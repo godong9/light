@@ -1,0 +1,104 @@
+package com.example.light;
+
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+public class FragmentActivity extends Activity {
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.frag_layout);
+	    
+	    ImageButton diary_btn = (ImageButton)findViewById(R.id.rival_btn);
+	    diary_btn.setSelected(true);
+	    
+	    FragmentManager fm = getFragmentManager();
+	    FragmentTransaction tr = fm.beginTransaction();
+	    
+	    RivalFrag rf = new RivalFrag();   
+	    tr.add(R.id.detail_frag, rf);
+	    tr.commit();
+	    
+	    findViewById(R.id.rival_btn).setOnClickListener(btnListener);
+	    findViewById(R.id.timeline_btn).setOnClickListener(btnListener);
+	    findViewById(R.id.community_btn).setOnClickListener(btnListener);
+	}
+	
+	Button.OnClickListener btnListener = new View.OnClickListener() {
+		public void onClick(View v) {
+			FragmentManager fm = getFragmentManager();
+		    FragmentTransaction tr = fm.beginTransaction();
+			
+		    ImageButton diary_btn = (ImageButton)findViewById(R.id.diary_btn);
+		    ImageButton rival_btn = (ImageButton)findViewById(R.id.rival_btn);
+		    ImageButton coach_btn = (ImageButton)findViewById(R.id.coach_btn);
+		    ImageButton chat_btn = (ImageButton)findViewById(R.id.chat_btn);
+		    ImageButton market_btn = (ImageButton)findViewById(R.id.market_btn);
+		    
+			if(v.getId() == R.id.diary_btn){
+				diary_btn.setSelected(true);
+				rival_btn.setSelected(false);
+				chat_btn.setSelected(false);
+				coach_btn.setSelected(false);		
+				market_btn.setSelected(false);
+				
+				DiaryFrag df = new DiaryFrag();    
+			    tr.replace(R.id.detail_frag, df);
+			    tr.commit();
+			}	
+			else if(v.getId() == R.id.rival_btn){
+				diary_btn.setSelected(false);
+				rival_btn.setSelected(true);
+				chat_btn.setSelected(false);
+				coach_btn.setSelected(false);		
+				market_btn.setSelected(false);
+				
+				RivalFrag rf = new RivalFrag();	    
+			    tr.replace(R.id.detail_frag, rf);
+			    tr.commit();
+			}
+			else if(v.getId() == R.id.chat_btn){
+				diary_btn.setSelected(false);
+				rival_btn.setSelected(false);
+				chat_btn.setSelected(true);
+				coach_btn.setSelected(false);	
+				market_btn.setSelected(false);
+				
+				ChatFrag cf = new ChatFrag();	    
+			    tr.replace(R.id.detail_frag, cf);
+			    tr.commit();
+			}
+			else if(v.getId() == R.id.coach_btn){
+				diary_btn.setSelected(false);
+				rival_btn.setSelected(false);
+				chat_btn.setSelected(false);
+				coach_btn.setSelected(true);	
+				market_btn.setSelected(false);
+				
+				CoachFrag cf = new CoachFrag();	    
+			    tr.replace(R.id.detail_frag, cf);
+			    tr.commit();
+			}
+			else if(v.getId() == R.id.market_btn){
+				diary_btn.setSelected(false);
+				rival_btn.setSelected(false);
+				chat_btn.setSelected(false);
+				coach_btn.setSelected(false);
+				market_btn.setSelected(true);
+				
+				MarketFrag mf = new MarketFrag();	    
+			    tr.replace(R.id.detail_frag, mf);
+			    tr.commit();
+			}
+			
+		}
+	};
+	
+	
+}
