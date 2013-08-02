@@ -6,6 +6,9 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+//  , rival = require('./routes/rival')
+//  , timeline = require('./routes/timeline')
+//  , community = require('./routes/community')
   , http = require('http')
   , path = require('path');
 
@@ -19,7 +22,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
+app.use(express.cookieParser('keyboard cat'));
 app.use(express.session());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));

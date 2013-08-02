@@ -4,5 +4,10 @@
  */
 
 exports.list = function(req, res){
-  res.send("respond with a resource");
+	var result;
+	
+	result = { result:"successful", msg:"successful" };
+	
+	res.send(result);
+	
 };
