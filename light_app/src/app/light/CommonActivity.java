@@ -45,19 +45,11 @@ public class CommonActivity extends Activity {
 		    
 		    try{
 		    	JSONObject json_data = new JSONObject(tmp_json);
-		    	String result_string = json_data.getString("result");
-		    	if ( result_string.equals("success") ){
-		    		Log.i("[login]", "Success");
-		    		return true;
-		    	}
-		    	else {
-		    		return false;
-		    	}
+		    	return true;
 		    } catch (Exception e){
-		    	e.printStackTrace();	
+		    	e.printStackTrace();
+		    	return false;
 		    }
-		    
-		    return false;
 		    
 		} catch (ClientProtocolException e) {
 			Log.i("[error]", "error");
@@ -85,13 +77,13 @@ public class CommonActivity extends Activity {
 		    	JSONObject json_data = new JSONObject(tmp_json);
 		    	//
 		    	//String result_string = json_data.getString("result");
+		    	return true;
 		    	
 		    } catch (Exception e){
-		    	e.printStackTrace();	
+		    	e.printStackTrace();
+		    	return false;
 		    }
 
-		    return false;
-			
 		} catch (ClientProtocolException e) {
 			Log.i("[error]", "error");
 			e.printStackTrace();

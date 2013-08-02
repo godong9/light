@@ -9,7 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class FragmentActivity extends Activity {
+public class FragmentActivity extends CommonActivity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,7 @@ public class FragmentActivity extends Activity {
 			if(v.getId() == R.id.rival_btn){
 				rival_btn.setSelected(true);
 				timeline_btn.setSelected(false);
-				community_btn.setSelected(false);		
-				
+				community_btn.setSelected(false);					
 		
 			}	
 			else if(v.getId() == R.id.timeline_btn){

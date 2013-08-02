@@ -35,7 +35,7 @@ public class LoginActivity extends CommonActivity {
 			Log.e("Error", "putJSON", e);
 		}
 
-		boolean login_status = postData("http://www.startend.kr/ajax/android_login.php", json_param);		
+		boolean login_status = getData("http://211.110.61.51:3000/users");		
 		if(login_status){
 			Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
 			startActivity(intent);
