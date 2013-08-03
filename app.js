@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , login = require('./routes/login')
 //  , rival = require('./routes/rival')
 //  , timeline = require('./routes/timeline')
 //  , community = require('./routes/community')
@@ -35,7 +36,10 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.post('/login', login.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+module.exports = app;
