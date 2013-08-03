@@ -30,13 +30,15 @@ public final class R {
         public static final int rival_btn=0x7f020006;
         public static final int rival_off=0x7f020007;
         public static final int rival_on=0x7f020008;
-        public static final int splash=0x7f020009;
-        public static final int timeline_btn=0x7f02000a;
-        public static final int timeline_off=0x7f02000b;
-        public static final int timeline_on=0x7f02000c;
+        public static final int setting_btn=0x7f020009;
+        public static final int splash=0x7f02000a;
+        public static final int timeline_btn=0x7f02000b;
+        public static final int timeline_off=0x7f02000c;
+        public static final int timeline_on=0x7f02000d;
+        public static final int title_logo=0x7f02000e;
     }
     public static final class id {
-        public static final int action_settings=0x7f080016;
+        public static final int action_settings=0x7f080017;
         public static final int community_btn=0x7f080012;
         public static final int detail_frag=0x7f08000f;
         public static final int id_input=0x7f080001;
@@ -47,7 +49,6 @@ public final class R {
         public static final int login=0x7f080000;
         public static final int login_btn=0x7f08000b;
         public static final int menu_frag=0x7f08000e;
-        public static final int nextBtn=0x7f080015;
         public static final int nickname_input=0x7f080003;
         public static final int password_input=0x7f080002;
         public static final int password_val=0x7f080008;
@@ -55,10 +56,12 @@ public final class R {
         public static final int rival_btn=0x7f080010;
         public static final int rival_frag=0x7f080013;
         public static final int save_info=0x7f080009;
+        public static final int setting_btn=0x7f080016;
         public static final int splash=0x7f08000d;
         public static final int terms_agree_btn=0x7f080005;
         public static final int timeline_btn=0x7f080011;
         public static final int titleTextView=0x7f080014;
+        public static final int title_logo=0x7f080015;
     }
     public static final class layout {
         public static final int activity_join=0x7f030000;

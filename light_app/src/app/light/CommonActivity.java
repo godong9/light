@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.util.Log;
+import android.widget.Toast;
 
 public class CommonActivity extends Activity {
 	public boolean postData(String url,JSONObject obj) {
@@ -42,7 +43,7 @@ public class CommonActivity extends Activity {
 		    HttpResponse response = httpclient.execute(httppost);
 		    String tmp_json = EntityUtils.toString(response.getEntity());
 		    Log.i("[post_val]", tmp_json);
-		    
+		   
 		    try{
 		    	JSONObject json_data = new JSONObject(tmp_json);
 		    	return true;
@@ -69,14 +70,17 @@ public class CommonActivity extends Activity {
 			HttpGet httpget = new HttpGet(url.toString());
 			httpget.setHeader("Content-type", "application/json");
 
-			HttpResponse response = httpclient.execute(httpget);
-			String tmp_json = EntityUtils.toString(response.getEntity());
+			HttpResponse response = httpclient.execute(httpget);	
+			String tmp_json = EntityUtils.toString(response.getEntity(), "UTF-8");
 			Log.i("[get_val]", tmp_json);
 			
 			try{
 		    	JSONObject json_data = new JSONObject(tmp_json);
 		    	//
-		    	//String result_string = json_data.getString("result");
+		    	String result_string = json_data.getString("result");
+		    	Toast toast = Toast.makeText(this, result_string, Toast.LENGTH_SHORT); 
+				toast.show(); 
+		    	//
 		    	return true;
 		    	
 		    } catch (Exception e){
