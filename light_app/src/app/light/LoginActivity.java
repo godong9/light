@@ -34,7 +34,9 @@ public class LoginActivity extends CommonActivity {
 		catch(JSONException e) {
 			Log.e("Error", "putJSON", e);
 		}
-
+		
+		
+		/*
 		boolean login_status = getData("http://211.110.61.51:3000/users");		
 		if(login_status){
 			Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
@@ -43,6 +45,18 @@ public class LoginActivity extends CommonActivity {
 		else{
 			
 		}
+		*/
+		
+		
+		boolean login_status = postData("http://211.110.61.51:3000/login", json_param);		
+		if(login_status){
+			Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
+			startActivity(intent);
+		}
+		else{
+			
+		}
+		
 	}
 	
 	public void onJoinBtn(View v) {
