@@ -48,14 +48,14 @@ public class LoginActivity extends CommonActivity {
 		*/
 		
 		
-		boolean login_status = postData("http://211.110.61.51:3000/login", json_param);		
-		if(login_status){
+		//boolean login_status = postData("http://211.110.61.51:3000/login", json_param);		
+		//if(login_status){
 			Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
 			startActivity(intent);
-		}
-		else{
+		//}
+		//else{
 			
-		}
+		//}
 		
 	}
 	

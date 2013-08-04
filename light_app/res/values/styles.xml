@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -15,15 +15,17 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowContentOverlay">@null</item>  
     </style>
     
     <style name="CustomTitle" parent="android:Theme">
-		<item name="android:windowTitleSize">45dp</item>    	
+		<item name="android:windowTitleSize">45dp</item> 
 		<item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+		<item name="android:windowContentOverlay">@null</item> 
 	</style>
 	    
 	<style name="CustomWindowTitleBackground">
-		<item name="android:background">#00000000</item>
+		<item name="android:background">#000000</item>
 	</style>
 
 </resources>
