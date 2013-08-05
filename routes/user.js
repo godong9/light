@@ -1,8 +1,15 @@
 var EventEmitter = require('events').EventEmitter;
-
+var mysql_conn = require('../sql/mysql_server').mysql_conn;
 /*
 사용자 관련 처리 함수들
 */
+
+function register_session(req, idx_user, email, nickname)
+{
+	req.session.idx_user = idx_user;
+	req.session.email = email;
+	req.session.nickname = nickname;
+}
 
 exports.join = function(req, res){
 	var evt = new EventEmitter();
@@ -55,7 +62,7 @@ exports.join = function(req, res){
 
 	evt.on('sign_up', function(err, rows){
 		console.log("sign_up");
-		var idx_user = rows.insert_id;
+		var idx_user = rows.insert_idx;
 		//register_session(req, idx_user, sign_up_email, first_name, last_name);
 		//sendMail(sign_up_email, code);
 		result = { result:"success", msg:"회원가입이 완료되었습니다!" };
