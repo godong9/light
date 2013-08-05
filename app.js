@@ -11,9 +11,29 @@ var express = require('express')
 //  , timeline = require('./routes/timeline')
 //  , community = require('./routes/community')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , expressValidator = require('express-validator');
 
 var app = express();
+
+var validator_option = {
+	errorFormatter: function(param, msg, value) {
+		var namespace = param.split('.')
+		, root    = namespace.shift()
+		, formParam = root;
+
+		while(namespace.length) {
+			formParam += '[' + namespace.shift() + ']';
+		}
+		return {
+			param : formParam,
+			target : formParam,
+			msg   : msg,
+			value : value,
+			result : "failed"
+		};
+	}
+}
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -22,6 +42,7 @@ app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
+app.use(expressValidator(validator_option));
 app.use(express.methodOverride());
 app.use(express.cookieParser('keyboard cat'));
 app.use(express.session());
