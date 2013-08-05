@@ -4,8 +4,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
+//  , routes = require('./routes')
+    , user = require('./routes/user')
 //  , login = require('./routes/login')
 //  , rival = require('./routes/rival')
 //  , timeline = require('./routes/timeline')
@@ -34,7 +34,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+//app.get('/', routes.index);
 app.post('/join', user.join);
 //app.post('/login', user.login);
 

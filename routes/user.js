@@ -1,3 +1,4 @@
+var EventEmitter = require('events').EventEmitter;
 
 /*
 사용자 관련 처리 함수들
@@ -5,7 +6,7 @@
 
 exports.join = function(req, res){
 	var evt = new EventEmitter();
-	var dao_u = require('../sql/user');
+//	var dao_u = require('../sql/user');
 	var result = {};
 
 	var email = req.body.email;
@@ -13,13 +14,13 @@ exports.join = function(req, res){
 	var re_password = req.body.re_password;
 	var nickname = req.body.nickname;
 
-	//test
+
 	console.log("닉네임: "+nickname);
 	console.log("password: "+password);
 	console.log("email: "+email);
 	result = { result:"success", msg:"회원가입이 완료되었습니다!" };
 	res.send(result);
-	//
+
 /*
 	req.checkBody("name", "닉네임을 입력해주세요!").notEmpty();
 	req.checkBody("email", "email을 입력해주세요!").notEmpty();
