@@ -15,6 +15,8 @@ exports.join = function(req, res){
 
 	//test
 	console.log("닉네임: "+nickname);
+	console.log("password: "+password);
+	console.log("email: "+email);
 	result = { result:"success", msg:"회원가입이 완료되었습니다!" };
 	res.send(result);
 	//

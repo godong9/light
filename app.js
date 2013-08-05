@@ -6,7 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , login = require('./routes/login')
+//  , login = require('./routes/login')
 //  , rival = require('./routes/rival')
 //  , timeline = require('./routes/timeline')
 //  , community = require('./routes/community')
