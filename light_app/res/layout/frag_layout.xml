@@ -4,16 +4,16 @@
     android:orientation="vertical"
     >
     <fragment
-    	android:id="@+id/menu_frag"
+        android:id="@+id/menu_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
+        android:layout_weight="75"
         class="app.light.MenuFrag" />
     <FrameLayout 
         android:id="@+id/detail_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="92"
+        android:layout_weight="925"
         />
       
 </LinearLayout>

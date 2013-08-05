@@ -3,7 +3,6 @@ package app.light;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,10 +45,6 @@ public class JoinActivity extends CommonActivity {
 			else{		
 				JSONObject json_data = new JSONObject(result_json);
 				String result_flag = json_data.getString("result");
-				String result_msg = json_data.getString("msg");
-				
-				Toast toast = Toast.makeText(this, result_msg, Toast.LENGTH_SHORT); 
-				toast.show(); 
 	
 				if(result_flag.equals("success")){
 					Intent intent = new Intent(JoinActivity.this, FragmentActivity.class);

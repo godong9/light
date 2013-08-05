@@ -41,10 +41,6 @@ public class LoginActivity extends CommonActivity {
 			else{		
 				JSONObject json_data = new JSONObject(result_json);
 				String result_flag = json_data.getString("result");
-				String result_msg = json_data.getString("msg");
-				
-				Toast toast = Toast.makeText(this, result_msg, Toast.LENGTH_SHORT); 
-				toast.show(); 
 
 				if(result_flag.equals("success")){
 					Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);

@@ -21,61 +21,68 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int community_btn=0x7f020000;
-        public static final int community_off=0x7f020001;
-        public static final int community_on=0x7f020002;
-        public static final int light_icon=0x7f020003;
-        public static final int login=0x7f020004;
-        public static final int rival=0x7f020005;
-        public static final int rival_btn=0x7f020006;
-        public static final int rival_off=0x7f020007;
-        public static final int rival_on=0x7f020008;
-        public static final int setting_btn=0x7f020009;
-        public static final int splash=0x7f02000a;
-        public static final int timeline_btn=0x7f02000b;
-        public static final int timeline_off=0x7f02000c;
-        public static final int timeline_on=0x7f02000d;
-        public static final int title_logo=0x7f02000e;
+        public static final int camera_btn=0x7f020000;
+        public static final int community_btn=0x7f020001;
+        public static final int community_off=0x7f020002;
+        public static final int community_on=0x7f020003;
+        public static final int diary_btn=0x7f020004;
+        public static final int light_icon=0x7f020005;
+        public static final int login=0x7f020006;
+        public static final int rival=0x7f020007;
+        public static final int rival_btn=0x7f020008;
+        public static final int rival_off=0x7f020009;
+        public static final int rival_on=0x7f02000a;
+        public static final int send_btn=0x7f02000b;
+        public static final int setting_btn=0x7f02000c;
+        public static final int splash=0x7f02000d;
+        public static final int timeline_btn=0x7f02000e;
+        public static final int timeline_off=0x7f02000f;
+        public static final int timeline_on=0x7f020010;
+        public static final int title_logo=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f080018;
-        public static final int community_btn=0x7f080013;
-        public static final int detail_frag=0x7f080010;
-        public static final int join_btn=0x7f08000d;
-        public static final int join_complete=0x7f080007;
-        public static final int join_id=0x7f080001;
-        public static final int join_nickname=0x7f080004;
-        public static final int join_password=0x7f080002;
-        public static final int join_re_password=0x7f080003;
-        public static final int join_read_terms=0x7f080005;
-        public static final int join_terms_agree_btn=0x7f080006;
-        public static final int login=0x7f080000;
-        public static final int login_btn=0x7f08000c;
-        public static final int login_id=0x7f080008;
-        public static final int login_keep_login=0x7f08000b;
-        public static final int login_password=0x7f080009;
-        public static final int login_save_info=0x7f08000a;
-        public static final int menu_frag=0x7f08000f;
-        public static final int rival_btn=0x7f080011;
-        public static final int rival_frag=0x7f080014;
-        public static final int setting_btn=0x7f080017;
-        public static final int splash=0x7f08000e;
-        public static final int timeline_btn=0x7f080012;
-        public static final int titleTextView=0x7f080015;
-        public static final int title_logo=0x7f080016;
+        public static final int button1=0x7f070015;
+        public static final int button2=0x7f070016;
+        public static final int button3=0x7f070017;
+        public static final int camera_btn=0x7f07001a;
+        public static final int chat_val=0x7f07001b;
+        public static final int community_btn=0x7f070013;
+        public static final int detail_frag=0x7f070010;
+        public static final int diary_btn=0x7f070019;
+        public static final int join_btn=0x7f07000d;
+        public static final int join_complete=0x7f070007;
+        public static final int join_id=0x7f070001;
+        public static final int join_nickname=0x7f070004;
+        public static final int join_password=0x7f070002;
+        public static final int join_re_password=0x7f070003;
+        public static final int join_read_terms=0x7f070005;
+        public static final int join_terms_agree_btn=0x7f070006;
+        public static final int login=0x7f070000;
+        public static final int login_btn=0x7f07000c;
+        public static final int login_id=0x7f070008;
+        public static final int login_keep_login=0x7f07000b;
+        public static final int login_password=0x7f070009;
+        public static final int login_save_info=0x7f07000a;
+        public static final int menu_frag=0x7f07000f;
+        public static final int rival_btn=0x7f070011;
+        public static final int rival_frag=0x7f070014;
+        public static final int send_btn=0x7f07001c;
+        public static final int setting_btn=0x7f07001e;
+        public static final int splash=0x7f07000e;
+        public static final int timeline_btn=0x7f070012;
+        public static final int timeline_frag=0x7f070018;
+        public static final int title_logo=0x7f07001d;
     }
     public static final class layout {
         public static final int activity_join=0x7f030000;
         public static final int activity_login=0x7f030001;
-        public static final int activity_rival=0x7f030002;
-        public static final int activity_splash=0x7f030003;
-        public static final int frag_layout=0x7f030004;
-        public static final int menu=0x7f030005;
-        public static final int rival_frag=0x7f030006;
-        public static final int title=0x7f030007;
-    }
-    public static final class menu {
-        public static final int rival=0x7f070000;
+        public static final int activity_splash=0x7f030002;
+        public static final int frag_layout=0x7f030003;
+        public static final int menu=0x7f030004;
+        public static final int rival_frag=0x7f030005;
+        public static final int setting_popup=0x7f030006;
+        public static final int timeline_frag=0x7f030007;
+        public static final int title=0x7f030008;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -107,6 +114,7 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
         public static final int CustomTitle=0x7f060002;

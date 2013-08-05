@@ -1,28 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-     android:orientation="horizontal" >
+    android:windowContentOverlay="@null"
+    android:orientation="horizontal"
+     >
 
     <ImageButton
         android:id="@+id/rival_btn"    
         android:background="@drawable/rival_btn"
         android:layout_width="0dp" 
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1" />"
 
     <ImageButton
         android:id="@+id/timeline_btn"
         android:background="@drawable/timeline_btn"
         android:layout_width="0dp" 
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1" />
 
     <ImageButton
         android:id="@+id/community_btn"
        	android:background="@drawable/community_btn"
         android:layout_width="0dp" 
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="1" />
-    
 
 </LinearLayout>
