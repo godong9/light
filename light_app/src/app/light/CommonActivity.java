@@ -41,11 +41,16 @@ public class CommonActivity extends Activity {
 		    httppost.setEntity(se); 
 
 		    HttpResponse response = httpclient.execute(httppost);
-		    String tmp_json = EntityUtils.toString(response.getEntity());
+		    String tmp_json = EntityUtils.toString(response.getEntity(), "UTF-8");
 		    Log.i("[post_val]", tmp_json);
 		   
 		    try{
 		    	JSONObject json_data = new JSONObject(tmp_json);
+		    	//
+		    	String result_string = json_data.getString("msg");
+		    	Toast toast = Toast.makeText(this, result_string, Toast.LENGTH_SHORT); 
+				toast.show(); 
+		    	//
 		    	return true;
 		    } catch (Exception e){
 		    	e.printStackTrace();
