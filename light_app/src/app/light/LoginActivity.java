@@ -24,10 +24,10 @@ public class LoginActivity extends CommonActivity {
 		JSONObject json_param = new JSONObject();
 		
 		try {		
-			final EditText id_text = (EditText)findViewById(R.id.id_val);
+			final EditText id_text = (EditText)findViewById(R.id.login_id);
 			String email_val = id_text.getText().toString();
 			json_param.put("email", email_val);	
-			final EditText password_text = (EditText)findViewById(R.id.password_val);
+			final EditText password_text = (EditText)findViewById(R.id.login_password);
 			String password_val = password_text.getText().toString();
 			json_param.put("password", password_val);
 		}

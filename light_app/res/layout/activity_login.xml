@@ -13,7 +13,7 @@
          	 android:gravity="center_vertical"
              android:text="ID "/>
          <EditText           
-             android:id="@+id/id_val"
+             android:id="@+id/login_id"
              android:text="godong9@gmail.com"
              android:layout_span="3"/>
      </TableRow> 
@@ -24,7 +24,7 @@
              android:gravity="center_vertical"
              android:text="PW "/>
          <EditText
-             android:id="@+id/password_val"
+             android:id="@+id/login_password"
              android:inputType="textPassword"
              android:text="godong1234"
              android:layout_span="3"/>
@@ -34,7 +34,7 @@
          android:layout_marginTop="10dp">
          <CheckBox 
              android:checked="true"
-             android:id="@+id/save_info"
+             android:id="@+id/login_save_info"
              android:text="ID,P/W 저장"
              android:textColor="#000000"
              android:layout_column="2"
@@ -42,7 +42,7 @@
          <CheckBox
              android:checked="true"
              android:state_checked="true" 
-             android:id="@+id/keep_login"
+             android:id="@+id/login_keep_login"
              android:text="로그인 유지"
              android:textColor="#000000"
 
