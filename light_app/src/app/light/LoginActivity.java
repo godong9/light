@@ -8,6 +8,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends CommonActivity {
 	@Override
@@ -30,33 +31,30 @@ public class LoginActivity extends CommonActivity {
 			final EditText password_text = (EditText)findViewById(R.id.login_password);
 			String password_val = password_text.getText().toString();
 			json_param.put("password", password_val);
+			
+			String result_json = postData("http://211.110.61.51:3000/login", json_param);		
+			
+			if(result_json.equals("error")){
+				Toast toast = Toast.makeText(this, "로그인 실패!", Toast.LENGTH_SHORT); 
+				toast.show(); 
+			}
+			else{		
+				JSONObject json_data = new JSONObject(result_json);
+				String result_flag = json_data.getString("result");
+				String result_msg = json_data.getString("msg");
+				
+				Toast toast = Toast.makeText(this, result_msg, Toast.LENGTH_SHORT); 
+				toast.show(); 
+
+				if(result_flag.equals("success")){
+					Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
+					startActivity(intent);
+				}
+			}	
 		}
 		catch(JSONException e) {
 			Log.e("Error", "putJSON", e);
-		}
-		
-		
-		/*
-		boolean login_status = getData("http://211.110.61.51:3000/users");		
-		if(login_status){
-			Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
-			startActivity(intent);
-		}
-		else{
-			
-		}
-		*/
-		
-		
-		//boolean login_status = postData("http://211.110.61.51:3000/login", json_param);		
-		//if(login_status){
-			Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
-			startActivity(intent);
-		//}
-		//else{
-			
-		//}
-		
+		}	
 	}
 	
 	public void onJoinBtn(View v) {

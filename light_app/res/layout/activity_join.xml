@@ -26,7 +26,7 @@
              android:layout_span="1"/>
          <EditText
              android:id="@+id/join_id"
-             android:text="godong9@gmail.com"
+             android:text="godong9@nate.com"
              android:layout_span="3"/>
      </TableRow> 
      <TableRow
@@ -64,7 +64,7 @@
              android:layout_span="1"/>
          <EditText
              android:id="@+id/join_nickname"
-             android:text="고동이" 
+             android:text="고동구" 
              android:layout_span="3"/>
      </TableRow>
       
