@@ -1,22 +1,13 @@
 package app.light;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class FragmentActivity extends Activity {
@@ -51,6 +42,7 @@ public class FragmentActivity extends Activity {
 	    findViewById(R.id.timeline_btn).setOnClickListener(btnListener);
 	    findViewById(R.id.community_btn).setOnClickListener(btnListener);
 	
+	    
 	    //퀵액션 3d 관련
 	    
 	    ActionItem nextItem 	= new ActionItem(ID_DOWN, "Next", getResources().getDrawable(R.drawable.menu_down_arrow));
@@ -101,12 +93,11 @@ public class FragmentActivity extends Activity {
   		});
         
         
-	    
   		//퀵액션 관련 끝
 	
-	
 	}
-		
+	
+	/* Alert 다이얼로그 관련 소스
 	public class AlertDialogWindow extends DialogFragment {
 
 		@Override
@@ -122,7 +113,7 @@ public class FragmentActivity extends Activity {
 			super.onStop();
 		}
 	}
-
+	 */
 	
 	public void clickSettingBtn(View v) {
 		/*Alert Dialog 형태의 팝업
@@ -131,7 +122,6 @@ public class FragmentActivity extends Activity {
 		*/
 		
 		quickAction.show(v);
-		
 	}
 	
 	Button.OnClickListener btnListener = new View.OnClickListener() {
@@ -167,7 +157,9 @@ public class FragmentActivity extends Activity {
 				timeline_btn.setSelected(false);
 				community_btn.setSelected(true);	
 				
-				
+				CommunityFrag cf = new CommunityFrag();	    
+			    tr.replace(R.id.detail_frag, cf);
+			    tr.commit();	
 			}	
 		}
 	};

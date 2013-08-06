@@ -2,7 +2,6 @@ package app.light;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -75,9 +74,9 @@ public class PopupWindows {
 			mWindow.setBackgroundDrawable(new BitmapDrawable());
 		else 
 			mWindow.setBackgroundDrawable(mBackground);
-
+			
 		mWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-		mWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+		mWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);	
 		mWindow.setTouchable(true);
 		mWindow.setFocusable(true);
 		mWindow.setOutsideTouchable(true);

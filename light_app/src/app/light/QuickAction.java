@@ -2,15 +2,14 @@ package app.light;
 
 import android.content.Context;
 
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ScrollView;
 import android.widget.RelativeLayout;
 import android.widget.PopupWindow.OnDismissListener;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -233,19 +232,22 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
 
 		Rect anchorRect 	= new Rect(location[0], location[1], location[0] + anchor.getWidth(), location[1] 
 		                	+ anchor.getHeight());
-
+		
 		//mRootView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		
 		mRootView.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-	
+		
 		int rootHeight 		= mRootView.getMeasuredHeight();
 		
 		if (rootWidth == 0) {
 			rootWidth		= mRootView.getMeasuredWidth();
 		}
 		
-		int screenWidth 	= mWindowManager.getDefaultDisplay().getWidth();
-		int screenHeight	= mWindowManager.getDefaultDisplay().getHeight();
+		Point pSize = new Point();
+		mWindowManager.getDefaultDisplay().getSize(pSize);
+		
+		int screenWidth 	= pSize.x;
+		int screenHeight	= pSize.y;	
 		
 		//automatically get X coord of popup (top left)
 		if ((anchorRect.left + rootWidth) > screenWidth) {
@@ -285,7 +287,7 @@ public class QuickAction extends PopupWindows implements OnDismissListener {
 				l.height		= dyBottom;
 			}
 		}
-		
+	
 		showArrow(((onTop) ? R.id.arrow_down : R.id.arrow_up), arrowPos);
 		
 		setAnimationStyle(screenWidth, anchorRect.centerX(), onTop);
