@@ -32,7 +32,7 @@
         
         <ImageButton
 	        android:id="@+id/diary_btn"
-	       	android:background="@drawable/diary_btn"
+	       	android:background="@drawable/write_btn"
 	        android:layout_width="0dp" 
 	        android:layout_height="30dp"
 	        android:layout_weight="10" 

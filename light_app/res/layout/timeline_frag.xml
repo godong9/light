@@ -8,7 +8,7 @@
      >
 
     <LinearLayout
-        android:background="#999995"
+        android:background="#E8E8E8"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:orientation="vertical" 
@@ -23,31 +23,47 @@
         android:layout_weight="1" >
         
         <ImageButton
-	        android:id="@+id/diary_btn"
-	       	android:background="@drawable/diary_btn"
+	        android:id="@+id/write_btn"
+	       	android:background="@drawable/write_btn"
 	        android:layout_width="0dp" 
-	        android:layout_height="30dp"
+	        android:layout_height="32dp"
 	        android:layout_weight="10" 
-	        android:layout_gravity="center"/>
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="4dp"
+	        android:layout_marginTop="4dp"
+	        android:layout_marginBottom="4dp"
+	        android:layout_gravity="center"
+	        android:onClick="clickTimelineWriteBtn"
+	        />
         <ImageButton
 	        android:id="@+id/camera_btn"
 	       	android:background="@drawable/camera_btn"
 	        android:layout_width="0dp" 
-	        android:layout_height="30dp"
+	        android:layout_height="26dp"
 	        android:layout_weight="10" 
+	        android:layout_marginLeft="3dp"
+	        android:layout_marginRight="6dp"
+	        android:layout_marginTop="6dp"
+	        android:layout_marginBottom="6dp"
 	        android:layout_gravity="center"/>
         <EditText           
             android:id="@+id/chat_val"
             android:layout_width="0dp" 
-            android:layout_height="42dp"
-            android:layout_weight="60"
-            android:layout_gravity="center"/>
+            android:layout_height="48dp"
+            android:layout_weight="62"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center"
+            />
         <ImageButton
 	        android:id="@+id/send_btn"
 	       	android:background="@drawable/send_btn"
 	        android:layout_width="0dp" 
-	        android:layout_height="30dp"
-	        android:layout_weight="20"
+	        android:layout_height="36dp"
+	        android:layout_weight="18"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="7dp"
+	        android:layout_marginTop="3dp"
+	        android:layout_marginBottom="3dp"	        
 	        android:layout_gravity="center"/>
         
     </LinearLayout>

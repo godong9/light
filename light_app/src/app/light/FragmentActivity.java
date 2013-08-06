@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -122,6 +123,13 @@ public class FragmentActivity extends Activity {
 		*/
 		
 		quickAction.show(v);
+	}
+	
+	
+	public void clickTimelineWriteBtn(View v) {
+
+		Log.i("[TEST]", "test");
+	
 	}
 	
 	Button.OnClickListener btnListener = new View.OnClickListener() {
