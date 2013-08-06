@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 
 public class FragmentActivity extends Activity {
 	
-	private PopupDialog popup_dialog;
+	private AlertDialogWindow popup_dialog;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class FragmentActivity extends Activity {
 	    findViewById(R.id.community_btn).setOnClickListener(btnListener);
 	}
 		
-	public static class PopupDialog extends DialogFragment {
+	public class AlertDialogWindow extends DialogFragment {
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -59,9 +60,13 @@ public class FragmentActivity extends Activity {
 		}
 	}
 
+	
 	public void clickSettingBtn(View v) {
-		popup_dialog = new PopupDialog();	
+		/*Alert Dialog 형태의 팝업
+		popup_dialog = new AlertDialogWindow();	
 		popup_dialog.show(getFragmentManager(), "setting_popup");
+		*/
+		
 	}
 	
 	Button.OnClickListener btnListener = new View.OnClickListener() {
