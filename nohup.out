@@ -115,3 +115,56 @@ Express server listening on port 3000
 [90mPOST /login [32m200 [90m2ms - 55b[0m
 [90mPOST /login [32m200 [90m8ms - 55b[0m
 [90mPOST /login [32m200 [90m2ms - 55b[0m
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/godong/light/node_modules/mysql/lib/protocol/Protocol.js:73:13)
+    at Socket.onend (stream.js:79:10)
+    at Socket.EventEmitter.emit (events.js:117:20)
+    at _stream_readable.js:910:16
+    at process._tickCallback (node.js:415:13)
+Express server listening on port 3000
+[90mPOST /login [32m200 [90m25ms - 55b[0m
+[90mPOST /login [32m200 [90m4ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m4ms - 55b[0m
+[90mPOST /login [32m200 [90m4ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m4ms - 55b[0m
+[90mPOST /login [32m200 [90m5ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m5ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m4ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m1ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
+[90mPOST /login [32m200 [90m3ms - 55b[0m
+[90mPOST /login [32m200 [90m2ms - 55b[0m
