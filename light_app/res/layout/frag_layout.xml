@@ -7,13 +7,13 @@
         android:id="@+id/menu_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="75"
+        android:layout_weight="7"
         class="app.light.MenuFrag" />
     <FrameLayout 
         android:id="@+id/detail_frag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="925"
+        android:layout_weight="93"
         />
       
 </LinearLayout>

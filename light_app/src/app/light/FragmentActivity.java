@@ -21,7 +21,17 @@ public class FragmentActivity extends Activity {
 	private static final int ID_INFO   = 4;
 	private static final int ID_ERASE  = 5;	
 	private static final int ID_OK     = 6;
-	private QuickAction quickAction;
+	private static final int ID_FOOD     = 7;
+	private static final int ID_EXERCISE     = 8;
+	private static final int ID_WEIGHT     = 9;
+	private static final int ID_CAMERA     = 10;
+	private static final int ID_ALBUM     = 11;
+	private static final int ID_MISSION     = 12;
+	
+	
+	private QuickAction settingPopup;
+	private QuickAction writePopup;
+	private QuickAction cameraPopup;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,34 +54,32 @@ public class FragmentActivity extends Activity {
 	    findViewById(R.id.community_btn).setOnClickListener(btnListener);
 	
 	    
-	    //퀵액션 3d 관련
+	    //설정 버튼 팝업 관련 코드
 	    
-	    ActionItem nextItem 	= new ActionItem(ID_DOWN, "Next", getResources().getDrawable(R.drawable.menu_down_arrow));
-		ActionItem prevItem 	= new ActionItem(ID_UP, "Prev", getResources().getDrawable(R.drawable.menu_up_arrow));
-        ActionItem searchItem 	= new ActionItem(ID_SEARCH, "Find", getResources().getDrawable(R.drawable.menu_search));
-        ActionItem infoItem 	= new ActionItem(ID_INFO, "Info", getResources().getDrawable(R.drawable.menu_info));
-        ActionItem eraseItem 	= new ActionItem(ID_ERASE, "Clear", getResources().getDrawable(R.drawable.menu_eraser));
-        ActionItem okItem 		= new ActionItem(ID_OK, "OK", getResources().getDrawable(R.drawable.menu_ok));
+	    ActionItem setting_my_info 	= new ActionItem(ID_DOWN, "내 정보");
+		ActionItem prevItem 	= new ActionItem(ID_UP, "Prev");
+        ActionItem searchItem 	= new ActionItem(ID_SEARCH, "Find");
+        ActionItem infoItem 	= new ActionItem(ID_INFO, "Info");
+        ActionItem eraseItem 	= new ActionItem(ID_ERASE, "Clear");
+        ActionItem okItem 		= new ActionItem(ID_OK, "OK");
 	    
         prevItem.setSticky(true);
-        nextItem.setSticky(true);
         
-        quickAction = new QuickAction(this, QuickAction.VERTICAL);
+        settingPopup = new QuickAction(this, QuickAction.VERTICAL);
         
         //add action items into QuickAction
-        quickAction.addActionItem(nextItem);
-		quickAction.addActionItem(prevItem);
-        quickAction.addActionItem(searchItem);
-        quickAction.addActionItem(infoItem);
-        quickAction.addActionItem(eraseItem);
-        quickAction.addActionItem(okItem);
-        
-        
+        settingPopup.addActionItem(setting_my_info);
+        settingPopup.addActionItem(prevItem);
+        settingPopup.addActionItem(searchItem);
+        settingPopup.addActionItem(infoItem);
+        settingPopup.addActionItem(eraseItem);
+        settingPopup.addActionItem(okItem);
+            
         //Set listener for action item clicked
-  		quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
+        settingPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
   			@Override
   			public void onItemClick(QuickAction source, int pos, int actionId) {				
-  				ActionItem actionItem = quickAction.getActionItem(pos);
+  				ActionItem actionItem = settingPopup.getActionItem(pos);
                    
   				//here we can filter which action item was clicked with pos or actionId parameter
   				if (actionId == ID_SEARCH) {
@@ -86,15 +94,108 @@ public class FragmentActivity extends Activity {
   		
   		//set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
   		//by clicking the area outside the dialog.
-  		quickAction.setOnDismissListener(new QuickAction.OnDismissListener() {			
+        settingPopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
   			@Override
   			public void onDismiss() {
   				Toast.makeText(getApplicationContext(), "Dismissed", Toast.LENGTH_SHORT).show();
   			}
   		});
         
+  		////////////////
+
         
-  		//퀵액션 관련 끝
+        //기록 버튼 팝업 관련 코드
+	    
+	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
+		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
+        ActionItem write_weight 	= new ActionItem(ID_WEIGHT, "체중 기록");
+      
+        write_food.setSticky(true);
+        write_exercise.setSticky(true);
+        write_weight.setSticky(true);
+        
+        writePopup = new QuickAction(this, QuickAction.HORIZONTAL);
+        
+        //add action items into QuickAction
+        writePopup.addActionItem(write_food);
+        writePopup.addActionItem(write_exercise);
+        writePopup.addActionItem(write_weight);   
+
+        //Set listener for action item clicked
+        writePopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
+  			@Override
+  			public void onItemClick(QuickAction source, int pos, int actionId) {				
+  				ActionItem actionItem = writePopup.getActionItem(pos);
+                   
+  				//here we can filter which action item was clicked with pos or actionId parameter
+  				if (actionId == ID_FOOD) {
+  					Toast.makeText(getApplicationContext(), "음식 기록", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_EXERCISE) {
+  					Toast.makeText(getApplicationContext(), "운동 기록", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_WEIGHT) {
+  					Toast.makeText(getApplicationContext(), "체중 기록", Toast.LENGTH_SHORT).show();
+  				} 
+  			}
+  		});		
+        
+        //set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
+  		//by clicking the area outside the dialog.
+        writePopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
+  			@Override
+  			public void onDismiss() {
+  				ImageButton wb = (ImageButton)findViewById(R.id.write_btn);
+  				wb.setSelected(false);
+  			}
+  		});
+        ////////////////
+        
+        
+        //카메라 버튼 팝업 관련 코드
+	    
+	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
+		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
+        ActionItem camera_mission 	= new ActionItem(ID_MISSION, "미션샷");
+      
+        camera_camera.setSticky(true);
+        camera_album.setSticky(true);
+        camera_mission.setSticky(true);
+        
+        cameraPopup = new QuickAction(this, QuickAction.HORIZONTAL);
+        
+        //add action items into QuickAction
+        cameraPopup.addActionItem(camera_camera);
+        cameraPopup.addActionItem(camera_album);
+        cameraPopup.addActionItem(camera_mission);   
+
+        //Set listener for action item clicked
+        cameraPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
+  			@Override
+  			public void onItemClick(QuickAction source, int pos, int actionId) {				
+  				ActionItem actionItem = writePopup.getActionItem(pos);
+                   
+  				//here we can filter which action item was clicked with pos or actionId parameter
+  				if (actionId == ID_CAMERA) {
+  					Toast.makeText(getApplicationContext(), "사진 촬영", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_EXERCISE) {
+  					Toast.makeText(getApplicationContext(), "앨범", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_MISSION) {
+  					Toast.makeText(getApplicationContext(), "미션샷", Toast.LENGTH_SHORT).show();
+  				} 
+  			}
+  		});		
+        
+        //set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
+  		//by clicking the area outside the dialog.
+        cameraPopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
+  			@Override
+  			public void onDismiss() {
+  				ImageButton cb = (ImageButton)findViewById(R.id.camera_btn);
+  				cb.setSelected(false);
+  			}
+  		});
+        ////////////////
+        
+             
 	
 	}
 	
@@ -105,7 +206,7 @@ public class FragmentActivity extends Activity {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
-			mBuilder.setView(mLayoutInflater.inflate(R.layout.setting_popup, null));
+			mBuilder.setView(mLayoutInflater.inflate(R.layout.dialog_popup, null));
 			return mBuilder.create();
 		}
 
@@ -122,14 +223,19 @@ public class FragmentActivity extends Activity {
 		popup_dialog.show(getFragmentManager(), "setting_popup");
 		*/
 		
-		quickAction.show(v);
+		settingPopup.show(v);
 	}
 	
 	
 	public void clickTimelineWriteBtn(View v) {
-
-		Log.i("[TEST]", "test");
+		v.setSelected(true);
+		writePopup.show(v);
+	}
 	
+	
+	public void clickTimelineCameraBtn(View v) {
+		v.setSelected(true);
+		cameraPopup.show(v);	
 	}
 	
 	Button.OnClickListener btnListener = new View.OnClickListener() {
