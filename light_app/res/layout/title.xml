@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="#515151" >
+	android:background="#515251" >
     
     <ImageView android:id="@+id/title_logo"
         android:src="@drawable/title_logo"

@@ -3,10 +3,15 @@ package app.light;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +23,31 @@ public class LoginActivity extends CommonActivity {
 		startActivity(new Intent(this, SplashActivity.class));
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy);
+	        
+	    EditText id_edit = (EditText)findViewById(R.id.login_id);
+	    EditText password_edit = (EditText)findViewById(R.id.login_password);
+	    CheckBox keep_login_check = (CheckBox)findViewById(R.id.login_keep_login);
+	    	    
+	    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);   
+		Boolean keep_login_boolean = prefs.getBoolean("keep_login", false);
+		
+		if(keep_login_boolean){    
+			String id_text = prefs.getString("email", "");
+		    String password_text = prefs.getString("password", "");
+			
+		    id_edit.setText(id_text);
+		    password_edit.setText(password_text);
+		    keep_login_check.setChecked(keep_login_boolean);
+		    Handler login_handler = new Handler () {
+		    	@Override
+		    	public void handleMessage(Message msg) {
+		    		Button login_btn = (Button)findViewById(R.id.login_btn);
+		 		    onLoginBtn(login_btn);
+		    	}
+	        };
+		        
+	        login_handler.sendEmptyMessageDelayed(0, 2100);	       
+	    }       
 	}
 	
 	public void onLoginBtn(View v) {
@@ -32,6 +62,8 @@ public class LoginActivity extends CommonActivity {
 			String password_val = password_text.getText().toString();
 			json_param.put("password", password_val);
 			
+			final CheckBox keep_login = (CheckBox)findViewById(R.id.login_keep_login);
+			
 			String result_json = postData("http://211.110.61.51:3000/login", json_param);		
 			
 			if(result_json.equals("error")){
@@ -43,6 +75,15 @@ public class LoginActivity extends CommonActivity {
 				String result_flag = json_data.getString("result");
 
 				if(result_flag.equals("success")){
+					SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+					SharedPreferences.Editor editor = prefs.edit();
+					
+					
+					editor.putString("email", email_val);
+					editor.putString("password", password_val);
+					editor.putBoolean("keep_login", keep_login.isChecked());
+					editor.commit();
+					
 					Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
 					startActivity(intent);
 				}

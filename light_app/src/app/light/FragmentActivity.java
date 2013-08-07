@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -15,19 +16,16 @@ public class FragmentActivity extends Activity {
 	
 	//private AlertDialogWindow popup_dialog;
 	
-	private static final int ID_UP     = 1;
-	private static final int ID_DOWN   = 2;
-	private static final int ID_SEARCH = 3;
-	private static final int ID_INFO   = 4;
-	private static final int ID_ERASE  = 5;	
-	private static final int ID_OK     = 6;
+	private static final int ID_MYINFO     = 1;
+	private static final int ID_PUSH   = 2;
+	private static final int ID_NOTIFY = 3;
+	private static final int ID_HELP   = 4;
 	private static final int ID_FOOD     = 7;
 	private static final int ID_EXERCISE     = 8;
 	private static final int ID_WEIGHT     = 9;
 	private static final int ID_CAMERA     = 10;
 	private static final int ID_ALBUM     = 11;
 	private static final int ID_MISSION     = 12;
-	
 	
 	private QuickAction settingPopup;
 	private QuickAction writePopup;
@@ -54,26 +52,24 @@ public class FragmentActivity extends Activity {
 	    findViewById(R.id.community_btn).setOnClickListener(btnListener);
 	
 	    
-	    //설정 버튼 팝업 관련 코드
-	    
-	    ActionItem setting_my_info 	= new ActionItem(ID_DOWN, "내 정보");
-		ActionItem prevItem 	= new ActionItem(ID_UP, "Prev");
-        ActionItem searchItem 	= new ActionItem(ID_SEARCH, "Find");
-        ActionItem infoItem 	= new ActionItem(ID_INFO, "Info");
-        ActionItem eraseItem 	= new ActionItem(ID_ERASE, "Clear");
-        ActionItem okItem 		= new ActionItem(ID_OK, "OK");
-	    
-        prevItem.setSticky(true);
+	    //설정 버튼 팝업 관련 코드	
+		
+	    ActionItem setting_myinfo 	= new ActionItem(ID_MYINFO, "내 정보");
+		ActionItem setting_push 	= new ActionItem(ID_PUSH, "푸시 설정");
+        ActionItem setting_notify 	= new ActionItem(ID_NOTIFY, "알림 설정");
+        ActionItem setting_help 	= new ActionItem(ID_HELP, "도움말");
+        ActionItem setting_logout 	= new ActionItem(ID_HELP, "로그아웃");
+   
+        setting_push.setSticky(true);
         
         settingPopup = new QuickAction(this, QuickAction.VERTICAL);
         
         //add action items into QuickAction
-        settingPopup.addActionItem(setting_my_info);
-        settingPopup.addActionItem(prevItem);
-        settingPopup.addActionItem(searchItem);
-        settingPopup.addActionItem(infoItem);
-        settingPopup.addActionItem(eraseItem);
-        settingPopup.addActionItem(okItem);
+        settingPopup.addActionItem(setting_myinfo);
+        settingPopup.addActionItem(setting_push);
+        settingPopup.addActionItem(setting_notify);
+        settingPopup.addActionItem(setting_help);
+        settingPopup.addActionItem(setting_logout);
             
         //Set listener for action item clicked
         settingPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
@@ -82,10 +78,10 @@ public class FragmentActivity extends Activity {
   				ActionItem actionItem = settingPopup.getActionItem(pos);
                    
   				//here we can filter which action item was clicked with pos or actionId parameter
-  				if (actionId == ID_SEARCH) {
-  					Toast.makeText(getApplicationContext(), "Let's do some search action", Toast.LENGTH_SHORT).show();
-  				} else if (actionId == ID_INFO) {
-  					Toast.makeText(getApplicationContext(), "I have no info this time", Toast.LENGTH_SHORT).show();
+  				if (actionId == ID_MYINFO) {
+  					Toast.makeText(getApplicationContext(), "내 정보 변경", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_PUSH) {
+  					Toast.makeText(getApplicationContext(), "푸시 관련 설정", Toast.LENGTH_SHORT).show();
   				} else {
   					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
   				}
@@ -97,10 +93,10 @@ public class FragmentActivity extends Activity {
         settingPopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
   			@Override
   			public void onDismiss() {
-  				Toast.makeText(getApplicationContext(), "Dismissed", Toast.LENGTH_SHORT).show();
+  				ImageButton sb = (ImageButton)findViewById(R.id.setting_btn);
+  				sb.setSelected(false);
   			}
-  		});
-        
+  		});   
   		////////////////
 
         
@@ -195,8 +191,6 @@ public class FragmentActivity extends Activity {
   		});
         ////////////////
         
-             
-	
 	}
 	
 	/* Alert 다이얼로그 관련 소스
@@ -215,14 +209,16 @@ public class FragmentActivity extends Activity {
 			super.onStop();
 		}
 	}
+	
+	public void clickSettingBtn(View v) {
+		//Alert Dialog 형태의 팝업
+		popup_dialog = new AlertDialogWindow();	
+		popup_dialog.show(getFragmentManager(), "setting_popup");	
+	}
 	 */
 	
 	public void clickSettingBtn(View v) {
-		/*Alert Dialog 형태의 팝업
-		popup_dialog = new AlertDialogWindow();	
-		popup_dialog.show(getFragmentManager(), "setting_popup");
-		*/
-		
+		v.setSelected(true);
 		settingPopup.show(v);
 	}
 	
@@ -236,6 +232,17 @@ public class FragmentActivity extends Activity {
 	public void clickTimelineCameraBtn(View v) {
 		v.setSelected(true);
 		cameraPopup.show(v);	
+	}
+	
+	public void clickTimelineSendBtn(View v) {
+		final EditText chat_text = (EditText)findViewById(R.id.chat_val);
+		String chat_val = chat_text.getText().toString();
+		if( chat_val.equals("")){
+			Toast.makeText(getApplicationContext(), "내용을 입력하세요!", Toast.LENGTH_SHORT).show();
+		}
+		else{
+			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();
+		}		
 	}
 	
 	Button.OnClickListener btnListener = new View.OnClickListener() {

@@ -3,51 +3,79 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:id="@+id/rival_frag"
      android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
-     android:background="#E8E8E8"
-     >
+     android:layout_height="fill_parent">
      <TableRow
-          android:layout_weight ="6" >
-   
+          android:layout_weight ="4" >
           <LinearLayout 
-            android:background="#FFFFFF"
+            android:background="@drawable/rival_title_bar"
 			android:layout_weight ="1"
-			android:layout_width="fill_parent"
-    		android:layout_height="fill_parent"
+			android:layout_width="match_parent"
+    		android:layout_height="match_parent"
     		android:orientation="horizontal"
-    		android:layout_span="2"
-          >
+    		android:layout_span="2">
           
           </LinearLayout>
-  
 
      </TableRow> 
      <TableRow
-          android:layout_weight ="47" >
-   
+          android:layout_weight ="48" >
+  
           <LinearLayout 
-            android:background="#777777"
+            android:background="@drawable/my_room"
 			android:layout_weight ="1"
 			android:layout_width="fill_parent"
     		android:layout_height="fill_parent"
-          >
-          
+    		android:orientation="horizontal">
+          	
+            <LinearLayout 
+		 	  android:layout_weight ="73"
+			  android:layout_width="0dp"
+    		  android:layout_height="fill_parent" 
+    		  android:orientation="vertical">
+          	     
+             <ImageView       
+   
+                android:layout_weight ="20"
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:scaleType="center"/> 
+			<ImageView        
+			    android:layout_weight ="60"
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:src="@drawable/character_1"/> 
+			<ImageView       
+     
+                android:layout_weight ="20"
+				android:layout_width="fill_parent"
+				android:layout_height="0dp"
+				android:scaleType="center"/> 
+                
+            </LinearLayout>
+              
+            <LinearLayout 
+		 	  android:layout_weight ="27"
+			  android:layout_width="0dp"
+    		  android:layout_height="fill_parent" 
+    		  android:orientation="vertical">
+          	     
+            </LinearLayout>
+              
           </LinearLayout>
           <LinearLayout 
-            android:background="#555555"
+            android:background="@drawable/other_room"
 			android:layout_weight ="1"
 			android:layout_width="fill_parent"
-    		android:layout_height="fill_parent"
-          >
+    		android:layout_height="fill_parent">
           
           </LinearLayout>
 
      </TableRow>  
      <TableRow
-          android:layout_weight ="47" >
+          android:layout_weight ="48" >
  
           <LinearLayout 
-            android:background="#999999"
+            android:background="@drawable/other_room"
 			android:layout_weight ="1"
 			android:layout_width="fill_parent"
     		android:layout_height="fill_parent"
@@ -55,7 +83,7 @@
           
           </LinearLayout>
           <LinearLayout 
-            android:background="#222222"
+            android:background="@drawable/other_room"
 			android:layout_weight ="1"
 			android:layout_width="fill_parent"
     		android:layout_height="fill_parent"
