@@ -52,7 +52,6 @@
             android:layout_weight="62"
             android:layout_marginTop="2dp"
             android:layout_gravity="center"
-            android:focusableInTouchMode="true"
             />
         <ImageButton
 	        android:id="@+id/send_btn"
