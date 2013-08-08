@@ -8,11 +8,15 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,8 +29,6 @@ import android.widget.Toast;
 public class FragmentActivity extends Activity {
 	
 	private AlertDialogWindow popup_dialog;
-	private ArrayList<String> list;
-	
 	
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
@@ -42,11 +44,15 @@ public class FragmentActivity extends Activity {
 	private QuickAction writePopup;
 	private QuickAction cameraPopup;
 	
+	Context context;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	    setContentView(R.layout.frag_layout);
+	    
+	    context = this;
 	    
 	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
 	    ImageButton diary_btn = (ImageButton)findViewById(R.id.rival_btn);
@@ -197,9 +203,10 @@ public class FragmentActivity extends Activity {
   			}
   		});
         ////////////////
-        
-        
-	}
+
+    
+	}	
+
 	
 	//메뉴 버튼 관련 코드
 	Button.OnClickListener btnListener = new View.OnClickListener() {
@@ -225,9 +232,15 @@ public class FragmentActivity extends Activity {
 				timeline_btn.setSelected(true);
 				community_btn.setSelected(false);	
 				
-				TimelineFrag tf = new TimelineFrag();	    
+				TimelineFrag tf = new TimelineFrag(context);	    
 			    tr.replace(R.id.detail_frag, tf);
-			    tr.commit();    
+			    
+			    int commitNum = tr.commit();
+//			    tr.add
+//			    if (commitNum == -1) {
+//			    	tf.setListView(context);
+//			    }
+			    System.out.println("coomm num : " + commitNum);
 			}
 			else if(v.getId() == R.id.community_btn){
 				rival_btn.setSelected(false);
@@ -259,14 +272,7 @@ public class FragmentActivity extends Activity {
 			super.onStop();
 		}
 	}
-	
-	/* Alert 다이얼로그 관련 소스
-	public void clickSettingBtn(View v) {
-		//Alert Dialog 형태의 팝업
-		popup_dialog = new AlertDialogWindow();	
-		popup_dialog.show(getFragmentManager(), "setting_popup");	
-	}
-	 */
+
 	
 	public void clickSettingBtn(View v) {
 		v.setSelected(true);
@@ -292,19 +298,9 @@ public class FragmentActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "내용을 입력하세요!", Toast.LENGTH_SHORT).show();
 		}
 		else{
-			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();	                      
 			
-			
-			list = new ArrayList<String>();
-	        list.add("Red");
-	        list.add("Green");
-	        list.add("Blue");
-	        
-	        MyListAdapter adapter = new MyListAdapter(this, R.layout.listview_item, list);
-
-	        // 리스트뷰에 어댑터 연결
-	        ListView listView = (ListView)findViewById(R.id.timeline_scroll);
-	        listView.setAdapter(adapter);
+			 
 			
 		//	LinearLayout timeline_layout = (LinearLayout)findViewById(R.id.timeline_layout);
 		//	TextView et = new TextView(this);

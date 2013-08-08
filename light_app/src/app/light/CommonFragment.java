@@ -1,6 +1,7 @@
 package app.light;
 
 import java.io.IOException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -15,10 +16,18 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+
 import android.app.Fragment;
+import android.content.Context;
 import android.util.Log;
 
 public class CommonFragment extends Fragment {
+	
+//	public CommonFragment(Context context) {
+//		super();
+//	}
+	
+	
 	public String postData(String url,JSONObject obj) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
