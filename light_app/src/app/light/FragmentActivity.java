@@ -19,9 +19,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lib.pulltorefresh.PullToRefreshAttacher;
+
 public class FragmentActivity extends Activity {
 	
 	private AlertDialogWindow popup_dialog;
+	private PullToRefreshAttacher mPullToRefreshAttacher;
 	
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
@@ -42,6 +45,10 @@ public class FragmentActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	    setContentView(R.layout.frag_layout);
+	    
+	    // The attacher should always be created in the Activity's onCreate
+        mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
+	    
 	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
 	    ImageButton diary_btn = (ImageButton)findViewById(R.id.rival_btn);
 	    diary_btn.setSelected(true);
@@ -146,6 +153,7 @@ public class FragmentActivity extends Activity {
         ////////////////
         
         
+        
         //카메라 버튼 팝업 관련 코드
 	    
 	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
@@ -192,6 +200,12 @@ public class FragmentActivity extends Activity {
         ////////////////
         
 	}
+	
+	
+	PullToRefreshAttacher getPullToRefreshAttacher() {
+        return mPullToRefreshAttacher;
+    }
+	
 	
 	//메뉴 버튼 관련 코드
 	Button.OnClickListener btnListener = new View.OnClickListener() {
