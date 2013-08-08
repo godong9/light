@@ -106,12 +106,13 @@ public final class R {
         public static final int write_on=0x7f020040;
     }
     public static final class id {
+        public static final int ID=0x7f080019;
         public static final int arrow_down=0x7f080022;
         public static final int arrow_up=0x7f080021;
-        public static final int btn=0x7f08001b;
         public static final int camera_btn=0x7f080047;
         public static final int chat_val=0x7f080048;
         public static final int community_btn=0x7f08001e;
+        public static final int content=0x7f08001a;
         public static final int detail_frag=0x7f080018;
         public static final int iv_icon=0x7f080000;
         public static final int join_btn=0x7f08000e;
@@ -172,7 +173,7 @@ public final class R {
         public static final int send_btn=0x7f080049;
         public static final int setting_btn=0x7f08004b;
         public static final int splash=0x7f08000f;
-        public static final int text=0x7f080019;
+        public static final int time=0x7f08001b;
         public static final int timeline_btn=0x7f08001d;
         public static final int timeline_frag=0x7f080010;
         public static final int timeline_layout=0x7f080044;
@@ -180,7 +181,6 @@ public final class R {
         public static final int title_logo=0x7f08004a;
         public static final int tracks=0x7f080020;
         public static final int tv_title=0x7f080001;
-        public static final int view=0x7f08001a;
         public static final int write_btn=0x7f080046;
     }
     public static final class layout {

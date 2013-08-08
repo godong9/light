@@ -13,14 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyListAdapter extends BaseAdapter {
-	private ArrayList<String>list;
+	private ArrayList<TimeLineObj> list;
 	private Context ctx;
 	private int itemLayout;
 	
-	MyListAdapter(Context ctx, int itemLayout, ArrayList<String> list) {
+	MyListAdapter(Context ctx, int itemLayout, ArrayList<TimeLineObj> my_list) {
 		this.ctx = ctx;
 		this.itemLayout = itemLayout;
-		this.list = list;
+		this.list = my_list;
 	}
 		 
 	@Override
@@ -30,7 +30,8 @@ public class MyListAdapter extends BaseAdapter {
 
 	@Override
 	public String getItem(int position) {
-		return list.get(position);
+		return list.get(position).ID;
+//		return list.get(position);
 	}
 
 	@Override
@@ -46,31 +47,20 @@ public class MyListAdapter extends BaseAdapter {
 			LayoutInflater inflater = (LayoutInflater) ctx
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(itemLayout, parent, false);
-			/*
-			TextView textView = (TextView) convertView.findViewById(R.id.text);
-			textView.setText(list.get(pos));
-			View view = convertView.findViewById(R.id.view);
+					
 			
-			int color = 0;
-			if (list.get(position).equals("Red"))
-				color = Color.RED;
-			else if (list.get(position).equals("Green"))
-				color = Color.GREEN;
-			else if (list.get(position).equals("Blue"))
-				color = Color.BLUE;
-			view.setBackgroundColor(color);
-			*/
-			Button btn = (Button) convertView.findViewById(R.id.btn);
-			
-			btn.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					Toast.makeText(ctx, list.get(pos), Toast.LENGTH_SHORT)
-							.show();
-				}
-			});
 		}
+		
+		TextView tvID = (TextView) convertView.findViewById(R.id.ID);
+		tvID.setText(list.get(pos).ID);
+		
+		TextView tvContent = (TextView) convertView.findViewById(R.id.content);
+		tvContent.setText(list.get(pos).content);
+
+		TextView tvTime = (TextView) convertView.findViewById(R.id.time);
+		tvTime.setText(list.get(pos).time);
+
 		return convertView;
 	}
 	
