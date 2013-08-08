@@ -1,5 +1,7 @@
 package app.light;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +25,9 @@ import android.widget.Toast;
 public class FragmentActivity extends Activity {
 	
 	private AlertDialogWindow popup_dialog;
-
+	private ArrayList<String> list;
+	
+	
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
 	private static final int ID_LOGOUT   = 3;
@@ -193,6 +198,7 @@ public class FragmentActivity extends Activity {
   		});
         ////////////////
         
+        
 	}
 	
 	//메뉴 버튼 관련 코드
@@ -287,16 +293,29 @@ public class FragmentActivity extends Activity {
 		}
 		else{
 			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();
-			LinearLayout timeline_layout = (LinearLayout)findViewById(R.id.timeline_layout);
-			TextView et = new TextView(this);
-			et.setText(chat_val);
-			timeline_layout.addView(et);
-			final ScrollView sv = (ScrollView)findViewById(R.id.timeline_scroll);
-			sv.post(new Runnable(){
-			    public void run(){
-			        sv.fullScroll(ScrollView.FOCUS_DOWN); 
-			    }
-			});
+			
+			
+			list = new ArrayList<String>();
+	        list.add("Red");
+	        list.add("Green");
+	        list.add("Blue");
+	        
+	        MyListAdapter adapter = new MyListAdapter(this, R.layout.listview_item, list);
+
+	        // 리스트뷰에 어댑터 연결
+	        ListView listView = (ListView)findViewById(R.id.timeline_scroll);
+	        listView.setAdapter(adapter);
+			
+		//	LinearLayout timeline_layout = (LinearLayout)findViewById(R.id.timeline_layout);
+		//	TextView et = new TextView(this);
+		//	et.setText(chat_val);
+		//	timeline_layout.addView(et);
+		//	final ScrollView sv = (ScrollView)findViewById(R.id.timeline_scroll);
+		//	sv.post(new Runnable(){
+		//	    public void run(){
+		//	        sv.fullScroll(ScrollView.FOCUS_DOWN); 
+		//	    }
+		//	});
 		}		
 	}
 

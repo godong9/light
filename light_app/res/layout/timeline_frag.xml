@@ -9,51 +9,14 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:orientation="vertical" 
-        android:layout_weight="9">
+        android:layout_weight="90">
         
-        <ScrollView 
+        <ListView 
             android:id="@+id/timeline_scroll"
         	android:layout_height="fill_parent"    
             android:layout_width="fill_parent">
-           	<LinearLayout 
-           	    android:id="@+id/timeline_layout"
-			    android:orientation="vertical"
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-			    android:paddingRight="5px" >
-	            <ImageButton
-				  	android:layout_width="200dp" 
-				    android:layout_height="150dp"
-				    android:scaleType="center"
-				  	android:background="#334456"/>
-	            <ImageButton
-				  	android:layout_width="200dp" 
-				    android:layout_height="150dp"
-				    android:scaleType="center"
-				  	android:background="#334456"/>
-	            <ImageButton
-				  	android:layout_width="200dp" 
-				    android:layout_height="150dp"
-				    android:scaleType="center"
-				  	android:background="#334456"/>
-	            <ImageButton
-				  	android:layout_width="200dp" 
-				    android:layout_height="150dp"
-				    android:scaleType="center"
-				  	android:background="#334456"/>
-	            <ImageButton
-				  	android:layout_width="200dp" 
-				    android:layout_height="150dp"
-				    android:scaleType="center"
-				  	android:background="#334456"/>
-	            <ImageButton
-				  	android:layout_width="200dp" 
-				    android:layout_height="150dp"
-				    android:scaleType="center"
-				  	android:background="#334456"/>
-            </LinearLayout>
-            
-        </ScrollView>
+           	          
+        </ListView>
         
         
     </LinearLayout>
@@ -63,7 +26,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:orientation="horizontal" 
-        android:layout_weight="1" >
+        android:layout_weight="10" >
         
         <ImageButton
 	        android:id="@+id/write_btn"
