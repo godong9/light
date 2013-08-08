@@ -20,10 +20,9 @@ public class FragmentActivity extends Activity {
 	
 	private AlertDialogWindow popup_dialog;
 	
-	private static final int ID_MYINFO     = 1;
-	private static final int ID_PUSH   = 2;
-	private static final int ID_NOTIFY = 3;
-	private static final int ID_HELP   = 4;
+	private static final int ID_NOTIFY = 1;
+	private static final int ID_HELP   = 2;
+	private static final int ID_LOGOUT   = 3;
 	private static final int ID_FOOD     = 7;
 	private static final int ID_EXERCISE     = 8;
 	private static final int ID_WEIGHT     = 9;
@@ -58,19 +57,15 @@ public class FragmentActivity extends Activity {
 	    
 	    //설정 버튼 팝업 관련 코드	
 		
-	    ActionItem setting_myinfo 	= new ActionItem(ID_MYINFO, "내 정보");
-		ActionItem setting_push 	= new ActionItem(ID_PUSH, "푸시 설정");
         ActionItem setting_notify 	= new ActionItem(ID_NOTIFY, "알림 설정");
         ActionItem setting_help 	= new ActionItem(ID_HELP, "도움말");
-        ActionItem setting_logout 	= new ActionItem(ID_HELP, "로그아웃");
+        ActionItem setting_logout 	= new ActionItem(ID_LOGOUT, "로그아웃");
    
-        setting_push.setSticky(true);
+        setting_notify.setSticky(true);
         
         settingPopup = new QuickAction(this, QuickAction.VERTICAL);
         
         //add action items into QuickAction
-        settingPopup.addActionItem(setting_myinfo);
-        settingPopup.addActionItem(setting_push);
         settingPopup.addActionItem(setting_notify);
         settingPopup.addActionItem(setting_help);
         settingPopup.addActionItem(setting_logout);
@@ -82,10 +77,8 @@ public class FragmentActivity extends Activity {
   				ActionItem actionItem = settingPopup.getActionItem(pos);
                    
   				//here we can filter which action item was clicked with pos or actionId parameter
-  				if (actionId == ID_MYINFO) {
-  					Toast.makeText(getApplicationContext(), "내 정보 변경", Toast.LENGTH_SHORT).show();
-  				} else if (actionId == ID_PUSH) {
-  					Toast.makeText(getApplicationContext(), "푸시 관련 설정", Toast.LENGTH_SHORT).show();
+  				if (actionId == ID_NOTIFY) {
+  					Toast.makeText(getApplicationContext(), "알림설정 변경", Toast.LENGTH_SHORT).show();
   				} else {
   					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
   				}
@@ -154,7 +147,7 @@ public class FragmentActivity extends Activity {
 	    
 	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
 		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
-        ActionItem camera_mission 	= new ActionItem(ID_MISSION, "미션샷");
+        ActionItem camera_mission 	= new ActionItem(ID_MISSION, "인증샷");
       
         camera_camera.setSticky(true);
         camera_album.setSticky(true);
@@ -207,7 +200,6 @@ public class FragmentActivity extends Activity {
 		    ImageButton timeline_btn = (ImageButton)findViewById(R.id.timeline_btn);
 		    ImageButton community_btn = (ImageButton)findViewById(R.id.community_btn);
 	
-		    
 			if(v.getId() == R.id.rival_btn){
 				rival_btn.setSelected(true);
 				timeline_btn.setSelected(false);
@@ -247,6 +239,7 @@ public class FragmentActivity extends Activity {
 			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
 			mBuilder.setView(mLayoutInflater.inflate(R.layout.dialog_popup, null));
+
 			return mBuilder.create();
 		}
 
@@ -294,22 +287,27 @@ public class FragmentActivity extends Activity {
 	
 	public void clickRivalUserBtn(View v) {
 		if(v.getId() == R.id.rival_user1_click){
-			popup_dialog = new AlertDialogWindow();	
+			popup_dialog = new AlertDialogWindow();		
 			popup_dialog.show(getFragmentManager(), "User1 Popup");	
 			//popup_dialog.dismiss();
 		}	
 		
 		else if(v.getId() == R.id.rival_user2_click){
-			Toast.makeText(getApplicationContext(), "user2", Toast.LENGTH_SHORT).show();
+			popup_dialog = new AlertDialogWindow();		
+			popup_dialog.show(getFragmentManager(), "User2 Popup");	
+			//popup_dialog.dismiss();
 		}
-		/*
+	
 		else if(v.getId() == R.id.rival_user3_click){
-		
+			popup_dialog = new AlertDialogWindow();		
+			popup_dialog.show(getFragmentManager(), "User3 Popup");	
+			//popup_dialog.dismiss();
 		}	
 		else if(v.getId() == R.id.rival_user4_click){
-			
-		}
-		*/		
+			popup_dialog = new AlertDialogWindow();		
+			popup_dialog.show(getFragmentManager(), "User4 Popup");	
+			//popup_dialog.dismiss();
+		}	
 	}
 	
 	public void rivalDialogClickBtn(View v) {

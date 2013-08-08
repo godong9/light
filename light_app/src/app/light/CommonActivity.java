@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.util.Log;
 
 public class CommonActivity extends Activity {
+		
 	public String postData(String url,JSONObject obj) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();

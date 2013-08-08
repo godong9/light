@@ -85,26 +85,29 @@
 	    		    android:orientation="vertical">
 				    <TextView   
 				        android:id="@+id/rival_user1_word"	 
-				    	android:layout_weight ="15"     
+				    	android:layout_weight ="18"     
 						android:layout_width="fill_parent"						
 						android:layout_height="0dp"
 						android:layout_marginTop="14dp"
 						android:layout_marginLeft="16dp"
 						android:layout_marginRight="6dp"
-						android:paddingTop="3dp"
+						android:paddingTop="6dp"
 						android:text="먹어봤자 아는맛!"    
 			            android:textSize ="12sp"
-			            android:textColor="#000000" 
+			            android:textStyle="bold"
+			            android:textColor="#424242" 
 			            android:singleLine="true"
 				  		android:gravity="center_horizontal"
-						android:background="#FFFFFF"/> 
+						android:background="@drawable/chat_ballon"/> 
 				    <ImageButton  
 				        android:id="@+id/rival_user1_click"
-				    	android:layout_weight ="85"     
+				    	android:layout_weight ="82"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
-						android:layout_marginLeft="10dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"
 						android:background="@drawable/character_1"
+						android:tag="1_1"
 						android:onClick="clickRivalUserBtn"/> 			
 				</LinearLayout>
 				
@@ -131,8 +134,11 @@
 				    	android:layout_weight ="85"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
-						android:layout_marginRight="10dp"
-						android:background="#FF3333"
+						android:layout_marginLeft="6dp"
+						android:layout_marginRight="17dp"
+						android:layout_marginTop="2dp"
+						android:layout_marginBottom="2dp"
+						android:background="@drawable/calorie_10"
 						android:gravity="center_horizontal"/> 			
 				</LinearLayout>
 			    
@@ -147,19 +153,20 @@
 			
 			    <TextView     
 	              android:id="@+id/rival_user1_nickname"
-	              android:layout_marginLeft="1dp"
+	              android:layout_marginLeft="2dp"
 	              android:layout_marginTop="11dp"
-	              android:layout_width="50dp"
+	              android:layout_width="58dp"
 	              android:layout_height="fill_parent"
-	              android:text="영아입니"    
+	              android:text="영아입니다"    
 	              android:textSize = "12sp"
-	              android:textColor="#5E5555" 
+	              android:textStyle="bold"
+	              android:textColor="#424242" 
 		  		  android:singleLine="true"
 		     	  android:gravity="center"/> 
 		     	<TextView     
 	              android:id="@+id/rival_user1_height"
 	              android:layout_marginTop="9dp"
-	              android:layout_marginLeft="34dp"             
+	              android:layout_marginLeft="25dp"             
 	              android:layout_width="54dp"
 	              android:layout_height="fill_parent"
 	              android:text="163cm /"    
@@ -185,7 +192,8 @@
 			  
 			  
           </LinearLayout>
-                     
+              
+          
           <!-- 유저2 -->
           
           <LinearLayout 
@@ -202,34 +210,38 @@
 			    android:layout_width="fill_parent"
     		    android:layout_height="0dp" 
     		    android:orientation="horizontal">
-				     
+				                   
 			    <LinearLayout 
 			 	    android:layout_weight ="74"
 				    android:layout_width="0dp"
 	    		    android:layout_height="fill_parent" 
 	    		    android:orientation="vertical">
+	       		        
 				    <TextView   
 				        android:id="@+id/rival_user2_word"	 
-				    	android:layout_weight ="15"     
+				    	android:layout_weight ="18"     
 						android:layout_width="fill_parent"						
 						android:layout_height="0dp"
 						android:layout_marginTop="14dp"
 						android:layout_marginLeft="16dp"
 						android:layout_marginRight="6dp"
-						android:paddingTop="3dp"
+						android:paddingTop="6dp"
 						android:text="화이팅팅!"    
 			            android:textSize ="12sp"
-			            android:textColor="#000000" 
+			            android:textStyle="bold"
+			            android:textColor="#424242" 
 			            android:singleLine="true"
 				  		android:gravity="center_horizontal"
-						android:background="#FFFFFF"/> 
+						android:background="@drawable/chat_ballon"/> 
 				    <ImageButton
 				        android:id="@+id/rival_user2_click"	 
-				    	android:layout_weight ="85"     
+				    	android:layout_weight ="82"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
-						android:layout_marginLeft="10dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"
 						android:background="@drawable/character_1"
+						android:tag="1_1"
 						android:onClick="clickRivalUserBtn"/> 			
 				</LinearLayout>
 				
@@ -256,8 +268,11 @@
 				    	android:layout_weight ="85"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
-						android:layout_marginRight="10dp"
-						android:background="#FF3333"
+						android:layout_marginLeft="6dp"
+						android:layout_marginRight="17dp"
+						android:layout_marginTop="2dp"
+						android:layout_marginBottom="2dp"
+						android:background="@drawable/calorie_0"
 						android:gravity="center_horizontal"/> 			
 				</LinearLayout>
 			    
@@ -268,28 +283,29 @@
 		 	    android:layout_weight ="16"
 			    android:layout_width="fill_parent"
     		    android:layout_height="0dp" 
-    		    android:orientation="horizontal">
-			
+    		    android:orientation="horizontal">	     
+			     		     
 			    <TextView     
 	              android:id="@+id/rival_user2_nickname"
-	              android:layout_marginLeft="1dp"
+	              android:layout_marginLeft="2dp"
 	              android:layout_marginTop="11dp"
-	              android:layout_width="50dp"
+	              android:layout_width="58dp"
 	              android:layout_height="fill_parent"
-	              android:text="윤하"    
+	              android:text="윤하입니다"    
 	              android:textSize = "12sp"
-	              android:textColor="#5E5555" 
+	              android:textStyle="bold"
+	              android:textColor="#424242" 
 		  		  android:singleLine="true"
 		     	  android:gravity="center"/> 
 		     	<TextView     
 	              android:id="@+id/rival_user2_height"
 	              android:layout_marginTop="9dp"
-	              android:layout_marginLeft="34dp"             
+	              android:layout_marginLeft="25dp"             
 	              android:layout_width="54dp"
 	              android:layout_height="fill_parent"
 	              android:text="160cm /"    
 	              android:textSize = "13sp"
-	              android:textColor="#706E6E" 
+	              android:textColor="#424242" 
 		  		  android:singleLine="true"
 		  		  android:gravity="center"
 		     	  /> 
@@ -301,7 +317,7 @@
 	              android:layout_height="fill_parent"
 	              android:text="55kg"    
 	              android:textSize = "13sp"
-	              android:textColor="#706E6E" 
+	              android:textColor="#424242" 
 		  		  android:singleLine="true"
 		  		  android:gravity="center_vertical"
 		     	  /> 
@@ -315,6 +331,8 @@
      <TableRow
           android:layout_weight ="48" >
  
+          <!-- 유저3 --> 
+        
           <LinearLayout 
             android:background="@drawable/other_room"
 			android:layout_weight ="50"
@@ -324,7 +342,129 @@
  			android:layout_marginRight="1dp"
           >
           
+          	 <LinearLayout 
+		 	    android:layout_weight ="84"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">
+				                   
+			    <LinearLayout 
+			 	    android:layout_weight ="74"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				    <TextView   
+				        android:id="@+id/rival_user3_word"	 
+				    	android:layout_weight ="18"     
+						android:layout_width="fill_parent"						
+						android:layout_height="0dp"
+						android:layout_marginTop="14dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"
+						android:paddingTop="6dp"
+						android:text="배고팡!"    
+			            android:textSize ="12sp"
+			            android:textStyle="bold"
+			            android:textColor="#424242" 
+			            android:singleLine="true"
+				  		android:gravity="center_horizontal"
+						android:background="@drawable/chat_ballon"/> 
+				    <ImageButton
+				        android:id="@+id/rival_user3_click"	 
+				    	android:layout_weight ="82"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"						
+						android:background="@drawable/character_1"
+						android:tag="1_1"
+						android:onClick="clickRivalUserBtn"/> 			
+				</LinearLayout>
+				
+			     <LinearLayout 
+			 	    android:layout_weight ="26"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				   <TextView   
+				      android:id="@+id/rival_user3_score"	   
+				      android:layout_weight ="15"                             
+		              android:layout_width="fill_parent"
+		              android:layout_height="0dp"
+		              android:layout_marginTop="3dp"
+		              android:layout_marginRight="10dp"
+		              android:text="400"    
+		              android:textSize = "13sp"
+		              android:textColor="#FF0062" 
+			  		  android:singleLine="true"
+			  		  android:gravity="center"
+			     	  /> 
+				    <ImageView   
+				        android:id="@+id/rival_user3_status"
+				    	android:layout_weight ="85"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginLeft="6dp"
+						android:layout_marginRight="17dp"
+						android:layout_marginTop="2dp"
+						android:layout_marginBottom="2dp"
+						android:background="@drawable/calorie_3"
+						android:gravity="center_horizontal"/> 			
+				</LinearLayout>
+			    
+				 
+              </LinearLayout>
+			  			 		 	
+			 <LinearLayout 
+		 	    android:layout_weight ="16"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">	     
+			     		     
+			    <TextView     
+	              android:id="@+id/rival_user3_nickname"
+	              android:layout_marginLeft="2dp"
+	              android:layout_marginTop="11dp"
+	              android:layout_width="58dp"
+	              android:layout_height="fill_parent"
+	              android:text="민옥"    
+	              android:textSize = "12sp"
+	              android:textStyle="bold"
+	              android:textColor="#424242" 
+		  		  android:singleLine="true"
+		     	  android:gravity="center"/> 
+		     	<TextView     
+	              android:id="@+id/rival_user3_height"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="25dp"             
+	              android:layout_width="54dp"
+	              android:layout_height="fill_parent"
+	              android:text="162cm /"    
+	              android:textSize = "13sp"
+	              android:textColor="#424242" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center"
+		     	  /> 
+		     	  <TextView     
+	              android:id="@+id/rival_user3_weight"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="1dp"           
+	              android:layout_width="35dp"
+	              android:layout_height="fill_parent"
+	              android:text="57kg"    
+	              android:textSize = "13sp"
+	              android:textColor="#424242" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center_vertical"
+		     	  /> 
+				 
+              </LinearLayout>
+              
           </LinearLayout>
+          
+          
+          <!-- 유저4 -->
+          
           <LinearLayout 
             android:background="@drawable/other_room"
 			android:layout_weight ="50"
@@ -332,7 +472,125 @@
     		android:layout_height="fill_parent"
     		android:orientation="vertical"
           >
-          
+          	
+               <LinearLayout 
+		 	    android:layout_weight ="84"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">
+				                   
+			    <LinearLayout 
+			 	    android:layout_weight ="74"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				    <TextView   
+				        android:id="@+id/rival_user4_word"	 
+				    	android:layout_weight ="18"     
+						android:layout_width="fill_parent"						
+						android:layout_height="0dp"
+						android:layout_marginTop="14dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"
+						android:paddingTop="6dp"
+						android:text="화이팅팅!"    
+			            android:textSize ="12sp"
+			            android:textStyle="bold"
+			            android:textColor="#424242" 
+			            android:singleLine="true"
+				  		android:gravity="center_horizontal"
+						android:background="@drawable/chat_ballon"/> 
+				    <ImageButton
+				        android:id="@+id/rival_user4_click"	 
+				    	android:layout_weight ="82"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"					
+						android:background="@drawable/character_1"
+						android:tag="1_1"
+						android:onClick="clickRivalUserBtn"/> 			
+				</LinearLayout>
+				
+			     <LinearLayout 
+			 	    android:layout_weight ="26"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				   <TextView   
+				      android:id="@+id/rival_user4_score"	   
+				      android:layout_weight ="15"                             
+		              android:layout_width="fill_parent"
+		              android:layout_height="0dp"
+		              android:layout_marginTop="3dp"
+		              android:layout_marginRight="10dp"
+		              android:text="400"    
+		              android:textSize = "13sp"
+		              android:textColor="#FF0062" 
+			  		  android:singleLine="true"
+			  		  android:gravity="center"
+			     	  /> 
+				    <ImageView   
+				        android:id="@+id/rival_user4_status"
+				    	android:layout_weight ="85"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginLeft="6dp"
+						android:layout_marginRight="17dp"
+						android:layout_marginTop="2dp"
+						android:layout_marginBottom="2dp"
+						android:background="@drawable/calorie_0"
+						android:gravity="center_horizontal"/> 			
+				</LinearLayout>
+			    
+				 
+              </LinearLayout>
+			  			 		 	
+			 <LinearLayout 
+		 	    android:layout_weight ="16"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">	     
+			     		     
+			    <TextView     
+	              android:id="@+id/rival_user4_nickname"
+	              android:layout_marginLeft="2dp"
+	              android:layout_marginTop="11dp"
+	              android:layout_width="58dp"
+	              android:layout_height="fill_parent"
+	              android:text="동순"    
+	              android:textSize = "12sp"
+	              android:textStyle="bold"
+	              android:textColor="#424242" 
+		  		  android:singleLine="true"
+		     	  android:gravity="center"/> 
+		     	<TextView     
+	              android:id="@+id/rival_user4_height"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="25dp"             
+	              android:layout_width="54dp"
+	              android:layout_height="fill_parent"
+	              android:text="160cm /"    
+	              android:textSize = "13sp"
+	              android:textColor="#424242" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center"
+		     	  /> 
+		     	<TextView     
+	              android:id="@+id/rival_user4_weight"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="1dp"           
+	              android:layout_width="35dp"
+	              android:layout_height="fill_parent"
+	              android:text="55kg"    
+	              android:textSize = "13sp"
+	              android:textColor="#424242" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center_vertical"
+		     	/> 
+				 
+              </LinearLayout>
+                      
           </LinearLayout>
 
      </TableRow>

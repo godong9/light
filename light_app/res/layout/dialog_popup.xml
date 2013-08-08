@@ -3,36 +3,121 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
+		
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="340dp"
+        android:orientation="vertical" 
+        android:background="#FFFFFF">
+        
+        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+			android:layout_weight="8"
+	        android:orientation="vertical">
+	        
+	        <ImageButton
+	            android:id="@+id/rival_dialog_exit"
+	            android:layout_width="28dp"
+	            android:layout_height="fill_parent"
+	            android:onClick="rivalDialogClickBtn"
+	            android:layout_gravity="right"
+	            android:background="#222FF2"/>
+	        
+        </LinearLayout>
+       
+		<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+			android:layout_weight="92"
+	        android:orientation="horizontal">
+	        
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+				android:layout_weight="65"
+		        android:orientation="vertical">
 
- 		<Button
-            android:id="@+id/rival_dialog_exit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="rivalDialogClickBtn"
-            android:text="Exit" />
+		        <ImageView
+		            android:id="@+id/rival_dialog_character"
+		            android:src="#666666"
+		            android:layout_weight="20"
+		            android:layout_width="fill_parent"
+		            android:layout_height="0dp"
+		            android:onClick="rivalDialogClickBtn"
+		            android:layout_gravity="right"
+		            android:background="#222FF2"/>
+		        
+		        <ImageView
+		            android:id="@+id/rival_dialog_character"
+		            android:src="#999999"
+		            android:layout_weight="80"
+		            android:layout_width="fill_parent"
+		            android:layout_height="0dp"
+		            android:onClick="rivalDialogClickBtn"
+		            android:layout_gravity="right"
+		            android:background="#222FF2"/>
 
-        <Button
-            android:id="@+id/rival_dialog_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="rivalDialogClickBtn"
-            android:text="One" />
+	      	</LinearLayout>
+	      	
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+				android:layout_weight="35"
+		        android:orientation="horizontal">
 
+	       
+	      	</LinearLayout>	    
+		    
+        </LinearLayout>
+          
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal" 
+        android:gravity="center"
+        android:background="#FFFF55">
+		
+        
+        <ImageButton
+	        android:id="@+id/rival_dialog_mypage"
+	        android:layout_weight="25"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:onClick="rivalDialogClickBtn"
+	        android:background="#DD68DD"/>
+        
+        <ImageButton
+	        android:id="@+id/rival_dialog_closet"
+	        android:layout_weight="25"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:onClick="rivalDialogClickBtn"
+	        android:background="#AADDDD"/>
+	
+		<ImageButton
+	        android:id="@+id/rival_dialog_shop"
+	        android:layout_weight="25"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:onClick="rivalDialogClickBtn"
+	        android:background="#DDD33D"/>
+         
+	    <ImageButton
+	        android:id="@+id/rival_dialog_history"
+	        android:layout_weight="25"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:onClick="rivalDialogClickBtn"
+	        android:background="#FFF66F"/>
 
-        <Button
-            android:id="@+id/rival_dialog_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="rivalDialogClickBtn"
-            android:text="Two" />
-
-  
-        <Button
-            android:id="@+id/rival_dialog_btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="rivalDialogClickBtn"
-            android:text="Three" />
+        
+    </LinearLayout>
+    
+    
+ 		
 
 
 </LinearLayout>
