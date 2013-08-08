@@ -67,7 +67,7 @@
          <!-- 유저1(내 화면) -->
           <LinearLayout 
             android:background="@drawable/my_room"
-			android:layout_weight ="1"
+			android:layout_weight ="50"
 			android:layout_width="0dp"
     		android:layout_height="fill_parent"
     		android:orientation="vertical">
@@ -98,12 +98,14 @@
 			            android:singleLine="true"
 				  		android:gravity="center_horizontal"
 						android:background="#FFFFFF"/> 
-				    <ImageView   
+				    <ImageButton  
+				        android:id="@+id/rival_user1_click"
 				    	android:layout_weight ="85"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
 						android:layout_marginLeft="10dp"
-						android:src="@drawable/character_1"/> 			
+						android:background="@drawable/character_1"
+						android:onClick="clickRivalUserBtn"/> 			
 				</LinearLayout>
 				
 			     <LinearLayout 
@@ -188,9 +190,10 @@
           
           <LinearLayout 
             android:background="@drawable/other_room"
-			android:layout_weight ="1"
+			android:layout_weight ="50"
 			android:layout_width="0dp"
     		android:layout_height="fill_parent"
+    		android:layout_marginBottom="1dp"
     		android:orientation="vertical">
           
               
@@ -220,12 +223,14 @@
 			            android:singleLine="true"
 				  		android:gravity="center_horizontal"
 						android:background="#FFFFFF"/> 
-				    <ImageView   
+				    <ImageButton
+				        android:id="@+id/rival_user2_click"	 
 				    	android:layout_weight ="85"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
 						android:layout_marginLeft="10dp"
-						android:src="@drawable/character_1"/> 			
+						android:background="@drawable/character_1"
+						android:onClick="clickRivalUserBtn"/> 			
 				</LinearLayout>
 				
 			     <LinearLayout 
@@ -302,9 +307,7 @@
 		     	  /> 
 				 
               </LinearLayout>
-              
-              
-                        
+                                   
               
           </LinearLayout>
 
@@ -314,17 +317,20 @@
  
           <LinearLayout 
             android:background="@drawable/other_room"
-			android:layout_weight ="1"
+			android:layout_weight ="50"
 			android:layout_width="0dp"
     		android:layout_height="fill_parent"
+    		android:orientation="vertical"
+ 			android:layout_marginRight="1dp"
           >
           
           </LinearLayout>
           <LinearLayout 
             android:background="@drawable/other_room"
-			android:layout_weight ="1"
+			android:layout_weight ="50"
 			android:layout_width="0dp"
     		android:layout_height="fill_parent"
+    		android:orientation="vertical"
           >
           
           </LinearLayout>

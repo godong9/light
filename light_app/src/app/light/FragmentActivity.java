@@ -1,10 +1,14 @@
 package app.light;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -14,7 +18,7 @@ import android.widget.Toast;
 
 public class FragmentActivity extends Activity {
 	
-	//private AlertDialogWindow popup_dialog;
+	private AlertDialogWindow popup_dialog;
 	
 	private static final int ID_MYINFO     = 1;
 	private static final int ID_PUSH   = 2;
@@ -193,58 +197,7 @@ public class FragmentActivity extends Activity {
         
 	}
 	
-	/* Alert 다이얼로그 관련 소스
-	public class AlertDialogWindow extends DialogFragment {
-
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
-			mBuilder.setView(mLayoutInflater.inflate(R.layout.dialog_popup, null));
-			return mBuilder.create();
-		}
-
-		@Override
-		public void onStop() {
-			super.onStop();
-		}
-	}
-	
-	public void clickSettingBtn(View v) {
-		//Alert Dialog 형태의 팝업
-		popup_dialog = new AlertDialogWindow();	
-		popup_dialog.show(getFragmentManager(), "setting_popup");	
-	}
-	 */
-	
-	public void clickSettingBtn(View v) {
-		v.setSelected(true);
-		settingPopup.show(v);
-	}
-	
-	
-	public void clickTimelineWriteBtn(View v) {
-		v.setSelected(true);
-		writePopup.show(v);
-	}
-	
-	
-	public void clickTimelineCameraBtn(View v) {
-		v.setSelected(true);
-		cameraPopup.show(v);	
-	}
-	
-	public void clickTimelineSendBtn(View v) {
-		final EditText chat_text = (EditText)findViewById(R.id.chat_val);
-		String chat_val = chat_text.getText().toString();
-		if( chat_val.equals("")){
-			Toast.makeText(getApplicationContext(), "내용을 입력하세요!", Toast.LENGTH_SHORT).show();
-		}
-		else{
-			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();
-		}		
-	}
-	
+	//메뉴 버튼 관련 코드
 	Button.OnClickListener btnListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			FragmentManager fm = getFragmentManager();
@@ -281,9 +234,91 @@ public class FragmentActivity extends Activity {
 				CommunityFrag cf = new CommunityFrag();	    
 			    tr.replace(R.id.detail_frag, cf);
 			    tr.commit();	
-			}	
+			}
 		}
 	};
+	
+	
+	
+	public class AlertDialogWindow extends DialogFragment {
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
+			mBuilder.setView(mLayoutInflater.inflate(R.layout.dialog_popup, null));
+			return mBuilder.create();
+		}
+
+		@Override
+		public void onStop() {
+			super.onStop();
+		}
+	}
+	
+	/* Alert 다이얼로그 관련 소스
+	public void clickSettingBtn(View v) {
+		//Alert Dialog 형태의 팝업
+		popup_dialog = new AlertDialogWindow();	
+		popup_dialog.show(getFragmentManager(), "setting_popup");	
+	}
+	 */
+	
+	public void clickSettingBtn(View v) {
+		v.setSelected(true);
+		settingPopup.show(v);
+	}
+	
+	
+	public void clickTimelineWriteBtn(View v) {
+		v.setSelected(true);
+		writePopup.show(v);
+	}
+	
+	
+	public void clickTimelineCameraBtn(View v) {
+		v.setSelected(true);
+		cameraPopup.show(v);	
+	}
+	
+	public void clickTimelineSendBtn(View v) {
+		final EditText chat_text = (EditText)findViewById(R.id.chat_val);
+		String chat_val = chat_text.getText().toString();
+		if( chat_val.equals("")){
+			Toast.makeText(getApplicationContext(), "내용을 입력하세요!", Toast.LENGTH_SHORT).show();
+		}
+		else{
+			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();
+		}		
+	}
+	
+	public void clickRivalUserBtn(View v) {
+		if(v.getId() == R.id.rival_user1_click){
+			popup_dialog = new AlertDialogWindow();	
+			popup_dialog.show(getFragmentManager(), "User1 Popup");	
+			//popup_dialog.dismiss();
+		}	
+		
+		else if(v.getId() == R.id.rival_user2_click){
+			Toast.makeText(getApplicationContext(), "user2", Toast.LENGTH_SHORT).show();
+		}
+		/*
+		else if(v.getId() == R.id.rival_user3_click){
+		
+		}	
+		else if(v.getId() == R.id.rival_user4_click){
+			
+		}
+		*/		
+	}
+	
+	public void rivalDialogClickBtn(View v) {
+		if(v.getId() == R.id.rival_dialog_exit){
+			
+			popup_dialog.dismiss();
+		}		
+		
+	}
 	
 	
 }
