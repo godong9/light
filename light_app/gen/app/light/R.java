@@ -108,8 +108,8 @@ public final class R {
     public static final class id {
         public static final int arrow_down=0x7f08001f;
         public static final int arrow_up=0x7f08001e;
-        public static final int camera_btn=0x7f080042;
-        public static final int chat_val=0x7f080043;
+        public static final int camera_btn=0x7f080044;
+        public static final int chat_val=0x7f080045;
         public static final int community_btn=0x7f08001b;
         public static final int detail_frag=0x7f080018;
         public static final int iv_icon=0x7f080000;
@@ -168,15 +168,17 @@ public final class R {
         public static final int rival_user4_weight=0x7f080040;
         public static final int rival_user4_word=0x7f08003a;
         public static final int scroller=0x7f08001c;
-        public static final int send_btn=0x7f080044;
-        public static final int setting_btn=0x7f080046;
+        public static final int send_btn=0x7f080046;
+        public static final int setting_btn=0x7f080048;
         public static final int splash=0x7f08000f;
         public static final int timeline_btn=0x7f08001a;
         public static final int timeline_frag=0x7f080010;
-        public static final int title_logo=0x7f080045;
+        public static final int timeline_layout=0x7f080042;
+        public static final int timeline_scroll=0x7f080041;
+        public static final int title_logo=0x7f080047;
         public static final int tracks=0x7f08001d;
         public static final int tv_title=0x7f080001;
-        public static final int write_btn=0x7f080041;
+        public static final int write_btn=0x7f080043;
     }
     public static final class layout {
         public static final int action_item_horizontal=0x7f030000;

@@ -14,6 +14,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FragmentActivity extends Activity {
@@ -282,8 +285,19 @@ public class FragmentActivity extends Activity {
 		}
 		else{
 			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();
+			LinearLayout timeline_layout = (LinearLayout)findViewById(R.id.timeline_layout);
+			TextView et = new TextView(this);
+			et.setText(chat_val);
+			timeline_layout.addView(et);
+			final ScrollView sv = (ScrollView)findViewById(R.id.timeline_scroll);
+			sv.post(new Runnable(){
+			    public void run(){
+			        sv.fullScroll(ScrollView.FOCUS_DOWN); 
+			    }
+			});
 		}		
 	}
+
 	
 	public void clickRivalUserBtn(View v) {
 		if(v.getId() == R.id.rival_user1_click){
