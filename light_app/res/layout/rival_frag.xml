@@ -13,61 +13,299 @@
     		android:layout_height="match_parent"
     		android:orientation="horizontal"
     		android:layout_span="2">
-          
+          	
+           <TextView 
+              android:id="@+id/rival_diet_title"
+              android:layout_marginLeft="5dp"
+              android:layout_marginTop="2dp"
+              android:layout_width="56dp"
+              android:layout_height="fill_parent"
+              android:text="다이어트"    
+              android:textSize = "14sp"
+              android:textColor="#FFFFFF" 
+			  android:singleLine="true"
+			  android:gravity="center"/>
+           
+           <TextView 
+              android:id="@+id/rival_count_day"
+              android:layout_width="50dp"
+              android:layout_height="fill_parent"
+              android:text="10일째"    
+              android:textSize = "16sp"
+              android:textColor="#FFFFFF" 
+			  android:singleLine="true"
+			  android:gravity="center"/>
+                
+           <TextView 
+              android:id="@+id/rival_remain_day"
+              android:layout_marginLeft="2dp"
+              android:layout_width="60dp"
+              android:layout_height="fill_parent"
+              android:text="D - 21"    
+              android:textSize = "16sp"
+              android:textColor="#74BAAD" 
+			  android:singleLine="true"
+			  android:gravity="center"/>  
+			  
+           <TextView 
+              android:id="@+id/rival_group_goal"
+              android:layout_marginLeft="52dp"
+              android:layout_width="90dp"
+              android:layout_height="fill_parent"
+              android:text="5kg 감량하기"    
+              android:textSize = "16sp"
+              android:textColor="#FFFFFF" 
+			  android:singleLine="true"
+			  android:gravity="center"/>    
+
           </LinearLayout>
 
      </TableRow> 
      <TableRow
           android:layout_weight ="48" >
-  
+  		
+         <!-- 유저1(내 화면) -->
           <LinearLayout 
             android:background="@drawable/my_room"
 			android:layout_weight ="1"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
     		android:layout_height="fill_parent"
-    		android:orientation="horizontal">
-          	
-            <LinearLayout 
-		 	  android:layout_weight ="73"
-			  android:layout_width="0dp"
-    		  android:layout_height="fill_parent" 
-    		  android:orientation="vertical">
-          	     
-             <ImageView       
-   
-                android:layout_weight ="20"
-				android:layout_width="fill_parent"
-				android:layout_height="0dp"
-				android:scaleType="center"/> 
-			<ImageView        
-			    android:layout_weight ="60"
-				android:layout_width="fill_parent"
-				android:layout_height="0dp"
-				android:src="@drawable/character_1"/> 
-			<ImageView       
-     
-                android:layout_weight ="20"
-				android:layout_width="fill_parent"
-				android:layout_height="0dp"
-				android:scaleType="center"/> 
-                
-            </LinearLayout>
-              
-            <LinearLayout 
-		 	  android:layout_weight ="27"
-			  android:layout_width="0dp"
-    		  android:layout_height="fill_parent" 
-    		  android:orientation="vertical">
-          	     
-            </LinearLayout>
-              
+    		android:orientation="vertical">
+          	         				 
+			 <LinearLayout 
+		 	    android:layout_weight ="84"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">
+				     
+			    <LinearLayout 
+			 	    android:layout_weight ="74"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				    <TextView   
+				        android:id="@+id/rival_user1_word"	 
+				    	android:layout_weight ="15"     
+						android:layout_width="fill_parent"						
+						android:layout_height="0dp"
+						android:layout_marginTop="14dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"
+						android:paddingTop="3dp"
+						android:text="먹어봤자 아는맛!"    
+			            android:textSize ="12sp"
+			            android:textColor="#000000" 
+			            android:singleLine="true"
+				  		android:gravity="center_horizontal"
+						android:background="#FFFFFF"/> 
+				    <ImageView   
+				    	android:layout_weight ="85"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginLeft="10dp"
+						android:src="@drawable/character_1"/> 			
+				</LinearLayout>
+				
+			     <LinearLayout 
+			 	    android:layout_weight ="26"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				   <TextView   
+				      android:id="@+id/rival_user1_score"	   
+				      android:layout_weight ="15"                             
+		              android:layout_width="fill_parent"
+		              android:layout_height="0dp"
+		              android:layout_marginTop="3dp"
+		              android:layout_marginRight="10dp"
+		              android:text="500"    
+		              android:textSize = "13sp"
+		              android:textColor="#FFFFFF" 
+			  		  android:singleLine="true"
+			  		  android:gravity="center"
+			     	  /> 
+				    <ImageView   
+				        android:id="@+id/rival_user1_status"
+				    	android:layout_weight ="85"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginRight="10dp"
+						android:background="#FF3333"
+						android:gravity="center_horizontal"/> 			
+				</LinearLayout>
+			    
+				 
+              </LinearLayout>
+			  			 		 	
+			 <LinearLayout 
+		 	    android:layout_weight ="16"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">
+			
+			    <TextView     
+	              android:id="@+id/rival_user1_nickname"
+	              android:layout_marginLeft="1dp"
+	              android:layout_marginTop="11dp"
+	              android:layout_width="50dp"
+	              android:layout_height="fill_parent"
+	              android:text="영아입니"    
+	              android:textSize = "12sp"
+	              android:textColor="#5E5555" 
+		  		  android:singleLine="true"
+		     	  android:gravity="center"/> 
+		     	<TextView     
+	              android:id="@+id/rival_user1_height"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="34dp"             
+	              android:layout_width="54dp"
+	              android:layout_height="fill_parent"
+	              android:text="163cm /"    
+	              android:textSize = "13sp"
+	              android:textColor="#FFFFFF" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center"
+		     	  /> 
+		     	  <TextView     
+	              android:id="@+id/rival_user1_weight"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="1dp"           
+	              android:layout_width="35dp"
+	              android:layout_height="fill_parent"
+	              android:text="57kg"    
+	              android:textSize = "13sp"
+	              android:textColor="#FFFFFF" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center_vertical"
+		     	  /> 
+				 
+              </LinearLayout>
+			  
+			  
           </LinearLayout>
+                     
+          <!-- 유저2 -->
+          
           <LinearLayout 
             android:background="@drawable/other_room"
 			android:layout_weight ="1"
-			android:layout_width="fill_parent"
-    		android:layout_height="fill_parent">
+			android:layout_width="0dp"
+    		android:layout_height="fill_parent"
+    		android:orientation="vertical">
           
+              
+            <LinearLayout 
+		 	    android:layout_weight ="84"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">
+				     
+			    <LinearLayout 
+			 	    android:layout_weight ="74"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				    <TextView   
+				        android:id="@+id/rival_user2_word"	 
+				    	android:layout_weight ="15"     
+						android:layout_width="fill_parent"						
+						android:layout_height="0dp"
+						android:layout_marginTop="14dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="6dp"
+						android:paddingTop="3dp"
+						android:text="화이팅팅!"    
+			            android:textSize ="12sp"
+			            android:textColor="#000000" 
+			            android:singleLine="true"
+				  		android:gravity="center_horizontal"
+						android:background="#FFFFFF"/> 
+				    <ImageView   
+				    	android:layout_weight ="85"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginLeft="10dp"
+						android:src="@drawable/character_1"/> 			
+				</LinearLayout>
+				
+			     <LinearLayout 
+			 	    android:layout_weight ="26"
+				    android:layout_width="0dp"
+	    		    android:layout_height="fill_parent" 
+	    		    android:orientation="vertical">
+				   <TextView   
+				      android:id="@+id/rival_user2_score"	   
+				      android:layout_weight ="15"                             
+		              android:layout_width="fill_parent"
+		              android:layout_height="0dp"
+		              android:layout_marginTop="3dp"
+		              android:layout_marginRight="10dp"
+		              android:text="400"    
+		              android:textSize = "13sp"
+		              android:textColor="#FF0062" 
+			  		  android:singleLine="true"
+			  		  android:gravity="center"
+			     	  /> 
+				    <ImageView   
+				        android:id="@+id/rival_user2_status"
+				    	android:layout_weight ="85"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginRight="10dp"
+						android:background="#FF3333"
+						android:gravity="center_horizontal"/> 			
+				</LinearLayout>
+			    
+				 
+              </LinearLayout>
+			  			 		 	
+			 <LinearLayout 
+		 	    android:layout_weight ="16"
+			    android:layout_width="fill_parent"
+    		    android:layout_height="0dp" 
+    		    android:orientation="horizontal">
+			
+			    <TextView     
+	              android:id="@+id/rival_user2_nickname"
+	              android:layout_marginLeft="1dp"
+	              android:layout_marginTop="11dp"
+	              android:layout_width="50dp"
+	              android:layout_height="fill_parent"
+	              android:text="윤하"    
+	              android:textSize = "12sp"
+	              android:textColor="#5E5555" 
+		  		  android:singleLine="true"
+		     	  android:gravity="center"/> 
+		     	<TextView     
+	              android:id="@+id/rival_user2_height"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="34dp"             
+	              android:layout_width="54dp"
+	              android:layout_height="fill_parent"
+	              android:text="160cm /"    
+	              android:textSize = "13sp"
+	              android:textColor="#706E6E" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center"
+		     	  /> 
+		     	  <TextView     
+	              android:id="@+id/rival_user2_weight"
+	              android:layout_marginTop="9dp"
+	              android:layout_marginLeft="1dp"           
+	              android:layout_width="35dp"
+	              android:layout_height="fill_parent"
+	              android:text="55kg"    
+	              android:textSize = "13sp"
+	              android:textColor="#706E6E" 
+		  		  android:singleLine="true"
+		  		  android:gravity="center_vertical"
+		     	  /> 
+				 
+              </LinearLayout>
+              
+              
+                        
+              
           </LinearLayout>
 
      </TableRow>  
@@ -77,7 +315,7 @@
           <LinearLayout 
             android:background="@drawable/other_room"
 			android:layout_weight ="1"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
     		android:layout_height="fill_parent"
           >
           
@@ -85,7 +323,7 @@
           <LinearLayout 
             android:background="@drawable/other_room"
 			android:layout_weight ="1"
-			android:layout_width="fill_parent"
+			android:layout_width="0dp"
     		android:layout_height="fill_parent"
           >
           
