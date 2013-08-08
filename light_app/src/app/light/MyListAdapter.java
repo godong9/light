@@ -42,12 +42,15 @@ public class MyListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final int pos = position;
 		if (convertView == null) {
+			
 			LayoutInflater inflater = (LayoutInflater) ctx
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(itemLayout, parent, false);
+			/*
 			TextView textView = (TextView) convertView.findViewById(R.id.text);
-			textView.setText(list.get(position));
+			textView.setText(list.get(pos));
 			View view = convertView.findViewById(R.id.view);
+			
 			int color = 0;
 			if (list.get(position).equals("Red"))
 				color = Color.RED;
@@ -56,7 +59,9 @@ public class MyListAdapter extends BaseAdapter {
 			else if (list.get(position).equals("Blue"))
 				color = Color.BLUE;
 			view.setBackgroundColor(color);
+			*/
 			Button btn = (Button) convertView.findViewById(R.id.btn);
+			
 			btn.setOnClickListener(new View.OnClickListener() {
 
 				@Override

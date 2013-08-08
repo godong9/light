@@ -157,10 +157,9 @@ public class FragmentActivity extends Activity {
   		});
         ////////////////
         
-        
-        
+              
         //카메라 버튼 팝업 관련 코드
-	    
+    
 	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
 		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
         ActionItem camera_mission 	= new ActionItem(ID_MISSION, "인증샷");
@@ -232,15 +231,9 @@ public class FragmentActivity extends Activity {
 				timeline_btn.setSelected(true);
 				community_btn.setSelected(false);	
 				
-				TimelineFrag tf = new TimelineFrag(context);	    
+				TimelineFrag tf = new TimelineFrag();	    
 			    tr.replace(R.id.detail_frag, tf);
-			    
-			    int commitNum = tr.commit();
-//			    tr.add
-//			    if (commitNum == -1) {
-//			    	tf.setListView(context);
-//			    }
-			    System.out.println("coomm num : " + commitNum);
+			    tr.commit();
 			}
 			else if(v.getId() == R.id.community_btn){
 				rival_btn.setSelected(false);
@@ -272,7 +265,6 @@ public class FragmentActivity extends Activity {
 			super.onStop();
 		}
 	}
-
 	
 	public void clickSettingBtn(View v) {
 		v.setSelected(true);
@@ -280,11 +272,11 @@ public class FragmentActivity extends Activity {
 	}
 	
 	
+	
 	public void clickTimelineWriteBtn(View v) {
 		v.setSelected(true);
 		writePopup.show(v);
 	}
-	
 	
 	public void clickTimelineCameraBtn(View v) {
 		v.setSelected(true);
@@ -299,19 +291,6 @@ public class FragmentActivity extends Activity {
 		}
 		else{
 			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();	                      
-			
-			 
-			
-		//	LinearLayout timeline_layout = (LinearLayout)findViewById(R.id.timeline_layout);
-		//	TextView et = new TextView(this);
-		//	et.setText(chat_val);
-		//	timeline_layout.addView(et);
-		//	final ScrollView sv = (ScrollView)findViewById(R.id.timeline_scroll);
-		//	sv.post(new Runnable(){
-		//	    public void run(){
-		//	        sv.fullScroll(ScrollView.FOCUS_DOWN); 
-		//	    }
-		//	});
 		}		
 	}
 
@@ -320,33 +299,27 @@ public class FragmentActivity extends Activity {
 		if(v.getId() == R.id.rival_user1_click){
 			popup_dialog = new AlertDialogWindow();		
 			popup_dialog.show(getFragmentManager(), "User1 Popup");	
-			//popup_dialog.dismiss();
 		}	
 		
 		else if(v.getId() == R.id.rival_user2_click){
 			popup_dialog = new AlertDialogWindow();		
 			popup_dialog.show(getFragmentManager(), "User2 Popup");	
-			//popup_dialog.dismiss();
 		}
 	
 		else if(v.getId() == R.id.rival_user3_click){
 			popup_dialog = new AlertDialogWindow();		
 			popup_dialog.show(getFragmentManager(), "User3 Popup");	
-			//popup_dialog.dismiss();
 		}	
 		else if(v.getId() == R.id.rival_user4_click){
 			popup_dialog = new AlertDialogWindow();		
 			popup_dialog.show(getFragmentManager(), "User4 Popup");	
-			//popup_dialog.dismiss();
 		}	
 	}
 	
 	public void rivalDialogClickBtn(View v) {
-		if(v.getId() == R.id.rival_dialog_exit){
-			
+		if(v.getId() == R.id.rival_dialog_exit){			
 			popup_dialog.dismiss();
-		}		
-		
+		}			
 	}
 	
 	
