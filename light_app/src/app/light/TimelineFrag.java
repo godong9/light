@@ -61,7 +61,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"15","111","asdfsdf"));
             
         my_list_count += 15;	//5개 불러와서 추가 
-		my_adapter = new MyListAdapter(context, R.layout.listview_item, my_list);
+		my_adapter = new MyListAdapter(context, my_list);
 	
 		// 리스트뷰에 어댑터 연결
 	    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
@@ -99,34 +99,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
             }
         }
 	}
-
-	/*
-	private void addItems(final int size)
-	{
-
-		lock_listview = true;
-		
-		Runnable run = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				for(int i = 0 ; i < size ; i++)
-				{
-					 my_list.add(0, new TimeLineObj("99"+i,"111","asdfsdf"));
-				}
-				
-				System.out.println(my_list);
-				my_adapter.notifyDataSetChanged();
-				lock_listview = false;
-			}
-		};
-		//my_list.setSelectionFromTop();
-		
-		Handler handler = new Handler();
-		handler.postDelayed(run, 3000);
-	}
-	*/
-
+	
 }
 

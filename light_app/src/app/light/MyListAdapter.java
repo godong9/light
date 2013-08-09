@@ -9,24 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyListAdapter extends BaseAdapter {
 	private ArrayList<TimeLineObj> list;
 	private Context context;
-	private int itemLayout;
 	private LayoutInflater inflater;
-	
-	MyListAdapter(Context context, int itemLayout, ArrayList<TimeLineObj> my_list) {
-		
+
+	MyListAdapter(Context context, ArrayList<TimeLineObj> my_list) {
 		this.context = context;
-		this.itemLayout = itemLayout;
 		this.list = my_list;
-		
-		this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		this.inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
-		 
+
 	@Override
 	public int getCount() {
 		return list.size();
@@ -44,68 +43,78 @@ public class MyListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-	// 뷰 얻어오는 부분 -> 여기 수정 필요
+		// 뷰 얻어오는 부분 -> 여기 수정 필요
 		final int pos = position;
 		if (convertView == null) {
 			int res = 0;
-			
-			//해당 뷰가 처음 생겨날때 resource 세팅
-			switch(list.get(position).type) {
+
+			// 해당 뷰가 처음 생겨날때 resource 세팅
+			switch (list.get(position).type) {
 				case TimeLineObj.VIEW_TYPE_MY_WORD:
-					
 					res = R.layout.timeline_my_word;
 					break;
-					
+	
 				case TimeLineObj.VIEW_TYPE_OTHER_WORD:
-					
 					res = R.layout.timeline_other_word;
 					break;
 			}
-			
-			convertView = inflater.inflate(itemLayout, parent, false);
+
+			convertView = inflater.inflate(res, parent, false);
 
 		}
-		
+		/*
+		public int type;
+		public String nickname;
+		public String food_type;
+		public int exercise_time;
+		public String content;
+		public int food_calorie;
+		public int exercise_calorie;
+		public int day_count;
+		public String time;
+		public ImageView manager_img;
+		public ImageView img;
+		public String mission_type;
+		*/
+		//변수들 전부 뷰로 만들기
 		TextView tvTime;
 		TextView tvContent;
 		TextView tvID;
-		
-		switch(list.get(position).type) {
-		
-		
-		
-		case TimeLineObj.VIEW_TYPE_MY_WORD:
-			//해당 뷰 세팅
-			 tvTime = (TextView) convertView.findViewById(R.id.time);
-			 tvContent = (TextView) convertView.findViewById(R.id.content);
-			
-			tvTime.setText(list.get(position).time);
-			tvContent.setText(list.get(position).content);
-			
-			break;
-			
-		case TimeLineObj.VIEW_TYPE_OTHER_WORD:
-			
-			tvTime = (TextView) convertView.findViewById(R.id.time);
-			tvContent = (TextView) convertView.findViewById(R.id.content);
-			tvID = (TextView) convertView.findViewById(R.id.ID);
-			
-			tvTime.setText(list.get(position).time);
-			tvContent.setText(list.get(position).content);
-			tvID.setText(list.get(position).nickname);
-			
-			break;
+
+		switch (list.get(position).type) {
+
+			case TimeLineObj.VIEW_TYPE_MY_WORD:
+				// 해당 뷰 세팅
+				tvTime = (TextView) convertView.findViewById(R.id.time);
+				tvContent = (TextView) convertView.findViewById(R.id.content);
+	
+				tvTime.setText(list.get(position).time);
+				tvContent.setText(list.get(position).content);
+	
+				break;
+	
+			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
+	
+				tvTime = (TextView) convertView.findViewById(R.id.time);
+				tvContent = (TextView) convertView.findViewById(R.id.content);
+				tvID = (TextView) convertView.findViewById(R.id.ID);
+	
+				tvTime.setText(list.get(position).time);
+				tvContent.setText(list.get(position).content);
+				tvID.setText(list.get(position).nickname);
+	
+				break;
 		}
-		
+
 		return convertView;
 	}
-	
+
 	public int getItemViewType(int position) {
 		return list.get(position).type;
-	}	
-	
+	}
+
 	public int getViewTypeCount() {
 		return 11;
 	}
-	
+
 }

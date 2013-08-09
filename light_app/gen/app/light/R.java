@@ -106,13 +106,13 @@ public final class R {
         public static final int write_on=0x7f020040;
     }
     public static final class id {
-        public static final int ID=0x7f080043;
-        public static final int arrow_down=0x7f080049;
-        public static final int arrow_up=0x7f080048;
+        public static final int ID=0x7f080049;
+        public static final int arrow_down=0x7f080046;
+        public static final int arrow_up=0x7f080045;
         public static final int camera_btn=0x7f080040;
         public static final int chat_val=0x7f080041;
         public static final int community_btn=0x7f08001b;
-        public static final int content=0x7f080044;
+        public static final int content=0x7f080048;
         public static final int detail_frag=0x7f080018;
         public static final int iv_icon=0x7f080000;
         public static final int join_btn=0x7f08000e;
@@ -169,17 +169,17 @@ public final class R {
         public static final int rival_user4_status=0x7f080039;
         public static final int rival_user4_weight=0x7f08003c;
         public static final int rival_user4_word=0x7f080036;
-        public static final int scroller=0x7f080046;
+        public static final int scroller=0x7f080043;
         public static final int send_btn=0x7f080042;
         public static final int setting_btn=0x7f08004b;
         public static final int splash=0x7f08000f;
-        public static final int time=0x7f080045;
+        public static final int time=0x7f080047;
         public static final int timeline_btn=0x7f08001a;
         public static final int timeline_frag=0x7f080016;
         public static final int timeline_layout=0x7f08003d;
         public static final int timeline_scroll=0x7f08003e;
         public static final int title_logo=0x7f08004a;
-        public static final int tracks=0x7f080047;
+        public static final int tracks=0x7f080044;
         public static final int tv_title=0x7f080001;
         public static final int write_btn=0x7f08003f;
     }
@@ -196,12 +196,11 @@ public final class R {
         public static final int frag_rival=0x7f030009;
         public static final int frag_timeline=0x7f03000a;
         public static final int horiz_separator=0x7f03000b;
-        public static final int listview_item=0x7f03000c;
-        public static final int popup_horizontal=0x7f03000d;
-        public static final int popup_vertical=0x7f03000e;
-        public static final int timeline_my_word=0x7f03000f;
-        public static final int timeline_other_word=0x7f030010;
-        public static final int title=0x7f030011;
+        public static final int popup_horizontal=0x7f03000c;
+        public static final int popup_vertical=0x7f03000d;
+        public static final int timeline_my_word=0x7f03000e;
+        public static final int timeline_other_word=0x7f03000f;
+        public static final int title=0x7f030010;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
