@@ -199,7 +199,9 @@ public final class R {
         public static final int popup_vertical=0x7f03000c;
         public static final int rival_frag=0x7f03000d;
         public static final int timeline_frag=0x7f03000e;
-        public static final int title=0x7f03000f;
+        public static final int timeline_my_msg=0x7f03000f;
+        public static final int timeline_other_msg=0x7f030010;
+        public static final int title=0x7f030011;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;

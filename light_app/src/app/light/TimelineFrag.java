@@ -46,16 +46,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 
         
         //item을 넣는 부분
-        my_list.add(new TimeLineObj("1","11","asdfsdf"));
-        my_list.add(new TimeLineObj("2","111","asdfsdf"));
-        my_list.add(new TimeLineObj("3","111","asdfsdf"));
-        my_list.add(new TimeLineObj("4","111","asdfsdf"));
-        my_list.add(new TimeLineObj("5","11","asdfsdf"));
-        my_list.add(new TimeLineObj("6","111","asdfsdf"));
-        my_list.add(new TimeLineObj("7","111","asdfsdf"));
-        my_list.add(new TimeLineObj("8","111","asdfsdf"));
-        my_list.add(new TimeLineObj("9","11","asdfsdf"));
-        my_list.add(new TimeLineObj("10","111","asdfsdf"));
+        my_list.add(new TimeLineObj("1","11","asdfsdf",0));
+        my_list.add(new TimeLineObj("2","111","asdfsdf",1));
+        my_list.add(new TimeLineObj("3","111","asdfsdf",0));
+        
 
         
         m_list_count += INSERT_COUNT;
@@ -98,7 +92,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
                     // 항목을 추가한다.
                     String str;
                     for(int i = 0; i < INSERT_COUNT; i++) {   
-                        my_list.add(0, new TimeLineObj("99"+i,"111","asdfsdf"));
+//                        my_list.add(0, new TimeLineObj("99"+i,"111","asdfsdf"));
                     }
                     m_list_count += INSERT_COUNT;
           
