@@ -17,7 +17,7 @@
         	android:layout_height="fill_parent"    
             android:layout_width="fill_parent"
             android:transcriptMode="disabled"
-         	android:stackFromBottom="false"
+         	android:stackFromBottom="true"
             >
            	          
         </ListView>

@@ -36,7 +36,7 @@ public class MyListAdapter extends BaseAdapter {
 
 	@Override
 	public String getItem(int position) {
-		return list.get(position).ID;
+		return list.get(position).nickname;
 //		return list.get(position);
 	}
 
@@ -76,7 +76,7 @@ public class MyListAdapter extends BaseAdapter {
 	
 	
 	public int getViewTypeCount() {
-		return 4;
+		return 11;
 	}
 	
 	@Override
@@ -87,15 +87,15 @@ public class MyListAdapter extends BaseAdapter {
 			
 			//해당 뷰가 처음 생겨날때 resource 세팅
 			switch(list.get(position).type) {
-			case TimeLineObj.VIEW_TYPE_MY_MSG:
-				
-				res = R.layout.timeline_my_msg;
-				break;
-				
-			case TimeLineObj.VIEW_TYPE_OTHER_MSG:
-				
-				res = R.layout.timeline_other_msg;
-				break;
+				case TimeLineObj.VIEW_TYPE_MY_WORD:
+					
+					res = R.layout.timeline_my_word;
+					break;
+					
+				case TimeLineObj.VIEW_TYPE_OTHER_WORD:
+					
+					res = R.layout.timeline_other_word;
+					break;
 			}
 			
 			convertView = inflater.inflate(itemLayout, parent, false);
@@ -110,7 +110,7 @@ public class MyListAdapter extends BaseAdapter {
 		
 		
 		
-		case TimeLineObj.VIEW_TYPE_MY_MSG:
+		case TimeLineObj.VIEW_TYPE_MY_WORD:
 			//해당 뷰 세팅
 			 tvTime = (TextView) convertView.findViewById(R.id.time);
 			 tvContent = (TextView) convertView.findViewById(R.id.content);
@@ -120,7 +120,7 @@ public class MyListAdapter extends BaseAdapter {
 			
 			break;
 			
-		case TimeLineObj.VIEW_TYPE_OTHER_MSG:
+		case TimeLineObj.VIEW_TYPE_OTHER_WORD:
 			
 			tvTime = (TextView) convertView.findViewById(R.id.time);
 			tvContent = (TextView) convertView.findViewById(R.id.content);
@@ -128,7 +128,7 @@ public class MyListAdapter extends BaseAdapter {
 			
 			tvTime.setText(list.get(position).time);
 			tvContent.setText(list.get(position).content);
-			tvID.setText(list.get(position).ID);
+			tvID.setText(list.get(position).nickname);
 			
 			break;
 		}

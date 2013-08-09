@@ -1,7 +1,5 @@
 package app.light;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,49 +8,36 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class FragmentActivity extends Activity {
 	
 	private AlertDialogWindow popup_dialog;
-	
+	private QuickAction settingPopup;
+	private QuickAction writePopup;
+	private QuickAction cameraPopup;	
+	// 설정 관련 버튼 상수
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
 	private static final int ID_LOGOUT   = 3;
-	private static final int ID_FOOD     = 7;
-	private static final int ID_EXERCISE     = 8;
-	private static final int ID_WEIGHT     = 9;
-	private static final int ID_CAMERA     = 10;
-	private static final int ID_ALBUM     = 11;
-	private static final int ID_MISSION     = 12;
-	
-	private QuickAction settingPopup;
-	private QuickAction writePopup;
-	private QuickAction cameraPopup;
-	
-	Context context;
-	
+	// 타임라인 입력 관련 버튼 상수
+	private static final int ID_FOOD     = 11;
+	private static final int ID_EXERCISE     = 12;
+	private static final int ID_WEIGHT     = 13;
+	private static final int ID_CAMERA     = 14;
+	private static final int ID_ALBUM     = 15;
+		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	    setContentView(R.layout.frag_layout);
-	    
-	    context = this;
 	    
 	    getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title);
 	    ImageButton diary_btn = (ImageButton)findViewById(R.id.rival_btn);
@@ -65,19 +50,18 @@ public class FragmentActivity extends Activity {
 	    tr.add(R.id.detail_frag, rf);
 	    tr.commit();
 	    
+	    // 각 버튼마다 버튼 리스너 등록
 	    findViewById(R.id.rival_btn).setOnClickListener(btnListener);
 	    findViewById(R.id.timeline_btn).setOnClickListener(btnListener);
 	    findViewById(R.id.community_btn).setOnClickListener(btnListener);
-	
-	    
-	    //설정 버튼 팝업 관련 코드	
-		
+	   
+	    // 설정 버튼 팝업 관련 코드		
         ActionItem setting_notify 	= new ActionItem(ID_NOTIFY, "알림 설정");
         ActionItem setting_help 	= new ActionItem(ID_HELP, "도움말");
         ActionItem setting_logout 	= new ActionItem(ID_LOGOUT, "로그아웃");
-   
+  
         setting_notify.setSticky(true);
-        
+       
         settingPopup = new QuickAction(this, QuickAction.VERTICAL);
         
         //add action items into QuickAction
@@ -94,9 +78,11 @@ public class FragmentActivity extends Activity {
   				//here we can filter which action item was clicked with pos or actionId parameter
   				if (actionId == ID_NOTIFY) {
   					Toast.makeText(getApplicationContext(), "알림설정 변경", Toast.LENGTH_SHORT).show();
-  				} else {
+  				} else if (actionId == ID_HELP) {
   					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
-  				}
+  				} else if (actionId == ID_LOGOUT) {
+   					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+   				}
   			}
   		});
   		
@@ -109,11 +95,8 @@ public class FragmentActivity extends Activity {
   				sb.setSelected(false);
   			}
   		});   
-  		////////////////
-
         
-        //기록 버튼 팝업 관련 코드
-	    
+        //기록 버튼 팝업 관련 코드    
 	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
 		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
         ActionItem write_weight 	= new ActionItem(ID_WEIGHT, "체중 기록");
@@ -155,25 +138,19 @@ public class FragmentActivity extends Activity {
   				wb.setSelected(false);
   			}
   		});
-        ////////////////
-        
               
-        //카메라 버튼 팝업 관련 코드
-    
+        //카메라 버튼 팝업 관련 코드  
 	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
 		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
-        ActionItem camera_mission 	= new ActionItem(ID_MISSION, "인증샷");
       
         camera_camera.setSticky(true);
         camera_album.setSticky(true);
-        camera_mission.setSticky(true);
         
         cameraPopup = new QuickAction(this, QuickAction.HORIZONTAL);
         
         //add action items into QuickAction
         cameraPopup.addActionItem(camera_camera);
         cameraPopup.addActionItem(camera_album);
-        cameraPopup.addActionItem(camera_mission);   
 
         //Set listener for action item clicked
         cameraPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
@@ -186,9 +163,7 @@ public class FragmentActivity extends Activity {
   					Toast.makeText(getApplicationContext(), "사진 촬영", Toast.LENGTH_SHORT).show();
   				} else if (actionId == ID_EXERCISE) {
   					Toast.makeText(getApplicationContext(), "앨범", Toast.LENGTH_SHORT).show();
-  				} else if (actionId == ID_MISSION) {
-  					Toast.makeText(getApplicationContext(), "미션샷", Toast.LENGTH_SHORT).show();
-  				} 
+  				}
   			}
   		});		
         
@@ -201,13 +176,9 @@ public class FragmentActivity extends Activity {
   				cb.setSelected(false);
   			}
   		});
-        ////////////////
-
-    
 	}	
 
-	
-	//메뉴 버튼 관련 코드
+	//메뉴 버튼 관련 이벤트 리스너
 	Button.OnClickListener btnListener = new View.OnClickListener() {
 		public void onClick(View v) {
 			FragmentManager fm = getFragmentManager();
@@ -247,8 +218,7 @@ public class FragmentActivity extends Activity {
 		}
 	};
 	
-	
-	
+	// 커스텀 AlertDialog 구현
 	public class AlertDialogWindow extends DialogFragment {
 
 		@Override
@@ -256,7 +226,6 @@ public class FragmentActivity extends Activity {
 			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
 			mBuilder.setView(mLayoutInflater.inflate(R.layout.dialog_popup, null));
-
 			return mBuilder.create();
 		}
 
@@ -266,23 +235,25 @@ public class FragmentActivity extends Activity {
 		}
 	}
 	
+	// 설정 버튼 클릭시
 	public void clickSettingBtn(View v) {
 		v.setSelected(true);
 		settingPopup.show(v);
 	}
 	
-	
-	
+	// 타임라인 기록하기 버튼 클릭시
 	public void clickTimelineWriteBtn(View v) {
 		v.setSelected(true);
 		writePopup.show(v);
 	}
 	
+	// 타임라인 카메라 버튼 클릭시
 	public void clickTimelineCameraBtn(View v) {
 		v.setSelected(true);
 		cameraPopup.show(v);	
 	}
 	
+	// 타임라인 전송 버튼 클릭시
 	public void clickTimelineSendBtn(View v) {
 		final EditText chat_text = (EditText)findViewById(R.id.chat_val);
 		String chat_val = chat_text.getText().toString();
@@ -294,7 +265,7 @@ public class FragmentActivity extends Activity {
 		}		
 	}
 
-	
+	// 캐릭터 클릭시
 	public void clickRivalUserBtn(View v) {
 		if(v.getId() == R.id.rival_user1_click){
 			popup_dialog = new AlertDialogWindow();		
@@ -316,6 +287,7 @@ public class FragmentActivity extends Activity {
 		}	
 	}
 	
+	// 캐릭터 다이얼로그 내 버튼 클릭시
 	public void rivalDialogClickBtn(View v) {
 		if(v.getId() == R.id.rival_dialog_exit){			
 			popup_dialog.dismiss();

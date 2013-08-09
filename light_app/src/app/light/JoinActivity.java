@@ -17,12 +17,14 @@ public class JoinActivity extends CommonActivity {
         super.onCreate(savedInstanceState); 
         setContentView(R.layout.activity_join);
     }
-       
+    
+    // 회원가입 완료 버튼 클릭시
     public void onJoinCompleteBtn(View v) {
-		
+    	
 		JSONObject json_param = new JSONObject();
 				
 		try {		
+			//입력폼으로부터 데이터 가져와서 JSON 오브젝트에 저장
 			final EditText id_text = (EditText)findViewById(R.id.join_id);
 			String email_val = id_text.getText().toString();
 			json_param.put("email", email_val);	
@@ -36,6 +38,7 @@ public class JoinActivity extends CommonActivity {
 			String nickname_val = nickname_text.getText().toString();
 			json_param.put("nickname", nickname_val);
 						
+			//postData 함수로 데이터 전송
 			String result_json = postData("http://211.110.61.51:3000/join", json_param);		
 							
 			if(result_json.equals("error")){
@@ -44,8 +47,8 @@ public class JoinActivity extends CommonActivity {
 			}
 			else{		
 				JSONObject json_data = new JSONObject(result_json);
-				String result_flag = json_data.getString("result");
-	
+				String result_flag = json_data.getString("result");			
+				// 회원가입 성공시
 				if(result_flag.equals("success")){
 					Intent intent = new Intent(JoinActivity.this, FragmentActivity.class);
 					startActivity(intent);

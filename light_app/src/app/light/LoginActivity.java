@@ -27,10 +27,12 @@ public class LoginActivity extends CommonActivity {
 	    EditText id_edit = (EditText)findViewById(R.id.login_id);
 	    EditText password_edit = (EditText)findViewById(R.id.login_password);
 	    CheckBox keep_login_check = (CheckBox)findViewById(R.id.login_keep_login);
-	    	    
+	    
+	    // 로컬 파일에서 로그인 데이터와 로그인 유지여부 데이터 가져옴
 	    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);   
 		Boolean keep_login_boolean = prefs.getBoolean("keep_login", false);
 		
+		// 로그인 상태 유지가 체크되었을 때
 		if(keep_login_boolean){    
 			String id_text = prefs.getString("email", "");
 		    String password_text = prefs.getString("password", "");
@@ -45,11 +47,12 @@ public class LoginActivity extends CommonActivity {
 		 		    onLoginBtn(login_btn);
 		    	}
 	        };
-		        
+		
 	        login_handler.sendEmptyMessageDelayed(0, 2100);	       
 	    }       
 	}
 	
+	//로그인 버튼 클릭시
 	public void onLoginBtn(View v) {
 
 		JSONObject json_param = new JSONObject();
@@ -75,9 +78,9 @@ public class LoginActivity extends CommonActivity {
 				String result_flag = json_data.getString("result");
 
 				if(result_flag.equals("success")){
+					// 로그인 성공시 로컬 파일에 로그인 관련 정보 저장
 					SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
 					SharedPreferences.Editor editor = prefs.edit();
-					
 					
 					editor.putString("email", email_val);
 					editor.putString("password", password_val);
@@ -94,6 +97,7 @@ public class LoginActivity extends CommonActivity {
 		}	
 	}
 	
+	// 회원가입 클릭시 회원가입 화면으로 이동
 	public void onJoinBtn(View v) {
 		Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
 		startActivity(intent);

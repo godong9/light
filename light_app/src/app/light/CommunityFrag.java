@@ -9,7 +9,7 @@ public class CommunityFrag extends CommonFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.community_frag, container, false);
+		return inflater.inflate(R.layout.frag_community, container, false);
 	}
 			      
 }

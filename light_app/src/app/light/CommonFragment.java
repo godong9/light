@@ -18,16 +18,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.util.Log;
 
 public class CommonFragment extends Fragment {
-	
-//	public CommonFragment(Context context) {
-//		super();
-//	}
-	
-	
+		
 	public String postData(String url,JSONObject obj) {
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
