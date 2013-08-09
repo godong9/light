@@ -47,20 +47,47 @@ public class MyListAdapter extends BaseAdapter {
 		final int pos = position;
 		if (convertView == null) {
 			int res = 0;
-
 			// 해당 뷰가 처음 생겨날때 resource 세팅
 			switch (list.get(position).type) {
+				case TimeLineObj.VIEW_TYPE_TIMEBAR:
+					res = R.layout.timeline_timebar;
+				break;
+				
 				case TimeLineObj.VIEW_TYPE_MY_WORD:
 					res = R.layout.timeline_my_word;
 					break;
-	
+				case TimeLineObj.VIEW_TYPE_MY_FOOD:
+					res = R.layout.timeline_my_food;
+					break;
+				case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
+					res = R.layout.timeline_my_exercise;
+					break;
+				case TimeLineObj.VIEW_TYPE_MY_PICTURE:
+					res = R.layout.timeline_my_picture;
+					break;
+					
 				case TimeLineObj.VIEW_TYPE_OTHER_WORD:
 					res = R.layout.timeline_other_word;
+					break;
+				case TimeLineObj.VIEW_TYPE_OTHER_FOOD:
+					res = R.layout.timeline_other_food;
+					break;
+				case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
+					res = R.layout.timeline_other_exercise;
+					break;
+				case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
+					res = R.layout.timeline_other_picture;
+					break;
+					
+				case TimeLineObj.VIEW_TYPE_MANAGER_WORD:
+					res = R.layout.timeline_manager_word;
+					break;
+				case TimeLineObj.VIEW_TYPE_MANAGER_MISSION:
+					res = R.layout.timeline_manager_mission;
 					break;
 			}
 
 			convertView = inflater.inflate(res, parent, false);
-
 		}
 		/*
 		public int type;
@@ -82,6 +109,9 @@ public class MyListAdapter extends BaseAdapter {
 		TextView tvID;
 
 		switch (list.get(position).type) {
+			case TimeLineObj.VIEW_TYPE_TIMEBAR:
+				//
+			break;
 
 			case TimeLineObj.VIEW_TYPE_MY_WORD:
 				// 해당 뷰 세팅
@@ -91,8 +121,17 @@ public class MyListAdapter extends BaseAdapter {
 				tvTime.setText(list.get(position).time);
 				tvContent.setText(list.get(position).content);
 	
+				break;	
+			case TimeLineObj.VIEW_TYPE_MY_FOOD:
+				//
 				break;
-	
+			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
+				//
+				break;
+			case TimeLineObj.VIEW_TYPE_MY_PICTURE:
+				//
+				break;
+				
 			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
 	
 				tvTime = (TextView) convertView.findViewById(R.id.time);
@@ -103,6 +142,22 @@ public class MyListAdapter extends BaseAdapter {
 				tvContent.setText(list.get(position).content);
 				tvID.setText(list.get(position).nickname);
 	
+				break;	
+			case TimeLineObj.VIEW_TYPE_OTHER_FOOD:
+				//
+				break;
+			case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
+				//
+				break;
+			case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
+				//
+				break;
+				
+			case TimeLineObj.VIEW_TYPE_MANAGER_WORD:
+				//
+				break;
+			case TimeLineObj.VIEW_TYPE_MANAGER_MISSION:
+				//
 				break;
 		}
 

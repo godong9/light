@@ -198,9 +198,18 @@ public final class R {
         public static final int horiz_separator=0x7f03000b;
         public static final int popup_horizontal=0x7f03000c;
         public static final int popup_vertical=0x7f03000d;
-        public static final int timeline_my_word=0x7f03000e;
-        public static final int timeline_other_word=0x7f03000f;
-        public static final int title=0x7f030010;
+        public static final int timeline_manager_mission=0x7f03000e;
+        public static final int timeline_manager_word=0x7f03000f;
+        public static final int timeline_my_exercise=0x7f030010;
+        public static final int timeline_my_food=0x7f030011;
+        public static final int timeline_my_picture=0x7f030012;
+        public static final int timeline_my_word=0x7f030013;
+        public static final int timeline_other_exercise=0x7f030014;
+        public static final int timeline_other_food=0x7f030015;
+        public static final int timeline_other_picture=0x7f030016;
+        public static final int timeline_other_word=0x7f030017;
+        public static final int timeline_timebar=0x7f030018;
+        public static final int title=0x7f030019;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
