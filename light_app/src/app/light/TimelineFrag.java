@@ -24,7 +24,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	private MyListAdapter my_adapter;
 	private ListView my_listview;
 	private int my_list_count = 0;
-	private boolean lock_listview = false;
 		
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -84,15 +83,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
                 // 리스트뷰의 0 번 인덱스 항목이 리스트뷰의 상단에 보이고 있는 경우	
                 if(view.getFirstVisiblePosition() == 0) {
                     // 항목을 추가한다.
-                	lock_listview = true;
-
-                   	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"16","111","asdfsdf"));
+         
+    				my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"16","111","asdfsdf"));
                    	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"17","111","asdfsdf"));
                    	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"18","111","asdfsdf"));
                    	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"19","111","asdfsdf"));
                    	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"20","111","asdfsdf"));
-                
-                    
+    				
+    				System.out.println(my_list);
+    				my_adapter.notifyDataSetChanged();
+ 
                     my_list_count += INSERT_COUNT;     
                     view.setSelection(INSERT_COUNT);	//뷰 위치 이동
                 }

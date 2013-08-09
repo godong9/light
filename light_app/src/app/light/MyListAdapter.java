@@ -16,9 +16,7 @@ public class MyListAdapter extends BaseAdapter {
 	private ArrayList<TimeLineObj> list;
 	private Context context;
 	private int itemLayout;
-	
-	//새로 추가한 부분
-	LayoutInflater inflater;
+	private LayoutInflater inflater;
 	
 	MyListAdapter(Context context, int itemLayout, ArrayList<TimeLineObj> my_list) {
 		
@@ -35,9 +33,8 @@ public class MyListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public String getItem(int position) {
-		return list.get(position).nickname;
-//		return list.get(position);
+	public TimeLineObj getItem(int position) {
+		return list.get(position);
 	}
 
 	@Override
@@ -45,42 +42,9 @@ public class MyListAdapter extends BaseAdapter {
 		return position;
 	}
 
-//	@Override
-//	public View getView(int position, View convertView, ViewGroup parent) {
-//		final int pos = position;
-//		if (convertView == null) {
-//			
-//			LayoutInflater inflater = (LayoutInflater) ctx
-//					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//			convertView = inflater.inflate(itemLayout, parent, false);
-//					
-//			
-//
-//		}
-//		
-//		TextView tvID = (TextView) convertView.findViewById(R.id.ID);
-//		tvID.setText(list.get(pos).ID);
-//		
-//		TextView tvContent = (TextView) convertView.findViewById(R.id.content);
-//		tvContent.setText(list.get(pos).content);
-//
-//		TextView tvTime = (TextView) convertView.findViewById(R.id.time);
-//		tvTime.setText(list.get(pos).time);
-//
-//		return convertView;
-//	}
-	//새로 추가된 부분
-	public int getItemViewType(int position) {
-		return list.get(position).type;
-	}
-	
-	
-	public int getViewTypeCount() {
-		return 11;
-	}
-	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+	// 뷰 얻어오는 부분 -> 여기 수정 필요
 		final int pos = position;
 		if (convertView == null) {
 			int res = 0;
@@ -133,13 +97,15 @@ public class MyListAdapter extends BaseAdapter {
 			break;
 		}
 		
-		
-		
-		
-
-
 		return convertView;
 	}
 	
+	public int getItemViewType(int position) {
+		return list.get(position).type;
+	}	
+	
+	public int getViewTypeCount() {
+		return 11;
+	}
 	
 }
