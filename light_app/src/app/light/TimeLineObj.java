@@ -12,7 +12,7 @@ public class TimeLineObj {
 	public int food_calorie;
 	public int exercise_calorie;
 	public int day_count;
-	public String time;
+	public String date;
 	public ImageView manager_img;
 	public ImageView img;
 	public String mission_type;
@@ -30,91 +30,91 @@ public class TimeLineObj {
 	public static final int VIEW_TYPE_MANAGER_MISSION = 10;
 	
 	//TIMEBAR 생성자
-	public TimeLineObj(int type, int day_count, String time) {
+	public TimeLineObj(int type, int day_count, String date) {
 		this.type = type;
 		this.day_count = day_count;
-		this.time = time;	
+		this.date = date;	
 	}
 	
 	//MY_WORD 생성자
-	public TimeLineObj(int type, String content, String time) {
+	public TimeLineObj(int type, String content, String date) {
 		this.type = type;
 		this.content = content;
-		this.time = time;	
+		this.date = date;	
 	}
 	
 	//MY_FOOD 생성자
-	public TimeLineObj(int type, String food_type, String content, int food_calorie, String time) {
+	public TimeLineObj(int type, String food_type, String content, int food_calorie, String date) {
 		this.type = type;
 		this.content = content;
-		this.time = time;	
+		this.date = date;	
 		this.food_type = food_type;
 		this.food_calorie = food_calorie;
 	}
 	
 	//MY_EXERCISE 생성자
-	public TimeLineObj(int type, int exercise_time, String content, int exercise_calorie, String time) {
+	public TimeLineObj(int type, int exercise_time, String content, int exercise_calorie, String date) {
 		this.type = type;
 		this.content = content;
-		this.time = time;
+		this.date = date;
 		this.exercise_time = exercise_time;
 		this.exercise_calorie = exercise_calorie;
 	}
 	
 	//MY_PICTURE 생성자
-	public TimeLineObj(int type, ImageView img, String time) {
+	public TimeLineObj(int type, ImageView img, String date) {
 		this.type = type;
 		this.img = img;
-		this.time = time;
+		this.date = date;
 	}
 
 	//OTHER_WORD 생성자
-	public TimeLineObj(int type, String nickname, String content, String time) {
+	public TimeLineObj(int type, String nickname, String content, String date) {
 		this.type = type;
 		this.nickname = nickname;
 		this.content = content;
-		this.time = time;	
+		this.date = date;	
 	}
 	
 	//OTHER_FOOD 생성자
-	public TimeLineObj(int type, String nickname, String food_type, String content, int food_calorie, String time) {
+	public TimeLineObj(int type, String nickname, String food_type, String content, int food_calorie, String date) {
 		this.type = type;
 		this.content = content;
-		this.time = time;	
+		this.date = date;	
 		this.food_type = food_type;
 		this.food_calorie = food_calorie;
 	}
 	
 	//OTHER_EXERCISE 생성자
-	public TimeLineObj(int type, String nickname, int exercise_time, String content, int exercise_calorie, String time) {
+	public TimeLineObj(int type, String nickname, int exercise_time, String content, int exercise_calorie, String date) {
 		this.type = type;
 		this.content = content;
-		this.time = time;
+		this.date = date;
 		this.exercise_time = exercise_time;
 		this.exercise_calorie = exercise_calorie;
 	}
 	
 	//OTHER_PICTURE 생성자
-	public TimeLineObj(int type, String nickname, ImageView img, String time) {
+	public TimeLineObj(int type, String nickname, ImageView img, String date) {
 		this.type = type;
 		this.img = img;
-		this.time = time;
+		this.date = date;
 	}
 	
 	//MANAGER_WORD 생성자
-	public TimeLineObj(int type, ImageView manager_img, String content, String time) {
+	public TimeLineObj(int type, ImageView manager_img, String content, String date) {
 		this.type = type;
 		this.manager_img = manager_img;
 		this.content = content;
-		this.time = time;	
+		this.date = date;	
 	}
 	
 	//MANAGER_MISSION 생성자
-	public TimeLineObj(int type, ImageView manager_img, String mission_type, String content, String time) {
+	public TimeLineObj(int type, ImageView manager_img, String mission_type, String content, String date) {
 		this.type = type;
 		this.manager_img = manager_img;
 		this.content = content;
-		this.time = time;	
+		this.date = date;	
 	}
 
 }

@@ -118,7 +118,7 @@ public class MyListAdapter extends BaseAdapter {
 				tvTime = (TextView) convertView.findViewById(R.id.time);
 				tvContent = (TextView) convertView.findViewById(R.id.content);
 	
-				tvTime.setText(list.get(position).time);
+				tvTime.setText(list.get(position).date);
 				tvContent.setText(list.get(position).content);
 	
 				break;	
@@ -138,7 +138,7 @@ public class MyListAdapter extends BaseAdapter {
 				tvContent = (TextView) convertView.findViewById(R.id.content);
 				tvID = (TextView) convertView.findViewById(R.id.ID);
 	
-				tvTime.setText(list.get(position).time);
+				tvTime.setText(list.get(position).date);
 				tvContent.setText(list.get(position).content);
 				tvID.setText(list.get(position).nickname);
 	
