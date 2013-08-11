@@ -104,9 +104,9 @@ public class MyListAdapter extends BaseAdapter {
 		public String mission_type;
 		*/
 		//변수들 전부 뷰로 만들기
-		TextView tvTime;
+		TextView tvDate;
 		TextView tvContent;
-		TextView tvID;
+		TextView tvNickname;
 
 		switch (list.get(position).type) {
 			case TimeLineObj.VIEW_TYPE_TIMEBAR:
@@ -115,11 +115,11 @@ public class MyListAdapter extends BaseAdapter {
 
 			case TimeLineObj.VIEW_TYPE_MY_WORD:
 				// 해당 뷰 세팅
-				tvTime = (TextView) convertView.findViewById(R.id.time);
-				tvContent = (TextView) convertView.findViewById(R.id.content);
+				//tvTime = (TextView) convertView.findViewById(R.id.time);
+				//tvContent = (TextView) convertView.findViewById(R.id.content);
 	
-				tvTime.setText(list.get(position).date);
-				tvContent.setText(list.get(position).content);
+				//tvTime.setText(list.get(position).date);
+				//tvContent.setText(list.get(position).content);
 	
 				break;	
 			case TimeLineObj.VIEW_TYPE_MY_FOOD:
@@ -133,14 +133,14 @@ public class MyListAdapter extends BaseAdapter {
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
-	
-				tvTime = (TextView) convertView.findViewById(R.id.time);
-				tvContent = (TextView) convertView.findViewById(R.id.content);
-				tvID = (TextView) convertView.findViewById(R.id.ID);
-	
-				tvTime.setText(list.get(position).date);
+				
+				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_word_nickname);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_other_word_content);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_word_date);
+				
+				tvNickname.setText(list.get(position).nickname);
 				tvContent.setText(list.get(position).content);
-				tvID.setText(list.get(position).nickname);
+				tvDate.setText(list.get(position).date);
 	
 				break;	
 			case TimeLineObj.VIEW_TYPE_OTHER_FOOD:

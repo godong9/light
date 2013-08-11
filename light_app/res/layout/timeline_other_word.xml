@@ -5,26 +5,28 @@
     android:orientation="horizontal" >
 
     <TextView
-        android:id="@+id/ID"
-        android:layout_width="50px"
-        android:layout_height="wrap_content"
+        android:id="@+id/timeline_other_word_nickname"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
         android:layout_weight="0"
+        android:background="@drawable/timeline_other_nickname"
         android:textColor="#ffffff" />
 
     <TextView
-        android:id="@+id/content"
-        android:layout_width="50px"
-        android:layout_height="wrap_content"
+        android:id="@+id/timeline_other_word_content"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:layout_weight="0"
+        android:background="@drawable/timeline_other_content"
         android:textColor="#ffffff" />
     
-        <TextView
-        android:id="@+id/time"
-        android:layout_width="50px"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/timeline_other_word_date"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_weight="0"
+        android:background="@drawable/timeline_other_date"
         android:textColor="#ffffff" />
-
 
 
 </LinearLayout>
