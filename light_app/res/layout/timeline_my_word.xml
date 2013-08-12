@@ -9,7 +9,6 @@
         android:id="@+id/timeline_my_word_date"
         android:layout_width="60dp"
         android:layout_height="16dp"
-        android:layout_weight="0"
         android:layout_gravity="bottom"
         android:gravity="center"
         android:textSize = "10sp"
@@ -30,13 +29,10 @@
         android:paddingTop="7dp"
         android:paddingLeft="10dp"
         android:paddingBottom="7dp"
-        android:paddingRight="10dp"
-        android:layout_weight="0"       
+        android:paddingRight="10dp"     
         android:background="@drawable/timeline_my_content"
         android:textSize = "15sp"
         android:textColor="#000000" />
    
-
-
 
 </LinearLayout>

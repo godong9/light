@@ -7,16 +7,16 @@
 
     <TextView
         android:id="@+id/timeline_other_word_nickname"
-        android:layout_width="78dp"
-        android:layout_height="22dp"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
         android:layout_gravity="top"
         android:gravity="center"
-        android:textSize = "14sp"
+        android:textSize = "12sp"
         android:textStyle="bold"
         android:textColor="#424242" 
   		android:singleLine="true"
         android:paddingLeft="5dp"
-  		android:layout_marginTop="4dp"
+  		android:layout_marginTop="3dp"
   		android:layout_marginLeft="5dp"
         android:background="@drawable/timeline_other_nickname"/>
 
@@ -31,8 +31,7 @@
         android:paddingTop="7dp"
         android:paddingLeft="10dp"
         android:paddingBottom="7dp"
-        android:paddingRight="10dp"
-        android:layout_weight="0"       
+        android:paddingRight="10dp"    
         android:background="@drawable/timeline_other_content"
         android:textSize = "15sp"
         android:textColor="#000000" />
@@ -41,7 +40,6 @@
         android:id="@+id/timeline_other_word_date"
         android:layout_width="60dp"
         android:layout_height="16dp"
-        android:layout_weight="0"
         android:layout_gravity="bottom"
         android:gravity="center"
         android:textSize = "10sp"

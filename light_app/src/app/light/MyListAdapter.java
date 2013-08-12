@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,6 @@ public class MyListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// 뷰 얻어오는 부분 -> 여기 수정 필요
 		final int pos = position;
 		if (convertView == null) {
 			int res = 0;
@@ -57,10 +57,10 @@ public class MyListAdapter extends BaseAdapter {
 					res = R.layout.timeline_my_word;
 					break;
 				case TimeLineObj.VIEW_TYPE_MY_FOOD:
-					res = R.layout.timeline_my_food;
+					res = R.layout.timeline_my_write;
 					break;
 				case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
-					res = R.layout.timeline_my_exercise;
+					res = R.layout.timeline_my_write;
 					break;
 				case TimeLineObj.VIEW_TYPE_MY_PICTURE:
 					res = R.layout.timeline_my_picture;
@@ -70,10 +70,10 @@ public class MyListAdapter extends BaseAdapter {
 					res = R.layout.timeline_other_word;
 					break;
 				case TimeLineObj.VIEW_TYPE_OTHER_FOOD:
-					res = R.layout.timeline_other_food;
+					res = R.layout.timeline_other_write;
 					break;
 				case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
-					res = R.layout.timeline_other_exercise;
+					res = R.layout.timeline_other_write;
 					break;
 				case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
 					res = R.layout.timeline_other_picture;
@@ -93,61 +93,82 @@ public class MyListAdapter extends BaseAdapter {
 		TextView tvNickname;	
 		TextView tvContent;
 		TextView tvDate;
-		TextView tvFoodType;
-		TextView tvFoodCal;
-		TextView tvExerciseTime;
-		TextView tvExerciseCal;
-		TextView tvDay;
+		TextView tvPreContent;
+		TextView tvCalorie;
+		TextView tvDayCount;
 		TextView tvMission;
-		ImageView ivManager;
-		ImageView ivPicture;	
-		
-		//전체 data type 
+		ImageView ivPicture;
+		LinearLayout llWriteType;
+		String picture_name;
 		/*
 		public int type;
+		public String write_type;
 		public String nickname;
-		public String food_type;
-		public int exercise_time;
+		public String pre_content;
 		public String content;
-		public int food_calorie;
-		public int exercise_calorie;
-		public int day_count;
+		public String calorie;
+		public String day_count;
+		public int bar_status;
 		public String date;
 		public ImageView manager_img;
 		public ImageView img;
 		public String mission_type;
 		*/
-		
+
 		switch (list.get(position).type) {
 			case TimeLineObj.VIEW_TYPE_TIMEBAR:
-				//
-			break;
-
+				tvDayCount = (TextView) convertView.findViewById(R.id.timeline_timebar_day_count);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_timebar_date);				
+				
+				tvDayCount.setText(list.get(position).day_count);
+				tvDate.setText(list.get(position).date);
+				break;	
+				
 			case TimeLineObj.VIEW_TYPE_MY_WORD:
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_word_date);
 				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_word_content);
-	
-				tvDate.setText(list.get(position).date);
-				tvContent.setText(list.get(position).content);
-	
-				break;	
-			case TimeLineObj.VIEW_TYPE_MY_FOOD:
-				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_food_date);
-				tvFoodType = (TextView) convertView.findViewById(R.id.timeline_my_food_type);
-				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_food_content);
-				tvFoodCal = (TextView) convertView.findViewById(R.id.timeline_my_food_calorie);
 				
 				tvDate.setText(list.get(position).date);
-				tvFoodType.setText(list.get(position).pre_content); 
 				tvContent.setText(list.get(position).content);
-				tvFoodCal.setText(list.get(position).calorie); 
-				//
+				break;	
+				
+			case TimeLineObj.VIEW_TYPE_MY_FOOD:
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_write_date);
+				tvPreContent = (TextView) convertView.findViewById(R.id.timeline_my_write_pre_content);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_write_content);
+				tvCalorie = (TextView) convertView.findViewById(R.id.timeline_my_write_calorie);
+				llWriteType = (LinearLayout) convertView.findViewById(R.id.timeline_my_write_type);
+				
+				llWriteType.setBackgroundResource(R.drawable.timeline_my_food);
+				tvDate.setText(list.get(position).date);
+				tvPreContent.setText(list.get(position).pre_content); 
+				tvContent.setText(list.get(position).content);
+				tvCalorie.setText(list.get(position).calorie); 
 				break;
+				
 			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
-				//
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_write_date);
+				tvPreContent = (TextView) convertView.findViewById(R.id.timeline_my_write_pre_content);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_write_content);
+				tvCalorie = (TextView) convertView.findViewById(R.id.timeline_my_write_calorie);
+				llWriteType = (LinearLayout) convertView.findViewById(R.id.timeline_my_write_type);
+				
+				llWriteType.setBackgroundResource(R.drawable.timeline_my_exercise);
+				tvDate.setText(list.get(position).date);
+				tvPreContent.setText(list.get(position).pre_content); 
+				tvContent.setText(list.get(position).content);
+				tvCalorie.setText(list.get(position).calorie); 
 				break;
+
 			case TimeLineObj.VIEW_TYPE_MY_PICTURE:
-				//
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_picture_date);
+				ivPicture = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
+				
+				//사진 적용하는 부분 추가 필요
+				
+				picture_name = list.get(position).content;
+				tvDate.setText(list.get(position).date);
+		
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
@@ -162,20 +183,65 @@ public class MyListAdapter extends BaseAdapter {
 	
 				break;	
 			case TimeLineObj.VIEW_TYPE_OTHER_FOOD:
-				//
+				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_write_nickname);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_write_date);
+				tvPreContent = (TextView) convertView.findViewById(R.id.timeline_other_write_pre_content);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_other_write_content);
+				tvCalorie = (TextView) convertView.findViewById(R.id.timeline_other_write_calorie);
+				llWriteType = (LinearLayout) convertView.findViewById(R.id.timeline_other_write_type);
+				
+				llWriteType.setBackgroundResource(R.drawable.timeline_other_food);
+				tvNickname.setText(list.get(position).nickname);
+				tvDate.setText(list.get(position).date);
+				tvPreContent.setText(list.get(position).pre_content); 
+				tvContent.setText(list.get(position).content);
+				tvCalorie.setText(list.get(position).calorie); 
 				break;
+
 			case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
-				//
+				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_write_nickname);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_write_date);
+				tvPreContent = (TextView) convertView.findViewById(R.id.timeline_other_write_pre_content);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_other_write_content);
+				tvCalorie = (TextView) convertView.findViewById(R.id.timeline_other_write_calorie);
+				llWriteType = (LinearLayout) convertView.findViewById(R.id.timeline_other_write_type);
+				
+				llWriteType.setBackgroundResource(R.drawable.timeline_other_exercise);
+				tvNickname.setText(list.get(position).nickname);
+				tvDate.setText(list.get(position).date);
+				tvPreContent.setText(list.get(position).pre_content); 
+				tvContent.setText(list.get(position).content);
+				tvCalorie.setText(list.get(position).calorie); 
 				break;
+				
 			case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
-				//
+				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_picture_nickname);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_picture_date);
+				ivPicture = (ImageView) convertView.findViewById(R.id.timeline_other_picture_content);
+				
+				//사진 적용하는 부분 추가 필요
+				
+				tvNickname.setText(list.get(position).nickname);
+				picture_name = list.get(position).content;
+				tvDate.setText(list.get(position).date);
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_MANAGER_WORD:
-				//
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_manager_word_content);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_manager_word_date);
+	
+				tvContent.setText(list.get(position).content);
+				tvDate.setText(list.get(position).date);
 				break;
+				
 			case TimeLineObj.VIEW_TYPE_MANAGER_MISSION:
-				//
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_manager_mission_date);
+				tvPreContent = (TextView) convertView.findViewById(R.id.timeline_manager_mission_pre_content);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_manager_mission_content);
+				
+				tvDate.setText(list.get(position).date);
+				tvPreContent.setText(list.get(position).pre_content); 
+				tvContent.setText(list.get(position).content);
 				break;
 		}
 

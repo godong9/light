@@ -48,15 +48,15 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","테스트테스트테스트테스트테스트테스트테스트테스트","오전 12:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","테스트테","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"테스트테스","오후 1:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "333","테","550","오후 12:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"6","a","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"7","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"8","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"9","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"10","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"11","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"12","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"13","111","asdfsdf"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "60","자전거","-550Kcal","오후 12:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥입니다","점심","냉모밀","+750Kcal","오전 11:50"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아니다","30","웨이트트레이닝","-300Kcal","오후 1:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_EXERCISE,"60","걷기","-200Kcal","오전 10:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, 0, 0, "운동", "자전거 1시간 타기","오후 12:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_WORD, 0, 0, "오늘 운동 많이했나요?","오후 13:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "10일째","2013. 8. 13"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,"test","오후 2:20"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE,"영아","test","오후 3:10"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"14","111","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"15","111","asdfsdf"));
             
