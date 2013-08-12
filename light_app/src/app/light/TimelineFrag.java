@@ -44,12 +44,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		my_list = new ArrayList<TimeLineObj>();
   
         //리스트에 아이템 넣는 부분
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"1","11","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"2","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"4","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"5","111","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"6","111","asdfsdf"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영아입니다","테스트","오후 11:20"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","테스트테스트테스트테스트테스트테스트테스트테스트","오전 12:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","테스트테","asdfsdf"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"테스트테스","오후 1:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, 1, "333","테","550","오후 12:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"6","a","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"7","111","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"8","111","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"9","111","asdfsdf"));

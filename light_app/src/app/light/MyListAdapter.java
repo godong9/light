@@ -89,6 +89,20 @@ public class MyListAdapter extends BaseAdapter {
 
 			convertView = inflater.inflate(res, parent, false);
 		}
+	
+		TextView tvNickname;	
+		TextView tvContent;
+		TextView tvDate;
+		TextView tvFoodType;
+		TextView tvFoodCal;
+		TextView tvExerciseTime;
+		TextView tvExerciseCal;
+		TextView tvDay;
+		TextView tvMission;
+		ImageView ivManager;
+		ImageView ivPicture;	
+		
+		//전체 data type 
 		/*
 		public int type;
 		public String nickname;
@@ -98,31 +112,35 @@ public class MyListAdapter extends BaseAdapter {
 		public int food_calorie;
 		public int exercise_calorie;
 		public int day_count;
-		public String time;
+		public String date;
 		public ImageView manager_img;
 		public ImageView img;
 		public String mission_type;
 		*/
-		//변수들 전부 뷰로 만들기
-		TextView tvDate;
-		TextView tvContent;
-		TextView tvNickname;
-
+		
 		switch (list.get(position).type) {
 			case TimeLineObj.VIEW_TYPE_TIMEBAR:
 				//
 			break;
 
 			case TimeLineObj.VIEW_TYPE_MY_WORD:
-				// 해당 뷰 세팅
-				//tvTime = (TextView) convertView.findViewById(R.id.time);
-				//tvContent = (TextView) convertView.findViewById(R.id.content);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_word_date);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_word_content);
 	
-				//tvTime.setText(list.get(position).date);
-				//tvContent.setText(list.get(position).content);
+				tvDate.setText(list.get(position).date);
+				tvContent.setText(list.get(position).content);
 	
 				break;	
 			case TimeLineObj.VIEW_TYPE_MY_FOOD:
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_food_date);
+				tvFoodType = (TextView) convertView.findViewById(R.id.timeline_my_food_type);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_food_content);
+				tvFoodCal = (TextView) convertView.findViewById(R.id.timeline_my_food_calorie);
+				
+				tvDate.setText(list.get(position).date);
+				tvFoodType.setText(list.get(position).food_type); 
+				tvContent.setText(list.get(position).content);
+				tvFoodCal.setText(list.get(position).food_calorie); 
 				//
 				break;
 			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:

@@ -2,21 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:gravity="right"
     android:orientation="horizontal" >
-
+      
     <TextView
-        android:id="@+id/time"
-        android:layout_width="50px"
-        android:layout_height="wrap_content"
+        android:id="@+id/timeline_my_word_date"
+        android:layout_width="60dp"
+        android:layout_height="16dp"
         android:layout_weight="0"
-        android:textColor="#ffffff" />
-
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textSize = "10sp"
+        android:textColor="#FFFFFF" 
+  		android:singleLine="true"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/timeline_my_date"/>
+    
     <TextView
-        android:id="@+id/content"
-        android:layout_width="50px"
+        android:id="@+id/timeline_my_word_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:textColor="#ffffff" />
+        android:maxWidth="160dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center_vertical"
+        android:paddingTop="7dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="7dp"
+        android:paddingRight="10dp"
+        android:layout_weight="0"       
+        android:background="@drawable/timeline_my_content"
+        android:textSize = "15sp"
+        android:textColor="#000000" />
+   
 
 
 

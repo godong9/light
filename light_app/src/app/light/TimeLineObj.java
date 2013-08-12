@@ -5,11 +5,12 @@ import android.widget.ImageView;
 public class TimeLineObj {
 	//전체 data type 
 	public int type;
+	public int write_type;
 	public String nickname;
 	public String food_type;
 	public int exercise_time;
 	public String content;
-	public int food_calorie;
+	public String food_calorie;
 	public int exercise_calorie;
 	public int day_count;
 	public String date;
@@ -43,9 +44,10 @@ public class TimeLineObj {
 		this.date = date;	
 	}
 	
-	//MY_FOOD 생성자
-	public TimeLineObj(int type, String food_type, String content, int food_calorie, String date) {
+	//MY_FOOD, MY_EXERCISE 생성자
+	public TimeLineObj(int type, int write_type, String food_type, String content, String food_calorie, String date) {
 		this.type = type;
+		this.write_type = write_type;
 		this.content = content;
 		this.date = date;	
 		this.food_type = food_type;
@@ -77,7 +79,7 @@ public class TimeLineObj {
 	}
 	
 	//OTHER_FOOD 생성자
-	public TimeLineObj(int type, String nickname, String food_type, String content, int food_calorie, String date) {
+	public TimeLineObj(int type, String nickname, String food_type, String content, String food_calorie, String date) {
 		this.type = type;
 		this.content = content;
 		this.date = date;	
