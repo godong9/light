@@ -138,9 +138,9 @@ public class MyListAdapter extends BaseAdapter {
 				tvFoodCal = (TextView) convertView.findViewById(R.id.timeline_my_food_calorie);
 				
 				tvDate.setText(list.get(position).date);
-				tvFoodType.setText(list.get(position).food_type); 
+				tvFoodType.setText(list.get(position).pre_content); 
 				tvContent.setText(list.get(position).content);
-				tvFoodCal.setText(list.get(position).food_calorie); 
+				tvFoodCal.setText(list.get(position).calorie); 
 				//
 				break;
 			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
