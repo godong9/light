@@ -18,20 +18,12 @@ import android.widget.Toast;
 
 public class BaseFragment extends Activity {
 	
-	private AlertDialogWindow popup_dialog;
 	private QuickAction settingPopup;
-	private QuickAction writePopup;
-	private QuickAction cameraPopup;	
+	
 	// 설정 관련 버튼 상수
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
 	private static final int ID_LOGOUT   = 3;
-	// 타임라인 입력 관련 버튼 상수
-	private static final int ID_FOOD     = 11;
-	private static final int ID_EXERCISE     = 12;
-	private static final int ID_WEIGHT     = 13;
-	private static final int ID_CAMERA     = 14;
-	private static final int ID_ALBUM     = 15;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,88 +86,7 @@ public class BaseFragment extends Activity {
   				ImageButton sb = (ImageButton)findViewById(R.id.setting_btn);
   				sb.setSelected(false);
   			}
-  		});   
-        
-        //기록 버튼 팝업 관련 코드    
-	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
-		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
-        ActionItem write_weight 	= new ActionItem(ID_WEIGHT, "체중 기록");
-      
-        write_food.setSticky(true);
-        write_exercise.setSticky(true);
-        write_weight.setSticky(true);
-        
-        writePopup = new QuickAction(this, QuickAction.HORIZONTAL);
-        
-        //add action items into QuickAction
-        writePopup.addActionItem(write_food);
-        writePopup.addActionItem(write_exercise);
-        writePopup.addActionItem(write_weight);   
-
-        //Set listener for action item clicked
-        writePopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
-  			@Override
-  			public void onItemClick(QuickAction source, int pos, int actionId) {				
-  				ActionItem actionItem = writePopup.getActionItem(pos);
-                   
-  				//here we can filter which action item was clicked with pos or actionId parameter
-  				if (actionId == ID_FOOD) {
-  					Toast.makeText(getApplicationContext(), "음식 기록", Toast.LENGTH_SHORT).show();
-  				} else if (actionId == ID_EXERCISE) {
-  					Toast.makeText(getApplicationContext(), "운동 기록", Toast.LENGTH_SHORT).show();
-  				} else if (actionId == ID_WEIGHT) {
-  					Toast.makeText(getApplicationContext(), "체중 기록", Toast.LENGTH_SHORT).show();
-  				} 
-  			}
-  		});		
-        
-        //set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
-  		//by clicking the area outside the dialog.
-        writePopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
-  			@Override
-  			public void onDismiss() {
-  				ImageButton wb = (ImageButton)findViewById(R.id.write_btn);
-  				wb.setSelected(false);
-  			}
-  		});
-              
-        //카메라 버튼 팝업 관련 코드  
-	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
-		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
-      
-        camera_camera.setSticky(true);
-        camera_album.setSticky(true);
-        
-        cameraPopup = new QuickAction(this, QuickAction.HORIZONTAL);
-        
-        //add action items into QuickAction
-        cameraPopup.addActionItem(camera_camera);
-        cameraPopup.addActionItem(camera_album);
-
-        //Set listener for action item clicked
-        cameraPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
-  			@Override
-  			public void onItemClick(QuickAction source, int pos, int actionId) {				
-  				ActionItem actionItem = writePopup.getActionItem(pos);
-                   
-  				//here we can filter which action item was clicked with pos or actionId parameter
-  				if (actionId == ID_CAMERA) {
-  					Toast.makeText(getApplicationContext(), "사진 촬영", Toast.LENGTH_SHORT).show();
-  				} else if (actionId == ID_EXERCISE) {
-  					Toast.makeText(getApplicationContext(), "앨범", Toast.LENGTH_SHORT).show();
-  				}
-  			}
-  		});		
-        
-        //set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
-  		//by clicking the area outside the dialog.
-        cameraPopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
-  			@Override
-  			public void onDismiss() {
-  				ImageButton cb = (ImageButton)findViewById(R.id.camera_btn);
-  				cb.setSelected(false);
-  			}
-  		});
+  		});      
 	}	
 
 	//메뉴 버튼 관련 이벤트 리스너
@@ -218,68 +129,10 @@ public class BaseFragment extends Activity {
 		}
 	};
 	
-	// 커스텀 AlertDialog 구현
-	public class AlertDialogWindow extends DialogFragment {
-
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
-			mBuilder.setView(mLayoutInflater.inflate(R.layout.dialog_popup, null));
-			return mBuilder.create();
-		}
-
-		@Override
-		public void onStop() {
-			super.onStop();
-		}
-	}
-	
 	// 설정 버튼 클릭시
 	public void clickSettingBtn(View v) {
 		v.setSelected(true);
 		settingPopup.show(v);
-	}
-	
-	// 타임라인 기록하기 버튼 클릭시
-	public void clickTimelineWriteBtn(View v) {
-		v.setSelected(true);
-		writePopup.show(v);
-	}
-	
-	// 타임라인 카메라 버튼 클릭시
-	public void clickTimelineCameraBtn(View v) {
-		v.setSelected(true);
-		cameraPopup.show(v);	
-	}
-	
-	// 캐릭터 클릭시
-	public void clickRivalUserBtn(View v) {
-		if(v.getId() == R.id.rival_user1_click){
-			popup_dialog = new AlertDialogWindow();		
-			popup_dialog.show(getFragmentManager(), "User1 Popup");	
-		}	
-		
-		else if(v.getId() == R.id.rival_user2_click){
-			popup_dialog = new AlertDialogWindow();		
-			popup_dialog.show(getFragmentManager(), "User2 Popup");	
-		}
-	
-		else if(v.getId() == R.id.rival_user3_click){
-			popup_dialog = new AlertDialogWindow();		
-			popup_dialog.show(getFragmentManager(), "User3 Popup");	
-		}	
-		else if(v.getId() == R.id.rival_user4_click){
-			popup_dialog = new AlertDialogWindow();		
-			popup_dialog.show(getFragmentManager(), "User4 Popup");	
-		}	
-	}
-	
-	// 캐릭터 다이얼로그 내 버튼 클릭시
-	public void rivalDialogClickBtn(View v) {
-		if(v.getId() == R.id.rival_dialog_exit){			
-			popup_dialog.dismiss();
-		}			
 	}
 	
 }

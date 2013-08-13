@@ -14,6 +14,7 @@ public class CommunityFrag extends CommonFragment {
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_community, container, false);
+		context = getActivity();
 		
 		return view;
 	}
@@ -21,7 +22,6 @@ public class CommunityFrag extends CommonFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		context = getActivity();
 		
 	}			      
 }

@@ -17,10 +17,9 @@
 	        android:orientation="vertical">
 	        
 	        <ImageButton
-	            android:id="@+id/rival_dialog_exit"
+	            android:id="@+id/rival_my_dialog_exit"
 	            android:layout_width="28dp"
 	            android:layout_height="fill_parent"
-	            android:onClick="rivalDialogClickBtn"
 	            android:layout_gravity="right"
 	            android:background="#222FF2"/>
 	        
@@ -39,22 +38,19 @@
 		        android:orientation="vertical">
 
 		        <ImageView
-		            android:id="@+id/rival_dialog_character"
+		            android:id="@+id/rival_my_dialog_character"
 		            android:src="#666666"
 		            android:layout_weight="20"
 		            android:layout_width="fill_parent"
 		            android:layout_height="0dp"
-		            android:onClick="rivalDialogClickBtn"
 		            android:layout_gravity="right"
 		            android:background="#222FF2"/>
 		        
 		        <ImageView
-		            android:id="@+id/rival_dialog_character"
 		            android:src="#999999"
 		            android:layout_weight="80"
 		            android:layout_width="fill_parent"
 		            android:layout_height="0dp"
-		            android:onClick="rivalDialogClickBtn"
 		            android:layout_gravity="right"
 		            android:background="#222FF2"/>
 
@@ -82,35 +78,31 @@
 		
         
         <ImageButton
-	        android:id="@+id/rival_dialog_mypage"
+	        android:id="@+id/rival_my_dialog_page"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:onClick="rivalDialogClickBtn"
 	        android:background="#DD68DD"/>
         
         <ImageButton
-	        android:id="@+id/rival_dialog_closet"
+	        android:id="@+id/rival_my_dialog_closet"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:onClick="rivalDialogClickBtn"
 	        android:background="#AADDDD"/>
 	
 		<ImageButton
-	        android:id="@+id/rival_dialog_shop"
+	        android:id="@+id/rival_my_dialog_shop"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:onClick="rivalDialogClickBtn"
 	        android:background="#DDD33D"/>
          
 	    <ImageButton
-	        android:id="@+id/rival_dialog_history"
+	        android:id="@+id/rival_my_dialog_history"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:onClick="rivalDialogClickBtn"
 	        android:background="#FFF66F"/>
 
         

@@ -107,8 +107,7 @@
 						android:layout_marginLeft="16dp"
 						android:layout_marginRight="6dp"
 						android:background="@drawable/character_1"
-						android:tag="1_1"
-						android:onClick="clickRivalUserBtn"/> 			
+						android:tag="1_1"/> 			
 				</LinearLayout>
 				
 			     <LinearLayout 
@@ -241,8 +240,7 @@
 						android:layout_marginLeft="16dp"
 						android:layout_marginRight="6dp"
 						android:background="@drawable/character_1"
-						android:tag="1_1"
-						android:onClick="clickRivalUserBtn"/> 			
+						android:tag="1_1"/> 			
 				</LinearLayout>
 				
 			     <LinearLayout 
@@ -377,8 +375,7 @@
 						android:layout_marginLeft="16dp"
 						android:layout_marginRight="6dp"						
 						android:background="@drawable/character_1"
-						android:tag="1_1"
-						android:onClick="clickRivalUserBtn"/> 			
+						android:tag="1_1"/> 			
 				</LinearLayout>
 				
 			     <LinearLayout 
@@ -508,8 +505,7 @@
 						android:layout_marginLeft="16dp"
 						android:layout_marginRight="6dp"					
 						android:background="@drawable/character_1"
-						android:tag="1_1"
-						android:onClick="clickRivalUserBtn"/> 			
+						android:tag="1_1"/> 			
 				</LinearLayout>
 				
 			     <LinearLayout 

@@ -46,7 +46,6 @@
 	        android:layout_marginTop="4dp"
 	        android:layout_marginBottom="4dp"
 	        android:layout_gravity="center"
-	        android:onClick="clickTimelineWriteBtn"
 	        />
         <ImageButton
 	        android:id="@+id/camera_btn"
@@ -59,7 +58,6 @@
 	        android:layout_marginTop="6dp"
 	        android:layout_marginBottom="6dp"
 	        android:layout_gravity="center"
-	        android:onClick="clickTimelineCameraBtn"
 	        />
         <EditText           
             android:id="@+id/chat_val"

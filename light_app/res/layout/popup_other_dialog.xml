@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+		
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="313dp"
+        android:orientation="vertical" 
+        android:background="#FFFFFF">
+        
+        <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+			android:layout_weight="8"
+	        android:orientation="vertical">
+	        
+	        <ImageButton
+	            android:id="@+id/rival_other_dialog_exit"
+	            android:layout_width="28dp"
+	            android:layout_height="fill_parent"
+	            android:layout_gravity="right"
+	            android:background="#222FF2"/>
+	        
+        </LinearLayout>
+       
+		<LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+			android:layout_weight="92"
+	        android:orientation="horizontal">
+	        
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+				android:layout_weight="65"
+		        android:orientation="vertical">
+
+		        <ImageView
+		            android:id="@+id/rival_my_dialog_character"
+		            android:src="#666666"
+		            android:layout_weight="20"
+		            android:layout_width="fill_parent"
+		            android:layout_height="0dp"
+		            android:layout_gravity="right"
+		            android:background="#222FF2"/>
+		        
+		        <ImageView
+		            android:src="#999999"
+		            android:layout_weight="80"
+		            android:layout_width="fill_parent"
+		            android:layout_height="0dp"
+		            android:layout_gravity="right"
+		            android:background="#222FF2"/>
+
+	      	</LinearLayout>
+	      	
+		    <LinearLayout
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+				android:layout_weight="35"
+		        android:orientation="horizontal">
+
+	       
+	      	</LinearLayout>	    
+		    
+        </LinearLayout>
+          
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal" 
+        android:gravity="center"
+        android:background="#FFFF55">
+		
+        
+        <ImageButton
+	        android:id="@+id/rival_my_dialog_page"
+	        android:layout_weight="25"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:background="#DD68DD"/>
+        
+         
+	    <ImageButton
+	        android:id="@+id/rival_my_dialog_history"
+	        android:layout_weight="25"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:background="#FFF66F"/>
+
+        
+    </LinearLayout>
+    
+    
+ 		
+
+
+</LinearLayout>

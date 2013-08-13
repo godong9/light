@@ -24,7 +24,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		
 	public final static int INSERT_COUNT = 5;
 	
+	// 타임라인 입력 관련 버튼 상수
+	private static final int ID_FOOD     = 11;
+	private static final int ID_EXERCISE     = 12;
+	private static final int ID_CAMERA     = 14;
+	private static final int ID_ALBUM     = 15;
+	
 	private Context context;
+	private QuickAction writePopup;
+	private QuickAction cameraPopup;
+	
 	private ArrayList<TimeLineObj> my_list;
 	private MyListAdapter my_adapter;
 	private ListView my_listview;
@@ -35,8 +44,93 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		ViewGroup container, Bundle savedInstanceState) {	
 
 		View view = inflater.inflate(R.layout.frag_timeline, container, false);
+		context = getActivity();
+			
+		//기록 버튼 팝업 관련 코드    
+	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
+		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
+      
+        write_food.setSticky(true);
+        write_exercise.setSticky(true);
+ 
+		writePopup = new QuickAction(context, QuickAction.HORIZONTAL);
+        
+        //add action items into QuickAction
+        writePopup.addActionItem(write_food);
+        writePopup.addActionItem(write_exercise);
+
+        //Set listener for action item clicked
+        writePopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
+  			@Override
+  			public void onItemClick(QuickAction source, int pos, int actionId) {				
+  				ActionItem actionItem = writePopup.getActionItem(pos);
+                   
+  				//here we can filter which action item was clicked with pos or actionId parameter
+  				if (actionId == ID_FOOD) {
+  					Toast.makeText(context, "음식 기록", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_EXERCISE) {
+  					Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
+  				}
+  			}
+  		});		
+        
+        //set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
+  		//by clicking the area outside the dialog.
+        writePopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
+  			@Override
+  			public void onDismiss() {
+  				ImageButton wb = (ImageButton)getActivity().findViewById(R.id.write_btn);
+  				wb.setSelected(false);
+  			}
+  		});
+              
+        //카메라 버튼 팝업 관련 코드  
+	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
+		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
+      
+        camera_camera.setSticky(true);
+        camera_album.setSticky(true);
+        
+        cameraPopup = new QuickAction(context, QuickAction.HORIZONTAL);
+        
+        //add action items into QuickAction
+        cameraPopup.addActionItem(camera_camera);
+        cameraPopup.addActionItem(camera_album);
+
+        //Set listener for action item clicked
+        cameraPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
+  			@Override
+  			public void onItemClick(QuickAction source, int pos, int actionId) {				
+  				ActionItem actionItem = writePopup.getActionItem(pos);
+                   
+  				//here we can filter which action item was clicked with pos or actionId parameter
+  				if (actionId == ID_CAMERA) {
+  					Toast.makeText(context, "사진 촬영", Toast.LENGTH_SHORT).show();
+  				} else if (actionId == ID_EXERCISE) {
+  					Toast.makeText(context, "앨범", Toast.LENGTH_SHORT).show();
+  				}
+  			}
+  		});		
+        
+        //set listnener for on dismiss event, this listener will be called only if QuickAction dialog was dismissed
+  		//by clicking the area outside the dialog.
+        cameraPopup.setOnDismissListener(new QuickAction.OnDismissListener() {			
+  			@Override
+  			public void onDismiss() {
+  				ImageButton cb = (ImageButton)getActivity().findViewById(R.id.camera_btn);
+  				cb.setSelected(false);
+  			}
+  		});
 		
-		final ImageButton send_btn = (ImageButton) view.findViewById(R.id.send_btn);
+        
+        /*
+         * 버튼 클릭 관련 이벤트 처리하는 부분
+         * 
+         */
+        final ImageButton send_btn = (ImageButton) view.findViewById(R.id.send_btn);
+		final ImageButton write_btn = (ImageButton) view.findViewById(R.id.write_btn);
+		final ImageButton camera_btn = (ImageButton) view.findViewById(R.id.camera_btn);
+		
 		final EditText chat_text = (EditText) view.findViewById(R.id.chat_val);
 		
 		//전송 버튼 클릭시
@@ -48,17 +142,36 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 				String chat_val = chat_text.getText().toString();
 				chat_text.setText("");
 				if( chat_val.equals("")){
-					
+					Toast.makeText(context, "메시지를 입력해주세요!", Toast.LENGTH_SHORT).show();
 				}
 				else{
 					addItem(chat_val);                  
-				}		
-
-				
-						
+				}						
 			}
 		});
-			
+		
+		// 기록하기 버튼 클릭시
+		write_btn.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				v.setSelected(true);
+				writePopup.show(v);
+			}
+		});
+		
+		// 카메라 버튼 클릭시
+		camera_btn.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				v.setSelected(true);
+				cameraPopup.show(v);	
+			}
+		});
+						
 		return view;
 	}
 	
@@ -66,8 +179,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	public void onStart() {  
 		//Fragment가 완전히 생성되고 난 후에 호출되는 함수
 		super.onStart();
-		context = getActivity();
-		setListView();
+		setListView();		
 	}
 	
 	public void setListView() {
