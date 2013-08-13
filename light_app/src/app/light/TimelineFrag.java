@@ -1,6 +1,7 @@
 package app.light;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
@@ -24,11 +29,37 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	private MyListAdapter my_adapter;
 	private ListView my_listview;
 	private int my_list_count = 0;
-		
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {	
-		return inflater.inflate(R.layout.frag_timeline, container, false);
+
+		View view = inflater.inflate(R.layout.frag_timeline, container, false);
+		
+		final ImageButton send_btn = (ImageButton) view.findViewById(R.id.send_btn);
+		final EditText chat_text = (EditText) view.findViewById(R.id.chat_val);
+		
+		//전송 버튼 클릭시
+		send_btn.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{	
+				String chat_val = chat_text.getText().toString();
+				chat_text.setText("");
+				if( chat_val.equals("")){
+					
+				}
+				else{
+					addItem(chat_val);                  
+				}		
+
+				
+						
+			}
+		});
+			
+		return view;
 	}
 	
 	@Override
@@ -47,7 +78,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영아입니다","테스트","오후 11:20"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","테스트테스트테스트테스트테스트테스트테스트테스트","오전 12:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","테스트테","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"테스트테스","오후 1:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"테스","오후 1:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "60","자전거","-550Kcal","오후 12:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥입니다","점심","냉모밀","+750Kcal","오전 11:50"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아니다","30","웨이트트레이닝","-300Kcal","오후 1:00"));
@@ -57,7 +88,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "10일째","2013. 8. 13"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,"test","오후 2:20"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE,"영아","test","오후 3:10"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"14","111","asdfsdf"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영","강","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"15","111","asdfsdf"));
             
         my_list_count += 15;	//5개 불러와서 추가 
@@ -100,5 +131,37 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         }
 	}
 	
+	public void addItem(String chat_val)
+	{		
+		
+		Calendar cal = Calendar.getInstance();
+
+		String dateToString , timeToString ;
+		String dateStatus;
+		int dateNoon = cal.get(Calendar.AM_PM);
+		int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+		int dateMinute = cal.get(Calendar.MINUTE);
+	
+		if(dateNoon == 0){
+			dateStatus = "오전";
+		}
+		else{
+			dateStatus = "오후";
+			dateHour = dateHour-12;
+		}
+		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
+		
+		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+	
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,chat_val,timeString));
+		my_list_count += 1;     
+		
+		my_adapter.notifyDataSetChanged();
+		
+		my_listview.setSelection(my_list.size());
+	}
+	
+
 }
 

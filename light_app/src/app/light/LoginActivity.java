@@ -87,7 +87,7 @@ public class LoginActivity extends CommonActivity {
 					editor.putBoolean("keep_login", keep_login.isChecked());
 					editor.commit();
 					
-					Intent intent = new Intent(LoginActivity.this, FragmentActivity.class);
+					Intent intent = new Intent(LoginActivity.this, BaseFragment.class);
 					startActivity(intent);
 				}
 			}	

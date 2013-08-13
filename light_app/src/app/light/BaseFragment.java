@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -15,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class FragmentActivity extends Activity {
+public class BaseFragment extends Activity {
 	
 	private AlertDialogWindow popup_dialog;
 	private QuickAction settingPopup;
@@ -252,18 +253,6 @@ public class FragmentActivity extends Activity {
 		cameraPopup.show(v);	
 	}
 	
-	// 타임라인 전송 버튼 클릭시
-	public void clickTimelineSendBtn(View v) {
-		final EditText chat_text = (EditText)findViewById(R.id.chat_val);
-		String chat_val = chat_text.getText().toString();
-		if( chat_val.equals("")){
-			Toast.makeText(getApplicationContext(), "내용을 입력하세요!", Toast.LENGTH_SHORT).show();
-		}
-		else{
-			Toast.makeText(getApplicationContext(), chat_val, Toast.LENGTH_SHORT).show();	                      
-		}		
-	}
-
 	// 캐릭터 클릭시
 	public void clickRivalUserBtn(View v) {
 		if(v.getId() == R.id.rival_user1_click){
@@ -292,6 +281,5 @@ public class FragmentActivity extends Activity {
 			popup_dialog.dismiss();
 		}			
 	}
-	
 	
 }

@@ -50,7 +50,7 @@ public class JoinActivity extends CommonActivity {
 				String result_flag = json_data.getString("result");			
 				// 회원가입 성공시
 				if(result_flag.equals("success")){
-					Intent intent = new Intent(JoinActivity.this, FragmentActivity.class);
+					Intent intent = new Intent(JoinActivity.this, BaseFragment.class);
 					startActivity(intent);
 				}
 			}		

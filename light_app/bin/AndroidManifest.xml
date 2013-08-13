@@ -33,7 +33,7 @@
             android:theme="@android:style/Theme.NoTitleBar"
             />
         <activity
-            android:name="FragmentActivity"
+            android:name="BaseFragment"
             android:theme="@style/CustomTitle"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
