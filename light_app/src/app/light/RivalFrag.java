@@ -1,10 +1,15 @@
 package app.light;
 
+import android.app.DialogFragment;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -40,7 +45,7 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_my_dialog = new AlertDialogWindow(0);		
+				popup_my_dialog = new AlertDialogWindow(0);	
 				popup_my_dialog.show(getFragmentManager(), "User1 Popup");	
 			}
 		});

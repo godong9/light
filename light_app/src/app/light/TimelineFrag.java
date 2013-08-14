@@ -50,8 +50,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
 		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
       
-        write_food.setSticky(true);
-        write_exercise.setSticky(true);
+		//버튼 눌러도 안사라지게 고정
+        //write_food.setSticky(true);
+        //write_exercise.setSticky(true);
  
 		writePopup = new QuickAction(context, QuickAction.HORIZONTAL);
         
@@ -88,10 +89,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	    ActionItem camera_camera 	= new ActionItem(ID_CAMERA, "사진 촬영");
 		ActionItem camera_album 	= new ActionItem(ID_EXERCISE, "앨범");
       
-        camera_camera.setSticky(true);
-        camera_album.setSticky(true);
-        
-        cameraPopup = new QuickAction(context, QuickAction.HORIZONTAL);
+		cameraPopup = new QuickAction(context, QuickAction.HORIZONTAL);
         
         //add action items into QuickAction
         cameraPopup.addActionItem(camera_camera);
@@ -187,6 +185,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		my_list = new ArrayList<TimeLineObj>();
   
         //리스트에 아이템 넣는 부분
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "9일째","2013. 8. 12"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영아입니다","테스트","오후 11:20"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","테스트테스트테스트테스트테스트테스트테스트테스트","오전 12:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","테스트테","asdfsdf"));
@@ -201,7 +200,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,"test","오후 2:20"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE,"영아","test","오후 3:10"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영","강","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"15","111","asdfsdf"));
             
         my_list_count += 15;	//5개 불러와서 추가 
 		my_adapter = new MyListAdapter(context, my_list);

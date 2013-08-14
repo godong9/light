@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 
 //커스텀 AlertDialog 구현
@@ -19,9 +21,13 @@ import android.widget.ImageButton;
 		}
 		
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
+		public Dialog onCreateDialog(Bundle savedInstanceStadte) {
 			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
+			
+
+			//위 아래 검은 레이아웃 제거
+			mBuilder.setInverseBackgroundForced(true);
 			
 			if(type==0){
 				mBuilder.setView(mLayoutInflater.inflate(R.layout.popup_my_dialog, null));
@@ -29,8 +35,10 @@ import android.widget.ImageButton;
 			else{
 				mBuilder.setView(mLayoutInflater.inflate(R.layout.popup_other_dialog, null));
 			}
-			context = getActivity();
-				
+			context = getActivity();	
+			
+			setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+			
 			return mBuilder.create();
 		}
 		
@@ -41,6 +49,7 @@ import android.widget.ImageButton;
 				getDialog().setCanceledOnTouchOutside(true);
 			
 			super.onStart();
+			
 			
 			/*
 			 * 다이얼로그 내부 버튼 클릭시 이벤트 처리
