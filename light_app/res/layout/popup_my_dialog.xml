@@ -16,14 +16,17 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="0dp"
 			android:layout_weight="8"
+			
 	        android:orientation="vertical">
 	        
 	        <ImageButton
 	            android:id="@+id/rival_my_dialog_exit"
-	            android:layout_width="28dp"
+	            android:layout_width="20dp"
 	            android:layout_height="fill_parent"
 	            android:layout_gravity="right"
-	            android:background="#222FF2"/>
+				android:layout_marginTop="6dp"
+	        	android:layout_marginRight="8dp"
+	            android:background="@drawable/rival_dialog_exit"/>
 	        
         </LinearLayout>
        
@@ -36,34 +39,92 @@
 		    <LinearLayout
 		        android:layout_width="0dp"
 		        android:layout_height="fill_parent"
-				android:layout_weight="65"
+				android:layout_weight="58"
 		        android:orientation="vertical">
-
-		        <ImageView
-		            android:id="@+id/rival_my_dialog_character"
-		            android:src="#666666"
-		            android:layout_weight="20"
-		            android:layout_width="fill_parent"
-		            android:layout_height="0dp"
-		            android:layout_gravity="right"
-		            android:background="#222FF2"/>
-		        
-		        <ImageView
-		            android:src="#999999"
-		            android:layout_weight="80"
-		            android:layout_width="fill_parent"
-		            android:layout_height="0dp"
-		            android:layout_gravity="right"
-		            android:background="#222FF2"/>
-
+				
+		      
+				
 	      	</LinearLayout>
 	      	
 		    <LinearLayout
 		        android:layout_width="0dp"
 		        android:layout_height="fill_parent"
-				android:layout_weight="35"
-		        android:orientation="horizontal">
-
+				android:layout_weight="42"
+		        android:orientation="vertical">
+				
+		        <TextView
+		            android:id="@+id/rival_my_dialog_nickname"
+		            android:layout_weight="10"
+		            android:layout_width="fill_parent"
+		            android:layout_height="0dp"
+					android:layout_marginTop="10dp"
+					android:layout_marginBottom="10dp"
+					android:layout_marginRight="10dp"
+		            android:background="@drawable/rival_dialog_nickname"/>
+		        
+		        <LinearLayout
+		            android:layout_weight="55"
+			        android:layout_width="fill_parent"
+			        android:layout_height="0dp"
+			        android:layout_marginRight="10dp"
+			        android:orientation="vertical"
+			        android:background="@drawable/rival_dialog_info">
+		        					
+			        <ImageView
+			            android:id="@+id/rival_my_dialog_height"
+			            android:layout_weight="20"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_gravity="right"
+						/>
+			        
+			        <ImageView
+			            android:layout_weight="80"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_gravity="right"
+			         	/>
+				</LinearLayout>
+				
+		          
+		        <LinearLayout
+		            android:layout_weight="35"
+			        android:layout_width="fill_parent"
+			        android:layout_height="0dp"
+			        android:layout_marginTop="4dp"
+			        android:layout_marginLeft="6dp"
+			        android:layout_marginRight="12dp"
+			        android:orientation="vertical">
+		        	
+		            <TextView
+			            android:layout_weight="32"
+				        android:layout_width="fill_parent"
+				        android:layout_height="0dp"
+				        android:paddingTop="4dp"
+			        	android:paddingLeft="27dp"
+				        android:text="오늘의 칼로리"
+				        android:textColor="#FFFFFF"
+				        android:textSize="14sp"
+				        android:textStyle="bold"
+				        android:background="@drawable/rival_dialog_calorie"
+		            />
+		            				
+			        <ImageView
+			            android:id="@+id/rival_my_dialog_height"
+			            android:layout_weight="34"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_gravity="right"
+			           />
+			        
+			        <ImageView
+			            android:layout_weight="34"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_gravity="right"
+			           />
+				</LinearLayout>
+		        
 	       
 	      	</LinearLayout>	    
 		    
@@ -75,8 +136,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:orientation="horizontal" 
-        android:gravity="center"
-        android:background="#FFFF55">
+        android:gravity="center">
 		
         
         <ImageButton
@@ -84,7 +144,12 @@
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:background="#DD68DD"/>
+	        android:layout_marginTop="2dp"
+	        android:layout_marginBottom="8dp"
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"
+	        
+	        android:background="@drawable/rival_dialog_home_btn"/>
         
         <ImageButton
 	        android:id="@+id/rival_my_dialog_closet"

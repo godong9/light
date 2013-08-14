@@ -29,10 +29,10 @@ import android.widget.ImageButton;
 			
 			View view; 
 			
+			//타입에 따라 자기 다이얼로그 or 다른 사람 다이얼로그
 			if(type==0){
 				view = mLayoutInflater.inflate(R.layout.popup_my_dialog, null);
-				mBuilder.setView(view);
-				
+				mBuilder.setView(view);	
 			}
 			else{
 				view = mLayoutInflater.inflate(R.layout.popup_other_dialog, null);
@@ -69,7 +69,6 @@ import android.widget.ImageButton;
 			}
 			else{
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
-				System.out.println(dialog_exit_btn);
 			}
 			
 			dialog_exit_btn.setOnClickListener(new View.OnClickListener() {

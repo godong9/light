@@ -17,8 +17,7 @@ import android.widget.Toast;
 public class RivalFrag extends CommonFragment {
 	
 	private Context context;
-	private AlertDialogWindow popup_my_dialog;
-	private AlertDialogWindow popup_other_dialog;
+	private AlertDialogWindow popup_dialog;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -26,8 +25,7 @@ public class RivalFrag extends CommonFragment {
 		
 		View view = inflater.inflate(R.layout.frag_rival, container, false);
 		context = getActivity();
-		
-		
+			
 		
 		/*
          * 버튼 클릭 관련 이벤트 처리하는 부분
@@ -45,8 +43,8 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_my_dialog = new AlertDialogWindow(0);	
-				popup_my_dialog.show(getFragmentManager(), "User1 Popup");	
+				popup_dialog = new AlertDialogWindow(0);	
+				popup_dialog.show(getFragmentManager(), "User1 Popup");	
 			}
 		});
 		
@@ -56,8 +54,8 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_my_dialog = new AlertDialogWindow(1);		
-				popup_my_dialog.show(getFragmentManager(), "User2 Popup");	
+				popup_dialog = new AlertDialogWindow(1);		
+				popup_dialog.show(getFragmentManager(), "User2 Popup");	
 			}
 		});
 		
@@ -67,8 +65,8 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_my_dialog = new AlertDialogWindow(1);	
-				popup_my_dialog.show(getFragmentManager(), "User3 Popup");	
+				popup_dialog = new AlertDialogWindow(1);	
+				popup_dialog.show(getFragmentManager(), "User3 Popup");	
 			}
 		});
 		
@@ -78,8 +76,8 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_my_dialog = new AlertDialogWindow(1);		
-				popup_my_dialog.show(getFragmentManager(), "User4 Popup");	
+				popup_dialog = new AlertDialogWindow(1);		
+				popup_dialog.show(getFragmentManager(), "User4 Popup");	
 			}
 		});
 			
