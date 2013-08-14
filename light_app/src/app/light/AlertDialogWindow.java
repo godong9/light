@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 //커스텀 AlertDialog 구현
@@ -22,45 +23,53 @@ import android.widget.ImageButton;
 		
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceStadte) {
-			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+			//Theme_Holo_Light_Panel 이용해서 테두리 없게 만들어줌
+			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Panel);
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
 			
-
-			//위 아래 검은 레이아웃 제거
-			mBuilder.setInverseBackgroundForced(true);
+			View view; 
 			
 			if(type==0){
-				mBuilder.setView(mLayoutInflater.inflate(R.layout.popup_my_dialog, null));
+				view = mLayoutInflater.inflate(R.layout.popup_my_dialog, null);
+				mBuilder.setView(view);
+				
 			}
 			else{
-				mBuilder.setView(mLayoutInflater.inflate(R.layout.popup_other_dialog, null));
+				view = mLayoutInflater.inflate(R.layout.popup_other_dialog, null);
+				mBuilder.setView(view);
 			}
+
 			context = getActivity();	
-			
-			setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-			
+		
 			return mBuilder.create();
 		}
 		
 		@Override 
 		public void onStart() {
 			//다이얼로그 외부 클릭시 다이얼로그 사라지도록 구현
-			if (getDialog() != null)
+			if (getDialog() != null) {
+				//다이얼로그 생성시 배경 어두워지게 설정
+				WindowManager.LayoutParams lp = getDialog().getWindow().getAttributes();
+				lp.dimAmount=0.8f;
+				
 				getDialog().setCanceledOnTouchOutside(true);
+				getDialog().getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+				getDialog().getWindow().setAttributes(lp);
+			}
 			
 			super.onStart();
-			
 			
 			/*
 			 * 다이얼로그 내부 버튼 클릭시 이벤트 처리
 			 * 
 			 */
 			ImageButton dialog_exit_btn;
-			if(type==0){
+			if(type == 0){
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
 			}
 			else{
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
+				System.out.println(dialog_exit_btn);
 			}
 			
 			dialog_exit_btn.setOnClickListener(new View.OnClickListener() {
