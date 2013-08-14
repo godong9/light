@@ -64,13 +64,71 @@ import android.widget.ImageButton;
 			 * 
 			 */
 			ImageButton dialog_exit_btn;
+	
+			
 			if(type == 0){
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
+				
+				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_page_btn);
+				final ImageButton dialog_closet_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_closet_btn);
+				final ImageButton dialog_shop_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_shop_btn);
+				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_history_btn);
+					
+				dialog_page_btn.setSelected(true);
+				
+				dialog_page_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{	
+						dialog_page_btn.setSelected(true);
+						dialog_closet_btn.setSelected(false);
+						dialog_shop_btn.setSelected(false);
+						dialog_history_btn.setSelected(false);	
+					}
+				});
+				
+				dialog_closet_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{				
+						dialog_page_btn.setSelected(false);
+						dialog_closet_btn.setSelected(true);
+						dialog_shop_btn.setSelected(false);
+						dialog_history_btn.setSelected(false);
+					}	
+				});
+				
+				dialog_shop_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{	
+						dialog_page_btn.setSelected(false);
+						dialog_closet_btn.setSelected(false);
+						dialog_shop_btn.setSelected(true);
+						dialog_history_btn.setSelected(false);
+					}
+				});
+				
+				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{	
+						dialog_page_btn.setSelected(false);
+						dialog_closet_btn.setSelected(false);
+						dialog_shop_btn.setSelected(false);
+						dialog_history_btn.setSelected(true);
+					}
+				});
+			
 			}
 			else{
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
+				//dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_page_btn);
+				//dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_history_btn);
+				
 			}
 			
+			//공통 다이얼로그 종료 버튼 이벤트 리스너
 			dialog_exit_btn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v)
@@ -78,6 +136,7 @@ import android.widget.ImageButton;
 					dismiss();
 				}
 			});
+						
 		}
 		
 		@Override

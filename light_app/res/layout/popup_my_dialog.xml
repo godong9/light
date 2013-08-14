@@ -49,9 +49,9 @@
 						android:layout_height="0dp"
 						android:layout_marginLeft="20dp"
 						android:layout_marginRight="20dp"
-						android:paddingTop="6dp"
+						android:paddingTop="5dp"
 						android:text="먹어봤자 아는맛!"    
-			            android:textSize ="12sp"
+			            android:textSize ="14sp"
 			            android:textStyle="bold"
 			            android:textColor="#424242" 
 			            android:singleLine="true"
@@ -143,11 +143,9 @@
 			            android:layout_height="0dp"
 			            android:layout_marginLeft="42dp"
 			            android:text="45kg"
-				        android:textColor="#000000"
+				        android:textColor="#FF0062"
 				        android:textSize="25sp"
-						/>
-			        
-			        
+						/>	        
 				</LinearLayout>
 				
 		          
@@ -164,8 +162,10 @@
 			            android:layout_weight="32"
 				        android:layout_width="fill_parent"
 				        android:layout_height="0dp"
+				        android:layout_marginLeft="3dp"
+				        android:layout_marginRight="2dp" 
 				        android:paddingTop="4dp"
-			        	android:paddingLeft="29dp"
+			        	android:paddingLeft="28dp"
 				        android:text="오늘의 칼로리"
 				        android:textColor="#FFFFFF"
 				        android:textSize="13sp"
@@ -264,7 +264,7 @@
 		
         
         <ImageButton
-	        android:id="@+id/rival_my_dialog_page"
+	        android:id="@+id/rival_my_dialog_page_btn"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
@@ -275,7 +275,7 @@
 	        android:background="@drawable/rival_dialog_home_btn"/>
         
         <ImageButton
-	        android:id="@+id/rival_my_dialog_closet"
+	        android:id="@+id/rival_my_dialog_closet_btn"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
@@ -286,7 +286,7 @@
 	        android:background="@drawable/rival_dialog_closet_btn"/>
 	
 		<ImageButton
-	        android:id="@+id/rival_my_dialog_shop"
+	        android:id="@+id/rival_my_dialog_shop_btn"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
@@ -297,7 +297,7 @@
 	        android:background="@drawable/rival_dialog_market_btn"/>
          
 	    <ImageButton
-	        android:id="@+id/rival_my_dialog_history"
+	        android:id="@+id/rival_my_dialog_history_btn"
 	        android:layout_weight="25"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
