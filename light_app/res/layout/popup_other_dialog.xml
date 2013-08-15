@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    android:background="@drawable/rival_dialog_background" >
 		
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="313dp"
-        android:orientation="vertical" 
-        android:background="#FFFFFF">
+        android:orientation="vertical" >
         
         <LinearLayout
 	        android:layout_width="fill_parent"
 	        android:layout_height="0dp"
 			android:layout_weight="8"
+			
 	        android:orientation="vertical">
 	        
 	        <ImageButton
 	            android:id="@+id/rival_other_dialog_exit"
-	            android:layout_width="28dp"
+	            android:layout_width="20dp"
 	            android:layout_height="fill_parent"
 	            android:layout_gravity="right"
-	            android:background="#222FF2"/>
+				android:layout_marginTop="6dp"
+	        	android:layout_marginRight="8dp"
+	            android:background="@drawable/rival_dialog_exit"/>
 	        
         </LinearLayout>
        
@@ -34,34 +39,217 @@
 		    <LinearLayout
 		        android:layout_width="0dp"
 		        android:layout_height="fill_parent"
-				android:layout_weight="65"
+				android:layout_weight="58"
 		        android:orientation="vertical">
-
-		        <ImageView
-		            android:id="@+id/rival_my_dialog_character"
-		            android:src="#666666"
-		            android:layout_weight="20"
-		            android:layout_width="fill_parent"
-		            android:layout_height="0dp"
-		            android:layout_gravity="right"
-		            android:background="#222FF2"/>
+				
+		        <TextView   
+				        android:id="@+id/rival_other_dialog_word"	 
+				    	android:layout_weight ="14"     
+						android:layout_width="fill_parent"						
+						android:layout_height="0dp"
+						android:layout_marginLeft="20dp"
+						android:layout_marginRight="20dp"
+						android:paddingTop="5dp"
+						android:text="먹어봤자 아는맛!"    
+			            android:textSize ="14sp"
+			            android:textStyle="bold"
+			            android:textColor="#424242" 
+			            android:singleLine="true"
+				  		android:gravity="center_horizontal"
+						android:background="@drawable/chat_ballon"/> 
+						
+		        <ImageButton  
+				        android:id="@+id/rival_other_dialog_character"
+				    	android:layout_weight ="86"     
+						android:layout_width="fill_parent"
+						android:layout_height="0dp"
+						android:layout_marginBottom="35dp"
+						android:layout_marginLeft="18dp"
+						android:layout_marginRight="18dp"
+						android:background="@drawable/character_1"
+						android:tag="1_1"/> 	
 		        
-		        <ImageView
-		            android:src="#999999"
-		            android:layout_weight="80"
-		            android:layout_width="fill_parent"
-		            android:layout_height="0dp"
-		            android:layout_gravity="right"
-		            android:background="#222FF2"/>
-
+		    		
 	      	</LinearLayout>
 	      	
 		    <LinearLayout
 		        android:layout_width="0dp"
 		        android:layout_height="fill_parent"
-				android:layout_weight="35"
-		        android:orientation="horizontal">
+				android:layout_weight="42"
+		        android:orientation="vertical">
+				
+		        <TextView
+		            android:id="@+id/rival_other_dialog_nickname"
+		            android:layout_weight="10"
+		            android:layout_width="fill_parent"
+		            android:layout_height="0dp"
+					android:layout_marginTop="10dp"
+					android:layout_marginBottom="10dp"
+					android:layout_marginRight="10dp"
+					android:gravity="center"
+					android:text="윤하입니다"
+			        android:textSize = "16sp"
+		            android:textStyle="bold"
+		            android:textColor="#424242" 
+			  		android:singleLine="true"
+		            android:background="@drawable/rival_dialog_nickname"/>
+		        
+		        <LinearLayout
+		            android:layout_weight="55"
+			        android:layout_width="fill_parent"
+			        android:layout_height="0dp"
+			        android:layout_marginRight="10dp"
+			        android:paddingTop="15dp"
+			        android:paddingBottom="10dp"
+			        android:orientation="vertical"
+			        android:background="@drawable/rival_dialog_info">
+		        					
+			        <TextView
+			            android:id="@+id/rival_other_dialog_height"
+			            android:layout_weight="20"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+						android:layout_marginLeft="15dp"
+			            android:text="키       163cm"
+				        android:textColor="#525252"
+				        android:textSize="15sp"
+						/>
+			        <TextView
+			            android:id="@+id/rival_other_dialog_weight"
+			            android:layout_weight="20"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_marginLeft="15dp"
+			            android:layout_marginTop="6dp"
+			            android:text="체중     50kg"
+				        android:textColor="#525252"
+				        android:textSize="15sp"
+						/>
+			        <TextView
+			            android:id="@+id/rival_other_dialog_goal"
+			            android:layout_weight="20"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_marginLeft="15dp"
+			            android:layout_marginTop="18dp"
+			            android:text="목표체중"
+				        android:textColor="#525252"
+				        android:textSize="15sp"
+						/>
+			        <TextView
+			            android:id="@+id/rival_other_dialog_goal_val"
+			            android:layout_weight="40"
+			            android:layout_width="fill_parent"
+			            android:layout_height="0dp"
+			            android:layout_marginLeft="42dp"
+			            android:text="45kg"
+				        android:textColor="#FF0062"
+				        android:textSize="25sp"
+						/>	        
+				</LinearLayout>
+				
+		          
+		        <LinearLayout
+		            android:layout_weight="35"
+			        android:layout_width="fill_parent"
+			        android:layout_height="0dp"
+			        android:layout_marginTop="4dp"
+			        android:layout_marginLeft="6dp"
+			        android:layout_marginRight="12dp"
+			        android:orientation="vertical">
+		        	
+		            <TextView
+			            android:layout_weight="32"
+				        android:layout_width="fill_parent"
+				        android:layout_height="0dp"
+				        android:layout_marginLeft="3dp"
+				        android:layout_marginRight="2dp" 
+				        android:paddingTop="4dp"
+			        	android:paddingLeft="28dp"
+				        android:text="오늘의 칼로리"
+				        android:textColor="#FFFFFF"
+				        android:textSize="13sp"
+				        android:textStyle="bold"
+				        android:background="@drawable/rival_dialog_calorie"
+		            />
+		            
+		            <LinearLayout
+			            android:layout_weight="68"
+				        android:layout_width="fill_parent"
+				        android:layout_height="0dp"
+				        android:layout_marginTop="2dp"
+				        android:orientation="vertical">
+		            		
+		               	<LinearLayout
+				            android:layout_weight="28"
+					        android:layout_width="fill_parent"
+					        android:layout_height="0dp"
+					        android:layout_marginLeft="6dp"
+					        android:layout_marginRight="2dp"
+					        android:gravity="top"
+					        android:orientation="horizontal">	
+					        <TextView          
+					            android:layout_weight="35"
+					            android:layout_width="0dp"
+					            android:layout_height="fill_parent"
+					            android:text="권장 "
+						        android:textColor="#FFFFFF"
+						        android:textSize="14sp"
+						        android:textStyle="bold"
+					           />
+					        
+					        <TextView
+					            android:id="@+id/rival_other_dialog_limit_calorie"
+					            android:layout_weight="65"
+					            android:layout_width="0dp"
+					            android:layout_height="fill_parent"
+								android:text="1800 Kcal"
+						        android:textColor="#54A696"
+						        android:textSize="14sp"
 
+					           />
+					        
+				       </LinearLayout>
+				       
+		               	
+		               <LinearLayout
+				            android:layout_weight="72"
+					        android:layout_width="fill_parent"
+					        android:layout_height="0dp"
+					        android:layout_marginTop="2dp"
+					        android:layout_marginLeft="6dp"
+					        android:layout_marginRight="2dp"
+					         android:gravity="top"
+					        android:orientation="horizontal">	
+					        <TextView
+					            
+					            android:layout_weight="35"
+					            android:layout_width="0dp"
+					            android:layout_height="fill_parent"
+					            android:text="섭취 "
+						        android:textColor="#FFFFFF"
+						        android:textSize="14sp"
+						        android:textStyle="bold"
+					           />
+					        
+					        <TextView
+					            android:id="@+id/rival_other_dialog_have_calorie"
+					            android:layout_weight="65"
+					            android:layout_width="0dp"
+					            android:layout_height="fill_parent"
+								android:text="1500 Kcal"
+						        android:textColor="#54A696"
+						        android:textSize="14sp"
+					           />
+					        
+				       </LinearLayout>	
+		               	
+				               
+			        </LinearLayout>
+			        
+		            
+			        
+				</LinearLayout>	        
 	       
 	      	</LinearLayout>	    
 		    
@@ -73,24 +261,33 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:orientation="horizontal" 
-        android:gravity="center"
-        android:background="#FFFF55">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center">
 		
         
         <ImageButton
-	        android:id="@+id/rival_my_dialog_page"
-	        android:layout_weight="25"
+	        android:id="@+id/rival_other_dialog_page_btn"
+	        android:layout_weight="50"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:background="#DD68DD"/>
+	        android:layout_marginTop="2.7dp"
+	        android:layout_marginBottom="8dp"
+	        android:layout_marginLeft="6dp"
+	        android:layout_marginRight="6dp"   
+	        android:background="@drawable/rival_other_dialog_home_btn"/>
         
          
 	    <ImageButton
-	        android:id="@+id/rival_my_dialog_history"
-	        android:layout_weight="25"
+	        android:id="@+id/rival_other_dialog_history_btn"
+	        android:layout_weight="50"
 	        android:layout_width="0dp"
 	        android:layout_height="fill_parent"
-	        android:background="#FFF66F"/>
+	        android:layout_marginTop="2.7dp"
+	        android:layout_marginBottom="8dp"
+	        android:layout_marginLeft="6dp"
+	        android:layout_marginRight="6dp"
+	        android:background="@drawable/rival_other_dialog_history_btn"/>
 
         
     </LinearLayout>

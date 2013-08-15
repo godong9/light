@@ -123,8 +123,29 @@ import android.widget.ImageButton;
 			}
 			else{
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
-				//dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_page_btn);
-				//dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_history_btn);
+				
+				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_page_btn);
+				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_history_btn);
+				
+				dialog_page_btn.setSelected(true);
+				
+				dialog_page_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{	
+						dialog_page_btn.setSelected(true);
+						dialog_history_btn.setSelected(false);	
+					}
+				});
+				
+				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{				
+						dialog_page_btn.setSelected(false);
+						dialog_history_btn.setSelected(true);
+					}	
+				});
 				
 			}
 			
