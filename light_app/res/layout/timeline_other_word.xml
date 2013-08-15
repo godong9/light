@@ -38,11 +38,11 @@
     
     <TextView
         android:id="@+id/timeline_other_word_date"
-        android:layout_width="60dp"
+        android:layout_width="48dp"
         android:layout_height="16dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:textSize = "10sp"
+        android:textSize = "8sp"
         android:textColor="#FFFFFF" 
   		android:singleLine="true"
         android:layout_marginBottom="7dp"

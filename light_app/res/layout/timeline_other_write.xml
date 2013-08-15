@@ -36,7 +36,7 @@
         	android:layout_height="20dp"
         	android:layout_marginTop="0dp"
         	android:layout_marginLeft="40dp"
-        	android:textSize = "12sp"
+        	android:textSize = "10sp"
         	android:textColor="#4980BD" 
         	android:gravity="center"
         	android:singleLine="true"
@@ -47,7 +47,7 @@
 	        android:layout_width="68dp"
         	android:layout_height="35dp"
         	android:layout_marginTop="0.5dp"
-        	android:layout_marginLeft="2dp"
+        	android:layout_marginLeft="1dp"
         	android:textSize = "14sp"
         	android:textColor="#424242" 
         	android:singleLine="true"
@@ -69,7 +69,7 @@
 	
 	<TextView
         android:id="@+id/timeline_other_write_date"
-        android:layout_width="60dp"
+        android:layout_width="48dp"
         android:layout_height="16dp"
         android:layout_gravity="bottom"
         android:gravity="center"
