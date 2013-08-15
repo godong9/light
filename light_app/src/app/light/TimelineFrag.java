@@ -190,10 +190,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","테스트테스트테스트테스트테스트테스트테스트테스트","오전 12:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","테스트테","asdfsdf"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"테스","오후 1:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "60","자전거","-550Kcal","오후 12:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥입니다","점심","냉모밀","+750Kcal","오전 11:50"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아니다","30","웨이트트레이닝","-300Kcal","오후 1:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_EXERCISE,"60","걷기","-200Kcal","오전 10:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "10개","샌드위치","550Kcal","오후 12:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥입니다","10개","냉모밀","+1750Kcal","오전 11:50"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아니다","30분","웨이트트레","-300Kcal","오후 1:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_EXERCISE,"60분","자전거타기","-1200Kcal","오전 10:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, 0, 0, "운동", "자전거 1시간 타기","오후 12:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_WORD, 0, 0, "오늘 운동 많이했나요?","오후 13:00"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "10일째","2013. 8. 13"));

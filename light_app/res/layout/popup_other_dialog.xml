@@ -99,31 +99,31 @@
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
 			        android:layout_marginRight="10dp"
-			        android:paddingTop="15dp"
+			        android:paddingTop="12dp"
 			        android:paddingBottom="10dp"
 			        android:orientation="vertical"
 			        android:background="@drawable/rival_dialog_info">
 		        					
 			        <TextView
 			            android:id="@+id/rival_other_dialog_height"
-			            android:layout_weight="20"
+			            android:layout_weight="22"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
 						android:layout_marginLeft="15dp"
 			            android:text="키       163cm"
 				        android:textColor="#525252"
-				        android:textSize="15sp"
+				        android:textSize="14sp"
 						/>
 			        <TextView
 			            android:id="@+id/rival_other_dialog_weight"
-			            android:layout_weight="20"
+			            android:layout_weight="22"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
 			            android:layout_marginLeft="15dp"
-			            android:layout_marginTop="6dp"
+			            android:layout_marginTop="2dp"
 			            android:text="체중     50kg"
 				        android:textColor="#525252"
-				        android:textSize="15sp"
+				        android:textSize="14sp"
 						/>
 			        <TextView
 			            android:id="@+id/rival_other_dialog_goal"
@@ -131,14 +131,14 @@
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
 			            android:layout_marginLeft="15dp"
-			            android:layout_marginTop="18dp"
+			            android:layout_marginTop="4dp"
 			            android:text="목표체중"
 				        android:textColor="#525252"
-				        android:textSize="15sp"
+				        android:textSize="14sp"
 						/>
 			        <TextView
 			            android:id="@+id/rival_other_dialog_goal_val"
-			            android:layout_weight="40"
+			            android:layout_weight="36"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
 			            android:layout_marginLeft="42dp"
@@ -150,21 +150,21 @@
 				
 		          
 		        <LinearLayout
-		            android:layout_weight="35"
+		            android:layout_weight="40"
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
-			        android:layout_marginTop="4dp"
+			        android:layout_marginTop="2dp"
 			        android:layout_marginLeft="6dp"
 			        android:layout_marginRight="12dp"
 			        android:orientation="vertical">
 		        	
 		            <TextView
-			            android:layout_weight="32"
+			            android:layout_weight="29"
 				        android:layout_width="fill_parent"
 				        android:layout_height="0dp"
 				        android:layout_marginLeft="3dp"
 				        android:layout_marginRight="2dp" 
-				        android:paddingTop="4dp"
+				        android:paddingTop="5dp"
 			        	android:paddingLeft="28dp"
 				        android:text="오늘의 칼로리"
 				        android:textColor="#FFFFFF"
@@ -174,21 +174,21 @@
 		            />
 		            
 		            <LinearLayout
-			            android:layout_weight="68"
+			            android:layout_weight="71"
 				        android:layout_width="fill_parent"
 				        android:layout_height="0dp"
 				        android:layout_marginTop="2dp"
 				        android:orientation="vertical">
 		            		
 		               	<LinearLayout
-				            android:layout_weight="28"
+				            android:layout_weight="24"
 					        android:layout_width="fill_parent"
 					        android:layout_height="0dp"
 					        android:layout_marginLeft="6dp"
 					        android:layout_marginRight="2dp"
 					        android:gravity="top"
 					        android:orientation="horizontal">	
-					        <TextView          
+					        <TextView
 					            android:layout_weight="35"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -213,16 +213,15 @@
 				       
 		               	
 		               <LinearLayout
-				            android:layout_weight="72"
+				            android:layout_weight="24"
 					        android:layout_width="fill_parent"
 					        android:layout_height="0dp"
-					        android:layout_marginTop="2dp"
+					        android:layout_marginTop="0dp"
 					        android:layout_marginLeft="6dp"
 					        android:layout_marginRight="2dp"
 					         android:gravity="top"
 					        android:orientation="horizontal">	
 					        <TextView
-					            
 					            android:layout_weight="35"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -233,11 +232,42 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_have_calorie"
+					            android:id="@+id/rival_other_dialog_eat_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
 								android:text="1500 Kcal"
+						        android:textColor="#54A696"
+						        android:textSize="14sp"
+					           />
+					        
+				       </LinearLayout>	
+				       
+		               <LinearLayout
+				            android:layout_weight="52"
+					        android:layout_width="fill_parent"
+					        android:layout_height="0dp"
+					        android:layout_marginTop="0dp"
+					        android:layout_marginLeft="6dp"
+					        android:layout_marginRight="2dp"
+					         android:gravity="top"
+					        android:orientation="horizontal">	
+					        <TextView
+					            android:layout_weight="35"
+					            android:layout_width="0dp"
+					            android:layout_height="fill_parent"
+					            android:text="운동 "
+						        android:textColor="#FFFFFF"
+						        android:textSize="14sp"
+						        android:textStyle="bold"
+					           />
+					        
+					        <TextView
+					            android:id="@+id/rival_other_dialog_exercise_calorie"
+					            android:layout_weight="65"
+					            android:layout_width="0dp"
+					            android:layout_height="fill_parent"
+								android:text="100 Kcal"
 						        android:textColor="#54A696"
 						        android:textSize="14sp"
 					           />
