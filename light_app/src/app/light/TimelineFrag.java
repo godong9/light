@@ -6,7 +6,9 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +20,25 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
+import android.net.Uri;
+import android.content.Intent;
+import android.graphics.Bitmap;
 
+import java.io.File;
+import android.widget.ImageView;
 
 public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		
 	public final static int INSERT_COUNT = 5;
+	private static final int PICK_FROM_CAMERA = 0;
+	private static final int PICK_FROM_ALBUM = 1;
+	private static final int CROP_FROM_CAMERA = 2;
+	
+	private Uri mImageCaptureUri;
+	private ImageView mPhotoImageView;
+
+	
+	private boolean firstStart = true;
 	
 	// 타임라인 입력 관련 버튼 상수
 	private static final int ID_FOOD     = 11;
@@ -103,9 +119,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
                    
   				//here we can filter which action item was clicked with pos or actionId parameter
   				if (actionId == ID_CAMERA) {
-  					Toast.makeText(context, "사진 촬영", Toast.LENGTH_SHORT).show();
+  					//Toast.makeText(context, "사진 촬영", Toast.LENGTH_SHORT).show();
+  					doTakePhotoAction();
+  					
   				} else if (actionId == ID_EXERCISE) {
-  					Toast.makeText(context, "앨범", Toast.LENGTH_SHORT).show();
+  					//Toast.makeText(context, "앨범", Toast.LENGTH_SHORT).show();
+  					doTakeAlbumAction();
   				}
   			}
   		});		
@@ -143,7 +162,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 					Toast.makeText(context, "메시지를 입력해주세요!", Toast.LENGTH_SHORT).show();
 				}
 				else{
-					addItem(chat_val);                  
+					addWord(chat_val);                  
 				}						
 			}
 		});
@@ -174,10 +193,74 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	}
 	
 	@Override
-	public void onStart() {  
-		//Fragment가 완전히 생성되고 난 후에 호출되는 함수
-		super.onStart();
-		setListView();		
+	public void onStart() {
+		if(firstStart){
+			firstStart=false;
+			//Fragment가 완전히 생성되고 난 후에 호출되는 함수
+			super.onStart();
+			setListView();	
+		}
+		else{
+			super.onStart();
+		}
+	}
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+	//	if(resultCode != RESULT_OK)
+	//	{
+	//		return;
+	//	}
+	//	System.out.println("result:"+resultCode);
+
+		switch(requestCode)
+		{
+			case CROP_FROM_CAMERA:
+			{
+				final Bundle extras = data.getExtras();
+	
+				if(extras != null)
+				{
+					Bitmap tmpPicture = extras.getParcelable("data");
+					addPicture(tmpPicture);
+					// 사진 업로드 구현 -> bitmap jpg로 변환 후 업로드
+					// 받는 측에서는 jpg->bitmap으로 변환
+				}
+	
+				File f = new File(mImageCaptureUri.getPath());		
+	
+				if(f.exists())
+				{
+					f.delete();		
+				}
+				
+				break;
+			}
+	
+			case PICK_FROM_ALBUM:
+			{
+				mImageCaptureUri = data.getData();
+				System.out.println(mImageCaptureUri);
+			}
+			
+			case PICK_FROM_CAMERA:
+			{
+				Intent intent = new Intent("com.android.camera.action.CROP");
+				intent.setDataAndType(mImageCaptureUri, "image/*");
+	
+				intent.putExtra("outputX", 400);
+				intent.putExtra("outputY", 300);
+				intent.putExtra("aspectX", 4);
+				intent.putExtra("aspectY", 3);
+				intent.putExtra("scale", true);
+				intent.putExtra("return-data", true);
+				startActivityForResult(intent, CROP_FROM_CAMERA);
+	
+				break;
+			}
+		}
 	}
 	
 	public void setListView() {
@@ -212,6 +295,27 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	    my_listview.setSelection(my_adapter.getCount() - 1);	    
 	}
 	
+	// 카메라 촬영시
+	private void doTakePhotoAction()
+	{
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		
+		String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
+		mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+		
+		intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+		intent.putExtra("return-data", true);
+		startActivityForResult(intent, PICK_FROM_CAMERA);
+	}
+	
+	//앨범 선택시
+	private void doTakeAlbumAction()
+	{
+		Intent intent = new Intent(Intent.ACTION_PICK);
+		intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+		startActivityForResult(intent, PICK_FROM_ALBUM);
+	}
+	
 	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
 	{
 	}
@@ -241,7 +345,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         }
 	}
 	
-	public void addItem(String chat_val)
+	public void addWord(String chat_val)
 	{		
 		
 		Calendar cal = Calendar.getInstance();
@@ -269,6 +373,37 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		
 		my_adapter.notifyDataSetChanged();
 		
+		my_listview.setSelection(my_list.size());
+	}
+	
+	public void addPicture(Bitmap tmpPicture)
+	{	
+		System.out.println("addPicture - "+tmpPicture);
+		
+		Calendar cal = Calendar.getInstance();
+
+		String dateToString , timeToString ;
+		String dateStatus;
+		int dateNoon = cal.get(Calendar.AM_PM);
+		int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+		int dateMinute = cal.get(Calendar.MINUTE);
+	
+		if(dateNoon == 0){
+			dateStatus = "오전";
+		}
+		else{
+			dateStatus = "오후";
+			dateHour = dateHour-12;
+		}
+		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
+		
+		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+	
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,tmpPicture,timeString));
+		my_list_count += 1;     
+		
+		my_adapter.notifyDataSetChanged();
 		my_listview.setSelection(my_list.size());
 	}
 	

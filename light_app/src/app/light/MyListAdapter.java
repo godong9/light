@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Bitmap;
 
 public class MyListAdapter extends BaseAdapter {
 	private ArrayList<TimeLineObj> list;
@@ -97,7 +98,7 @@ public class MyListAdapter extends BaseAdapter {
 		TextView tvCalorie;
 		TextView tvDayCount;
 		TextView tvMission;
-		ImageView ivPicture;
+		Bitmap bmPicture;
 		LinearLayout llWriteType;
 		String picture_name;
 		/*
@@ -162,13 +163,10 @@ public class MyListAdapter extends BaseAdapter {
 
 			case TimeLineObj.VIEW_TYPE_MY_PICTURE:
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_picture_date);
-				ivPicture = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
+				ImageView iv = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
 				
-				//사진 적용하는 부분 추가 필요
-				
-				picture_name = list.get(position).content;
+				iv.setImageBitmap(list.get(position).picture_img);
 				tvDate.setText(list.get(position).date);
-		
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
@@ -217,7 +215,7 @@ public class MyListAdapter extends BaseAdapter {
 			case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_picture_nickname);
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_picture_date);
-				ivPicture = (ImageView) convertView.findViewById(R.id.timeline_other_picture_content);
+				//bmPicture = (ImageView) convertView.findViewById(R.id.timeline_other_picture_content);
 				
 				//사진 적용하는 부분 추가 필요
 				

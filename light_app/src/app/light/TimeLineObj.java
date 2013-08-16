@@ -1,6 +1,7 @@
 package app.light;
 
 import android.widget.ImageView;
+import android.graphics.Bitmap;
 
 public class TimeLineObj {
 	//전체 data type 
@@ -13,7 +14,7 @@ public class TimeLineObj {
 	public int bar_status;
 	public String date;
 	public ImageView manager_img;
-	public ImageView img;
+	public Bitmap picture_img;
 	public int manager_type;
 	public int manager_num;
 	
@@ -54,9 +55,10 @@ public class TimeLineObj {
 	}
 	
 	//MY_PICTURE 생성자
-	public TimeLineObj(int type, ImageView img, String date) {
+	public TimeLineObj(int type, Bitmap img, String date) {
 		this.type = type;
-		this.img = img;
+		this.picture_img = img;
+		System.out.println("TimelineObj - "+picture_img);
 		this.date = date;
 	}
 
