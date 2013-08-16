@@ -226,11 +226,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-	//	if(resultCode != RESULT_OK)
-	//	{
-	//		return;
-	//	}
-	//	System.out.println("result:"+resultCode);
+		System.out.println("result:"+resultCode);
 
 		switch(requestCode)
 		{
@@ -247,7 +243,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
-						String filePath = path+"/"+"myImage.jpg";
+						String filePath = path+"/"+"1_"+String.valueOf(System.currentTimeMillis())+".jpg";
 						
 						fOut = new FileOutputStream(filePath);//context.openFileOutput(filePath, Context.MODE_PRIVATE);
 						resize.compress(CompressFormat.JPEG, 100, fOut);
@@ -256,14 +252,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 						
 						fOut.flush();
 						fOut.close();
-						
-						
+									
 						String urlString = "http://211.110.61.51:3000/upload";
 						
 						DoFileUpload(urlString, filePath);
-						
-						
-						
+										
+						//임시 이미지 파일 삭제
 						File f = new File(mImageCaptureUri.getPath());	
 						if(f.exists())
 						{
@@ -279,26 +273,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 					// 받는 측에서는 jpg->bitmap으로 변환		
 				}
 	
-				/*
-				File f = new File(mImageCaptureUri.getPath());		
-				
-				String urlString = "http://211.110.61.51:3000/upload";
-				
-				System.out.println("FILE: "+f);
-				
-				//절대경로를 획득한다!!! 중요~
-				Cursor c = context.getContentResolver().query(Uri.parse(mImageCaptureUri.toString()), null,null,null,null);
-				//c.moveToNext();
-				String absolutePath = c.getString(c.getColumnIndex(MediaStore.MediaColumns.DATA));
-				
-				//파일 업로드 시작!
-				DoFileUpload(urlString , absolutePath);
-				
-				if(f.exists())
-				{
-					f.delete();		
-				}
-				*/
 				break;
 			}
 	
