@@ -39,7 +39,7 @@
 		    <LinearLayout
 		        android:layout_width="0dp"
 		        android:layout_height="fill_parent"
-				android:layout_weight="58"
+				android:layout_weight="59"
 		        android:orientation="vertical">
 				
 		        <TextView   
@@ -47,8 +47,8 @@
 				    	android:layout_weight ="14"     
 						android:layout_width="fill_parent"						
 						android:layout_height="0dp"
-						android:layout_marginLeft="20dp"
-						android:layout_marginRight="20dp"
+						android:layout_marginLeft="18dp"
+						android:layout_marginRight="18dp"
 						android:paddingTop="5dp"
 						android:text="먹어봤자 아는맛!"    
 			            android:textSize ="14sp"
@@ -64,8 +64,8 @@
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
 						android:layout_marginBottom="35dp"
-						android:layout_marginLeft="18dp"
-						android:layout_marginRight="18dp"
+						android:layout_marginLeft="16dp"
+						android:layout_marginRight="16dp"
 						android:background="@drawable/character_1"
 						android:tag="1_1"/> 	
 		        
@@ -75,7 +75,7 @@
 		    <LinearLayout
 		        android:layout_width="0dp"
 		        android:layout_height="fill_parent"
-				android:layout_weight="42"
+				android:layout_weight="41"
 		        android:orientation="vertical">
 				
 		        <TextView
@@ -85,7 +85,8 @@
 		            android:layout_height="0dp"
 					android:layout_marginTop="10dp"
 					android:layout_marginBottom="10dp"
-					android:layout_marginRight="10dp"
+					android:layout_marginRight="8dp"
+					android:layout_marginLeft="0.7dp"
 					android:gravity="center"
 					android:text="윤하입니다"
 			        android:textSize = "16sp"
@@ -98,9 +99,10 @@
 		            android:layout_weight="55"
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
-			        android:layout_marginRight="10dp"
+			        android:layout_marginRight="8dp"
 			        android:paddingTop="12dp"
 			        android:paddingBottom="10dp"
+			        android:layout_marginLeft="0.7dp"
 			        android:orientation="vertical"
 			        android:background="@drawable/rival_dialog_info">
 		        					
@@ -155,7 +157,7 @@
 			        android:layout_height="0dp"
 			        android:layout_marginTop="2dp"
 			        android:layout_marginLeft="6dp"
-			        android:layout_marginRight="12dp"
+			        android:layout_marginRight="8dp"
 			        android:orientation="vertical">
 		        	
 		            <TextView
@@ -193,7 +195,7 @@
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
 					            android:text="권장 "
-						        android:textColor="#FFFFFF"
+						        android:textColor="#79B942"
 						        android:textSize="14sp"
 						        android:textStyle="bold"
 					           />
@@ -204,7 +206,7 @@
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
 								android:text="1800 Kcal"
-						        android:textColor="#54A696"
+						        android:textColor="#79B942"
 						        android:textSize="14sp"
 
 					           />
