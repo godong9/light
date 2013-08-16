@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-//  , routes = require('./routes')
+	, routes = require('./routes')
     , user = require('./routes/user')
 //  , login = require('./routes/login')
 //  , rival = require('./routes/rival')
@@ -49,6 +49,11 @@ app.use(express.session());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+//파일 업로드 관련 설정
+app.use(express.limit('10mb'));
+app.use(express.bodyParser({uploadDir: __dirname + '/tmp'})); 
+app.use(express.methodOverride());
+app.use(express.logger({ buffer: 5000}));
 
 // development only
 if ('development' == app.get('env')) {
@@ -58,6 +63,9 @@ if ('development' == app.get('env')) {
 //app.get('/', routes.index);
 app.post('/join', user.join);
 app.post('/login', user.login);
+
+//파일 업로드 관련
+app.post('/upload', routes.upload);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
