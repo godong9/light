@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +23,20 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.net.Uri;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-
+import android.graphics.Bitmap.CompressFormat;
+import android.provider.MediaStore.Images.Media;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+
+
 import android.widget.ImageView;
 
 public class TimelineFrag extends CommonFragment implements OnScrollListener {
@@ -36,7 +48,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	
 	private Uri mImageCaptureUri;
 	private ImageView mPhotoImageView;
-
+	private FileInputStream mFileInputStream;
 	
 	private boolean firstStart = true;
 	
@@ -59,6 +71,11 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {	
 
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+		.permitDiskReads() 
+		.permitDiskWrites()
+		.permitNetwork().build());
+		
 		View view = inflater.inflate(R.layout.frag_timeline, container, false);
 		context = getActivity();
 			
@@ -220,29 +237,75 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 			case CROP_FROM_CAMERA:
 			{
 				final Bundle extras = data.getExtras();
-	
+				Bitmap resize;
+				
 				if(extras != null)
 				{
 					Bitmap tmpPicture = extras.getParcelable("data");
 					addPicture(tmpPicture);
+					resize = Bitmap.createScaledBitmap(tmpPicture, 400, 300, true);
+					try{
+						FileOutputStream fOut = null;
+						String path = Environment.getExternalStorageDirectory().toString();
+						String filePath = path+"/"+"myImage.jpg";
+						
+						fOut = new FileOutputStream(filePath);//context.openFileOutput(filePath, Context.MODE_PRIVATE);
+						resize.compress(CompressFormat.JPEG, 100, fOut);
+					
+						System.out.println(filePath);
+						
+						fOut.flush();
+						fOut.close();
+						
+						
+						String urlString = "http://211.110.61.51:3000/upload";
+						
+						DoFileUpload(urlString, filePath);
+						
+						
+						
+						File f = new File(mImageCaptureUri.getPath());	
+						if(f.exists())
+						{
+							f.delete();		
+						}
+						
+					}
+					catch(Exception e)
+					{
+						System.out.println("ERROR");
+					}
 					// 사진 업로드 구현 -> bitmap jpg로 변환 후 업로드
-					// 받는 측에서는 jpg->bitmap으로 변환
+					// 받는 측에서는 jpg->bitmap으로 변환		
 				}
 	
+				/*
 				File f = new File(mImageCaptureUri.getPath());		
-	
+				
+				String urlString = "http://211.110.61.51:3000/upload";
+				
+				System.out.println("FILE: "+f);
+				
+				//절대경로를 획득한다!!! 중요~
+				Cursor c = context.getContentResolver().query(Uri.parse(mImageCaptureUri.toString()), null,null,null,null);
+				//c.moveToNext();
+				String absolutePath = c.getString(c.getColumnIndex(MediaStore.MediaColumns.DATA));
+				
+				//파일 업로드 시작!
+				DoFileUpload(urlString , absolutePath);
+				
 				if(f.exists())
 				{
 					f.delete();		
 				}
-				
+				*/
 				break;
 			}
 	
 			case PICK_FROM_ALBUM:
 			{
 				mImageCaptureUri = data.getData();
-				System.out.println(mImageCaptureUri);
+				//System.out.println(mImageCaptureUri);
 			}
 			
 			case PICK_FROM_CAMERA:
@@ -407,6 +470,81 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		my_listview.setSelection(my_list.size());
 	}
 	
+	public void DoFileUpload(String apiUrl, String absolutePath) {
+		HttpFileUpload(apiUrl, "", absolutePath);
+	}
 
+	public void HttpFileUpload(String urlString, String params, String fileName) {
+		String lineEnd = "\r\n";
+		String twoHyphens = "--";
+		String boundary = "*****";
+		
+		try {
+
+			mFileInputStream = new FileInputStream(fileName);
+			URL connectUrl = new URL(urlString);
+			Log.d("Test", "mFileInputStream  is " + mFileInputStream);
+
+			// open connection
+			HttpURLConnection conn = (HttpURLConnection) connectUrl
+					.openConnection();
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			conn.setUseCaches(false);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Connection", "Keep-Alive");
+			conn.setRequestProperty("Content-Type",
+					"multipart/form-data;boundary=" + boundary);
+
+			// write data
+			DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+			dos.writeBytes(twoHyphens + boundary + lineEnd);
+			dos.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\""
+					+ fileName + "\"" + lineEnd);
+			dos.writeBytes(lineEnd);
+
+			int bytesAvailable = mFileInputStream.available();
+			int maxBufferSize = 1024;
+			int bufferSize = Math.min(bytesAvailable, maxBufferSize);
+
+			byte[] buffer = new byte[bufferSize];
+			int bytesRead = mFileInputStream.read(buffer, 0, bufferSize);
+
+			Log.d("Test", "image byte is " + bytesRead);
+
+			// read image
+			while (bytesRead > 0) {
+				dos.write(buffer, 0, bufferSize);
+				bytesAvailable = mFileInputStream.available();
+				bufferSize = Math.min(bytesAvailable, maxBufferSize);
+				bytesRead = mFileInputStream.read(buffer, 0, bufferSize);
+			}
+
+			dos.writeBytes(lineEnd);
+			dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+			// close streams
+			Log.e("Test", "File is written");
+			mFileInputStream.close();
+			dos.flush(); // finish upload...
+
+			// get response
+			int ch;
+			InputStream is = conn.getInputStream();
+			StringBuffer b = new StringBuffer();
+			while ((ch = is.read()) != -1) {
+				b.append((char) ch);
+			}
+			String s = b.toString();
+			Log.e("Test", "result = " + s);
+		//	mEdityEntry.setText(s);
+			dos.close();
+
+		} catch (Exception e) {
+			Log.d("Test", "exception " + e.getMessage());
+			// TODO: handle exception
+		}
+	}
+	
 }
 
