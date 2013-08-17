@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -23,10 +21,8 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.net.Uri;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.provider.MediaStore.Images.Media;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,10 +30,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-
-
-import android.widget.ImageView;
 
 public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		
@@ -47,7 +39,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	private static final int CROP_FROM_CAMERA = 2;
 	
 	private Uri mImageCaptureUri;
-	private ImageView mPhotoImageView;
 	private FileInputStream mFileInputStream;
 	
 	private boolean firstStart = true;
@@ -211,21 +202,25 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	
 	@Override
 	public void onStart() {
-		if(firstStart){
+		if(firstStart){	//처음 시작될 때
 			firstStart=false;
 			//Fragment가 완전히 생성되고 난 후에 호출되는 함수
 			super.onStart();
 			setListView();	
 		}
-		else{
+		else{ //카메라 작동 후 돌아왔을 때
 			super.onStart();
 		}
-	}
-	
+	}	
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
+		if(resultCode != -1)	//카메라 정상동작하지 않을때
+		{
+				return;
+		}
+	
 		System.out.println("result:"+resultCode);
 
 		switch(requestCode)
@@ -238,15 +233,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 				if(extras != null)
 				{
 					Bitmap tmpPicture = extras.getParcelable("data");
-					addPicture(tmpPicture);
+					addPicture(tmpPicture);	//사진 타임라인에 추가
+					//사진 크기 재조정
 					resize = Bitmap.createScaledBitmap(tmpPicture, 400, 300, true);
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
 						String filePath = path+"/"+"1_"+String.valueOf(System.currentTimeMillis())+".jpg";
 						
-						fOut = new FileOutputStream(filePath);//context.openFileOutput(filePath, Context.MODE_PRIVATE);
-						resize.compress(CompressFormat.JPEG, 100, fOut);
+						fOut = new FileOutputStream(filePath);	//context.openFileOutput(filePath, Context.MODE_PRIVATE);
+						resize.compress(CompressFormat.JPEG, 100, fOut);	//jpeg 형태로 이미지 압축
 					
 						System.out.println(filePath);
 						
@@ -255,6 +251,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 									
 						String urlString = "http://211.110.61.51:3000/upload";
 						
+						//파일 서버로 업로드
 						DoFileUpload(urlString, filePath);
 										
 						//임시 이미지 파일 삭제
@@ -279,16 +276,14 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 			case PICK_FROM_ALBUM:
 			{
 				mImageCaptureUri = data.getData();
-				//System.out.println(mImageCaptureUri);
 			}
 			
 			case PICK_FROM_CAMERA:
 			{
 				Intent intent = new Intent("com.android.camera.action.CROP");
 				intent.setDataAndType(mImageCaptureUri, "image/*");
-	
-				intent.putExtra("outputX", 400);
-				intent.putExtra("outputY", 300);
+				intent.putExtra("outputX", 640);
+				intent.putExtra("outputY", 480);
 				intent.putExtra("aspectX", 4);
 				intent.putExtra("aspectY", 3);
 				intent.putExtra("scale", true);
@@ -357,6 +352,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	{
 	}
 
+	//스크롤 이동 이벤트 발생시
 	public void onScrollStateChanged(AbsListView view, int scrollState)
 	{
 		// 리스트뷰가 구성이 완료되어 보이는 경우
@@ -382,6 +378,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         }
 	}
 	
+	//내가 쓴 채팅 내용 추가
 	public void addWord(String chat_val)
 	{		
 		
@@ -413,6 +410,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		my_listview.setSelection(my_list.size());
 	}
 	
+	//내가 찍은 사진 업로드
 	public void addPicture(Bitmap tmpPicture)
 	{	
 		System.out.println("addPicture - "+tmpPicture);

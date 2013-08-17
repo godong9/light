@@ -32,14 +32,17 @@ public class LoginActivity extends CommonActivity {
 	    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);   
 		Boolean keep_login_boolean = prefs.getBoolean("keep_login", false);
 		
+		String id_text = prefs.getString("email", "");
+	    String password_text = prefs.getString("password", "");
+		
+	    // 해당 값 넣어주기
+	    id_edit.setText(id_text);
+	    password_edit.setText(password_text);
+	    keep_login_check.setChecked(keep_login_boolean);
+	    
 		// 로그인 상태 유지가 체크되었을 때
-		if(keep_login_boolean){    
-			String id_text = prefs.getString("email", "");
-		    String password_text = prefs.getString("password", "");
-			
-		    id_edit.setText(id_text);
-		    password_edit.setText(password_text);
-		    keep_login_check.setChecked(keep_login_boolean);
+		if(keep_login_boolean){    			
+		    
 		    Handler login_handler = new Handler () {
 		    	@Override
 		    	public void handleMessage(Message msg) {
@@ -49,7 +52,7 @@ public class LoginActivity extends CommonActivity {
 	        };
 		
 	        login_handler.sendEmptyMessageDelayed(0, 2100);	       
-	    }       
+	    }
 	}
 	
 	//로그인 버튼 클릭시
