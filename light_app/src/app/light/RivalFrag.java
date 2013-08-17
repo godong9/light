@@ -81,7 +81,11 @@ public class RivalFrag extends CommonFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		
+		setRivalView();	
 	}
 	
+	public void setRivalView(){
+		
+		
+	}
 }
