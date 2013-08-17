@@ -1,23 +1,16 @@
 package app.light;
 
-import android.app.DialogFragment;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 public class RivalFrag extends CommonFragment {
 	
 	private Context context;
-	private AlertDialogWindow popup_dialog;
+	private RivalDialogWindow popup_dialog;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -43,7 +36,7 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new AlertDialogWindow(0);	
+				popup_dialog = new RivalDialogWindow(0);	
 				popup_dialog.show(getFragmentManager(), "User1 Popup");	
 			}
 		});
@@ -54,7 +47,7 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new AlertDialogWindow(1);		
+				popup_dialog = new RivalDialogWindow(1);		
 				popup_dialog.show(getFragmentManager(), "User2 Popup");	
 			}
 		});
@@ -65,7 +58,7 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new AlertDialogWindow(1);	
+				popup_dialog = new RivalDialogWindow(1);	
 				popup_dialog.show(getFragmentManager(), "User3 Popup");	
 			}
 		});
@@ -76,7 +69,7 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new AlertDialogWindow(1);		
+				popup_dialog = new RivalDialogWindow(1);		
 				popup_dialog.show(getFragmentManager(), "User4 Popup");	
 			}
 		});

@@ -13,11 +13,11 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 //커스텀 AlertDialog 구현
-	public class AlertDialogWindow extends DialogFragment {
+	public class RivalDialogWindow extends DialogFragment {
 		private Context context;
 		private int type;
 
-		public AlertDialogWindow(int type) {
+		public RivalDialogWindow(int type) {
 			this.type=type;
 		}
 		

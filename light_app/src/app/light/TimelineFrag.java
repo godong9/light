@@ -32,22 +32,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TimelineFrag extends CommonFragment implements OnScrollListener {
-		
+	
 	public final static int INSERT_COUNT = 5;
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
 	private static final int CROP_FROM_CAMERA = 2;
-	
-	private Uri mImageCaptureUri;
-	private FileInputStream mFileInputStream;
-	
-	private boolean firstStart = true;
 	
 	// 타임라인 입력 관련 버튼 상수
 	private static final int ID_FOOD     = 11;
 	private static final int ID_EXERCISE     = 12;
 	private static final int ID_CAMERA     = 14;
 	private static final int ID_ALBUM     = 15;
+	
+	
+	private Uri mImageCaptureUri;
+	private FileInputStream mFileInputStream;
+	private TimelineDialogWindow popup_dialog;
 	
 	private Context context;
 	private QuickAction writePopup;
@@ -57,6 +57,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	private MyListAdapter my_adapter;
 	private ListView my_listview;
 	private int my_list_count = 0;
+	private boolean firstStart = true;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -92,9 +93,14 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
                    
   				//here we can filter which action item was clicked with pos or actionId parameter
   				if (actionId == ID_FOOD) {
-  					Toast.makeText(context, "음식 기록", Toast.LENGTH_SHORT).show();
+  					//Toast.makeText(context, "음식 기록", Toast.LENGTH_SHORT).show();
+  					popup_dialog = new TimelineDialogWindow(0);
+  					popup_dialog.show(getFragmentManager(), "Food Popup");	
+  					
   				} else if (actionId == ID_EXERCISE) {
-  					Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
+  					//Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
+  					popup_dialog = new TimelineDialogWindow(1);
+  					popup_dialog.show(getFragmentManager(), "Exercise Popup");	
   				}
   			}
   		});		
