@@ -33,7 +33,9 @@ import java.net.URL;
 
 public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	
-	public final static int INSERT_COUNT = 5;
+	private static final int INSERT_COUNT = 5;
+	
+	// 카메라 관련 상수
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
 	private static final int CROP_FROM_CAMERA = 2;
@@ -43,7 +45,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	private static final int ID_EXERCISE     = 12;
 	private static final int ID_CAMERA     = 14;
 	private static final int ID_ALBUM     = 15;
-	
 	
 	private Uri mImageCaptureUri;
 	private FileInputStream mFileInputStream;

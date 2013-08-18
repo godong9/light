@@ -1,5 +1,7 @@
 package app.light;
 
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +13,11 @@ public class RivalFrag extends CommonFragment {
 	
 	private Context context;
 	private RivalDialogWindow popup_dialog;
+	
+	private JSONObject rival1_info;	//내 정보
+	private JSONObject rival2_info;
+	private JSONObject rival3_info;
+	private JSONObject rival4_info;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -85,7 +92,7 @@ public class RivalFrag extends CommonFragment {
 	}
 	
 	public void setRivalView(){
-		
+		//DB에서 데이터 가져와서 변수에 저장
 		
 	}
 }
