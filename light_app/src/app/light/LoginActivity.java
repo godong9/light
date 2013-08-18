@@ -20,7 +20,13 @@ public class LoginActivity extends CommonActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_login);
-		startActivity(new Intent(this, SplashActivity.class));
+		
+		Intent intent = getIntent();   // 값을 받기 위한 Intent 생성
+
+		String intent_str = intent.getStringExtra("type");
+		
+		//System.out.println("intent: "+intent_str);
+		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy);
 	        
@@ -39,20 +45,24 @@ public class LoginActivity extends CommonActivity {
 	    id_edit.setText(id_text);
 	    password_edit.setText(password_text);
 	    keep_login_check.setChecked(keep_login_boolean);
-	    
-		// 로그인 상태 유지가 체크되었을 때
-		if(keep_login_boolean){    			
-		    
-		    Handler login_handler = new Handler () {
-		    	@Override
-		    	public void handleMessage(Message msg) {
-		    		Button login_btn = (Button)findViewById(R.id.login_btn);
-		 		    onLoginBtn(login_btn);
-		    	}
-	        };
 		
-	        login_handler.sendEmptyMessageDelayed(0, 2100);	       
-	    }
+		if(intent_str == null){	//처음 앱 접속시
+			startActivity(new Intent(this, SplashActivity.class));
+			
+			// 로그인 상태 유지가 체크되었을 때
+			if(keep_login_boolean){    			
+			    
+			    Handler login_handler = new Handler () {
+			    	@Override
+			    	public void handleMessage(Message msg) {
+			    		Button login_btn = (Button)findViewById(R.id.login_btn);
+			 		    onLoginBtn(login_btn);
+			    	}
+		        };
+			
+		        login_handler.sendEmptyMessageDelayed(0, 2100);	       
+		    }		
+		}
 	}
 	
 	//로그인 버튼 클릭시

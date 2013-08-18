@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:id="@+id/timeline_frag"
-     android:orientation="vertical"
      android:layout_width="fill_parent"
-     android:layout_height="fill_parent">
-
+     android:layout_height="fill_parent"
+     android:orientation="vertical">
+	 
+     <LinearLayout 
+	     android:orientation="vertical"
+	     android:layout_width="fill_parent"
+	     android:layout_height="0dp"
+	     android:layout_weight="10"
+	     android:background="#222222">
+     </LinearLayout>
+         
      <ListView 
-            android:id="@+id/community_scroll"
-        	android:layout_height="fill_parent"    
-            android:layout_width="fill_parent"
-            android:transcriptMode="disabled">        	          
+          android:id="@+id/community_scroll"
+          android:layout_width="fill_parent"
+          android:layout_height="0dp"    
+          android:layout_weight="90"
+          android:transcriptMode="disabled"
+          android:background="#464664"
+          >        	          
      </ListView>
-
+     
 </LinearLayout>

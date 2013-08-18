@@ -3,6 +3,7 @@ package app.light;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -63,12 +64,15 @@ public class BaseFragment extends Activity {
                    
   				//here we can filter which action item was clicked with pos or actionId parameter
   				if (actionId == ID_NOTIFY) {
-  					Toast.makeText(getApplicationContext(), "알림설정 변경", Toast.LENGTH_SHORT).show();
+  					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " (준비중입니다..)", Toast.LENGTH_SHORT).show();
   				} else if (actionId == ID_HELP) {
-  					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+  					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " (준비중입니다..)", Toast.LENGTH_SHORT).show();
   				} else if (actionId == ID_LOGOUT) {
-   					Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
-   				}
+   					//Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+  					Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+  					intent.putExtra("type", "logout");
+  					startActivity(intent);
+  				}
   			}
   		});
   		
