@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends CommonActivity {
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
@@ -71,6 +72,7 @@ public class LoginActivity extends CommonActivity {
 		JSONObject json_param = new JSONObject();
 		
 		try {		
+			
 			final EditText id_text = (EditText)findViewById(R.id.login_id);
 			String email_val = id_text.getText().toString();
 			json_param.put("email", email_val);	
@@ -80,7 +82,9 @@ public class LoginActivity extends CommonActivity {
 			
 			final CheckBox keep_login = (CheckBox)findViewById(R.id.login_keep_login);
 			
-			String result_json = postData("http://211.110.61.51:3000/login", json_param);		
+			CommonHttp ch = new CommonHttp();	
+			
+			String result_json = ch.postData("http://211.110.61.51:3000/login", json_param);		
 			
 			if(result_json.equals("error")){
 				Toast toast = Toast.makeText(this, "로그인 실패!", Toast.LENGTH_SHORT); 

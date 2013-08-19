@@ -39,7 +39,8 @@ public class JoinActivity extends CommonActivity {
 			json_param.put("nickname", nickname_val);
 						
 			//postData 함수로 데이터 전송
-			String result_json = postData("http://211.110.61.51:3000/join", json_param);		
+			CommonHttp ch = new CommonHttp();	
+			String result_json = ch.postData("http://211.110.61.51:3000/join", json_param);		
 							
 			if(result_json.equals("error")){
 				Toast toast = Toast.makeText(this, "회원가입 실패!", Toast.LENGTH_SHORT); 

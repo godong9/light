@@ -1,5 +1,6 @@
 package app.light;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -19,10 +20,9 @@ public class RivalFrag extends CommonFragment {
 	private Context context;
 	private RivalDialogWindow popup_dialog;
 	
-	private JSONObject rival1_info;	//내 정보
-	private JSONObject rival2_info;
-	private JSONObject rival3_info;
-	private JSONObject rival4_info;
+	public static JSONObject group_info = new JSONObject();
+	public static JSONObject my_info = new JSONObject();	//내 정보
+	public static JSONArray rival_info = new JSONArray();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -102,22 +102,47 @@ public class RivalFrag extends CommonFragment {
 		JSONObject json_param = new JSONObject();
 			
 		try {		
-				
-			String result_json = postData("http://211.110.61.51:3000/rival", json_param);		
+			CommonHttp ch = new CommonHttp();	
+			String result_json = ch.postData("http://211.110.61.51:3000/rival", json_param);		
 			
 			if(result_json.equals("error")){
 				Toast.makeText(context, "데이터 수신 실패!", Toast.LENGTH_SHORT).show();
 			}
-			else{	
-				
-				System.out.println(result_json);
-				
+			else{			
+				System.out.println("성공");			
 				JSONObject json_data = new JSONObject(result_json);
+				JSONArray json_group_info = json_data.getJSONArray("group_info");
+				JSONArray json_user_info = json_data.getJSONArray("user_info");
+			
+				group_info = json_group_info.getJSONObject(0);
+				String my_email = group_info.getString("email");
+				
+				for(int i=0; i<json_user_info.length(); i++){
+					String tmp_email = json_user_info.getJSONObject(i).getString("email");
+					if(my_email.equals(tmp_email)){
+						my_info = json_user_info.getJSONObject(i);
+					}
+					else{
+						rival_info.put(json_user_info.getJSONObject(i));
+					}
+				}
+				
+				System.out.println(rival_info.getJSONObject(0).getString("email"));
+				System.out.println(rival_info.getJSONObject(1).getString("email"));
+				System.out.println(rival_info.getJSONObject(2).getString("email"));
+				
+				
+			//	System.out.println("GROUP->"+json_group_info);
+				
+			//	System.out.println(group_title);
+			//	System.out.println("USER->"+json_user_info);
 				
 			}	
 		
 	
-		} catch(Exception e) {}
+		} catch(Exception e) {
+			System.out.println("에러 발생");
+		}
 		
 	}
 }
