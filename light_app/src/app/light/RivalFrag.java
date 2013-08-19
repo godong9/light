@@ -3,11 +3,16 @@ package app.light;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class RivalFrag extends CommonFragment {
 	
@@ -93,6 +98,26 @@ public class RivalFrag extends CommonFragment {
 	
 	public void setRivalView(){
 		//DB에서 데이터 가져와서 변수에 저장
+		
+		JSONObject json_param = new JSONObject();
+			
+		try {		
+				
+			String result_json = postData("http://211.110.61.51:3000/rival", json_param);		
+			
+			if(result_json.equals("error")){
+				Toast.makeText(context, "데이터 수신 실패!", Toast.LENGTH_SHORT).show();
+			}
+			else{	
+				
+				System.out.println(result_json);
+				
+				JSONObject json_data = new JSONObject(result_json);
+				
+			}	
+		
+	
+		} catch(Exception e) {}
 		
 	}
 }
