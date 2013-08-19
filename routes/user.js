@@ -108,7 +108,11 @@ exports.login = function(req, res){
 		}
 		else if( rows[0].password === rows[0].input_password )
 		{
+			
 			register_session(req, rows[0].email, rows[0].nickname);
+
+			console.log("Session 등록 -> "+req.session.email);
+
 			result = { result:"success", msg:"로그인 성공!" };
 			res.send(result);
 		}

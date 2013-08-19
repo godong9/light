@@ -6,8 +6,7 @@
 var express = require('express')
 	, routes = require('./routes')
     , user = require('./routes/user')
-//  , login = require('./routes/login')
-//  , rival = require('./routes/rival')
+	, rival = require('./routes/rival')
 //  , timeline = require('./routes/timeline')
 //  , community = require('./routes/community')
   , http = require('http')
@@ -63,6 +62,7 @@ if ('development' == app.get('env')) {
 //app.get('/', routes.index);
 app.post('/join', user.join);
 app.post('/login', user.login);
+app.post('/rival', rival.rival_page_info);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);
