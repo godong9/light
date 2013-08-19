@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -136,54 +137,58 @@ public class RivalFrag extends CommonFragment {
 					}
 				}
 				
-				
-				Calendar cal = Calendar.getInstance();
-
-				String today_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-				//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
-				
-				//Calendar start_cal = Calendar.getInstance();
-				//Calendar end_cal = Calendar.getInstance();
-				
+				//문자열로 날짜 변환 후에 다시 Date 형태로 변환
 				String start_day_str = group_info.getString("start_date");
 				String end_day_str = group_info.getString("end_date");
 			
 				String start_day = start_day_str.substring(0, start_day_str.indexOf("T"));
 				String end_day = end_day_str.substring(0, end_day_str.indexOf("T"));
-				
-				
-				
+						
 				SimpleDateFormat tf = new SimpleDateFormat("yyyy-MM-dd");
 				Date start_day_date = tf.parse(start_day);
-				Date end_day_date = tf.parse(end_day);
+				Date end_day_date = tf.parse(end_day);	
+				Date tmp_day_date = new Date();	//현재 날짜, 시간 가져옴
+					
+				//날짜 차이 계산
+				long start_tmp_diff = tmp_day_date.getTime() - start_day_date.getTime();
+				long tmp_end_diff = end_day_date.getTime() - tmp_day_date.getTime();
 				
-				long diff = end_day_date.getTime() - start_day_date.getTime();
-				long diffDays = diff / (24*60*60*1000);
+				long start_tmp_diff_days = start_tmp_diff / (24*60*60*1000);
+				long tmp_end_diff_days = tmp_end_diff / (24*60*60*1000);
+		
+				//그룹 목표, 제목 데이터
+				String group_goal = group_info.getString("goal");
+				String group_title = group_info.getString("title");
 				
-				
-				//start_cal.set(start_day_date.getYear(), start_day_date.getMonth(), start_day_date.getDay());
-				//end_cal.set(end_day_date.getYear(), end_day_date.getMonth(), end_day_date.getDay());
-				
-				//long rawResult = (end_cal.getTimeInMillis() - start_cal.getTimeInMillis()) / 1000;
-				//long result = rawResult/(60*60*24);
-				
-				
-				
-				System.out.println("날짜차이 : "+diffDays);
-				System.out.println(rival_info.getJSONObject(0).getString("email"));
-				System.out.println(rival_info.getJSONObject(1).getString("email"));
-				System.out.println(rival_info.getJSONObject(2).getString("email"));
-				
+				//그룹 관련 타이틀 부분 데이터 적용
 				TextView tvGroupCountDay = (TextView)((Activity)context).findViewById(R.id.rival_count_day);
 				TextView tvGroupRemainDay = (TextView)((Activity)context).findViewById(R.id.rival_remain_day);    
 				TextView tvGroupGoal = (TextView)((Activity)context).findViewById(R.id.rival_group_goal);
 				
+				tvGroupCountDay.setText(start_tmp_diff_days+"일째");
+				tvGroupRemainDay.setText("D - "+tmp_end_diff_days);
+				tvGroupGoal.setText(group_goal+"kg "+group_title);
 				
-			//	System.out.println("GROUP->"+json_group_info);
+				//내 캐릭터 데이터 적용
+				TextView myNickName = (TextView)((Activity)context).findViewById(R.id.rival_user1_nickname);
+				TextView myChat = (TextView)((Activity)context).findViewById(R.id.rival_user1_word);
+				TextView myHeight = (TextView)((Activity)context).findViewById(R.id.rival_user1_height);
+				TextView myWeight = (TextView)((Activity)context).findViewById(R.id.rival_user1_weight);
+				TextView myScore = (TextView)((Activity)context).findViewById(R.id.rival_user1_score);
+				ImageButton myCharacter = (ImageButton)((Activity)context).findViewById(R.id.rival_user1_click);
+				ImageView myCalorie = (ImageView)((Activity)context).findViewById(R.id.rival_user1_status);
 				
-			//	System.out.println(group_title);
-			//	System.out.println("USER->"+json_user_info);
+				myNickName.setText(my_info.getString("nickname"));
+				myChat.setText(my_info.getString("chat_ballon"));
+				myHeight.setText(my_info.getString("height")+"cm /");
+				myWeight.setText(my_info.getString("weight")+"kg");
+				myScore.setText(my_info.getString("score"));
 				
+				String res_character = "@drawable/character_"+my_info.getString("character");
+				String res_calorie = "@drawable/calorie_"+my_info.getString("calorie_status");
+				String packName = "app.light";
+				myCharacter.setBackgroundResource(getResources().getIdentifier(res_character, "drawable", packName));
+				myCalorie.setBackgroundResource(getResources().getIdentifier(res_calorie, "drawable", packName));
 			}	
 		
 	
