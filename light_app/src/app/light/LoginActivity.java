@@ -103,6 +103,10 @@ public class LoginActivity extends CommonActivity {
 					Intent intent = new Intent(LoginActivity.this, BaseFragment.class);
 					startActivity(intent);
 				}
+				else{
+					Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
+					toast.show(); 
+				}
 			}	
 		}
 		catch(JSONException e) {

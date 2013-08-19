@@ -53,6 +53,10 @@ public class JoinActivity extends CommonActivity {
 					Intent intent = new Intent(JoinActivity.this, BaseFragment.class);
 					startActivity(intent);
 				}
+				else{
+					Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
+					toast.show(); 
+				}
 			}		
 		}
 		catch(JSONException e) {

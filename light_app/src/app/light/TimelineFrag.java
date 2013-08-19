@@ -307,22 +307,22 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		my_list = new ArrayList<TimeLineObj>();
   
         //리스트에 아이템 넣는 부분
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "9일째","2013. 8. 12"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영아입니다","테스트","오후 11:20"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","테스트테스트테스트테스트테스트테스트테스트테스트","오전 12:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"3","테스트테","asdfsdf"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"테스","오후 1:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "10개","샌드위치","550Kcal","오후 12:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥입니다","10개","냉모밀","+750Kcal","오전 11:50"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아니다","30분","웨이트트레","-300Kcal","오후 1:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_EXERCISE,"60분","자전거타기","-200Kcal","오전 10:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, 0, 0, "운동", "자전거 1시간 타기","오후 12:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_WORD, 0, 0, "오늘 운동 많이했나요?","오후 13:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "10일째","2013. 8. 13"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,"test","오후 2:20"));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "9일째","2013. 8. 19"));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, 0, 0, "운동", "30분 걷기","오전 08:00"));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"오늘도 열심히 해봐요ㅋㅋ","오전 10:09"));	
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영아","너무 힘들어요ㅠ","오전 10:10"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","우리 같이 힘내요! 화이팅!","오전 10:12"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"민옥","화이팅!!!","오전 10:35"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아","30분","걷기","-100Kcal","오전 10:50"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "2개","샌드위치","650Kcal","오전 11:50"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥","1인분","냉모밀","+550Kcal","오전 11:55"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_EXERCISE,"50분","걷기","-100Kcal","오후 1:20"));
         my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE,"영아","test","오후 3:10"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영","강","asdfsdf"));
-            
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","샐러드 먹어요!","오후 4:00"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "윤하","1인분","샐러드","+350Kcal","오후 4:05"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "1인분","김치찌개","700Kcal","오후 5:50"));
+        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_WORD, 0, 0, "오늘 운동 많이했나요?","오후 9:00"));
+       
         my_list_count += 15;	//5개 불러와서 추가 
 		my_adapter = new MyListAdapter(context, my_list);
 	
