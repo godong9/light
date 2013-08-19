@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -29,10 +30,13 @@ public class RivalFrag extends CommonFragment {
 	
 	private Context context;
 	private RivalDialogWindow popup_dialog;
+	private String packName = "app.light";
+	private Resources res;
 	
 	public static JSONObject group_info = new JSONObject();
 	public static JSONObject my_info = new JSONObject();	//내 정보
 	public static JSONArray rival_info = new JSONArray();
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -169,7 +173,7 @@ public class RivalFrag extends CommonFragment {
 				tvGroupRemainDay.setText("D - "+tmp_end_diff_days);
 				tvGroupGoal.setText(group_goal+"kg "+group_title);
 				
-				//내 캐릭터 데이터 적용
+				//내 데이터 적용
 				TextView myNickName = (TextView)((Activity)context).findViewById(R.id.rival_user1_nickname);
 				TextView myChat = (TextView)((Activity)context).findViewById(R.id.rival_user1_word);
 				TextView myHeight = (TextView)((Activity)context).findViewById(R.id.rival_user1_height);
@@ -184,11 +188,50 @@ public class RivalFrag extends CommonFragment {
 				myWeight.setText(my_info.getString("weight")+"kg");
 				myScore.setText(my_info.getString("score"));
 				
-				String res_character = "@drawable/character_"+my_info.getString("character");
-				String res_calorie = "@drawable/calorie_"+my_info.getString("calorie_status");
-				String packName = "app.light";
-				myCharacter.setBackgroundResource(getResources().getIdentifier(res_character, "drawable", packName));
-				myCalorie.setBackgroundResource(getResources().getIdentifier(res_calorie, "drawable", packName));
+				res = getResources();
+				
+				String my_character = "@drawable/character_"+my_info.getString("character");
+				String my_calorie = "@drawable/calorie_"+my_info.getString("calorie_status");
+				
+				myCharacter.setBackgroundResource(res.getIdentifier(my_character, "drawable", packName));
+				myCalorie.setBackgroundResource(res.getIdentifier(my_calorie, "drawable", packName));
+			
+				//라이벌 데이터 적용
+				for(int i=0; i<rival_info.length(); i++){
+					
+					int user_num=2+i;
+					String res_other = "@id/rival_user"+user_num+"_";
+					System.out.println("res_other: "+res_other);
+					
+					res = getResources();
+					
+					TextView otherNickName = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"nickname", "id", packName));
+					TextView otherChat = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"word", "id", packName));
+					TextView otherHeight = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"height", "id", packName));
+					TextView otherWeight = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"weight", "id", packName));
+					TextView otherScore = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"score", "id", packName));
+					ImageButton otherCharacter = (ImageButton)((Activity)context).findViewById(res.getIdentifier(res_other+"click", "id", packName));
+					ImageView otherCalorie = (ImageView)((Activity)context).findViewById(res.getIdentifier(res_other+"status", "id", packName));
+					
+					System.out.println(res_other+"status");
+					
+					otherNickName.setText(rival_info.getJSONObject(i).getString("nickname"));
+					otherChat.setText(rival_info.getJSONObject(i).getString("chat_ballon"));
+					otherHeight.setText(rival_info.getJSONObject(i).getString("height")+"cm /");
+					otherWeight.setText(rival_info.getJSONObject(i).getString("weight")+"kg");
+					otherScore.setText(rival_info.getJSONObject(i).getString("score"));
+					
+					String other_character = "@drawable/character_"+rival_info.getJSONObject(i).getString("character");
+					String other_calorie = "@drawable/calorie_"+rival_info.getJSONObject(i).getString("calorie_status");
+		
+					System.out.println("=>"+other_character);
+					System.out.println("=>"+other_calorie);
+					
+					otherCharacter.setBackgroundResource(res.getIdentifier(other_character, "drawable", packName));
+					otherCalorie.setBackgroundResource(res.getIdentifier(other_calorie, "drawable", packName));
+				
+				}
+			
 			}	
 		
 	
