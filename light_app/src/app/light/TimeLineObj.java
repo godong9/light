@@ -19,16 +19,17 @@ public class TimeLineObj {
 	public int manager_num;
 	
 	public static final int VIEW_TYPE_TIMEBAR = 0;
-	public static final int VIEW_TYPE_MY_WORD = 1;
-	public static final int VIEW_TYPE_MY_FOOD = 2;
-	public static final int VIEW_TYPE_MY_EXERCISE = 3;
-	public static final int VIEW_TYPE_MY_PICTURE = 4;		
-	public static final int VIEW_TYPE_OTHER_WORD = 5;
-	public static final int VIEW_TYPE_OTHER_FOOD = 6;
-	public static final int VIEW_TYPE_OTHER_EXERCISE =7;
-	public static final int VIEW_TYPE_OTHER_PICTURE = 8;	
-	public static final int VIEW_TYPE_MANAGER_WORD = 9;
-	public static final int VIEW_TYPE_MANAGER_MISSION = 10;
+	public static final int VIEW_TYPE_MANAGER_WORD = 1;
+	public static final int VIEW_TYPE_MANAGER_MISSION = 2;
+	public static final int VIEW_TYPE_MY_WORD = 3;
+	public static final int VIEW_TYPE_MY_FOOD = 4;
+	public static final int VIEW_TYPE_MY_EXERCISE = 5;
+	public static final int VIEW_TYPE_MY_PICTURE = 6;		
+	public static final int VIEW_TYPE_OTHER_WORD = 7;
+	public static final int VIEW_TYPE_OTHER_FOOD = 8;
+	public static final int VIEW_TYPE_OTHER_EXERCISE =9;
+	public static final int VIEW_TYPE_OTHER_PICTURE = 10;	
+	
 	
 	//TIMEBAR 생성자
 	public TimeLineObj(int type, int bar_status, String day_count, String date) {

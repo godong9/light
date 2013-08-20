@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 //커스텀 AlertDialog 구현
@@ -25,6 +26,8 @@ import android.widget.TextView;
 		private JSONObject user_info = new JSONObject();
 		private Resources res;
 		private String packName = "app.light";
+		private LinearLayout home_layout;
+		private LinearLayout history_layout;
 		
 		public RivalDialogWindow(int type, JSONObject user_info) {
 			this.type = type;
@@ -117,10 +120,15 @@ import android.widget.TextView;
 				final ImageButton dialog_closet_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_closet_btn);
 				final ImageButton dialog_shop_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_shop_btn);
 				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_history_btn);
-					
+							
+				home_layout = (LinearLayout) getDialog().findViewById(R.id.rival_my_dialog_layout);
+				history_layout = (LinearLayout) getDialog().findViewById(R.id.rival_history_layout);
+						
 				dialog_page_btn.setSelected(true);
 				
 				dialog_page_btn.setOnClickListener(new View.OnClickListener() {
+					
+					
 					@Override
 					public void onClick(View v)
 					{	
@@ -128,6 +136,9 @@ import android.widget.TextView;
 						dialog_closet_btn.setSelected(false);
 						dialog_shop_btn.setSelected(false);
 						dialog_history_btn.setSelected(false);	
+						
+						history_layout.setVisibility(View.GONE);
+						home_layout.setVisibility(View.VISIBLE);			
 					}
 				});
 				
@@ -161,11 +172,18 @@ import android.widget.TextView;
 						dialog_closet_btn.setSelected(false);
 						dialog_shop_btn.setSelected(false);
 						dialog_history_btn.setSelected(true);
+			
+						home_layout.setVisibility(View.GONE);
+						history_layout.setVisibility(View.VISIBLE);
 					}
 				});
 			
 			}
 			else{
+				
+				home_layout = (LinearLayout) getDialog().findViewById(R.id.rival_other_dialog_layout);
+				history_layout = (LinearLayout) getDialog().findViewById(R.id.rival_history_layout);
+				
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
 				
 				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_page_btn);
@@ -179,6 +197,9 @@ import android.widget.TextView;
 					{	
 						dialog_page_btn.setSelected(true);
 						dialog_history_btn.setSelected(false);	
+						
+						history_layout.setVisibility(View.GONE);
+						home_layout.setVisibility(View.VISIBLE);				
 					}
 				});
 				
@@ -188,6 +209,9 @@ import android.widget.TextView;
 					{				
 						dialog_page_btn.setSelected(false);
 						dialog_history_btn.setSelected(true);
+						
+						home_layout.setVisibility(View.GONE);
+						history_layout.setVisibility(View.VISIBLE);
 					}	
 				});
 				

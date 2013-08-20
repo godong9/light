@@ -11,7 +11,8 @@
         android:id="@+id/rival_my_dialog_layout"	 
         android:layout_width="300dp"
         android:layout_height="313dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="visible" >
         
         <LinearLayout
 	        android:layout_width="fill_parent"
@@ -288,6 +289,34 @@
         </LinearLayout>
           
     </LinearLayout>
+    
+    
+     <LinearLayout
+        android:id="@+id/rival_history_layout"
+        android:layout_width="300dp"
+        android:layout_height="313dp"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        <LinearLayout 
+		     android:orientation="vertical"
+		     android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:layout_weight="10"
+		     android:background="#222222">
+	     </LinearLayout>
+	         
+	     <ListView 
+	          android:id="@+id/community_scroll"
+	          android:layout_width="fill_parent"
+	          android:layout_height="0dp"    
+	          android:layout_weight="90"
+	          android:transcriptMode="disabled"
+	          android:background="#464664"
+	          >        	          
+	     </ListView>
+    </LinearLayout>
+    
+    
     
     <LinearLayout
         android:layout_width="300dp"
