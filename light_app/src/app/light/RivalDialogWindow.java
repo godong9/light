@@ -1,9 +1,13 @@
 package app.light;
 
+import org.json.JSONObject;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +15,20 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 //커스텀 AlertDialog 구현
 	public class RivalDialogWindow extends DialogFragment {
 		private Context context;
 		private int type;
-
-		public RivalDialogWindow(int type) {
-			this.type=type;
+		private JSONObject user_info = new JSONObject();
+		private Resources res;
+		private String packName = "app.light";
+		
+		public RivalDialogWindow(int type, JSONObject user_info) {
+			this.type = type;
+			this.user_info = user_info;
 		}
 		
 		@Override
@@ -30,7 +40,7 @@ import android.widget.ImageButton;
 			View view; 
 			
 			//타입에 따라 자기 다이얼로그 or 다른 사람 다이얼로그
-			if(type==0){
+			if(type==1){
 				view = mLayoutInflater.inflate(R.layout.popup_my_dialog, null);
 				mBuilder.setView(view);	
 			}
@@ -59,6 +69,40 @@ import android.widget.ImageButton;
 			
 			super.onStart();
 			
+			// 다이얼로그 Home 페이지 내 데이터 적용
+			TextView myNickName = (TextView)getDialog().findViewById(R.id.rival_dialog_nickname);
+			TextView myChat = (TextView)getDialog().findViewById(R.id.rival_dialog_word);
+			TextView myHeight = (TextView)getDialog().findViewById(R.id.rival_dialog_height);
+			TextView myWeight = (TextView)getDialog().findViewById(R.id.rival_dialog_weight);
+			TextView myGoal = (TextView)getDialog().findViewById(R.id.rival_dialog_goal);
+			ImageButton myCharacter = (ImageButton)getDialog().findViewById(R.id.rival_dialog_character);
+			TextView myLimitCalorie = (TextView)getDialog().findViewById(R.id.rival_dialog_limit_calorie);
+			TextView myEatCalorie = (TextView)getDialog().findViewById(R.id.rival_dialog_eat_calorie);
+			TextView myExerciseCalorie = (TextView)getDialog().findViewById(R.id.rival_dialog_exercise_calorie);
+			
+			
+			try {
+				myNickName.setText(user_info.getString("nickname"));
+				myChat.setText(user_info.getString("chat_ballon"));
+				myHeight.setText("키       "+user_info.getString("height")+"cm");
+				myWeight.setText("체중     "+user_info.getString("weight")+"kg");
+				myGoal.setText(user_info.getString("goal_weight")+"kg");
+				myLimitCalorie.setText(user_info.getString("day_calorie")+" Kcal");
+				myEatCalorie.setText(user_info.getString("food_calorie")+" Kcal");
+				myExerciseCalorie.setText(user_info.getString("exercise_calorie")+" Kcal");
+				
+				res = getResources();
+				
+				String my_character = "@drawable/character_"+user_info.getString("character");
+			
+				myCharacter.setBackgroundResource(res.getIdentifier(my_character, "drawable", packName));
+	
+			}
+			catch(Exception e){
+				System.out.println("다이얼로그 에러 발생");
+			}
+			
+			
 			/*
 			 * 다이얼로그 내부 버튼 클릭시 이벤트 처리
 			 * 
@@ -66,7 +110,7 @@ import android.widget.ImageButton;
 			ImageButton dialog_exit_btn;
 	
 			
-			if(type == 0){
+			if(type == 1){
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
 				
 				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_page_btn);

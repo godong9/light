@@ -43,7 +43,7 @@
 		        android:orientation="vertical">
 				
 		        <TextView   
-				        android:id="@+id/rival_other_dialog_word"	 
+				        android:id="@+id/rival_dialog_word"	 
 				    	android:layout_weight ="14"     
 						android:layout_width="fill_parent"						
 						android:layout_height="0dp"
@@ -59,7 +59,7 @@
 						android:background="@drawable/chat_ballon"/> 
 						
 		        <ImageButton  
-				        android:id="@+id/rival_other_dialog_character"
+				        android:id="@+id/rival_dialog_character"
 				    	android:layout_weight ="86"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
@@ -79,7 +79,7 @@
 		        android:orientation="vertical">
 				
 		        <TextView
-		            android:id="@+id/rival_other_dialog_nickname"
+		            android:id="@+id/rival_dialog_nickname"
 		            android:layout_weight="10"
 		            android:layout_width="fill_parent"
 		            android:layout_height="0dp"
@@ -107,7 +107,7 @@
 			        android:background="@drawable/rival_dialog_info">
 		        					
 			        <TextView
-			            android:id="@+id/rival_other_dialog_height"
+			            android:id="@+id/rival_dialog_height"
 			            android:layout_weight="22"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -117,7 +117,7 @@
 				        android:textSize="14sp"
 						/>
 			        <TextView
-			            android:id="@+id/rival_other_dialog_weight"
+			            android:id="@+id/rival_dialog_weight"
 			            android:layout_weight="22"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -128,7 +128,6 @@
 				        android:textSize="14sp"
 						/>
 			        <TextView
-			            android:id="@+id/rival_other_dialog_goal"
 			            android:layout_weight="20"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -139,7 +138,7 @@
 				        android:textSize="14sp"
 						/>
 			        <TextView
-			            android:id="@+id/rival_other_dialog_goal_val"
+			            android:id="@+id/rival_dialog_goal"
 			            android:layout_weight="36"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -201,7 +200,7 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_limit_calorie"
+					            android:id="@+id/rival_dialog_limit_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -234,7 +233,7 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_eat_calorie"
+					            android:id="@+id/rival_dialog_eat_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -265,7 +264,7 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_exercise_calorie"
+					            android:id="@+id/rival_dialog_exercise_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"

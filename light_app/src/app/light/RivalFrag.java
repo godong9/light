@@ -62,7 +62,7 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new RivalDialogWindow(0);	
+				popup_dialog = new RivalDialogWindow(1, my_info);	
 				popup_dialog.show(getFragmentManager(), "User1 Popup");	
 			}
 		});
@@ -73,7 +73,10 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new RivalDialogWindow(1);		
+				try {
+					popup_dialog = new RivalDialogWindow(2, rival_info.getJSONObject(0));	
+				}
+				catch(Exception e){}	
 				popup_dialog.show(getFragmentManager(), "User2 Popup");	
 			}
 		});
@@ -84,7 +87,10 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new RivalDialogWindow(1);	
+				try {
+					popup_dialog = new RivalDialogWindow(3, rival_info.getJSONObject(1));	
+				}
+				catch(Exception e){}	
 				popup_dialog.show(getFragmentManager(), "User3 Popup");	
 			}
 		});
@@ -95,7 +101,10 @@ public class RivalFrag extends CommonFragment {
 			@Override
 			public void onClick(View v)
 			{	
-				popup_dialog = new RivalDialogWindow(1);		
+				try {
+					popup_dialog = new RivalDialogWindow(4, rival_info.getJSONObject(2));	
+				}
+				catch(Exception e){}		
 				popup_dialog.show(getFragmentManager(), "User4 Popup");	
 			}
 		});
