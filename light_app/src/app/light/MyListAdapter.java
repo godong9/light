@@ -165,7 +165,9 @@ public class MyListAdapter extends BaseAdapter {
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_picture_date);
 				ImageView iv = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
 				
-				iv.setImageBitmap(list.get(position).picture_img);
+				//iv.setImageBitmap(list.get(position).picture_img);
+					
+				
 				tvDate.setText(list.get(position).date);
 				break;
 				

@@ -312,25 +312,14 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	public void setListView() {
 		
 		my_list = new ArrayList<TimeLineObj>();
-  
+		
+	
         //리스트에 아이템 넣는 부분
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, 0, "9일째","2013. 8. 19"));
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, 0, 0, "운동", "30분 걷기","오전 08:00"));
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,"오늘도 열심히 해봐요ㅋㅋ","오전 10:09"));	
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"영아","너무 힘들어요ㅠ","오전 10:10"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","우리 같이 힘내요! 화이팅!","오전 10:12"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"민옥","화이팅!!!","오전 10:35"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_EXERCISE,"영아","30분","걷기","-100Kcal","오전 10:50"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "2개","샌드위치","650Kcal","오전 11:50"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "민옥","1인분","냉모밀","+550Kcal","오전 11:55"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_EXERCISE,"50분","걷기","-100Kcal","오후 1:20"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE,"영아","test","오후 3:10"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"윤하","샐러드 먹어요!","오후 4:00"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_FOOD, "윤하","1인분","샐러드","+350Kcal","오후 4:05"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_FOOD, "1인분","김치찌개","700Kcal","오후 5:50"));
-        my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_WORD, 0, 0, "오늘 운동 많이했나요?","오후 9:00"));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, "", "", "9일째", "", "2013. 8. 19"));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, "", "운동", "30분 걷기", "", "오전 08:00"));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD, "", "", "오늘도 열심히 해봐요ㅋㅋ", "", "오전 10:09"));	
        
-        my_list_count += 15;	//5개 불러와서 추가 
+        my_list_count += 3;	//5개 불러와서 추가 
 		my_adapter = new MyListAdapter(context, my_list);
 	
 		// 리스트뷰에 어댑터 연결
@@ -387,16 +376,13 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
                 if(view.getFirstVisiblePosition() == 0) {
                     // 항목을 추가한다.
          
-    				my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"16","111","asdfsdf"));
-                   	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"17","111","asdfsdf"));
-                   	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"18","111","asdfsdf"));
-                   	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"19","111","asdfsdf"));
-                   	my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"20","111","asdfsdf"));
+    				//my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"16","111","asdfsdf"));
+               
     				
     				System.out.println(my_list);
     				my_adapter.notifyDataSetChanged();
  
-                    my_list_count += INSERT_COUNT;     
+                    my_list_count += 0;     
                     view.setSelection(INSERT_COUNT);	//뷰 위치 이동
                 }
             }
@@ -427,7 +413,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
 	
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD,chat_val,timeString));
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD, "", "", chat_val, "", timeString));	
 		my_list_count += 1;     
 		
 		my_adapter.notifyDataSetChanged();
@@ -460,11 +446,11 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
 	
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,tmpPicture,timeString));
-		my_list_count += 1;     
+		//my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,tmpPicture,timeString));
+		//my_list_count += 1;     
 		
-		my_adapter.notifyDataSetChanged();
-		my_listview.setSelection(my_list.size());
+		//my_adapter.notifyDataSetChanged();
+		//my_listview.setSelection(my_list.size());
 	}
 	
 	public void DoFileUpload(String apiUrl, String absolutePath) {
