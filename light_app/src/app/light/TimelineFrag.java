@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -31,7 +34,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class TimelineFrag extends CommonFragment implements OnScrollListener {
+public class TimelineFrag extends CommonFragment implements OnScrollListener, OnItemClickListener {
 	
 	// 카메라 관련 상수
 	private static final int PICK_FROM_CAMERA = 0;
@@ -60,6 +63,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	private ListView my_listview;
 	private int my_list_count = 0;
 	private boolean firstStart = true;
+	
+	private EditText chat_text = null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -163,8 +168,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
         final ImageButton send_btn = (ImageButton) view.findViewById(R.id.send_btn);
 		final ImageButton write_btn = (ImageButton) view.findViewById(R.id.write_btn);
 		final ImageButton camera_btn = (ImageButton) view.findViewById(R.id.camera_btn);
+		final ListView list_view = (ListView) view.findViewById(R.id.timeline_scroll);
 		
-		final EditText chat_text = (EditText) view.findViewById(R.id.chat_val);
+		chat_text = (EditText) view.findViewById(R.id.chat_val);
 		
 		//전송 버튼 클릭시
 		send_btn.setOnClickListener(new View.OnClickListener()
@@ -332,8 +338,19 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 	    
 	    my_listview.setAdapter(my_adapter);
 	    my_listview.setOnScrollListener(this);
+	    my_listview.setOnItemClickListener(this);
 	    my_listview.setSelection(my_adapter.getCount() - 1);	    
 	}
+	
+	
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+	{
+		// 리스트뷰 클릭시 키보드 숨기기
+		InputMethodManager imm = (InputMethodManager)context.getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(chat_text.getWindowToken(), 0);
+	}
+	
 	
 	// 카메라 촬영시
 	private void doTakePhotoAction()
@@ -526,5 +543,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener {
 		}
 	}
 	
+
+
 }
 
