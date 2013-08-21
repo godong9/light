@@ -1,7 +1,10 @@
 package app.light;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +37,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class TimelineFrag extends CommonFragment implements OnScrollListener, OnItemClickListener {
 	
 	// 카메라 관련 상수
@@ -47,8 +53,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private static final int ID_FOOD     = 11;
 	private static final int ID_EXERCISE     = 12;
 	private static final int ID_CAMERA     = 14;
-	private static final int ID_ALBUM     = 15;
-	
+	private static final int ID_ALBUM     = 15;	
 	
 	private Uri mImageCaptureUri;
 	private FileInputStream mFileInputStream;
@@ -65,6 +70,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private boolean firstStart = true;
 	
 	private EditText chat_text = null;
+	
+	private Calendar last_get_date = Calendar.getInstance();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -313,22 +320,106 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		my_list = new ArrayList<TimeLineObj>();
 		
+		
+		JSONObject json_param = new JSONObject();
+		
+		try {
+			Calendar cal = Calendar.getInstance();
 	
-        //리스트에 아이템 넣는 부분
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_TIMEBAR, "", "", "9일째", "", "2013. 8. 19"));
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MANAGER_MISSION, "", "운동", "30분 걷기", "", "오전 08:00"));
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD, "", "", "오늘도 열심히 해봐요ㅋㅋ", "", "오전 10:09"));	
-       
-        my_list_count += 3;	//5개 불러와서 추가 
-		my_adapter = new MyListAdapter(context, my_list);
+			String tmp_date_string, last_date_string;
+			
+			tmp_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+			last_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+			
+			last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+			
+			
+			json_param.put("start_date", last_date_string);
+			json_param.put("end_date", tmp_date_string);
+			
+			System.out.println("tmp -> "+tmp_date_string);
+			System.out.println("last -> "+last_date_string);
+			
+			CommonHttp ch = new CommonHttp();	
+			String result_json = ch.postData("http://211.110.61.51:3000/timeline", json_param);		
+			
+			System.out.println("타임라인 가져온 데이터: "+result_json);
+			
+			JSONObject json_data = new JSONObject(result_json);
+			JSONArray json_timeline_data = json_data.getJSONArray("timeline_data");
+			
+			for(int i=0; i<json_timeline_data.length(); i++){
+				// 리스트에 아이템 넣는 부분
+				
+				String tmp_type_string = json_timeline_data.getJSONObject(i).getString("view_type");
+				String tmp_nickname = json_timeline_data.getJSONObject(i).getString("nickname");
+				String tmp_pre_content = json_timeline_data.getJSONObject(i).getString("pre_content");
+				String tmp_content = json_timeline_data.getJSONObject(i).getString("content");
+				String tmp_calorie = json_timeline_data.getJSONObject(i).getString("calorie");
+				String tmp_date = json_timeline_data.getJSONObject(i).getString("reg_date");
+				
+				int tmp_type = Integer.parseInt(tmp_type_string);
+				
+				// 시간 +9 적용(GMT 때문에)
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+				Calendar tmp_date_cal = Calendar.getInstance();
 	
-		// 리스트뷰에 어댑터 연결
-	    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
-	    
-	    my_listview.setAdapter(my_adapter);
-	    my_listview.setOnScrollListener(this);
-	    my_listview.setOnItemClickListener(this);
-	    my_listview.setSelection(my_adapter.getCount() - 1);	    
+				tmp_date = tmp_date.replaceAll("T"," ");
+				tmp_date = tmp_date.replaceAll("Z", "");			
+			
+				tmp_date_cal.setTime(sdf.parse(tmp_date));
+				tmp_date_cal.add(tmp_date_cal.HOUR, 9);
+				
+				// 타임라인에 맞게 시간 적용
+				String dateStatus;
+				int dateNoon = tmp_date_cal.get(Calendar.AM_PM);
+				int dateHour = tmp_date_cal.get(Calendar.HOUR_OF_DAY);
+				int dateMinute = tmp_date_cal.get(Calendar.MINUTE);
+			
+				if(dateNoon == 0){
+					dateStatus = "오전";
+				}
+				else{
+					dateStatus = "오후";
+					if(dateHour != 12){
+						dateHour = dateHour-12;
+					}
+				}
+			
+				String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+				String dateString = String.format("%04d. %02d. %02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH) + 1, tmp_date_cal.get(Calendar.DAY_OF_MONTH));
+				
+				//String nickname, String pre_content, String content, String calorie, String date
+				//System.out.println(dateString);
+				String tmp_list_date;
+				if(tmp_type==0)
+					tmp_list_date = dateString;
+				else
+					tmp_list_date = timeString;
+				
+				my_list.add(new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));
+			}
+			
+			//System.out.println(json_timeline_data);
+
+			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 
+			
+			my_adapter = new MyListAdapter(context, my_list);
+		
+			// 리스트뷰에 어댑터 연결
+		    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
+		    
+		    my_listview.setAdapter(my_adapter);
+		    my_listview.setOnScrollListener(this);
+		    my_listview.setOnItemClickListener(this);
+		    my_listview.setSelection(my_adapter.getCount() - 1);	
+			
+		}
+		catch(Exception e){
+			System.out.println("리스트뷰 데이터 가져오기 에러");
+		}
+		
+           
 	}
 	
 	
@@ -377,13 +468,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
                     // 항목을 추가한다.
          
     				//my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"16","111","asdfsdf"));
-               
     				
     				System.out.println(my_list);
     				my_adapter.notifyDataSetChanged();
  
                     my_list_count += 0;     
-                    view.setSelection(INSERT_COUNT);	//뷰 위치 이동
+                    view.setSelection(0);	//뷰 위치 이동
                 }
             }
         }
@@ -395,7 +485,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		Calendar cal = Calendar.getInstance();
 
-		String dateToString , timeToString ;
 		String dateStatus;
 		int dateNoon = cal.get(Calendar.AM_PM);
 		int dateHour = cal.get(Calendar.HOUR_OF_DAY);
@@ -406,7 +495,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}
 		else{
 			dateStatus = "오후";
-			dateHour = dateHour-12;
+			if(dateHour != 12){
+				dateHour = dateHour-12;
+			}
 		}
 		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
 		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
@@ -439,14 +530,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}
 		else{
 			dateStatus = "오후";
-			dateHour = dateHour-12;
+			if(dateHour != 12){
+				dateHour = dateHour-12;
+			}
 		}
 		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
 		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
 		
 		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
 	
-		//my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE,tmpPicture,timeString));
+		//my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_UPLOAD_MY_PICTURE,tmpPicture,timeString));
 		//my_list_count += 1;     
 		
 		//my_adapter.notifyDataSetChanged();

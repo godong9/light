@@ -1,6 +1,5 @@
 package app.light;
 
-import android.widget.ImageView;
 import android.graphics.Bitmap;
 
 public class TimeLineObj {
@@ -12,8 +11,8 @@ public class TimeLineObj {
 	public String calorie;
 	public String day_count;
 	public String date;
-	//public Bitmap picture_img;
-	
+	public Bitmap picture_img;
+
 	public static final int VIEW_TYPE_TIMEBAR = 0;
 	public static final int VIEW_TYPE_MANAGER_WORD = 1;
 	public static final int VIEW_TYPE_MANAGER_MISSION = 2;
@@ -26,6 +25,7 @@ public class TimeLineObj {
 	public static final int VIEW_TYPE_OTHER_EXERCISE =9;
 	public static final int VIEW_TYPE_OTHER_PICTURE = 10;	
 	
+	public static final int VIEW_TYPE_UPLOAD_MY_PICTURE = 11;
 	
 	public TimeLineObj(int type, String nickname, String pre_content, String content, String calorie, String date) {
 		if(type == VIEW_TYPE_TIMEBAR){
@@ -73,9 +73,6 @@ public class TimeLineObj {
 		}
 	}
 	
-	
-	/*
-	
 	//MY_PICTURE 생성자
 	public TimeLineObj(int type, Bitmap img, String date) {
 		this.type = type;
@@ -83,7 +80,4 @@ public class TimeLineObj {
 		System.out.println("TimelineObj - "+picture_img);
 		this.date = date;
 	}
-
-	*/
-
 }

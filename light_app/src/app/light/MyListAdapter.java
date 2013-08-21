@@ -144,7 +144,7 @@ public class MyListAdapter extends BaseAdapter {
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
 				tvContent.setText(list.get(position).content);
-				tvCalorie.setText(list.get(position).calorie); 
+				tvCalorie.setText("+"+list.get(position).calorie+"Kcal"); 
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
@@ -158,19 +158,18 @@ public class MyListAdapter extends BaseAdapter {
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
 				tvContent.setText(list.get(position).content);
-				tvCalorie.setText(list.get(position).calorie); 
+				tvCalorie.setText("-"+list.get(position).calorie+"Kcal"); 
 				break;
 
 			case TimeLineObj.VIEW_TYPE_MY_PICTURE:
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_picture_date);
 				ImageView iv = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
 				
-				//iv.setImageBitmap(list.get(position).picture_img);
-					
+				//iv.setImageBitmap(list.get(position).picture_img);			
 				
 				tvDate.setText(list.get(position).date);
 				break;
-				
+							
 			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
 				
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_word_nickname);
@@ -195,7 +194,7 @@ public class MyListAdapter extends BaseAdapter {
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
 				tvContent.setText(list.get(position).content);
-				tvCalorie.setText(list.get(position).calorie); 
+				tvCalorie.setText("+"+list.get(position).calorie+"Kcal"); 
 				break;
 
 			case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
@@ -211,7 +210,7 @@ public class MyListAdapter extends BaseAdapter {
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
 				tvContent.setText(list.get(position).content);
-				tvCalorie.setText(list.get(position).calorie); 
+				tvCalorie.setText("-"+list.get(position).calorie+"Kcal"); 
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
