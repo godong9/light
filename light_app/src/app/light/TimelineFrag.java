@@ -317,24 +317,30 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		my_list = new ArrayList<TimeLineObj>();
 		
+		Calendar cal = Calendar.getInstance();
+	
+		String end_date_string, start_date_string;
+		
+		end_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+		start_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+		
+		// 현재까지 불러온 날짜 last_get_date 변수에 저장
+		last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+			
+		getTimelineData(start_date_string, end_date_string);
+
+   	}
+	
+	public void getTimelineData(String db_start_date, String db_end_date)
+	{
 		JSONObject json_param = new JSONObject();
 		
-		try {
-			Calendar cal = Calendar.getInstance();
-	
-			String tmp_date_string, last_date_string;
+		try{
+			json_param.put("start_date", db_start_date);
+			json_param.put("end_date", db_end_date);
 			
-			tmp_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-			last_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
-			
-			// 현재까지 불러온 날짜 last_get_date 변수에 저장
-			last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
-				
-			json_param.put("start_date", last_date_string);
-			json_param.put("end_date", tmp_date_string);
-			
-			System.out.println("tmp -> "+tmp_date_string);
-			System.out.println("last -> "+last_date_string);
+			System.out.println("tmp -> "+db_start_date);
+			System.out.println("last -> "+db_end_date);
 			
 			CommonHttp ch = new CommonHttp();	
 			String result_json = ch.postData("http://211.110.61.51:3000/timeline", json_param);		
@@ -384,7 +390,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				String dateString = String.format("%04d. %02d. %02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH) + 1, tmp_date_cal.get(Calendar.DAY_OF_MONTH));
 				
 				String tmp_list_date;
-
+	
 				if(tmp_type==0)	// 타임바일 경우 날짜로 적용
 					tmp_list_date = dateString;
 				else
@@ -392,28 +398,24 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				
 				//리스트에 값 추가
 				my_list.add(new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));
+				
+				my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 
+				
+				my_adapter = new MyListAdapter(context, my_list);
+				
+				// 리스트뷰에 어댑터 연결
+			    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
+			    
+			    my_listview.setAdapter(my_adapter);
+			    my_listview.setOnScrollListener(this);
+			    my_listview.setOnItemClickListener(this);
+			    my_listview.setSelection(my_adapter.getCount() - 1);	
 			}
-
-			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 
-			
-			my_adapter = new MyListAdapter(context, my_list);
-		
-			// 리스트뷰에 어댑터 연결
-		    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
-		    
-		    my_listview.setAdapter(my_adapter);
-		    my_listview.setOnScrollListener(this);
-		    my_listview.setOnItemClickListener(this);
-		    my_listview.setSelection(my_adapter.getCount() - 1);	
-			
 		}
 		catch(Exception e){
-			System.out.println("리스트뷰 데이터 가져오기 에러");
-		}
-		
-           
+			System.out.println("에러 발생");
+		}	
 	}
-	
 	
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 	{
