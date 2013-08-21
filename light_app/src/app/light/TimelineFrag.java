@@ -320,7 +320,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		my_list = new ArrayList<TimeLineObj>();
 		
-		
 		JSONObject json_param = new JSONObject();
 		
 		try {
@@ -331,9 +330,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			tmp_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
 			last_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
 			
+			// 현재까지 불러온 날짜 last_get_date 변수에 저장
 			last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
-			
-			
+				
 			json_param.put("start_date", last_date_string);
 			json_param.put("end_date", tmp_date_string);
 			
@@ -343,13 +342,11 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			CommonHttp ch = new CommonHttp();	
 			String result_json = ch.postData("http://211.110.61.51:3000/timeline", json_param);		
 			
-			System.out.println("타임라인 가져온 데이터: "+result_json);
-			
 			JSONObject json_data = new JSONObject(result_json);
 			JSONArray json_timeline_data = json_data.getJSONArray("timeline_data");
 			
 			for(int i=0; i<json_timeline_data.length(); i++){
-				// 리스트에 아이템 넣는 부분
+				// JSON 데이터 가져와서 리스트에 추가하는 부분
 				
 				String tmp_type_string = json_timeline_data.getJSONObject(i).getString("view_type");
 				String tmp_nickname = json_timeline_data.getJSONObject(i).getString("nickname");
@@ -389,18 +386,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
 				String dateString = String.format("%04d. %02d. %02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH) + 1, tmp_date_cal.get(Calendar.DAY_OF_MONTH));
 				
-				//String nickname, String pre_content, String content, String calorie, String date
-				//System.out.println(dateString);
 				String tmp_list_date;
-				if(tmp_type==0)
+
+				if(tmp_type==0)	// 타임바일 경우 날짜로 적용
 					tmp_list_date = dateString;
 				else
 					tmp_list_date = timeString;
 				
+				//리스트에 값 추가
 				my_list.add(new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));
 			}
-			
-			//System.out.println(json_timeline_data);
 
 			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 
 			
