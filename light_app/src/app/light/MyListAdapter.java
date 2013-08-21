@@ -3,16 +3,13 @@ package app.light;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.graphics.Bitmap;
 
 public class MyListAdapter extends BaseAdapter {
@@ -97,7 +94,6 @@ public class MyListAdapter extends BaseAdapter {
 		TextView tvPreContent;
 		TextView tvCalorie;
 		TextView tvDayCount;
-		TextView tvMission;
 		Bitmap bmPicture;
 		LinearLayout llWriteType;
 		String picture_name;

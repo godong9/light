@@ -28,9 +28,7 @@ public class RivalFrag extends CommonFragment {
 	public static JSONObject group_info = new JSONObject();
 	public static JSONObject my_info = new JSONObject();	//내 정보
 	public static JSONArray rival_info = new JSONArray();
-	
-	private boolean firstStart = true;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {

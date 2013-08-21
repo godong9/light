@@ -1,11 +1,8 @@
 package app.light;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -477,7 +474,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	//내가 쓴 채팅 내용 추가
 	public void addWord(String chat_val)
 	{		
-		
 		Calendar cal = Calendar.getInstance();
 
 		String dateStatus;
@@ -494,8 +490,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				dateHour = dateHour-12;
 			}
 		}
-		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
 		
 		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
 	
