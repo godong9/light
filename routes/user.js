@@ -5,10 +5,11 @@ var mysql_conn = require('../sql/mysql_server').mysql_conn;
 사용자 관련 처리 함수들
 */
 
-function register_session(req, email, nickname)
+function register_session(req, email, nickname, group_id)
 {
 	req.session.email = email;
 	req.session.nickname = nickname;
+	req.session.group_id = group_id;
 }
 
 exports.join = function(req, res){
@@ -109,9 +110,11 @@ exports.login = function(req, res){
 		else if( rows[0].password === rows[0].input_password )
 		{
 			
-			register_session(req, rows[0].email, rows[0].nickname);
+			register_session(req, rows[0].email, rows[0].nickname, rows[0].group_id);
 
 			console.log("Session 등록 -> "+req.session.email);
+			console.log("Session 등록 -> "+req.session.nickname);
+			console.log("Session 등록 -> "+req.session.group_id);
 
 			result = { result:"success", msg:"로그인 성공!" };
 			res.send(result);

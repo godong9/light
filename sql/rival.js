@@ -11,7 +11,7 @@ exports.dao_group_info = function(evt, mysql_conn, params){
 	sql += "`B`.`email`, ";
 	sql += "`B`.`nickname` ";
 	sql += "FROM `rival_group` AS `A` ";
-	sql += "INNER JOIN user AS `B` ";
+	sql += "INNER JOIN `user` AS `B` ";
 	sql += "ON `A`.`group_id` = `B`.`group_id` ";
 	sql += "WHERE `B`.`email` = '"+params['email']+"' ";
 	
