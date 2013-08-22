@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rival_background_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -8,9 +9,11 @@
     android:background="@drawable/rival_dialog_background" >
 		
     <LinearLayout
+        android:id="@+id/rival_other_dialog_layout"
         android:layout_width="300dp"
         android:layout_height="313dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="visible" >
         
         <LinearLayout
 	        android:layout_width="fill_parent"
@@ -43,7 +46,7 @@
 		        android:orientation="vertical">
 				
 		        <TextView   
-				        android:id="@+id/rival_other_dialog_word"	 
+				        android:id="@+id/rival_dialog_word"	 
 				    	android:layout_weight ="14"     
 						android:layout_width="fill_parent"						
 						android:layout_height="0dp"
@@ -59,7 +62,7 @@
 						android:background="@drawable/chat_ballon"/> 
 						
 		        <ImageButton  
-				        android:id="@+id/rival_other_dialog_character"
+				        android:id="@+id/rival_dialog_character"
 				    	android:layout_weight ="86"     
 						android:layout_width="fill_parent"
 						android:layout_height="0dp"
@@ -79,7 +82,7 @@
 		        android:orientation="vertical">
 				
 		        <TextView
-		            android:id="@+id/rival_other_dialog_nickname"
+		            android:id="@+id/rival_dialog_nickname"
 		            android:layout_weight="10"
 		            android:layout_width="fill_parent"
 		            android:layout_height="0dp"
@@ -107,7 +110,7 @@
 			        android:background="@drawable/rival_dialog_info">
 		        					
 			        <TextView
-			            android:id="@+id/rival_other_dialog_height"
+			            android:id="@+id/rival_dialog_height"
 			            android:layout_weight="22"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -117,7 +120,7 @@
 				        android:textSize="14sp"
 						/>
 			        <TextView
-			            android:id="@+id/rival_other_dialog_weight"
+			            android:id="@+id/rival_dialog_weight"
 			            android:layout_weight="22"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -128,7 +131,6 @@
 				        android:textSize="14sp"
 						/>
 			        <TextView
-			            android:id="@+id/rival_other_dialog_goal"
 			            android:layout_weight="20"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -139,7 +141,7 @@
 				        android:textSize="14sp"
 						/>
 			        <TextView
-			            android:id="@+id/rival_other_dialog_goal_val"
+			            android:id="@+id/rival_dialog_goal"
 			            android:layout_weight="36"
 			            android:layout_width="fill_parent"
 			            android:layout_height="0dp"
@@ -201,7 +203,7 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_limit_calorie"
+					            android:id="@+id/rival_dialog_limit_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -234,7 +236,7 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_eat_calorie"
+					            android:id="@+id/rival_dialog_eat_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -265,7 +267,7 @@
 					           />
 					        
 					        <TextView
-					            android:id="@+id/rival_other_dialog_exercise_calorie"
+					            android:id="@+id/rival_dialog_exercise_calorie"
 					            android:layout_weight="65"
 					            android:layout_width="0dp"
 					            android:layout_height="fill_parent"
@@ -288,6 +290,45 @@
         </LinearLayout>
           
     </LinearLayout>
+    
+    
+    
+    <LinearLayout
+        android:id="@+id/rival_history_layout"
+        android:layout_width="300dp"
+        android:layout_height="313dp"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        <TextView
+		     android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:layout_weight="12"
+		     android:paddingTop="15dp"
+		     android:paddingLeft="28dp"
+		     android:text="기록 히스토리"
+			 android:textSize = "14sp"
+			 android:textStyle = "bold"
+		     android:textColor="#424242" 
+			 android:singleLine="true">
+	     </TextView>
+	         
+	     <ListView 
+	          android:id="@+id/history_scroll"
+	          android:layout_width="fill_parent"
+	          android:layout_height="0dp"    
+	          android:layout_weight="88"
+	          android:layout_marginTop="4dp"
+	          android:layout_marginBottom="18dp"
+	          android:divider="#FFFFFF"
+	          android:listSelector="#00000000"
+       	  	  android:cacheColorHint="#00000000"
+	          android:transcriptMode="normal">        	          
+	     </ListView>
+    </LinearLayout>
+    
+    
+    
+    
     
     <LinearLayout
         android:layout_width="300dp"

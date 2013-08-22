@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="30dp"
+    android:orientation="horizontal" >
+
+    <LinearLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_marginLeft="15dp"
+	    android:layout_marginRight="10dp"
+	    android:orientation="horizontal"
+	    android:background="@drawable/rival_history_list_item_background" >
+        
+	    <TextView
+	        android:id="@+id/history_date"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="10"
+	        android:layout_marginLeft="5dp"
+	        android:gravity="center_vertical"
+	        android:text=" 9999 99/99"
+	        android:textSize="9sp"
+	        android:textColor="#ffffff" />
+	    
+	    <ImageView
+	        android:id="@+id/history_status"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="10"
+	        android:layout_marginTop="2.5dp"
+	        android:layout_marginBottom="2.5dp"
+	        android:background="@drawable/history_calorie_good" />
+	
+	    <ImageView
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="5"
+	        android:layout_marginTop="7dp"
+	        android:layout_marginBottom="7dp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
+	        android:background="@drawable/history_food_icon" />
+	    
+	    <TextView
+	        android:id="@+id/history_food_calorie"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="20"
+	        android:gravity="center_vertical"
+	        android:text="9999"
+	        android:textSize="16sp"
+	        android:textColor="#ffffff" />
+	    
+	    <ImageView
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="7"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginRight="5dp"
+	        android:background="@drawable/history_exercise_icon" />
+	    
+	    <TextView
+	        android:id="@+id/history_exercise_calorie"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="14"
+	        android:gravity="center_vertical"
+	        android:text="9999"
+	        android:textSize="16sp"
+	        android:textColor="#ffffff" />
+	    
+	    <ImageView
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="4"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="4dp"
+	        android:layout_marginRight="8dp"
+	        android:background="@drawable/history_result_icon" />
+	    
+	    <TextView
+	        android:id="@+id/history_result_calorie"
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="30"
+	        android:gravity="center_vertical"
+	        android:text="9999"
+	        android:textSize="16sp"
+	        android:textColor="#54A696" />
+		
+    </LinearLayout>
+
+</LinearLayout>

@@ -54,7 +54,6 @@ public class CommonHttp {
 	}
 	
 	public String getData(String url) {
-		HttpClient httpclient = new DefaultHttpClient();
 		
 		try {
 			HttpGet httpget = new HttpGet(url.toString());
