@@ -30,6 +30,7 @@ import android.widget.TextView;
 		private LinearLayout closet_layout;
 		private LinearLayout shop_layout;
 		private LinearLayout history_layout;
+		private LinearLayout rival_background_layout;
 		
 		private ArrayList<HistoryObj> history_list;
 		private MyHistoryAdapter history_adapter;
@@ -132,12 +133,11 @@ import android.widget.TextView;
 				closet_layout = (LinearLayout) getDialog().findViewById(R.id.rival_closet_layout);
 				shop_layout = (LinearLayout) getDialog().findViewById(R.id.rival_shop_layout);
 				history_layout = (LinearLayout) getDialog().findViewById(R.id.rival_history_layout);
+				rival_background_layout = (LinearLayout) getDialog().findViewById(R.id.rival_background_layout);
 						
 				dialog_page_btn.setSelected(true);
 				
 				dialog_page_btn.setOnClickListener(new View.OnClickListener() {
-					
-					
 					@Override
 					public void onClick(View v)
 					{	
@@ -149,7 +149,9 @@ import android.widget.TextView;
 						history_layout.setVisibility(View.GONE);
 						closet_layout.setVisibility(View.GONE);
 						shop_layout.setVisibility(View.GONE);
-						home_layout.setVisibility(View.VISIBLE);			
+						home_layout.setVisibility(View.VISIBLE);	
+						
+						rival_background_layout.setBackgroundResource(R.drawable.rival_dialog_background);
 					}
 				});
 				
@@ -166,6 +168,8 @@ import android.widget.TextView;
 						shop_layout.setVisibility(View.GONE);
 						home_layout.setVisibility(View.GONE);
 						closet_layout.setVisibility(View.VISIBLE);
+						
+						rival_background_layout.setBackgroundResource(R.drawable.rival_etc_background);
 					}	
 				});
 				
@@ -182,6 +186,8 @@ import android.widget.TextView;
 						home_layout.setVisibility(View.GONE);
 						closet_layout.setVisibility(View.GONE);
 						shop_layout.setVisibility(View.VISIBLE);
+						
+						rival_background_layout.setBackgroundResource(R.drawable.rival_etc_background);
 					}
 				});
 				
@@ -200,6 +206,9 @@ import android.widget.TextView;
 						closet_layout.setVisibility(View.GONE);
 						shop_layout.setVisibility(View.GONE);
 						history_layout.setVisibility(View.VISIBLE);
+						
+						
+						rival_background_layout.setBackgroundResource(R.drawable.rival_history_background);
 					}
 				});
 			
@@ -208,6 +217,7 @@ import android.widget.TextView;
 				
 				home_layout = (LinearLayout) getDialog().findViewById(R.id.rival_other_dialog_layout);
 				history_layout = (LinearLayout) getDialog().findViewById(R.id.rival_history_layout);
+				rival_background_layout = (LinearLayout) getDialog().findViewById(R.id.rival_background_layout);
 				
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
 				
@@ -224,19 +234,23 @@ import android.widget.TextView;
 						dialog_history_btn.setSelected(false);	
 						
 						history_layout.setVisibility(View.GONE);
-						home_layout.setVisibility(View.VISIBLE);				
+						home_layout.setVisibility(View.VISIBLE);		
+						rival_background_layout.setBackgroundResource(R.drawable.rival_etc_background);
 					}
 				});
 				
 				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v)
-					{				
+					{		
+						setHistoryList();
+						
 						dialog_page_btn.setSelected(false);
 						dialog_history_btn.setSelected(true);
 						
 						home_layout.setVisibility(View.GONE);
 						history_layout.setVisibility(View.VISIBLE);
+						rival_background_layout.setBackgroundResource(R.drawable.rival_history_background);
 					}	
 				});
 				
@@ -268,6 +282,22 @@ import android.widget.TextView;
 			history_list = new ArrayList<HistoryObj>();
 			
 			history_list.add(new HistoryObj("good", "2000", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
 			history_list.add(new HistoryObj("bad", "1900", "200"));	
 			
 			history_adapter = new MyHistoryAdapter(context, history_list);

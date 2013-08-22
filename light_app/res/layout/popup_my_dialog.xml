@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rival_background_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -296,7 +297,6 @@
         android:layout_width="300dp"
         android:layout_height="313dp"
         android:orientation="horizontal"
-        android:background="@drawable/rival_etc_background"
         android:visibility="gone" >
         <TextView
 		     android:layout_width="0dp"
@@ -326,7 +326,6 @@
         android:layout_width="300dp"
         android:layout_height="313dp"
         android:orientation="horizontal"
-        android:background="@drawable/rival_etc_background"
         android:visibility="gone" >
         <TextView
 		     android:layout_width="0dp"
@@ -357,16 +356,15 @@
         android:layout_width="300dp"
         android:layout_height="313dp"
         android:orientation="vertical"
-        android:background="@drawable/rival_history_background"
         android:visibility="gone" >
         <TextView
 		     android:layout_width="fill_parent"
 		     android:layout_height="0dp"
-		     android:layout_weight="10"
-		     android:paddingTop="10dp"
-		     android:paddingLeft="20dp"
+		     android:layout_weight="12"
+		     android:paddingTop="15dp"
+		     android:paddingLeft="28dp"
 		     android:text="기록 히스토리"
-			 android:textSize = "12sp"
+			 android:textSize = "14sp"
 			 android:textStyle = "bold"
 		     android:textColor="#424242" 
 			 android:singleLine="true">
@@ -376,7 +374,9 @@
 	          android:id="@+id/history_scroll"
 	          android:layout_width="fill_parent"
 	          android:layout_height="0dp"    
-	          android:layout_weight="90"
+	          android:layout_weight="88"
+	          android:layout_marginTop="4dp"
+	          android:layout_marginBottom="18dp"
 	          android:divider="#FFFFFF"
 	          android:listSelector="#00000000"
        	  	  android:cacheColorHint="#00000000"
