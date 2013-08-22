@@ -1,6 +1,8 @@
 package app.light;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -288,9 +290,30 @@ import android.widget.Toast;
 					//System.out.println("성공");			
 					JSONObject json_data = new JSONObject(result_json);
 					JSONArray json_history_data = json_data.getJSONArray("history_data");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
 					
 					for(int i=0; i<json_history_data.length(); i++){
+				
 						
+						String status = json_history_data.getJSONObject(i).getString("status");
+						String food_calorie = json_history_data.getJSONObject(i).getString("food_calorie");
+						String exercise_calorie = json_history_data.getJSONObject(i).getString("exercise_calorie");
+						String tmp_date = json_history_data.getJSONObject(i).getString("reg_date");
+						
+						System.out.println("VAL => "+json_history_data.getJSONObject(i));
+						
+						// 시간 +9 적용(GMT 때문에)
+						Calendar tmp_date_cal = Calendar.getInstance();
+						tmp_date = tmp_date.replaceAll("T"," ");
+						tmp_date = tmp_date.replaceAll("Z", "");			
+						tmp_date_cal.setTime(sdf.parse(tmp_date));
+						tmp_date_cal.add(tmp_date_cal.HOUR, 9);
+						
+						String tmp_date_str = String.format(" %04d %02d/%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH), tmp_date_cal.get(Calendar.DAY_OF_MONTH));
+						
+						System.out.println("Date => "+tmp_date_str);
+						
+						history_list.add(new HistoryObj(tmp_date_str, status, food_calorie, exercise_calorie));
 					}
 
 				}
@@ -299,25 +322,6 @@ import android.widget.Toast;
 			catch(Exception e){
 				System.out.println("다이얼로그 히스토리 가져오기 에러");
 			}
-		
-			history_list.add(new HistoryObj("good", "2000", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
-			history_list.add(new HistoryObj("bad", "1900", "200"));	
 			
 			history_adapter = new MyHistoryAdapter(context, history_list);
 			

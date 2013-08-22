@@ -50,6 +50,9 @@ public class MyHistoryAdapter extends BaseAdapter {
 			convertView = inflater.inflate(layout, parent, false);
 		}
 
+		TextView history_date = (TextView)convertView.findViewById(R.id.history_date);
+		history_date.setText(list.get(position).date);
+		
 		String status_str = list.get(position).status;	
 		ImageView status = (ImageView)convertView.findViewById(R.id.history_status);
 		
@@ -59,7 +62,6 @@ public class MyHistoryAdapter extends BaseAdapter {
 		else{
 			status.setBackgroundResource(R.drawable.history_calorie_bad);
 		}
-		
 		
 		TextView food_calorie = (TextView)convertView.findViewById(R.id.history_food_calorie);
 		food_calorie.setText(list.get(position).food_calorie);
