@@ -1,6 +1,10 @@
 package app.light;
 
+import java.util.ArrayList;
+
 import org.json.JSONObject;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -12,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 //커스텀 AlertDialog 구현
@@ -25,6 +30,11 @@ import android.widget.TextView;
 		private LinearLayout closet_layout;
 		private LinearLayout shop_layout;
 		private LinearLayout history_layout;
+		
+		private ArrayList<HistoryObj> history_list;
+		private MyHistoryAdapter history_adapter;
+		private ListView history_listview;
+		private int history_list_count = 0;
 		
 		public RivalDialogWindow(int type, JSONObject user_info) {
 			this.type = type;
@@ -179,6 +189,8 @@ import android.widget.TextView;
 					@Override
 					public void onClick(View v)
 					{	
+						setHistoryList();
+						
 						dialog_page_btn.setSelected(false);
 						dialog_closet_btn.setSelected(false);
 						dialog_shop_btn.setSelected(false);
@@ -245,4 +257,26 @@ import android.widget.TextView;
 		public void onStop() {
 			super.onStop();
 		}
+		
+		public void setHistoryList() {
+			
+			//private ArrayList<HistoryObj> history_list;
+			//private MyHistoryAdapter history_adapter;
+			//private ListView history_listview;
+			//private int history_list_count = 0;
+			
+			history_list = new ArrayList<HistoryObj>();
+			
+			history_list.add(new HistoryObj("good", "2000", "200"));	
+			history_list.add(new HistoryObj("bad", "1900", "200"));	
+			
+			history_adapter = new MyHistoryAdapter(context, history_list);
+			
+			// 리스트뷰에 어댑터 연결
+		    history_listview = (ListView)getDialog().findViewById(R.id.history_scroll);	  
+		    history_listview.setAdapter(history_adapter);
+		 	
+			
+		}
+		
 	}
