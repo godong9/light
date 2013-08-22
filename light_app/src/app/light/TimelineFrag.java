@@ -61,7 +61,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private QuickAction cameraPopup;
 	
 	private ArrayList<TimeLineObj> my_list;
-	private MyListAdapter my_adapter;
+	private MyTimelineAdapter my_adapter;
 	private ListView my_listview;
 	private int my_list_count = 0;
 	private int pre_list_add = 0;
@@ -330,7 +330,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			
 		getTimelineData(start_date_string, end_date_string);
 		
-		my_adapter = new MyListAdapter(context, my_list);
+		my_adapter = new MyTimelineAdapter(context, my_list);
 		
 		// 리스트뷰에 어댑터 연결
 	    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
@@ -338,7 +338,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	    my_listview.setAdapter(my_adapter);
 	    my_listview.setOnScrollListener(this);
 	    my_listview.setOnItemClickListener(this);
-	    my_listview.setSelection(my_adapter.getCount() - 1);
+	    //my_listview.setSelection(my_adapter.getCount() - 1);
    	}
 	
 	public void getTimelineData(String db_start_date, String db_end_date)

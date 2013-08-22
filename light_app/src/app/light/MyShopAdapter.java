@@ -11,13 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MyBoardAdapter extends BaseAdapter {
+public class MyShopAdapter extends BaseAdapter {
 	private ArrayList<TimeLineObj> list;
 	private Context context;
 	private LayoutInflater inflater;
 	private int layout;
 	
-	MyBoardAdapter(Context context, int layout, ArrayList<TimeLineObj> my_list) {
+	MyShopAdapter(Context context, int layout, ArrayList<TimeLineObj> my_list) {
 		this.context = context;
 		this.list = my_list;
 		this.layout = layout;
@@ -48,7 +48,7 @@ public class MyBoardAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = inflater.inflate(layout, parent, false);
 		}
-		
+		/*
 		TextView title_type = (TextView)convertView.findViewById(R.id.community_title_type);
 		title_type.setText(list.get(position).type);
 		
@@ -67,7 +67,7 @@ public class MyBoardAdapter extends BaseAdapter {
 				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
 			}
 		});
-		
+		*/
 		return convertView;
 	}
 
