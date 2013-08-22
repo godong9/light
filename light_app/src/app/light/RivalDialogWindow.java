@@ -2,6 +2,7 @@ package app.light;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //커스텀 AlertDialog 구현
 	public class RivalDialogWindow extends DialogFragment {
@@ -194,9 +196,7 @@ import android.widget.TextView;
 				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v)
-					{	
-						setHistoryList();
-						
+					{					
 						dialog_page_btn.setSelected(false);
 						dialog_closet_btn.setSelected(false);
 						dialog_shop_btn.setSelected(false);
@@ -207,8 +207,9 @@ import android.widget.TextView;
 						shop_layout.setVisibility(View.GONE);
 						history_layout.setVisibility(View.VISIBLE);
 						
-						
 						rival_background_layout.setBackgroundResource(R.drawable.rival_history_background);
+						
+						setHistoryList();
 					}
 				});
 			
@@ -242,15 +243,15 @@ import android.widget.TextView;
 				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v)
-					{		
-						setHistoryList();
-						
+					{				
 						dialog_page_btn.setSelected(false);
 						dialog_history_btn.setSelected(true);
 						
 						home_layout.setVisibility(View.GONE);
 						history_layout.setVisibility(View.VISIBLE);
 						rival_background_layout.setBackgroundResource(R.drawable.rival_history_background);
+					
+						setHistoryList();
 					}	
 				});
 				
@@ -274,13 +275,31 @@ import android.widget.TextView;
 		
 		public void setHistoryList() {
 			
-			//private ArrayList<HistoryObj> history_list;
-			//private MyHistoryAdapter history_adapter;
-			//private ListView history_listview;
-			//private int history_list_count = 0;
-			
 			history_list = new ArrayList<HistoryObj>();
 			
+			try {
+				CommonHttp ch = new CommonHttp();	
+				String result_json = ch.getData("http://211.110.61.51:3000/rival_history");		
+				
+				if(result_json.equals("error")){
+					Toast.makeText(context, "데이터 수신 실패!", Toast.LENGTH_SHORT).show();
+				}
+				else{			
+					//System.out.println("성공");			
+					JSONObject json_data = new JSONObject(result_json);
+					JSONArray json_history_data = json_data.getJSONArray("history_data");
+					
+					for(int i=0; i<json_history_data.length(); i++){
+						
+					}
+
+				}
+				
+			}
+			catch(Exception e){
+				System.out.println("다이얼로그 히스토리 가져오기 에러");
+			}
+		
 			history_list.add(new HistoryObj("good", "2000", "200"));	
 			history_list.add(new HistoryObj("bad", "1900", "200"));	
 			history_list.add(new HistoryObj("bad", "1900", "200"));	

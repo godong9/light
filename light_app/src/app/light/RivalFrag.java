@@ -112,19 +112,17 @@ public class RivalFrag extends CommonFragment {
 	
 	public void setRivalView(){
 		//DB에서 데이터 가져와서 변수에 저장
-		
-		JSONObject json_param = new JSONObject();
-			
+	
 		try {		
 			if(group_info.length() == 0) {
 				CommonHttp ch = new CommonHttp();	
-				String result_json = ch.postData("http://211.110.61.51:3000/rival", json_param);		
+				String result_json = ch.getData("http://211.110.61.51:3000/rival");		
 				
 				if(result_json.equals("error")){
 					Toast.makeText(context, "데이터 수신 실패!", Toast.LENGTH_SHORT).show();
 				}
 				else{			
-					System.out.println("성공");			
+					//System.out.println("성공");			
 					JSONObject json_data = new JSONObject(result_json);
 					JSONArray json_group_info = json_data.getJSONArray("group_info");
 					JSONArray json_user_info = json_data.getJSONArray("user_info");
