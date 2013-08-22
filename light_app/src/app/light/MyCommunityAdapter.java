@@ -12,15 +12,14 @@ import android.widget.Toast;
 
 
 public class MyCommunityAdapter extends BaseAdapter {
-	private ArrayList<TimeLineObj> list;
+	private ArrayList<CommunityObj> list;
 	private Context context;
 	private LayoutInflater inflater;
 	private int layout;
 	
-	MyCommunityAdapter(Context context, int layout, ArrayList<TimeLineObj> my_list) {
+	MyCommunityAdapter(Context context, ArrayList<CommunityObj> my_list) {
 		this.context = context;
 		this.list = my_list;
-		this.layout = layout;
 
 		this.inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -32,7 +31,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public TimeLineObj getItem(int position) {
+	public CommunityObj getItem(int position) {
 		return list.get(position);
 	}
 
@@ -46,20 +45,13 @@ public class MyCommunityAdapter extends BaseAdapter {
 		// 뷰 얻어오는 부분 -> 여기 수정 필요
 		final int pos = position;
 		if (convertView == null) {
+			layout = R.layout.community_title;
 			convertView = inflater.inflate(layout, parent, false);
 		}
-		
+		/*
 		TextView title_type = (TextView)convertView.findViewById(R.id.community_title_type);
 		title_type.setText(list.get(position).type);
-		
-		TextView title_content = (TextView)convertView.findViewById(R.id.community_title_content);
-		title_content.setText(list.get(position).content);
-		
-		TextView title_nickname = (TextView)convertView.findViewById(R.id.community_title_nickname);
-		title_nickname.setText(list.get(position).nickname);
-
-		TextView title_date = (TextView)convertView.findViewById(R.id.community_title_date);
-		title_date.setText(list.get(position).date);
+	
 		
 		title_content.setOnClickListener(new TextView.OnClickListener() {
 			public void onClick(View v) {
@@ -67,7 +59,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
 			}
 		});
-		
+		*/
 		return convertView;
 	}
 

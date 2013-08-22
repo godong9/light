@@ -293,15 +293,12 @@ import android.widget.Toast;
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
 					
 					for(int i=0; i<json_history_data.length(); i++){
-				
-						
+							
 						String status = json_history_data.getJSONObject(i).getString("status");
 						String food_calorie = json_history_data.getJSONObject(i).getString("food_calorie");
 						String exercise_calorie = json_history_data.getJSONObject(i).getString("exercise_calorie");
 						String tmp_date = json_history_data.getJSONObject(i).getString("reg_date");
-						
-						System.out.println("VAL => "+json_history_data.getJSONObject(i));
-						
+				
 						// 시간 +9 적용(GMT 때문에)
 						Calendar tmp_date_cal = Calendar.getInstance();
 						tmp_date = tmp_date.replaceAll("T"," ");
@@ -310,9 +307,7 @@ import android.widget.Toast;
 						tmp_date_cal.add(tmp_date_cal.HOUR, 9);
 						
 						String tmp_date_str = String.format(" %04d %02d/%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH), tmp_date_cal.get(Calendar.DAY_OF_MONTH));
-						
-						System.out.println("Date => "+tmp_date_str);
-						
+										
 						history_list.add(new HistoryObj(tmp_date_str, status, food_calorie, exercise_calorie));
 					}
 
