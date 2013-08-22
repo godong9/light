@@ -47,3 +47,22 @@ exports.dao_user_info = function(evt, mysql_conn, params){
 	});
 	return sql;
 }
+
+// rival_history_data
+// params['email']
+exports.dao_rival_history_data = function(evt, mysql_conn, params){
+	var sql = "SELECT ";
+	sql +="`A`.`status`, ";
+	sql +="`A`.`food_calorie`, ";
+	sql +="`A`.`exercise_calorie`, ";
+	sql += "`A`.`reg_date` ";
+	sql += "FROM `user_history` AS `A` ";
+	sql += "WHERE `A`.`email` = '"+params['email']+"' ";
+	sql += "ORDER BY `A`.`reg_date` ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		evt.emit('history_data', err, rows);
+	});
+	return sql;
+}
+
