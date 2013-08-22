@@ -64,6 +64,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private MyListAdapter my_adapter;
 	private ListView my_listview;
 	private int my_list_count = 0;
+	private int pre_list_add = 0;
 	private boolean firstStart = true;
 	
 	private EditText chat_text = null;
@@ -328,7 +329,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
 			
 		getTimelineData(start_date_string, end_date_string);
-
+		
+		my_adapter = new MyListAdapter(context, my_list);
+		
+		// 리스트뷰에 어댑터 연결
+	    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
+	    
+	    my_listview.setAdapter(my_adapter);
+	    my_listview.setOnScrollListener(this);
+	    my_listview.setOnItemClickListener(this);
+	    my_listview.setSelection(my_adapter.getCount() - 1);
    	}
 	
 	public void getTimelineData(String db_start_date, String db_end_date)
@@ -397,20 +407,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					tmp_list_date = timeString;
 				
 				//리스트에 값 추가
-				my_list.add(new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));
-				
-				my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 
-				
-				my_adapter = new MyListAdapter(context, my_list);
-				
-				// 리스트뷰에 어댑터 연결
-			    my_listview = (ListView)((Activity)context).findViewById(R.id.timeline_scroll);
-			    
-			    my_listview.setAdapter(my_adapter);
-			    my_listview.setOnScrollListener(this);
-			    my_listview.setOnItemClickListener(this);
-			    my_listview.setSelection(my_adapter.getCount() - 1);	
+				my_list.add(new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
 			}
+			pre_list_add = json_timeline_data.length();	//직전에 추가된 리스트 개수
+			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 		
 		}
 		catch(Exception e){
 			System.out.println("에러 발생");
@@ -461,13 +461,24 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
                 if(view.getFirstVisiblePosition() == 0) {
                     // 항목을 추가한다.
          
-    				//my_list.add(0, new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_WORD,"16","111","asdfsdf"));
-    				
-    				System.out.println(my_list);
+                	//Calendar cal = Calendar.getInstance();
+                	
+            		String end_date_string, start_date_string;
+            		
+            		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
+            		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+            		
+            		// 현재까지 불러온 날짜 last_get_date 변수에 저장
+            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+            			
+            		getTimelineData(start_date_string, end_date_string);
+                	
+            		System.out.println("마지막 날짜: "+last_get_date);
+                	
+    				System.out.println("더해진 개수: "+pre_list_add);
     				my_adapter.notifyDataSetChanged();
- 
-                    my_list_count += 0;     
-                    view.setSelection(0);	//뷰 위치 이동
+  
+                    view.setSelection(pre_list_add);	//뷰 위치 이동
                 }
             }
         }
