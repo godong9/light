@@ -297,22 +297,27 @@
         android:layout_width="300dp"
         android:layout_height="313dp"
         android:orientation="vertical"
+        android:background="@drawable/rival_history_background"
         android:visibility="gone" >
-        <LinearLayout 
-		     android:orientation="vertical"
+        <TextView
 		     android:layout_width="fill_parent"
 		     android:layout_height="0dp"
 		     android:layout_weight="10"
-		     android:background="#222222">
-	     </LinearLayout>
+		     android:paddingTop="10dp"
+		     android:paddingLeft="20dp"
+		     android:text="기록 히스토리"
+			 android:textSize = "12sp"
+			 android:textStyle = "bold"
+		     android:textColor="#424242" 
+			 android:singleLine="true">
+	     </TextView>
 	         
 	     <ListView 
-	          android:id="@+id/community_scroll"
+	          android:id="@+id/history_scroll"
 	          android:layout_width="fill_parent"
 	          android:layout_height="0dp"    
 	          android:layout_weight="90"
-	          android:transcriptMode="disabled"
-	          android:background="#464664"
+	          android:transcriptMode="normal"
 	          >        	          
 	     </ListView>
     </LinearLayout>

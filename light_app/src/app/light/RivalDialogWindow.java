@@ -22,6 +22,8 @@ import android.widget.TextView;
 		private Resources res;
 		private String packName = "app.light";
 		private LinearLayout home_layout;
+		private LinearLayout closet_layout;
+		private LinearLayout shop_layout;
 		private LinearLayout history_layout;
 		
 		public RivalDialogWindow(int type, JSONObject user_info) {
@@ -117,6 +119,8 @@ import android.widget.TextView;
 				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_history_btn);
 							
 				home_layout = (LinearLayout) getDialog().findViewById(R.id.rival_my_dialog_layout);
+				closet_layout = (LinearLayout) getDialog().findViewById(R.id.rival_closet_layout);
+				shop_layout = (LinearLayout) getDialog().findViewById(R.id.rival_shop_layout);
 				history_layout = (LinearLayout) getDialog().findViewById(R.id.rival_history_layout);
 						
 				dialog_page_btn.setSelected(true);
@@ -133,6 +137,8 @@ import android.widget.TextView;
 						dialog_history_btn.setSelected(false);	
 						
 						history_layout.setVisibility(View.GONE);
+						closet_layout.setVisibility(View.GONE);
+						shop_layout.setVisibility(View.GONE);
 						home_layout.setVisibility(View.VISIBLE);			
 					}
 				});
@@ -145,6 +151,11 @@ import android.widget.TextView;
 						dialog_closet_btn.setSelected(true);
 						dialog_shop_btn.setSelected(false);
 						dialog_history_btn.setSelected(false);
+						
+						history_layout.setVisibility(View.GONE);				
+						shop_layout.setVisibility(View.GONE);
+						home_layout.setVisibility(View.GONE);
+						closet_layout.setVisibility(View.VISIBLE);
 					}	
 				});
 				
@@ -156,6 +167,11 @@ import android.widget.TextView;
 						dialog_closet_btn.setSelected(false);
 						dialog_shop_btn.setSelected(true);
 						dialog_history_btn.setSelected(false);
+						
+						history_layout.setVisibility(View.GONE);								
+						home_layout.setVisibility(View.GONE);
+						closet_layout.setVisibility(View.GONE);
+						shop_layout.setVisibility(View.VISIBLE);
 					}
 				});
 				
@@ -169,6 +185,8 @@ import android.widget.TextView;
 						dialog_history_btn.setSelected(true);
 			
 						home_layout.setVisibility(View.GONE);
+						closet_layout.setVisibility(View.GONE);
+						shop_layout.setVisibility(View.GONE);
 						history_layout.setVisibility(View.VISIBLE);
 					}
 				});
