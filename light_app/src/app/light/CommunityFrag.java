@@ -37,7 +37,18 @@ public class CommunityFrag extends CommonFragment {
 	public void setCommunityList(){
 		community_list = new ArrayList<CommunityObj>();
 		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!", "LIGHT", "2013.08.22", "조회수 61", "10"));
-	
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
+		
 		community_adapter = new MyCommunityAdapter(context, community_list);
 		
 		// 리스트뷰에 어댑터 연결
