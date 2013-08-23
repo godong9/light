@@ -61,12 +61,12 @@ if ('development' == app.get('env')) {
 
 // GET 방식
 app.get('/rival', rival.rival_page_info);
-app.get('/rival_history', rival.rival_history_data);
+
 // POST 방식
 app.post('/join', user.join);
 app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);
-
+app.post('/rival_history', rival.rival_history_data);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

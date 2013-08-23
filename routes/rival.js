@@ -39,9 +39,9 @@ exports.rival_history_data = function(req, res){
 	var evt = new EventEmitter();
 	var dao_r = require('../sql/rival');
 
-	var email = req.session.email;
+	var email = req.body.email;
 
-	console.log("email(routes) => "+req.session.email);
+	console.log("email(routes) => "+email);
 
 	var params = { email: email };
 	var result = { history_data:{} };

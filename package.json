@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "3.3.4",
     "ejs": "*",
-    "stylus": "*"
+    "stylus": "*",
+    "node-gcm": "~0.9.6"
   }
 }
