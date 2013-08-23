@@ -238,7 +238,7 @@ import android.widget.Toast;
 						
 						history_layout.setVisibility(View.GONE);
 						home_layout.setVisibility(View.VISIBLE);		
-						rival_background_layout.setBackgroundResource(R.drawable.rival_etc_background);
+						rival_background_layout.setBackgroundResource(R.drawable.rival_dialog_background);
 					}
 				});
 				
@@ -278,10 +278,13 @@ import android.widget.Toast;
 		public void setHistoryList() {
 			
 			history_list = new ArrayList<HistoryObj>();
-			
+			JSONObject json_param = new JSONObject();
+					
 			try {
+				json_param.put("email", user_info.getString("email"));
+				
 				CommonHttp ch = new CommonHttp();	
-				String result_json = ch.getData("http://211.110.61.51:3000/rival_history");		
+				String result_json = ch.postData("http://211.110.61.51:3000/rival_history", json_param);		
 				
 				if(result_json.equals("error")){
 					Toast.makeText(context, "데이터 수신 실패!", Toast.LENGTH_SHORT).show();

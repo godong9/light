@@ -36,7 +36,6 @@ public class RivalFrag extends CommonFragment {
 		View view = inflater.inflate(R.layout.frag_rival, container, false);
 		context = getActivity();
 			
-		
 		/*
          * 버튼 클릭 관련 이벤트 처리하는 부분
          * 
@@ -45,8 +44,7 @@ public class RivalFrag extends CommonFragment {
 		final ImageButton user2_btn = (ImageButton) view.findViewById(R.id.rival_user2_click);
 		final ImageButton user3_btn = (ImageButton) view.findViewById(R.id.rival_user3_click);
 		final ImageButton user4_btn = (ImageButton) view.findViewById(R.id.rival_user4_click);
-
-		
+	
 		//User1 캐릭터 클릭시
 		user1_btn.setOnClickListener(new View.OnClickListener()
 		{

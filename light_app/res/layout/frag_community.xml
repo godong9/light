@@ -6,11 +6,55 @@
      android:orientation="vertical">
 	 
      <LinearLayout 
-	     android:orientation="vertical"
 	     android:layout_width="fill_parent"
 	     android:layout_height="0dp"
 	     android:layout_weight="10"
-	     android:background="#222222">
+	     android:orientation="horizontal"
+	     android:layout_marginLeft="2dp"
+	     android:layout_marginRight="2dp"
+	     android:background="@drawable/community_title_background">
+	     
+         <EditText           
+             android:id="@+id/community_search_val"
+			 android:layout_width="186dp"
+			 android:layout_height="fill_parent"
+			 android:layout_marginTop="6dp"
+			 android:layout_marginBottom="4dp"
+			 android:layout_marginLeft="4dp"
+		 	 android:layout_marginRight="6dp"
+		 	 android:layout_gravity="center"/>
+         <ImageButton  
+	        android:id="@+id/community_search_btn"
+			android:layout_width="25dp"
+			android:layout_height="25dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="4dp"
+			android:layout_marginLeft="0dp"
+			android:layout_marginRight="2dp"
+			android:layout_gravity="center"
+			android:background="@drawable/community_search_btn"/> 
+		<ImageButton  
+	        android:id="@+id/community_write_btn"
+			android:layout_width="32dp"
+			android:layout_height="32dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="4dp"
+			android:layout_marginLeft="23dp"
+			android:layout_marginRight="10dp"
+			android:layout_gravity="center"
+			android:background="@drawable/community_write_btn"/> 
+		<ImageButton  
+	        android:id="@+id/community_sort_btn"  
+			android:layout_width="31dp"
+			android:layout_height="32dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="4dp"
+			android:layout_marginLeft="21dp"
+			android:layout_marginRight="10dp"
+			android:layout_gravity="center"
+			android:background="@drawable/community_sort_btn"/> 
+         
+         
      </LinearLayout>
          
      <ListView 
@@ -19,7 +63,7 @@
           android:layout_height="0dp"    
           android:layout_weight="90"
           android:transcriptMode="disabled"
-          android:background="#464664"
+
           >        	          
      </ListView>
      
