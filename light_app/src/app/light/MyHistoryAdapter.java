@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 public class MyHistoryAdapter extends BaseAdapter {
 	private ArrayList<HistoryObj> list;
@@ -73,15 +71,7 @@ public class MyHistoryAdapter extends BaseAdapter {
 		
 		TextView result_calorie = (TextView)convertView.findViewById(R.id.history_result_calorie);
 		result_calorie.setText(result_calorie_num+"Kcal");
-		
-		/*
-		title_content.setOnClickListener(new TextView.OnClickListener() {
-			public void onClick(View v) {
-				String str = list.get(pos).content;
-				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
-			}
-		});
-		*/
+
 		return convertView;
 	}
 

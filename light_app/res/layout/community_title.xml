@@ -13,24 +13,37 @@
 
     <TextView
         android:id="@+id/community_title_content"
-        android:layout_width="50px"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:textColor="#ffffff" />
     
     <TextView
         android:id="@+id/community_title_nickname"
-        android:layout_width="50px"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:textColor="#ffffff" />
     
     <TextView
         android:id="@+id/community_title_date"
-        android:layout_width="50px"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:textColor="#ffffff" />
-
+	
+    <TextView
+        android:id="@+id/community_title_hits"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:textColor="#ffffff" />
+    
+    <TextView
+        android:id="@+id/community_title_comment"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:textColor="#ffffff" />
 
 </LinearLayout>
