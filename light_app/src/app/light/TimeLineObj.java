@@ -25,7 +25,7 @@ public class TimeLineObj {
 	public static final int VIEW_TYPE_OTHER_EXERCISE =9;
 	public static final int VIEW_TYPE_OTHER_PICTURE = 10;	
 	
-	public static final int VIEW_TYPE_UPLOAD_MY_PICTURE = 11;
+	//public static final int VIEW_TYPE_UPLOAD_MY_PICTURE = 11;
 	
 	public TimeLineObj(int type, String nickname, String pre_content, String content, String calorie, String date) {
 		if(type == VIEW_TYPE_TIMEBAR){
