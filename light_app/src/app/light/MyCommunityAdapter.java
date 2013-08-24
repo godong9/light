@@ -50,19 +50,20 @@ public class MyCommunityAdapter extends BaseAdapter {
 		}
 		
 		TextView title_type = (TextView)convertView.findViewById(R.id.community_title_type);
-		title_type.setText(list.get(position).type);
+		
+		String tmp_type = list.get(position).type;
+		title_type.setText(tmp_type);
+		
+		if(tmp_type.equals("공지")){
+			title_type.setBackgroundResource(R.drawable.community_type_notice_background);
+		}
 		
 		TextView title_content = (TextView)convertView.findViewById(R.id.community_title_content);
 		title_content.setText(list.get(position).title_content);
 		
-		TextView title_nickname = (TextView)convertView.findViewById(R.id.community_title_nickname);
-		title_nickname.setText(list.get(position).nickname);
-		
-		TextView title_date = (TextView)convertView.findViewById(R.id.community_title_date);
-		title_date.setText(list.get(position).reg_date);
-		
-		TextView title_hits = (TextView)convertView.findViewById(R.id.community_title_hits);
-		title_hits.setText(list.get(position).hits);
+		TextView title_info = (TextView)convertView.findViewById(R.id.community_title_info);
+		title_info.setText(list.get(position).nickname + " / " + list.get(position).reg_date + " / " + list.get(position).hits);
+
 		
 		TextView title_comment = (TextView)convertView.findViewById(R.id.community_title_comment);
 		title_comment.setText(list.get(position).comment);
