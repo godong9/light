@@ -57,6 +57,9 @@ public class MyCommunityAdapter extends BaseAdapter {
 		if(tmp_type.equals("공지")){
 			title_type.setBackgroundResource(R.drawable.community_type_notice_background);
 		}
+		else{
+			title_type.setBackgroundResource(R.drawable.community_type_etc_background);
+		}
 		
 		TextView title_content = (TextView)convertView.findViewById(R.id.community_title_content);
 		title_content.setText(list.get(position).title_content);
