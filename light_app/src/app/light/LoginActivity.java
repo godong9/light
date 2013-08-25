@@ -9,22 +9,101 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.os.AsyncTask;
+import static app.light.CommonUtilities.DISPLAY_MESSAGE_ACTION;
+import static app.light.CommonUtilities.EXTRA_MESSAGE;
+import static app.light.CommonUtilities.SENDER_ID;
+import static app.light.CommonUtilities.SERVER_URL;
+
+import com.google.android.gcm.GCMRegistrar;
 
 public class LoginActivity extends CommonActivity {
+	
+	AsyncTask<Void, Void, Void> mRegisterTask;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_login);
 		
+		//푸시서버 GCM 관련 설정
+		checkNotNull(SERVER_URL, "SERVER_URL");
+        checkNotNull(SENDER_ID, "SENDER_ID");
+        // Make sure the device has the proper dependencies.
+        GCMRegistrar.checkDevice(this);
+        // Make sure the manifest was properly set - comment out this line
+        // while developing the app, then uncomment it when it's ready.
+        GCMRegistrar.checkManifest(this);
+        registerReceiver(mHandleMessageReceiver,
+                new IntentFilter(DISPLAY_MESSAGE_ACTION));
+        final String regId = GCMRegistrar.getRegistrationId(this);
+        
+        if (regId.equals("")) {
+            // Automatically registers application on startup.
+            GCMRegistrar.register(this, SENDER_ID);
+            System.out.println("GCM Register");
+        } else {
+            // Device is already registered on GCM, check server.
+            if (GCMRegistrar.isRegisteredOnServer(this)) {
+                // Skips registration.         	
+                System.out.println(getString(R.string.already_registered));
+            } else {
+                // Try to register again, but not in the UI thread.
+                // It's also necessary to cancel the thread onDestroy(),
+                // hence the use of AsyncTask instead of a raw thread.
+                final Context context = this;
+                mRegisterTask = new AsyncTask<Void, Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        boolean registered =
+                                ServerUtilities.register(context, regId);
+                        // At this point all attempts to register with the app
+                        // server failed, so we need to unregister the device
+                        // from GCM - the app will try to register again when
+                        // it is restarted. Note that GCM will send an
+                        // unregistered callback upon completion, but
+                        // GCMIntentService.onUnregistered() will ignore it.
+                        if (!registered) {
+                            GCMRegistrar.unregister(context);
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        mRegisterTask = null;
+                    }
+
+                };
+                mRegisterTask.execute(null, null, null);
+            }
+        }
+        
+           
+        
 		Intent intent = getIntent();   // 값을 받기 위한 Intent 생성
 
 		String intent_str = intent.getStringExtra("type");
+		
+		String intent_nickname = intent.getStringExtra("nickname");
+		String intent_content = intent.getStringExtra("content");
+		
+		if(intent_nickname != null && intent_content != null){
+			System.out.println("MSG => "+intent_nickname+" : "+intent_content);
+		}
 		
 		//System.out.println("intent: "+intent_str);
 		
@@ -123,5 +202,33 @@ public class LoginActivity extends CommonActivity {
 		Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
 		startActivity(intent);
 	}
+	
+
+    @Override
+    protected void onDestroy() {
+        if (mRegisterTask != null) {
+            mRegisterTask.cancel(true);
+        }
+        unregisterReceiver(mHandleMessageReceiver);
+        GCMRegistrar.onDestroy(this);
+        super.onDestroy();  	
+    }
+
+    private void checkNotNull(Object reference, String name) {
+        if (reference == null) {
+            throw new NullPointerException(
+                    getString(R.string.error_config, name));
+        }
+    }
+
+    private final BroadcastReceiver mHandleMessageReceiver =
+            new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
+            
+            System.out.println("Receive Content => "+intent.getStringExtra("content"));
+        }
+    };
 	
 }

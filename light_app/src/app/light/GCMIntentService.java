@@ -16,7 +16,6 @@
 package app.light;
 
 import static app.light.CommonUtilities.SENDER_ID;
-import static app.light.CommonUtilities.displayMessage;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -43,14 +42,14 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected void onRegistered(Context context, String registrationId) {
         Log.i(TAG, "Device registered: regId = " + registrationId);
-        displayMessage(context, getString(R.string.gcm_registered));
+        System.out.println(getString(R.string.gcm_registered));
         ServerUtilities.register(context, registrationId);
     }
 
     @Override
     protected void onUnregistered(Context context, String registrationId) {
         Log.i(TAG, "Device unregistered");
-        displayMessage(context, getString(R.string.gcm_unregistered));
+        System.out.println(getString(R.string.gcm_unregistered));
         if (GCMRegistrar.isRegisteredOnServer(context)) {
             ServerUtilities.unregister(context, registrationId);
         } else {
@@ -62,50 +61,51 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onMessage(Context context, Intent intent) {
-        Log.i(TAG, "Received message");
-        String message = getString(R.string.gcm_message);
-         
-        displayMessage(context, intent.getStringExtra("content"));       
-        //displayMessage(context, message);
+        Log.i(TAG, "Received message"); 
+        
+        String message = intent.getStringExtra("nickname")+":"+intent.getStringExtra("content");
+        String nickname = intent.getStringExtra("nickname");
+        String content = intent.getStringExtra("content");
+        
+        System.out.println("onMessage => "+intent.getStringExtra("content"));       
         // notifies user
-        generateNotification(context, message);
+        generateNotification(context, nickname, content);
     }
 
     @Override
     protected void onDeletedMessages(Context context, int total) {
         Log.i(TAG, "Received deleted messages notification");
         String message = getString(R.string.gcm_deleted, total);
-        displayMessage(context, message);
         // notifies user
-        generateNotification(context, message);
+        generateNotification(context, message, "");
     }
 
     @Override
     public void onError(Context context, String errorId) {
         Log.i(TAG, "Received error: " + errorId);
-        displayMessage(context, getString(R.string.gcm_error, errorId));
     }
 
     @Override
     protected boolean onRecoverableError(Context context, String errorId) {
         // log message
         Log.i(TAG, "Received recoverable error: " + errorId);
-        displayMessage(context, getString(R.string.gcm_recoverable_error,
-                errorId));
         return super.onRecoverableError(context, errorId);
     }
 
     /**
      * Issues a notification to inform the user that server has sent a message.
      */
-    private static void generateNotification(Context context, String message) {
-        int icon = R.drawable.ic_stat_gcm;
+    private static void generateNotification(Context context, String nickname, String content) {
+        int icon = R.drawable.light_icon;
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
+        String message = nickname + " : " + content;
         Notification notification = new Notification(icon, message, when);
         String title = context.getString(R.string.app_name);
-        Intent notificationIntent = new Intent(context, BaseFragment.class);
+        Intent notificationIntent = new Intent(context, LoginActivity.class);
+        notificationIntent.putExtra("nickname", nickname);
+        notificationIntent.putExtra("content", content);
         // set intent so it does not start a new activity
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);

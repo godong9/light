@@ -42,8 +42,7 @@ public final class CommonUtilities {
     /**
      * Intent used to display a message in the screen.
      */
-    static final String DISPLAY_MESSAGE_ACTION =
-            "com.google.android.gcm.demo.app.DISPLAY_MESSAGE";
+    static final String DISPLAY_MESSAGE_ACTION = "app.light.DISPLAY_MESSAGE";
 
     /**
      * Intent's extra that contains the message to be displayed.
@@ -59,9 +58,4 @@ public final class CommonUtilities {
      * @param context application's context.
      * @param message message to be displayed.
      */
-    static void displayMessage(Context context, String message) {
-        Intent intent = new Intent(DISPLAY_MESSAGE_ACTION);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        context.sendBroadcast(intent);
-    }
 }

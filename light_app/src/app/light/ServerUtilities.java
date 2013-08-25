@@ -17,7 +17,6 @@ package app.light;
 
 import static app.light.CommonUtilities.SERVER_URL;
 import static app.light.CommonUtilities.TAG;
-import static app.light.CommonUtilities.displayMessage;
 
 import com.google.android.gcm.GCMRegistrar;
 
@@ -61,12 +60,12 @@ public final class ServerUtilities {
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             Log.d(TAG, "Attempt #" + i + " to register");
             try {
-                displayMessage(context, context.getString(
+                System.out.println(context.getString(
                         R.string.server_registering, i, MAX_ATTEMPTS));
                 post(serverUrl, params);
                 GCMRegistrar.setRegisteredOnServer(context, true);
                 String message = context.getString(R.string.server_registered);
-                CommonUtilities.displayMessage(context, message);
+                System.out.println(message);
                 return true;
             } catch (IOException e) {
                 // Here we are simplifying and retrying on any error; in a real
@@ -91,7 +90,7 @@ public final class ServerUtilities {
         }
         String message = context.getString(R.string.server_register_error,
                 MAX_ATTEMPTS);
-        CommonUtilities.displayMessage(context, message);
+        System.out.println(message);
         return false;
     }
 
@@ -107,7 +106,7 @@ public final class ServerUtilities {
             post(serverUrl, params);
             GCMRegistrar.setRegisteredOnServer(context, false);
             String message = context.getString(R.string.server_unregistered);
-            CommonUtilities.displayMessage(context, message);
+            System.out.println(message);
         } catch (IOException e) {
             // At this point the device is unregistered from GCM, but still
             // registered in the server.
@@ -116,7 +115,7 @@ public final class ServerUtilities {
             // a "NotRegistered" error message and should unregister the device.
             String message = context.getString(R.string.server_unregister_error,
                     e.getMessage());
-            CommonUtilities.displayMessage(context, message);
+            System.out.println(message);
         }
     }
 
