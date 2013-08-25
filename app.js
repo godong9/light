@@ -61,8 +61,10 @@ if ('development' == app.get('env')) {
 
 // GET 방식
 app.get('/rival', rival.rival_page_info);
+app.get('/send', routes.send_push);
 
 // POST 방식
+app.post('/register', routes.regist);
 app.post('/join', user.join);
 app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);

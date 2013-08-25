@@ -1,8 +1,70 @@
 var util = require('util')
-    , fs = require('fs');
+    , fs = require('fs')
+    , gcm = require('node-gcm');
+
+var reg1 = null;
 
 exports.index = function(req, res){
     res.render('index', { title: 'Express'});
+};
+
+exports.regist = function (req, res) {
+	console.log("regId => "+req.body.regId);
+	reg1 =req.body.regId;
+	send_push2();
+};
+
+
+function send_push2() {
+	var message = new gcm.Message();
+
+	var sender = new gcm.Sender('AIzaSyBHorBmc3UVUlEMte5icgua25nmh9671yY');
+	var registrationIds = [];
+
+	/*
+	message.addDataWithObject({
+		key1: 'message1',
+		key2: 'message2'
+	});
+	*/
+	message.addDataWithKeyValue('key1','message11111');
+	message.addDataWithKeyValue('key2','message22222입니다');
+
+	message.collapseKey = 'demo';
+	message.delayWhileIdle = true;
+	message.timeToLive = 3;
+
+	registrationIds.push(reg1);
+	registrationIds.push('regId2');
+
+	sender.send(message, registrationIds, 4, function (err, result) {
+		console.log(result);	
+	});
+
+}
+
+exports.send_push = function(req, res) {
+	var message = new gcm.Message();
+
+	var sender = new gcm.Sender('AIzaSyBHorBmc3UVUlEMte5icgua25nmh9671yY');
+	var registrationIds = [];
+
+	message.addDataWithObject({
+		key1: 'message1',
+		key2: 'message2'
+	});
+
+	message.collapseKey = 'demo';
+	message.delayWhileIdle = true;
+	message.timeToLive = 3;
+
+	registrationIds.push('regId1');
+	registrationIds.push('regId2');
+
+	sender.send(message, registrationIds, 4, function (err, result) {
+		console.log(result);	
+	});
+
 };
 
 exports.upload = function(req, res){
@@ -37,3 +99,4 @@ function renameImg(image){
         console.log('->> upload done');
     });
 }
+
