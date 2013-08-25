@@ -8,10 +8,10 @@ var express = require('express')
     , user = require('./routes/user')
 	, rival = require('./routes/rival')
     , timeline = require('./routes/timeline')
-//  , community = require('./routes/community')
-  , http = require('http')
-  , path = require('path')
-  , expressValidator = require('express-validator');
+    , community = require('./routes/community')
+    , http = require('http')
+    , path = require('path')
+    , expressValidator = require('express-validator');
 
 var app = express();
 
@@ -61,7 +61,7 @@ if ('development' == app.get('env')) {
 
 // GET 방식
 app.get('/rival', rival.rival_page_info);
-app.get('/send', routes.send_push);
+app.get('/community', community.community_data);
 
 // POST 방식
 app.post('/register', routes.regist);
@@ -69,6 +69,8 @@ app.post('/join', user.join);
 app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);
 app.post('/rival_history', rival.rival_history_data);
+app.post('/send', routes.send_push);
+
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

@@ -23,11 +23,12 @@ exports.send_push = function(req, res) {
 	
 	//console.log("Val => " +content_val);
 
+	message.addDataWithKeyValue('nickname', '윤하');
 	message.addDataWithKeyValue('content', 'Message Test');
 
-	message.collapseKey = 'demo';
-	message.delayWhileIdle = true;
-	message.timeToLive = 3;
+	message.collapseKey = 'light';
+	message.delayWhileIdle = false;
+	message.timeToLive = 600;
 
 	sender.send(message, registrationIds, 4, function (err, result) {
 		console.log(result);	
