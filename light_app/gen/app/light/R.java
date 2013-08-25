@@ -326,25 +326,8 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
-        public static final int already_registered=0x7f060004;
         public static final int app_name=0x7f060000;
         public static final int btn_setting=0x7f060002;
-        public static final int error_config=0x7f060003;
-        public static final int gcm_deleted=0x7f06000a;
-        public static final int gcm_error=0x7f060008;
-        public static final int gcm_message=0x7f060007;
-        public static final int gcm_recoverable_error=0x7f060009;
-        public static final int gcm_registered=0x7f060005;
-        public static final int gcm_unregistered=0x7f060006;
-        public static final int options_clear=0x7f060012;
-        public static final int options_exit=0x7f060013;
-        public static final int options_register=0x7f060010;
-        public static final int options_unregister=0x7f060011;
-        public static final int server_register_error=0x7f06000e;
-        public static final int server_registered=0x7f06000c;
-        public static final int server_registering=0x7f06000b;
-        public static final int server_unregister_error=0x7f06000f;
-        public static final int server_unregistered=0x7f06000d;
     }
     public static final class style {
         public static final int Animations=0x7f070004;
