@@ -1,12 +1,17 @@
 package app.light;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
@@ -17,6 +22,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class CommonHttp {
@@ -72,5 +79,33 @@ public class CommonHttp {
 			e.printStackTrace();
 			return "error";
 		}		
+	}
+	
+	public Bitmap getImg(String img_url) {
+		URL url = null;
+		Bitmap bitmap = null;
+		try {
+			url = new URL(img_url);
+			HttpGet httpRequest = null;
+			try {
+				httpRequest = new HttpGet(url.toURI());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpResponse response = (HttpResponse) httpclient
+					.execute(httpRequest);
+			HttpEntity entity = response.getEntity();
+			BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity);
+			InputStream instream = bufHttpEntity.getContent();
+			bitmap = BitmapFactory.decodeStream(instream);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bitmap;
 	}
 }

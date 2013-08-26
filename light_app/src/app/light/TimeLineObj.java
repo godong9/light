@@ -44,7 +44,7 @@ public class TimeLineObj {
 			this.content = content;
 			this.date = date;	
 		}
-		else if(type == VIEW_TYPE_MY_WORD || type == VIEW_TYPE_MY_PICTURE){
+		else if(type == VIEW_TYPE_MY_WORD){
 			this.type = type;
 			this.content = content;
 			this.date = date;		
@@ -57,7 +57,7 @@ public class TimeLineObj {
 			this.date = date;	
 		}
 	
-		else if(type == VIEW_TYPE_OTHER_WORD || type == VIEW_TYPE_OTHER_PICTURE){
+		else if(type == VIEW_TYPE_OTHER_WORD){
 			this.type = type;
 			this.nickname = nickname;
 			this.content = content;
@@ -72,12 +72,15 @@ public class TimeLineObj {
 			this.date = date;	
 		}
 	}
-	
-	//MY_PICTURE 생성자
-	public TimeLineObj(int type, Bitmap img, String date) {
+
+	//MY_PICTURE, OTHER_PICTURE 생성자
+	public TimeLineObj(int type, String nickname, Bitmap img_bm, String date) {
 		this.type = type;
-		this.picture_img = img;
-		System.out.println("TimelineObj - "+picture_img);
+		this.nickname = nickname;
+		this.picture_img = img_bm;	
 		this.date = date;
+
 	}
+	
 }
+

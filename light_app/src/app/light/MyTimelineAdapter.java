@@ -3,6 +3,7 @@ package app.light;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,9 +95,8 @@ public class MyTimelineAdapter extends BaseAdapter {
 		TextView tvPreContent;
 		TextView tvCalorie;
 		TextView tvDayCount;
-		Bitmap bmPicture;
 		LinearLayout llWriteType;
-		String picture_name;
+		ImageView ivPicture;
 		/*
 		public int type;
 		public String write_type;
@@ -111,7 +111,7 @@ public class MyTimelineAdapter extends BaseAdapter {
 		public ImageView img;
 		public String mission_type;
 		*/
-
+		
 		switch (list.get(position).type) {
 			case TimeLineObj.VIEW_TYPE_TIMEBAR:
 				tvDayCount = (TextView) convertView.findViewById(R.id.timeline_timebar_day_count);
@@ -159,23 +159,20 @@ public class MyTimelineAdapter extends BaseAdapter {
 
 			case TimeLineObj.VIEW_TYPE_MY_PICTURE:
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_picture_date);
-				ImageView iv = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
+				ivPicture = (ImageView) convertView.findViewById(R.id.timeline_my_picture_content);
 				
-				//iv.setImageBitmap(list.get(position).picture_img);			
-				
+				ivPicture.setImageBitmap(list.get(position).picture_img);			
 				tvDate.setText(list.get(position).date);
 				break;
 							
-			case TimeLineObj.VIEW_TYPE_OTHER_WORD:
-				
+			case TimeLineObj.VIEW_TYPE_OTHER_WORD:		
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_word_nickname);
 				tvContent = (TextView) convertView.findViewById(R.id.timeline_other_word_content);
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_word_date);
-				
+	
 				tvNickname.setText(list.get(position).nickname);
 				tvContent.setText(list.get(position).content);
 				tvDate.setText(list.get(position).date);
-	
 				break;	
 			case TimeLineObj.VIEW_TYPE_OTHER_FOOD:
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_write_nickname);
@@ -212,12 +209,10 @@ public class MyTimelineAdapter extends BaseAdapter {
 			case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_picture_nickname);
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_picture_date);
-				//bmPicture = (ImageView) convertView.findViewById(R.id.timeline_other_picture_content);
+				ivPicture = (ImageView) convertView.findViewById(R.id.timeline_other_picture_content);
 				
-				//사진 적용하는 부분 추가 필요
-				
+				ivPicture.setImageBitmap(list.get(position).picture_img);	
 				tvNickname.setText(list.get(position).nickname);
-				picture_name = list.get(position).content;
 				tvDate.setText(list.get(position).date);
 				break;
 				

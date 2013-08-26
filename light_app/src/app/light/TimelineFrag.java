@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
@@ -51,8 +52,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private static final int ID_EXERCISE     = 12;
 	private static final int ID_CAMERA     = 14;
 	private static final int ID_ALBUM     = 15;	
-	
-	
+		
 	private Uri mImageCaptureUri;
 	private FileInputStream mFileInputStream;
 	private TimelineDialogWindow popup_dialog;
@@ -69,6 +69,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private boolean firstStart = true;
 	
 	private EditText chat_text = null;
+	
+	private String my_email = null;
 	
 	private Calendar last_get_date = Calendar.getInstance();
 	
@@ -255,11 +257,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					Bitmap tmpPicture = extras.getParcelable("data");
 					addPicture(tmpPicture);	//사진 타임라인에 추가
 					//사진 크기 재조정
-					resize = Bitmap.createScaledBitmap(tmpPicture, 400, 300, true);
+					resize = Bitmap.createScaledBitmap(tmpPicture, 200, 150, true);
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
-						String filePath = path+"/"+"1_"+String.valueOf(System.currentTimeMillis())+".jpg";
+						String fileName = my_email+"_"+String.valueOf(System.currentTimeMillis())+".jpg";
+						String filePath = path+"/"+fileName;
 						
 						fOut = new FileOutputStream(filePath);	//context.openFileOutput(filePath, Context.MODE_PRIVATE);
 						resize.compress(CompressFormat.JPEG, 100, fOut);	//jpeg 형태로 이미지 압축
@@ -368,7 +371,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			
 			JSONObject json_data = new JSONObject(result_json);
 			JSONArray json_timeline_data = json_data.getJSONArray("timeline_data");
-			String my_email = json_data.getJSONObject("my_email").getString("my_email");
+			my_email = json_data.getJSONObject("my_email").getString("my_email");
 			
 			System.out.println("EMAIL: "+my_email);
 			
@@ -419,13 +422,20 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					tmp_list_date = dateString;
 				else
 					tmp_list_date = timeString;
-				
+					
 				//리스트에 값 추가
 				//내 데이터이거나 관리자 데이터일 때
-				if(tmp_email.equals(my_email) || tmp_nickname.equals("LIGHT"))
-					my_list.add(new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));						
+				if(tmp_type==6){ // 사진 데이터일 경우 사진 데이터 서버에서 가져옴
+					Bitmap img_bm = getTimelineImg(tmp_content);
+					if(tmp_email.equals(my_email))
+						my_list.add(0, new TimeLineObj(tmp_type, tmp_nickname, img_bm, tmp_list_date));	
+					else
+						my_list.add(0, new TimeLineObj(tmp_type+4, tmp_nickname, img_bm, tmp_list_date));				
+				}
+				else if(tmp_email.equals(my_email) || tmp_nickname.equals("LIGHT"))
+					my_list.add(0, new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));						
 				else	//다른 사람 데이터일 때
-					my_list.add(new TimeLineObj(tmp_type+4, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
+					my_list.add(0, new TimeLineObj(tmp_type+4, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
 			}
 			pre_list_add = json_timeline_data.length();	//직전에 추가된 리스트 개수
 			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 		
@@ -543,11 +553,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD, "", "", chat_val, "", timeString));	
 			my_list_count += 1;     
 			
-			my_adapter.notifyDataSetChanged();
-			
+			my_adapter.notifyDataSetChanged();		
 			my_listview.setSelection(my_list.size());
-		}
-		
+		}	
 	}
 	
 	//내가 찍은 사진 업로드
@@ -667,11 +675,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	 * 5 - EXERCISE
 	 * 6 - PICTURE
 	 */
-	
 	public boolean sendTimelineData(JSONObject json_param) {	
 		try {
-			System.out.println("타임라인 데이터 전송");
-			
 			CommonHttp ch = new CommonHttp();	
 			String result_json = ch.postData("http://211.110.61.51:3000/send_push", json_param);		
 			if(result_json.equals("error")) {
@@ -685,6 +690,21 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			System.out.println("데이터 전송 실패!");
 			return false;
 		}	
+	}
+	
+	/*
+	 * 타임라인 DB에 전송할 때 타입 값
+	 * 3 - CHAT
+	 * 4 - FOOD
+	 * 5 - EXERCISE
+	 * 6 - PICTURE
+	 */
+	public Bitmap getTimelineImg(String img_str) {	
+		
+		CommonHttp ch = new CommonHttp();	
+		Bitmap img_bm = ch.getImg("http://211.110.61.51:3000/img?img_str="+img_str);		
+	
+		return img_bm;
 	}
 
 }
