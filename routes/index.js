@@ -2,6 +2,9 @@ var util = require('util')
     , fs = require('fs')
     , gcm = require('node-gcm');
 
+var EventEmitter = require('events').EventEmitter;
+var mysql_conn = require('../sql/mysql_server').mysql_conn;
+
 var registrationIds = [];
 
 exports.index = function(req, res){
@@ -16,25 +19,43 @@ exports.regist = function (req, res) {
 
 exports.send_push = function(req, res) {
 	var message = new gcm.Message();
-
-	var sender = new gcm.Sender('AIzaSyBHorBmc3UVUlEMte5icgua25nmh9671yY');
-
-	//var content_val = req.body.content_val;
+	var evt = new EventEmitter();
+	var dao_t = require('../sql/timeline');
 	
-	//console.log("Val => " +content_val);
+	var sender = new gcm.Sender('AIzaSyBHorBmc3UVUlEMte5icgua25nmh9671yY');
+	
+	var params = {
+					email: req.session.email,
+					nickname: req.session.nickname,
+					group_id: req.session.group_id,
+					type: req.body.type,
+					pre_content: req.body.pre_content,
+					content: req.body.content,
+					calorie: req.body.calorie
+	};
+	
+	console.log("content => " +params['content']);
 
-	message.addDataWithKeyValue('nickname', '윤하');
-	message.addDataWithKeyValue('content', 'Message Test');
+	dao_t.dao_set_timeline(evt, mysql_conn, params);
 
-	message.collapseKey = 'light';
-	message.delayWhileIdle = false;
-	message.timeToLive = 600;
+	evt.on('set_timeline', function(err, rows){
+		if(err) throw err;
+		
+		message.addDataWithKeyValue('nickname', params['nickname']);
+		message.addDataWithKeyValue('view_type', params['type']);
+		message.addDataWithKeyValue('pre_content', params['pre_content']);
+		message.addDataWithKeyValue('content', params['content']);
 
-	sender.send(message, registrationIds, 4, function (err, result) {
-		console.log(result);	
-		res.send("success");
+		message.collapseKey = 'light';
+		message.delayWhileIdle = false;
+		message.timeToLive = 600;
+
+		sender.send(message, registrationIds, 4, function (err, result) {
+			console.log(result);	
+			var result_val = { result:"success", msg:"회원가입이 완료되었습니다!" };
+			res.send(result_val);
+		});
 	});
-
 };
 
 exports.upload = function(req, res){
@@ -58,7 +79,7 @@ exports.upload = function(req, res){
 
 function renameImg(image){
     var tmp_path = image.path;
-	
+
 	var file_name_array = image.name.split('/');
     var target_path = './public/upload/' + file_name_array[3];
 //  console.log('->> tmp_path: ' + tmp_path );

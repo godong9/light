@@ -18,7 +18,7 @@ exports.timeline_data = function(req, res){
 //	console.log("end_date(routes_timeline) => "+req.body.end_date);
 	
 	var params = { email: email, group_id: group_id, start_date: start_date, end_date: end_date };
-	var result = { timeline_data:{} };
+	var result = { timeline_data:{}, my_email:{ my_email: email } };
 
 	dao_t.dao_timeline_data(evt, mysql_conn, params);
 
@@ -26,6 +26,7 @@ exports.timeline_data = function(req, res){
 		if(err) throw err;
 		result.timeline_data = rows;
 		console.log("timeline_data: "+rows);
+		console.log("timeline_data: "+result.my_email);
 		res.send(result);
 	});
 

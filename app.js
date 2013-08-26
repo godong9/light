@@ -11,6 +11,7 @@ var express = require('express')
     , community = require('./routes/community')
     , http = require('http')
     , path = require('path')
+	, url = require('url')
     , expressValidator = require('express-validator');
 
 var app = express();
@@ -62,6 +63,13 @@ if ('development' == app.get('env')) {
 // GET 방식
 app.get('/rival', rival.rival_page_info);
 app.get('/community', community.community_data);
+app.get('/img', function(req, res){	//이미지 파일 다운로드
+	var url_parts = url.parse(req.url, true); // url 파싱
+	var query = url_parts.query; // 쿼티로드 (ex> { id: 'zz3', a: '1', b: '2' } )
+	var img_str = query.img_str;
+	var file = __dirname + '/public/upload/' + img_str;
+	res.download(file); // Set disposition and send it.
+});
 
 // POST 방식
 app.post('/register', routes.regist);
@@ -69,8 +77,7 @@ app.post('/join', user.join);
 app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);
 app.post('/rival_history', rival.rival_history_data);
-app.post('/send', routes.send_push);
-
+app.post('/send_push', routes.send_push);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);
