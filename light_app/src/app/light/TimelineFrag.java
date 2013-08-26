@@ -326,7 +326,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		start_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
 		
 		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-		last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+		last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 6);
 			
 		getTimelineData(start_date_string, end_date_string);
 		

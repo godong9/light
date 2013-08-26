@@ -1,6 +1,11 @@
 package app.light;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,24 +41,54 @@ public class CommunityFrag extends CommonFragment {
 	
 	public void setCommunityList(){
 		community_list = new ArrayList<CommunityObj>();
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!", "가가가가가", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("상담", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
-		community_list.add(new CommunityObj("공지", "세븐스프링스 이벤트 당첨자 확인하세요!dsgsdgsdgsdgsdgwegwegweg", "LIGHT", "2013.08.22", "조회수 61", "10"));
 		
-		community_adapter = new MyCommunityAdapter(context, community_list);
-		
-		// 리스트뷰에 어댑터 연결
-	    community_listview = (ListView)((Activity)context).findViewById(R.id.community_scroll);	  
-	    community_listview.setAdapter(community_adapter);
+		try{		
+			CommonHttp ch = new CommonHttp();	
+			String result_json = ch.getData("http://211.110.61.51:3000/community");		
+			
+			JSONObject json_data = new JSONObject(result_json);
+			JSONArray json_community_data = json_data.getJSONArray("community_data");
+			
+			for(int i=0; i<json_community_data.length(); i++){
+				// JSON 데이터 가져와서 리스트에 추가하는 부분		
+				String tmp_type = json_community_data.getJSONObject(i).getString("type");
+				String tmp_nickname = json_community_data.getJSONObject(i).getString("nickname");
+				String tmp_title = json_community_data.getJSONObject(i).getString("title");
+				String tmp_hits = json_community_data.getJSONObject(i).getString("hits");
+				String tmp_num_comment = json_community_data.getJSONObject(i).getString("num_comment");
+				String tmp_date = json_community_data.getJSONObject(i).getString("reg_date");
+					
+				// 시간 +9 적용(GMT 때문에)
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+				Calendar tmp_date_cal = Calendar.getInstance();
+	
+				tmp_date = tmp_date.replaceAll("T"," ");
+				tmp_date = tmp_date.replaceAll("Z", "");			
+			
+				tmp_date_cal.setTime(sdf.parse(tmp_date));
+				tmp_date_cal.add(tmp_date_cal.HOUR, 9);		
+			
+				String dateString = String.format("%04d.%02d.%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH) + 1, tmp_date_cal.get(Calendar.DAY_OF_MONTH));
+				
+				//리스트에 값 추가
+				if(tmp_type.equals("공지")){
+					community_list.add(0, new CommunityObj(tmp_type, tmp_title, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
+				}
+				else{
+					community_list.add(new CommunityObj(tmp_type, tmp_title, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
+				}
+				
+				
+			}
+
+			community_list_count += json_community_data.length();	//개수만큼 불러와서 추가 		
+			community_adapter = new MyCommunityAdapter(context, community_list);
+			community_listview = (ListView)((Activity)context).findViewById(R.id.community_scroll);	  
+		    community_listview.setAdapter(community_adapter);
+		}
+		catch(Exception e){
+			System.out.println("에러 발생");
+		}	
 	 	
 	}
 }
