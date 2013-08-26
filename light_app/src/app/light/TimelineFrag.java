@@ -330,6 +330,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			
 		getTimelineData(start_date_string, end_date_string);
 		
+		if (pre_list_add == 0){
+    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
+    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+    		
+    		// 현재까지 불러온 날짜 last_get_date 변수에 저장
+    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 6);
+    			
+    		getTimelineData(start_date_string, end_date_string);
+		}
+		
 		my_adapter = new MyTimelineAdapter(context, my_list);
 		
 		// 리스트뷰에 어댑터 연결
@@ -469,7 +479,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
             		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
             		
             		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 6);
             			
             		getTimelineData(start_date_string, end_date_string);
                 	

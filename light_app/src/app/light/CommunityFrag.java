@@ -77,8 +77,7 @@ public class CommunityFrag extends CommonFragment {
 				else{
 					community_list.add(new CommunityObj(tmp_type, tmp_title, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
 				}
-				
-				
+		
 			}
 
 			community_list_count += json_community_data.length();	//개수만큼 불러와서 추가 		
