@@ -10,12 +10,11 @@ exports.community_data = function(req, res){
 	var params = { };
 	var result = { community_data:{} };
 
-	dao_c.community_data(evt, mysql_conn, params);
+	dao_c.dao_community_data(evt, mysql_conn, params);
 
 	evt.on('community_data', function(err, rows){
 		if(err) throw err;
 		result.community_data = rows;
 		res.send(result);
 	});
-
 };

@@ -1,21 +1,20 @@
 // community_data
 // 
 exports.dao_community_data = function(evt, mysql_conn, params){
-	/*
+	
 	var sql = "SELECT ";
-	sql +="`A`.`group_id`, ";
+	sql +="`A`.`type`, ";
 	sql += "`A`.`title`, ";
-	sql += "`A`.`goal`, ";
-	sql += "`A`.`start_date`, ";
-	sql += "`A`.`end_date`, ";
-	sql += "`A`.`reward`, ";
-	sql += "`B`.`email`, ";
+	sql += "`A`.`content`, ";
+	sql += "`A`.`hits`, ";
+	sql += "`A`.`num_comment`, ";
+	sql += "`A`.`reg_date`, ";
 	sql += "`B`.`nickname` ";
-	sql += "FROM `rival_group` AS `A` ";
+	sql += "FROM `community` AS `A` ";
 	sql += "INNER JOIN `user` AS `B` ";
-	sql += "ON `A`.`group_id` = `B`.`group_id` ";
-	sql += "WHERE `B`.`email` = '"+params['email']+"' ";
-	*/
+	sql += "ON `A`.`email` = `B`.`email` ";
+	sql += "ORDER BY `A`.`reg_date` DESC";
+
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		evt.emit('community_data', err, rows);
 	});
