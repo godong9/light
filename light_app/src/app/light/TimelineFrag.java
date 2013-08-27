@@ -61,16 +61,18 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private QuickAction writePopup;
 	private QuickAction cameraPopup;
 	
-	private ArrayList<TimeLineObj> my_list;
+	private static ArrayList<TimeLineObj> my_list = null;
 	private MyTimelineAdapter my_adapter;
 	private ListView my_listview;
 	private int my_list_count = 0;
 	private int pre_list_add = 0;
-	private boolean firstStart = true;
+	private boolean first_start = true;
 	
 	private EditText chat_text = null;
 	
 	private String my_email = null;
+	
+	private String tmp_file_name = null;
 	
 	private Calendar last_get_date = Calendar.getInstance();
 	
@@ -192,7 +194,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					Toast.makeText(context, "메시지를 입력해주세요!", Toast.LENGTH_SHORT).show();
 				}
 				else{
-					addWord(chat_val);                  
+					addMyWord(chat_val);                  
 				}						
 			}
 		});
@@ -224,8 +226,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	
 	@Override
 	public void onStart() {
-		if(firstStart){	//처음 시작될 때
-			firstStart=false;
+		if(first_start){	//처음 시작될 때
+			first_start=false;
 			//Fragment가 완전히 생성되고 난 후에 호출되는 함수
 			super.onStart();
 			setListView();	
@@ -234,6 +236,14 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			super.onStart();
 		}
 	}	
+	
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+	{
+		// 리스트뷰 클릭시 키보드 숨기기
+		InputMethodManager imm = (InputMethodManager)context.getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(chat_text.getWindowToken(), 0);
+	}
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -255,14 +265,14 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				if(extras != null)
 				{
 					Bitmap tmpPicture = extras.getParcelable("data");
-					addPicture(tmpPicture);	//사진 타임라인에 추가
+					
 					//사진 크기 재조정
-					resize = Bitmap.createScaledBitmap(tmpPicture, 200, 150, true);
+					resize = Bitmap.createScaledBitmap(tmpPicture, 320, 240, true);
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
-						String fileName = my_email+"_"+String.valueOf(System.currentTimeMillis())+".jpg";
-						String filePath = path+"/"+fileName;
+						tmp_file_name = my_email+"_"+String.valueOf(System.currentTimeMillis())+".jpg";			
+						String filePath = path+"/"+tmp_file_name;
 						
 						fOut = new FileOutputStream(filePath);	//context.openFileOutput(filePath, Context.MODE_PRIVATE);
 						resize.compress(CompressFormat.JPEG, 100, fOut);	//jpeg 형태로 이미지 압축
@@ -284,6 +294,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 							f.delete();		
 						}
 						
+						//사진 타임라인에 추가
+						addMyPicture(tmpPicture);			
 					}
 					catch(Exception e)
 					{
@@ -319,29 +331,30 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	public void setListView() {
-		
-		my_list = new ArrayList<TimeLineObj>();
-		
-		Calendar cal = Calendar.getInstance();
-	
-		String end_date_string, start_date_string;
-		
-		end_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-		start_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
-		
-		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-		last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 6);
+		if(my_list == null){
+			my_list = new ArrayList<TimeLineObj>();
 			
-		getTimelineData(start_date_string, end_date_string);
+			Calendar cal = Calendar.getInstance();
 		
-		if (pre_list_add == 0){
-    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
-    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
-    		
-    		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 6);
-    			
-    		getTimelineData(start_date_string, end_date_string);
+			String end_date_string, start_date_string;
+			
+			end_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+			start_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+			
+			// 현재까지 불러온 날짜 last_get_date 변수에 저장
+			last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 6);
+				
+			getTimelineData(start_date_string, end_date_string);
+			
+			if (pre_list_add == 0){
+	    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
+	    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+	    		
+	    		// 현재까지 불러온 날짜 last_get_date 변수에 저장
+	    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 6);
+	    			
+	    		getTimelineData(start_date_string, end_date_string);
+			}
 		}
 		
 		my_adapter = new MyTimelineAdapter(context, my_list);
@@ -353,7 +366,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	    my_listview.setOnScrollListener(this);
 	    my_listview.setOnItemClickListener(this);
 	    //my_listview.setSelection(my_adapter.getCount() - 1);
-   	}
+	    
+	}
 	
 	public void getTimelineData(String db_start_date, String db_end_date)
 	{
@@ -445,14 +459,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}	
 	}
 	
-	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-	{
-		// 리스트뷰 클릭시 키보드 숨기기
-		InputMethodManager imm = (InputMethodManager)context.getSystemService(
-			      Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(chat_text.getWindowToken(), 0);
-	}
-	
 	
 	// 카메라 촬영시
 	private void doTakePhotoAction()
@@ -513,7 +519,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	//내가 쓴 채팅 내용 추가
-	public void addWord(String chat_val)
+	public void addMyWord(String chat_val)
 	{		
 		JSONObject json_param = new JSONObject();
 		try {
@@ -521,7 +527,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			json_param.put("pre_content", "");
 			json_param.put("content", chat_val);
 			json_param.put("calorie", "");	
-			System.out.println("JSON 입력");
 		}
 		catch(Exception e){
 			System.out.println("JSON 에러");
@@ -559,37 +564,50 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	//내가 찍은 사진 업로드
-	public void addPicture(Bitmap tmpPicture)
+	public void addMyPicture(Bitmap tmpPicture)
 	{	
-		System.out.println("addPicture - "+tmpPicture);
-		
-		Calendar cal = Calendar.getInstance();
-
-		String dateToString , timeToString ;
-		String dateStatus;
-		int dateNoon = cal.get(Calendar.AM_PM);
-		int dateHour = cal.get(Calendar.HOUR_OF_DAY);
-		int dateMinute = cal.get(Calendar.MINUTE);
-	
-		if(dateNoon == 0){
-			dateStatus = "오전";
+		JSONObject json_param = new JSONObject();
+		try {
+			json_param.put("type", 6);	
+			json_param.put("pre_content", "");
+			json_param.put("content", tmp_file_name);
+			json_param.put("calorie", "");	
 		}
-		else{
-			dateStatus = "오후";
-			if(dateHour != 12){
-				dateHour = dateHour-12;
+		catch(Exception e){
+			System.out.println("JSON 에러");
+		}
+		
+		boolean data_status = sendTimelineData(json_param);
+		
+		if(data_status){
+			
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
+		
+			if(dateNoon == 0){
+				dateStatus = "오전";
 			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+			//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+			//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
+			
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+		
+			my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE, "", tmpPicture, timeString));
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();
+			my_listview.setSelection(my_list.size());
 		}
-		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
-		
-		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
-	
-		//my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_UPLOAD_MY_PICTURE,tmpPicture,timeString));
-		//my_list_count += 1;     
-		
-		//my_adapter.notifyDataSetChanged();
-		//my_listview.setSelection(my_list.size());
 	}
 	
 	public void DoFileUpload(String apiUrl, String absolutePath) {
@@ -705,6 +723,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		Bitmap img_bm = ch.getImg("http://211.110.61.51:3000/img?img_str="+img_str);		
 	
 		return img_bm;
+	}
+	
+	public boolean addTimelineData(JSONObject json_param){
+		
+		System.out.println("ADD Timeline Data => "+json_param);
+		return true;
 	}
 
 }

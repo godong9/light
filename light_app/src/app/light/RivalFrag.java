@@ -25,9 +25,9 @@ public class RivalFrag extends CommonFragment {
 	private String packName = "app.light";
 	private Resources res;
 	
-	public static JSONObject group_info = new JSONObject();
-	public static JSONObject my_info = new JSONObject();	//내 정보
-	public static JSONArray rival_info = new JSONArray();
+	public static JSONObject group_info = null;
+	public static JSONObject my_info = null;	//내 정보
+	public static JSONArray rival_info = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -109,8 +109,12 @@ public class RivalFrag extends CommonFragment {
 	}
 	
 	public void setRivalView(){
-		//DB에서 데이터 가져와서 변수에 저장
-	
+		//group 정보가 없을 때 DB에서 데이터 가져와서 변수에 저장
+
+		group_info = new JSONObject();
+		my_info = new JSONObject();
+		rival_info = new JSONArray();
+		
 		try {		
 			if(group_info.length() == 0) {
 				CommonHttp ch = new CommonHttp();	
@@ -139,8 +143,12 @@ public class RivalFrag extends CommonFragment {
 					}
 				}	
 			}
-			
-			
+		}
+		catch(Exception e) {
+			System.out.println("데이터 받아올 때 에러 발생");
+		}
+				
+		try {
 			//문자열로 날짜 변환 후에 다시 Date 형태로 변환
 			String start_day_str = group_info.getString("start_date");
 			String end_day_str = group_info.getString("end_date");
@@ -231,11 +239,10 @@ public class RivalFrag extends CommonFragment {
 				otherCalorie.setBackgroundResource(res.getIdentifier(other_calorie, "drawable", packName));
 			
 			}
-			
-			
-		} catch(Exception e) {
-			System.out.println("에러 발생");
 		}
+		catch(Exception e){
+			System.out.println("데이터 세팅 중 에러 발생");
+		}	
 		
 	}
 }
