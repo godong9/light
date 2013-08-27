@@ -13,15 +13,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class CommunityFrag extends CommonFragment {
+public class CommunityFrag extends CommonFragment implements OnItemClickListener {
 	
 	private Context context;
 	private ArrayList<CommunityObj> community_list;
 	private MyCommunityAdapter community_adapter;
 	private ListView community_listview;
 	private int community_list_count = 0;
+	private EditText search_text = null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -29,6 +34,8 @@ public class CommunityFrag extends CommonFragment {
 		View view = inflater.inflate(R.layout.frag_community, container, false);
 		context = getActivity();
 		
+		search_text = (EditText) view.findViewById(R.id.community_search_val);
+	
 		return view;
 	}
 	
@@ -37,7 +44,17 @@ public class CommunityFrag extends CommonFragment {
 		super.onStart();
 		
 		setCommunityList();
-	}			      
+	}		
+	
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+	{
+		// 리스트뷰 클릭시 키보드 숨기기
+		InputMethodManager imm = (InputMethodManager)context.getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(search_text.getWindowToken(), 0);
+	}
+	
+	
 	
 	public void setCommunityList(){
 		community_list = new ArrayList<CommunityObj>();
@@ -83,7 +100,8 @@ public class CommunityFrag extends CommonFragment {
 			community_list_count += json_community_data.length();	//개수만큼 불러와서 추가 		
 			community_adapter = new MyCommunityAdapter(context, community_list);
 			community_listview = (ListView)((Activity)context).findViewById(R.id.community_scroll);	  
-		    community_listview.setAdapter(community_adapter);
+		    community_listview.setOnItemClickListener(this);
+			community_listview.setAdapter(community_adapter);
 		}
 		catch(Exception e){
 			System.out.println("에러 발생");

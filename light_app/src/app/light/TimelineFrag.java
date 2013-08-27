@@ -235,6 +235,14 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}
 	}	
 	
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+	{
+		// 리스트뷰 클릭시 키보드 숨기기
+		InputMethodManager imm = (InputMethodManager)context.getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(chat_text.getWindowToken(), 0);
+	}
+	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -445,14 +453,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		catch(Exception e){
 			System.out.println("에러 발생");
 		}	
-	}
-	
-	public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-	{
-		// 리스트뷰 클릭시 키보드 숨기기
-		InputMethodManager imm = (InputMethodManager)context.getSystemService(
-			      Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(chat_text.getWindowToken(), 0);
 	}
 	
 	
