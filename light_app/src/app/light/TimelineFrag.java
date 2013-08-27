@@ -72,6 +72,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	
 	private String my_email = null;
 	
+	private String tmp_file_name = null;
+	
 	private Calendar last_get_date = Calendar.getInstance();
 	
 	@Override
@@ -269,8 +271,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
-						String fileName = my_email+"_"+String.valueOf(System.currentTimeMillis())+".jpg";
-						String filePath = path+"/"+fileName;
+						tmp_file_name = my_email+"_"+String.valueOf(System.currentTimeMillis())+".jpg";			
+						String filePath = path+"/"+tmp_file_name;
 						
 						fOut = new FileOutputStream(filePath);	//context.openFileOutput(filePath, Context.MODE_PRIVATE);
 						resize.compress(CompressFormat.JPEG, 100, fOut);	//jpeg 형태로 이미지 압축
@@ -523,7 +525,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			json_param.put("pre_content", "");
 			json_param.put("content", chat_val);
 			json_param.put("calorie", "");	
-			System.out.println("JSON 입력");
 		}
 		catch(Exception e){
 			System.out.println("JSON 에러");
@@ -563,35 +564,48 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	//내가 찍은 사진 업로드
 	public void addPicture(Bitmap tmpPicture)
 	{	
-		System.out.println("addPicture - "+tmpPicture);
-		
-		Calendar cal = Calendar.getInstance();
-
-		String dateToString , timeToString ;
-		String dateStatus;
-		int dateNoon = cal.get(Calendar.AM_PM);
-		int dateHour = cal.get(Calendar.HOUR_OF_DAY);
-		int dateMinute = cal.get(Calendar.MINUTE);
-	
-		if(dateNoon == 0){
-			dateStatus = "오전";
+		JSONObject json_param = new JSONObject();
+		try {
+			json_param.put("type", 6);	
+			json_param.put("pre_content", "");
+			json_param.put("content", tmp_file_name);
+			json_param.put("calorie", "");	
 		}
-		else{
-			dateStatus = "오후";
-			if(dateHour != 12){
-				dateHour = dateHour-12;
+		catch(Exception e){
+			System.out.println("JSON 에러");
+		}
+		
+		boolean data_status = sendTimelineData(json_param);
+		
+		if(data_status){
+			
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
+		
+			if(dateNoon == 0){
+				dateStatus = "오전";
 			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+			//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+			//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
+			
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+		
+			my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE, "", tmpPicture, timeString));
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();
+			my_listview.setSelection(my_list.size());
 		}
-		//dateToString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-		//timeToString = String.format("%02d:%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
-		
-		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
-	
-		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE, "", tmpPicture, timeString));
-		my_list_count += 1;     
-		
-		my_adapter.notifyDataSetChanged();
-		my_listview.setSelection(my_list.size());
 	}
 	
 	public void DoFileUpload(String apiUrl, String absolutePath) {
