@@ -30,6 +30,7 @@ exports.dao_user_info = function(evt, mysql_conn, params){
 	sql +="`A`.`nickname`, ";
 	sql += "`A`.`weight`, ";
 	sql += "`A`.`height`, ";
+	sql += "`A`.`pre_weight`, ";
 	sql += "`A`.`goal_weight`, ";
 	sql += "`A`.`character`, ";
 	sql += "`A`.`chat_ballon`, ";

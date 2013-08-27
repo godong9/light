@@ -33,30 +33,38 @@ exports.send_push = function(req, res) {
 					content: req.body.content,
 					calorie: req.body.calorie
 	};
-	
-	console.log("content => " +params['content']);
 
 	dao_t.dao_set_timeline(evt, mysql_conn, params);
 
 	evt.on('set_timeline', function(err, rows){
 		if(err) throw err;
 		
+		var today = getTimeStamp();
+
+		console.log('Today => ' + today);
+
 		message.addDataWithKeyValue('nickname', params['nickname']);
 		message.addDataWithKeyValue('view_type', params['type']);
 		message.addDataWithKeyValue('pre_content', params['pre_content']);
 		message.addDataWithKeyValue('content', params['content']);
+		message.addDataWithKeyValue('calorie', params['calorie']);
+		message.addDataWithKeyValue('date', today);
 
 		message.collapseKey = 'light';
 		message.delayWhileIdle = false;
 		message.timeToLive = 600;
+		
+		console.log('PUSHED DATA => '+params['nickname']+' // '+params['content']);
 
 		sender.send(message, registrationIds, 4, function (err, result) {
 			console.log(result);	
-			var result_val = { result:"success", msg:"회원가입이 완료되었습니다!" };
+			var result_val = { result:"success", msg:"메시지 전송 완료!" };
 			res.send(result_val);
 		});
 	});
 };
+
+
 
 exports.upload = function(req, res){
 	console.log('->> upload was called!');
@@ -91,3 +99,28 @@ function renameImg(image){
     });
 }
 
+function getTimeStamp() {
+  var d = new Date();
+
+  var s =
+    leadingZeros(d.getFullYear(), 4) + '-' +
+    leadingZeros(d.getMonth() + 1, 2) + '-' +
+    leadingZeros(d.getDate(), 2) + ' ' +
+
+    leadingZeros(d.getHours(), 2) + ':' +
+    leadingZeros(d.getMinutes(), 2) + ':' +
+    leadingZeros(d.getSeconds(), 2);
+
+  return s;
+}
+
+function leadingZeros(n, digits) {
+  var zero = '';
+  n = n.toString();
+
+  if (n.length < digits) {
+    for (i = 0; i < digits - n.length; i++)
+      zero += '0';
+  }
+  return zero + n;
+}
