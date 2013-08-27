@@ -101,7 +101,13 @@ public class GCMIntentService extends GCMBaseIntentService {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         String message = nickname + " : " + content;
-        Notification notification = new Notification(icon, message, when);
+        //Notification notification = new Notification(icon, message, when);
+        Notification notification = new Notification.Builder(context)
+        								.setSmallIcon(icon)
+        								.setContentTitle(message)
+        								.setWhen(when)
+        								.build();
+        
         String title = context.getString(R.string.app_name);
         Intent notificationIntent = new Intent(context, LoginActivity.class);
         notificationIntent.putExtra("nickname", nickname);

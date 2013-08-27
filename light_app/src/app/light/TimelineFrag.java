@@ -267,7 +267,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					Bitmap tmpPicture = extras.getParcelable("data");
 					
 					//사진 크기 재조정
-					resize = Bitmap.createScaledBitmap(tmpPicture, 640, 480, true);
+					resize = Bitmap.createScaledBitmap(tmpPicture, 320, 240, true);
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
