@@ -339,19 +339,19 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			String end_date_string, start_date_string;
 			
 			end_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-			start_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 5);
+			start_date_string = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 3);
 			
 			// 현재까지 불러온 날짜 last_get_date 변수에 저장
-			last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 6);
+			last_get_date.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH) - 4);
 				
 			getTimelineData(start_date_string, end_date_string);
 			
 			if (pre_list_add == 0){
 	    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
-	    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+	    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
 	    		
 	    		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-	    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 6);
+	    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 4);
 	    			
 	    		getTimelineData(start_date_string, end_date_string);
 			}
@@ -500,17 +500,24 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
             		String end_date_string, start_date_string;
             		
             		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
-            		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 5);
+            		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
             		
             		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 6);
+            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 4);
             			
             		getTimelineData(start_date_string, end_date_string);
                 	
-            		System.out.println("마지막 날짜: "+last_get_date);
-                	
-    				System.out.println("더해진 개수: "+pre_list_add);
-    				my_adapter.notifyDataSetChanged();
+            		if (pre_list_add == 0){
+        	    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
+        	    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
+        	    		
+        	    		// 현재까지 불러온 날짜 last_get_date 변수에 저장
+        	    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 4);
+        	    			
+        	    		getTimelineData(start_date_string, end_date_string);
+        			}
+	
+            		my_adapter.notifyDataSetChanged();
   
                     view.setSelection(pre_list_add);	//뷰 위치 이동
                 }
@@ -725,10 +732,47 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		return img_bm;
 	}
 	
-	public boolean addTimelineData(JSONObject json_param){
+	public void addTimelineData(JSONObject json_param){
 		
 		System.out.println("ADD Timeline Data => "+json_param);
-		return true;
+		try {
+			String type = json_param.getString("type");
+	        String nickname = json_param.getString("nickname");
+	        String pre_content = json_param.getString("pre_content");
+	        String content = json_param.getString("content");
+	        String calorie = json_param.getString("calorie");
+	        String date = json_param.getString("date");
+	        
+	        int type_int = Integer.parseInt(type);
+	        
+	        switch (type_int) {
+				case 0:
+					//
+				break;
+				case 1:
+					//
+				break;
+				case 2:
+					//
+				break;
+				case 3:
+					//
+				break;
+				case 4:
+					//
+				break;
+				case 5:
+					//
+				break;
+				case 6:
+					//
+				break;			
+			}
+	        
+		}
+		catch(Exception e){
+			System.out.println("add 에러");
+		}
 	}
 
 }
