@@ -194,7 +194,19 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					Toast.makeText(context, "메시지를 입력해주세요!", Toast.LENGTH_SHORT).show();
 				}
 				else{
-					addMyWord(chat_val);                  
+					try {
+						JSONObject json_my_param = new JSONObject();
+						json_my_param.put("type", "3");
+						json_my_param.put("nickname", "");
+						json_my_param.put("pre_content", "");
+						json_my_param.put("content", chat_val);
+						json_my_param.put("calorie", "");
+						
+						addMyData(json_my_param);
+					}
+					catch(Exception e){
+						
+					}
 				}						
 			}
 		});
@@ -526,48 +538,49 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	//내가 쓴 채팅 내용 추가
-	public void addMyWord(String chat_val)
-	{		
-		JSONObject json_param = new JSONObject();
-		try {
-			json_param.put("type", 3);	
-			json_param.put("pre_content", "");
-			json_param.put("content", chat_val);
-			json_param.put("calorie", "");	
+	public void addMyData(JSONObject json_my_param)
+	{	
+		try {	
+			String type = json_my_param.getString("type");
+	        String pre_content = json_my_param.getString("pre_content");
+	        String content = json_my_param.getString("content");
+	        String calorie = json_my_param.getString("calorie");
+			
+	        int type_int = Integer.parseInt(type);
+	       
+			boolean data_status = sendTimelineData(json_my_param);
+		
+			if(data_status){
+			
+				Calendar cal = Calendar.getInstance();
+		
+				String dateStatus;
+				int dateNoon = cal.get(Calendar.AM_PM);
+				int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+				int dateMinute = cal.get(Calendar.MINUTE);
+			
+				if(dateNoon == 0){
+					dateStatus = "오전";
+				}
+				else{
+					dateStatus = "오후";
+					if(dateHour != 12){
+						dateHour = dateHour-12;
+					}
+				}
+				
+				String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+				
+				my_list.add(new TimeLineObj(type_int, "", pre_content, content, calorie, timeString));	
+				my_list_count += 1;     
+				
+				my_adapter.notifyDataSetChanged();		
+				my_listview.setSelection(my_list.size());
+			}	
 		}
 		catch(Exception e){
-			System.out.println("JSON 에러");
+			System.out.println("내 대화 추가 에러 발생");
 		}
-		
-		boolean data_status = sendTimelineData(json_param);
-		
-		if(data_status){
-		
-			Calendar cal = Calendar.getInstance();
-	
-			String dateStatus;
-			int dateNoon = cal.get(Calendar.AM_PM);
-			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
-			int dateMinute = cal.get(Calendar.MINUTE);
-		
-			if(dateNoon == 0){
-				dateStatus = "오전";
-			}
-			else{
-				dateStatus = "오후";
-				if(dateHour != 12){
-					dateHour = dateHour-12;
-				}
-			}
-			
-			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
-			
-			my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_WORD, "", "", chat_val, "", timeString));	
-			my_list_count += 1;     
-			
-			my_adapter.notifyDataSetChanged();		
-			my_listview.setSelection(my_list.size());
-		}	
 	}
 	
 	//내가 찍은 사진 업로드
@@ -617,6 +630,19 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}
 	}
 	
+	// 다른사람이 추가한 데이터 추가
+	public void addOtherData(JSONObject json_param)
+	{
+		
+	}
+	
+	// 다른사람이 올린 사진 추가
+	public void addOtherPicture(JSONObject json_param, Bitmap tmpPicture)
+	{
+		
+	}
+	
+
 	public void DoFileUpload(String apiUrl, String absolutePath) {
 		HttpFileUpload(apiUrl, "", absolutePath);
 	}
@@ -717,13 +743,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}	
 	}
 	
-	/*
-	 * 타임라인 DB에 전송할 때 타입 값
-	 * 3 - CHAT
-	 * 4 - FOOD
-	 * 5 - EXERCISE
-	 * 6 - PICTURE
-	 */
 	public Bitmap getTimelineImg(String img_str) {	
 		
 		CommonHttp ch = new CommonHttp();	
