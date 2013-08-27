@@ -255,9 +255,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				if(extras != null)
 				{
 					Bitmap tmpPicture = extras.getParcelable("data");
-					addPicture(tmpPicture);	//사진 타임라인에 추가
+					
 					//사진 크기 재조정
-					resize = Bitmap.createScaledBitmap(tmpPicture, 200, 150, true);
+					resize = Bitmap.createScaledBitmap(tmpPicture, 640, 480, true);
 					try{
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
@@ -284,6 +284,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 							f.delete();		
 						}
 						
+						//사진 타임라인에 추가
+						addPicture(tmpPicture);			
 					}
 					catch(Exception e)
 					{
@@ -585,11 +587,11 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
 	
-		//my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_UPLOAD_MY_PICTURE,tmpPicture,timeString));
-		//my_list_count += 1;     
+		my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_MY_PICTURE, "", tmpPicture, timeString));
+		my_list_count += 1;     
 		
-		//my_adapter.notifyDataSetChanged();
-		//my_listview.setSelection(my_list.size());
+		my_adapter.notifyDataSetChanged();
+		my_listview.setSelection(my_list.size());
 	}
 	
 	public void DoFileUpload(String apiUrl, String absolutePath) {
