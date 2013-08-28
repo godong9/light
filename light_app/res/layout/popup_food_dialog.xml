@@ -10,6 +10,87 @@
         android:orientation="vertical" 
         android:background="@drawable/write_dialog_background">
  		
+	    <LinearLayout
+	        android:layout_weight="12"	
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"	
+	        android:orientation="horizontal">
+	        
+	        <TextView   
+				android:layout_width="240dp"						
+				android:layout_height="fill_parent"
+				android:layout_marginLeft="28.5dp"
+				android:paddingTop="19dp"
+				android:text="식사 기록"    
+	            android:textSize ="14sp"
+	            android:textStyle="bold"
+	            android:textColor="#424242" 
+	            android:singleLine="true"/>
+	        <ImageButton  
+		        android:id="@+id/write_food_exit_btn" 
+				android:layout_width="20dp"						
+				android:layout_height="20dp"
+				android:layout_gravity="center_vertical"
+				android:layout_marginTop="1dp"
+				android:layout_marginLeft="1dp"
+				android:layout_marginRight="1dp"
+				android:background="@drawable/rival_dialog_exit"/> 	
+				
+        </LinearLayout>
+	    
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="0dp"
+			android:layout_weight="74"
+	        android:orientation="vertical">
+	        <LinearLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+				android:layout_weight="20"
+		        android:orientation="horizontal">
+		        <EditText           
+		             android:id="@+id/write_food_search_val"
+					 android:layout_width="210dp"
+					 android:layout_height="fill_parent"
+					 android:layout_marginTop="8dp"
+					 android:layout_marginBottom="4dp"
+					 android:layout_marginLeft="24dp"
+				 	 android:layout_marginRight="4dp"/>	
+		        <ImageButton
+		            android:id="@+id/write_food_search_btn"
+			        android:layout_width="30dp"
+					android:layout_height="fill_parent"
+					android:layout_marginTop="12dp"
+					android:layout_marginBottom="12dp"
+					android:layout_marginLeft="4dp"
+					android:layout_marginRight="4dp"
+		            android:background="@drawable/search_btn"/>
+	        </LinearLayout>
+	        <ListView 
+	          android:id="@+id/food_scroll"
+	          android:layout_width="fill_parent"
+	          android:layout_height="0dp"    
+	          android:layout_weight="80"
+	          android:layout_marginBottom="14dp"
+	          android:transcriptMode="normal"
+	          android:divider="#FFFFFF"
+	       	  android:listSelector="#00000000"
+	       	  android:cacheColorHint="#00000000" />
+	        
+        </LinearLayout>
+	           	          
+     	<ImageButton
+	        android:id="@+id/write_food_ok_btn"
+	        android:layout_weight="14"
+	        android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="16dp"
+			android:layout_marginLeft="13dp"
+			android:layout_marginRight="13dp"
+			android:layout_gravity="center"
+	        android:background="@drawable/write_ok_btn"/>
+	            
 	</LinearLayout>
 
 </LinearLayout>
