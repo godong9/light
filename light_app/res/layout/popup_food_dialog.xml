@@ -8,7 +8,7 @@
         android:layout_width="300dp"
         android:layout_height="373dp"
         android:orientation="vertical" 
-        android:background="#FFFFFF">
+        android:background="@drawable/write_dialog_background">
  		
 	</LinearLayout>
 

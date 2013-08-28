@@ -31,8 +31,12 @@ import android.view.WindowManager;
 				view = mLayoutInflater.inflate(R.layout.popup_food_dialog, null);
 				mBuilder.setView(view);	
 			}
-			else{
+			else if(type==1){
 				view = mLayoutInflater.inflate(R.layout.popup_exercise_dialog, null);
+				mBuilder.setView(view);
+			}
+			else if(type==2){
+				view = mLayoutInflater.inflate(R.layout.popup_weight_dialog, null);
 				mBuilder.setView(view);
 			}
 

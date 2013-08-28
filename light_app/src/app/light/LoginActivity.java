@@ -1,10 +1,18 @@
 package app.light;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
@@ -21,6 +29,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import static app.light.CommonUtilities.DISPLAY_MESSAGE_ACTION;
 import static app.light.CommonUtilities.EXTRA_MESSAGE;
@@ -32,6 +41,7 @@ import com.google.android.gcm.GCMRegistrar;
 public class LoginActivity extends CommonActivity {
 	
 	AsyncTask<Void, Void, Void> mRegisterTask;
+	private static final String PACKAGE_NAME="app.light";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +136,14 @@ public class LoginActivity extends CommonActivity {
 	    password_edit.setText(password_text);
 	    keep_login_check.setChecked(keep_login_boolean);
 		
+	    System.out.println("intent_str=>"+intent_str);
+	    
 		if(intent_str == null){	//처음 앱 접속시
+			if(!checkDB(this)){
+				dumpDB(this);
+				System.out.println("DUMP DB");
+			}
+			
 			startActivity(new Intent(this, SplashActivity.class));
 			
 			// 로그인 상태 유지가 체크되었을 때
@@ -144,6 +161,16 @@ public class LoginActivity extends CommonActivity {
 		    }		
 		}
 	}
+	
+    private final BroadcastReceiver mHandleMessageReceiver =
+            new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
+            
+            System.out.println("Receive Content => "+intent.getStringExtra("content"));
+        }
+    };
 	
 	//로그인 버튼 클릭시
 	public void onLoginBtn(View v) {
@@ -220,15 +247,60 @@ public class LoginActivity extends CommonActivity {
                     getString(R.string.error_config, name));
         }
     }
+    
+    
+	public boolean checkDB(Context mContext) {
+		String path = Environment.getExternalStorageDirectory().toString();
+		String filePath = path+"/Light_Diet/" + PACKAGE_NAME + "/db/food.db";
+		File file = new File(filePath);
+		return file.exists();
+	}
 
-    private final BroadcastReceiver mHandleMessageReceiver =
-            new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String newMessage = intent.getExtras().getString(EXTRA_MESSAGE);
-            
-            System.out.println("Receive Content => "+intent.getStringExtra("content"));
-        }
-    };
+	// Dump DB
+	public void dumpDB(Context mContext) {
+		AssetManager manager = mContext.getAssets();
+		String path = Environment.getExternalStorageDirectory().toString();
+		String folderPath = path+"/Light_Diet/" + PACKAGE_NAME + "/db";
+		String filePath = path+"/Light_Diet/" + PACKAGE_NAME + "/db/food.db";
+		
+		File folder = new File(folderPath);
+		File file = new File(filePath);
+
+		FileOutputStream fos = null;
+		BufferedOutputStream bos = null;
+
+		try {
+			InputStream is = manager.open("db/food_db.sqlite");
+			BufferedInputStream bis = new BufferedInputStream(is);
+
+			if (folder.exists()) {
+			} else {
+				folder.mkdirs();
+			}
+
+			if (file.exists()) {
+				file.delete();
+				file.createNewFile();
+			}
+			
+			fos = new FileOutputStream(file);
+			bos = new BufferedOutputStream(fos);
+			int read = -1;
+			byte[] buffer = new byte[1024];
+			while ((read = bis.read(buffer, 0, 1024)) != -1) {
+				System.out.println("BUFFER"+buffer);
+				bos.write(buffer, 0, read);
+			}
+
+			bos.flush();
+			bos.close();
+			fos.close();
+			bis.close();
+			is.close();
+
+		} catch (IOException e) {
+			Log.e("ErrorMessage : ", e.getMessage());
+		}
+	}
 	
 }

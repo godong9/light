@@ -151,8 +151,9 @@ public final class R {
         public static final int timeline_timebar=0x7f02006d;
         public static final int title_logo=0x7f02006e;
         public static final int write_btn=0x7f02006f;
-        public static final int write_off=0x7f020070;
-        public static final int write_on=0x7f020071;
+        public static final int write_dialog_background=0x7f020070;
+        public static final int write_off=0x7f020071;
+        public static final int write_on=0x7f020072;
     }
     public static final class id {
         public static final int arrow_down=0x7f08004e;
@@ -312,16 +313,17 @@ public final class R {
         public static final int popup_my_dialog=0x7f030011;
         public static final int popup_other_dialog=0x7f030012;
         public static final int popup_vertical=0x7f030013;
-        public static final int timeline_manager_mission=0x7f030014;
-        public static final int timeline_manager_word=0x7f030015;
-        public static final int timeline_my_picture=0x7f030016;
-        public static final int timeline_my_word=0x7f030017;
-        public static final int timeline_my_write=0x7f030018;
-        public static final int timeline_other_picture=0x7f030019;
-        public static final int timeline_other_word=0x7f03001a;
-        public static final int timeline_other_write=0x7f03001b;
-        public static final int timeline_timebar=0x7f03001c;
-        public static final int title=0x7f03001d;
+        public static final int popup_weight_dialog=0x7f030014;
+        public static final int timeline_manager_mission=0x7f030015;
+        public static final int timeline_manager_word=0x7f030016;
+        public static final int timeline_my_picture=0x7f030017;
+        public static final int timeline_my_word=0x7f030018;
+        public static final int timeline_my_write=0x7f030019;
+        public static final int timeline_other_picture=0x7f03001a;
+        public static final int timeline_other_word=0x7f03001b;
+        public static final int timeline_other_write=0x7f03001c;
+        public static final int timeline_timebar=0x7f03001d;
+        public static final int title=0x7f03001e;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;

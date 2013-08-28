@@ -27,6 +27,9 @@ import android.net.Uri;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,9 +53,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	// 타임라인 입력 관련 버튼 상수
 	private static final int ID_FOOD     = 11;
 	private static final int ID_EXERCISE     = 12;
+	private static final int ID_WEIGHT     = 13;
 	private static final int ID_CAMERA     = 14;
 	private static final int ID_ALBUM     = 15;	
-		
+	
+	private static final String PACKAGE_NAME="app.light";
+	
 	private Uri mImageCaptureUri;
 	private FileInputStream mFileInputStream;
 	private TimelineDialogWindow popup_dialog;
@@ -91,6 +97,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		//기록 버튼 팝업 관련 코드    
 	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
 		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
+		ActionItem write_weight 	= new ActionItem(ID_WEIGHT, "체중 기록");
       
 		//버튼 눌러도 안사라지게 고정
         //write_food.setSticky(true);
@@ -101,6 +108,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
         //add action items into QuickAction
         writePopup.addActionItem(write_food);
         writePopup.addActionItem(write_exercise);
+        writePopup.addActionItem(write_weight);
 
         //Set listener for action item clicked
         writePopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
@@ -118,6 +126,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
   					//Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
   					popup_dialog = new TimelineDialogWindow(1);
   					popup_dialog.show(getFragmentManager(), "Exercise Popup");	
+  				} else if (actionId == ID_WEIGHT) {
+  					//Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
+  					popup_dialog = new TimelineDialogWindow(2);
+  					popup_dialog.show(getFragmentManager(), "Weight Popup");	
   				}
   			}
   		});		
@@ -284,12 +296,23 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 						FileOutputStream fOut = null;
 						String path = Environment.getExternalStorageDirectory().toString();
 						tmp_file_name = my_email+"_"+String.valueOf(System.currentTimeMillis())+".jpg";			
-						String filePath = path+"/"+tmp_file_name;
-						
+					//	String filePath = path+"/"+tmp_file_name;
+									
+						String folderPath = path+"/Light_Diet/" + PACKAGE_NAME + "/picture";
+						String filePath = path+"/Light_Diet/" + PACKAGE_NAME + "/picture/"+tmp_file_name;
+
+						File folder = new File(folderPath);
+						File file = new File(filePath);
+
+				
+						if (!folder.exists()) {
+							folder.mkdirs();
+						}
+												
 						fOut = new FileOutputStream(filePath);	//context.openFileOutput(filePath, Context.MODE_PRIVATE);
 						resize.compress(CompressFormat.JPEG, 100, fOut);	//jpeg 형태로 이미지 압축
-					
-						System.out.println(filePath);
+								
+						//System.out.println(filePath);
 						
 						fOut.flush();
 						fOut.close();
@@ -300,11 +323,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 						DoFileUpload(urlString, filePath);
 										
 						//임시 이미지 파일 삭제
-						File f = new File(mImageCaptureUri.getPath());	
-						if(f.exists())
+						File tmp_file = new File(mImageCaptureUri.getPath());	
+
+						if(tmp_file.exists())
 						{
-							f.delete();		
-						}
+							tmp_file.delete();	
+						}		
 						
 						//사진 타임라인에 추가
 						addMyPicture(tmpPicture);			
@@ -512,23 +536,15 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
             		String end_date_string, start_date_string;
             		
             		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
-            		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
+            		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 2);
+            		
+            		System.out.println("start_date =>"+start_date_string);
             		
             		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 4);
+            		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
             			
             		getTimelineData(start_date_string, end_date_string);
-                	
-            		if (pre_list_add == 0){
-        	    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
-        	    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
-        	    		
-        	    		// 현재까지 불러온 날짜 last_get_date 변수에 저장
-        	    		last_get_date.set(last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 4);
-        	    			
-        	    		getTimelineData(start_date_string, end_date_string);
-        			}
-	
+           
             		my_adapter.notifyDataSetChanged();
   
                     view.setSelection(pre_list_add);	//뷰 위치 이동
