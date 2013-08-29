@@ -19,7 +19,7 @@
 	        <TextView   
 				android:layout_width="240dp"						
 				android:layout_height="fill_parent"
-				android:layout_marginLeft="28.5dp"
+				android:layout_marginLeft="28dp"
 				android:paddingTop="19dp"
 				android:text="식사 기록"    
 	            android:textSize ="14sp"
@@ -27,7 +27,7 @@
 	            android:textColor="#424242" 
 	            android:singleLine="true"/>
 	        <ImageButton  
-		        android:id="@+id/write_food_exit_btn" 
+		        android:id="@+id/write_exit_btn" 
 				android:layout_width="20dp"						
 				android:layout_height="20dp"
 				android:layout_gravity="center_vertical"

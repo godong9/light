@@ -77,7 +77,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private EditText chat_text = null;
 	
 	private String my_email = null;
-	
+	private String my_weight = null;
 	private String tmp_file_name = null;
 	
 	private Calendar last_get_date = Calendar.getInstance();
@@ -119,16 +119,16 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
   				//here we can filter which action item was clicked with pos or actionId parameter
   				if (actionId == ID_FOOD) {
   					//Toast.makeText(context, "음식 기록", Toast.LENGTH_SHORT).show();
-  					popup_dialog = new TimelineDialogWindow(0);
+  					popup_dialog = new TimelineDialogWindow(0, my_email, my_weight);
   					popup_dialog.show(getFragmentManager(), "Food Popup");	
   					
   				} else if (actionId == ID_EXERCISE) {
   					//Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
-  					popup_dialog = new TimelineDialogWindow(1);
+  					popup_dialog = new TimelineDialogWindow(1, my_email, my_weight);
   					popup_dialog.show(getFragmentManager(), "Exercise Popup");	
   				} else if (actionId == ID_WEIGHT) {
   					//Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
-  					popup_dialog = new TimelineDialogWindow(2);
+  					popup_dialog = new TimelineDialogWindow(2, my_email, my_weight);
   					popup_dialog.show(getFragmentManager(), "Weight Popup");	
   				}
   			}
@@ -277,7 +277,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				return;
 		}
 	
-		System.out.println("result:"+resultCode);
+		//System.out.println("result:"+resultCode);
 
 		switch(requestCode)
 		{
@@ -382,7 +382,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				
 			getTimelineData(start_date_string, end_date_string);
 			
-			if (pre_list_add == 0){
+			if (pre_list_add <= 20){
 	    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH));
 	    		start_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH), last_get_date.get(Calendar.DAY_OF_MONTH) - 3);
 	    		
@@ -402,7 +402,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	    my_listview.setOnScrollListener(this);
 	    my_listview.setOnItemClickListener(this);
 	    //my_listview.setSelection(my_adapter.getCount() - 1);
-	    
+  
 	}
 	
 	public void getTimelineData(String db_start_date, String db_end_date)
@@ -413,8 +413,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			json_param.put("start_date", db_start_date);
 			json_param.put("end_date", db_end_date);
 			
-			System.out.println("tmp -> "+db_start_date);
-			System.out.println("last -> "+db_end_date);
+			//System.out.println("tmp -> "+db_start_date);
+			//System.out.println("last -> "+db_end_date);
 			
 			CommonHttp ch = new CommonHttp();	
 			String result_json = ch.postData("http://211.110.61.51:3000/timeline", json_param);		
@@ -422,8 +422,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			JSONObject json_data = new JSONObject(result_json);
 			JSONArray json_timeline_data = json_data.getJSONArray("timeline_data");
 			my_email = json_data.getJSONObject("my_email").getString("my_email");
-			
-			System.out.println("EMAIL: "+my_email);
+			my_weight = json_data.getJSONArray("weight_data").getJSONObject(0).getString("weight");
+			System.out.println("EMAIL: "+my_weight);
 			
 			for(int i=0; i<json_timeline_data.length(); i++){
 				// JSON 데이터 가져와서 리스트에 추가하는 부분
