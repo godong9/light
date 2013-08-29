@@ -99,7 +99,19 @@ import android.widget.Toast;
 			
 			
 			if(type==0){
-			
+				final ImageButton ok_btn = (ImageButton)getDialog().findViewById(R.id.write_food_ok_btn);
+				//검색 및 자동완성 구현
+				
+				
+				ok_btn.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{	
+						//데이터 전송해주는 부분 추가 필요
+						onStop();
+					}	
+				});	
 			}
 			else if(type==1){
 				
