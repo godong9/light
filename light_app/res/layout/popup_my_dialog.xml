@@ -126,7 +126,7 @@
 			            android:layout_height="0dp"
 			            android:layout_marginLeft="15dp"
 			            android:layout_marginTop="1.5dp"
-			            android:text="체중     99kg"
+			            android:text="체중    99kg"
 				        android:textColor="#525252"
 				        android:textSize="14sp"
 						/>

@@ -100,7 +100,7 @@ import android.widget.Toast;
 				myNickName.setText(user_info.getString("nickname"));
 				myChat.setText(user_info.getString("chat_ballon"));
 				myHeight.setText("키       "+user_info.getString("height")+"cm");
-				myWeight.setText("체중     "+user_info.getString("weight")+"kg");
+				myWeight.setText("체중    "+user_info.getString("weight")+"kg");
 				myGoal.setText(user_info.getString("goal_weight")+"kg");
 				myLimitCalorie.setText(user_info.getString("day_calorie")+" Kcal");
 				myEatCalorie.setText(user_info.getString("food_calorie")+" Kcal");

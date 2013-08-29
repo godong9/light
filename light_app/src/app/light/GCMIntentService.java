@@ -175,12 +175,9 @@ public class GCMIntentService extends GCMBaseIntentService {
     	}    
     }
 
-    public static boolean isRunningProcess(Context context, String packageName) {
-    	 
+    public static boolean isRunningProcess(Context context, String packageName) {	 
         boolean isRunning = false;
- 
         ActivityManager actMng = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);                      
- 
         List<RunningAppProcessInfo> list = actMng.getRunningAppProcesses();     
  
         for(RunningAppProcessInfo rap : list)                           

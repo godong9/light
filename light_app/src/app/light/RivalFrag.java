@@ -184,7 +184,7 @@ public class RivalFrag extends CommonFragment {
 			//내 데이터 적용
 			TextView myNickName = (TextView)((Activity)context).findViewById(R.id.rival_user1_nickname);
 			TextView myChat = (TextView)((Activity)context).findViewById(R.id.rival_user1_word);
-			TextView myHeight = (TextView)((Activity)context).findViewById(R.id.rival_user1_height);
+			TextView myPreWeight = (TextView)((Activity)context).findViewById(R.id.rival_user1_pre_weight);
 			TextView myWeight = (TextView)((Activity)context).findViewById(R.id.rival_user1_weight);
 			TextView myScore = (TextView)((Activity)context).findViewById(R.id.rival_user1_score);
 			ImageButton myCharacter = (ImageButton)((Activity)context).findViewById(R.id.rival_user1_click);
@@ -192,9 +192,27 @@ public class RivalFrag extends CommonFragment {
 			
 			myNickName.setText(my_info.getString("nickname"));
 			myChat.setText(my_info.getString("chat_ballon"));
-			myHeight.setText(my_info.getString("height")+"cm /");
-			myWeight.setText(my_info.getString("weight")+"kg");
-			myScore.setText(my_info.getString("score"));
+			myPreWeight.setText(my_info.getString("pre_weight")+"kg");
+			myWeight.setText(my_info.getString("weight")+"kg");	
+			
+			String score_str = "";
+			String pre_weight_str = my_info.getString("pre_weight");
+			String tmp_weight_str = my_info.getString("weight");
+	
+			float pre_weight = Float.parseFloat(pre_weight_str);
+			float tmp_weight = Float.parseFloat(tmp_weight_str);
+			
+			if(tmp_weight <= pre_weight){
+				float tmp_score = pre_weight-tmp_weight;
+				String tmp_score_str = String.format("%.1f", tmp_score);
+				score_str = "-"+tmp_score_str+"kg";
+			}
+			else{
+				float tmp_score = tmp_weight-pre_weight;
+				String tmp_score_str = String.format("%.1f", tmp_score);
+				score_str = "+"+tmp_score_str+"kg";
+			}
+			myScore.setText(score_str);
 			
 			res = getResources();
 			
@@ -215,7 +233,7 @@ public class RivalFrag extends CommonFragment {
 				
 				TextView otherNickName = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"nickname", "id", packName));
 				TextView otherChat = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"word", "id", packName));
-				TextView otherHeight = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"height", "id", packName));
+				TextView otherPreWeight = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"pre_weight", "id", packName));
 				TextView otherWeight = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"weight", "id", packName));
 				TextView otherScore = (TextView)((Activity)context).findViewById(res.getIdentifier(res_other+"score", "id", packName));
 				ImageButton otherCharacter = (ImageButton)((Activity)context).findViewById(res.getIdentifier(res_other+"click", "id", packName));
@@ -225,9 +243,27 @@ public class RivalFrag extends CommonFragment {
 				
 				otherNickName.setText(rival_info.getJSONObject(i).getString("nickname"));
 				otherChat.setText(rival_info.getJSONObject(i).getString("chat_ballon"));
-				otherHeight.setText(rival_info.getJSONObject(i).getString("height")+"cm /");
+				otherPreWeight.setText(rival_info.getJSONObject(i).getString("pre_weight")+"kg");
 				otherWeight.setText(rival_info.getJSONObject(i).getString("weight")+"kg");
-				otherScore.setText(rival_info.getJSONObject(i).getString("score"));
+				
+				score_str = "";
+				pre_weight_str = rival_info.getJSONObject(i).getString("pre_weight");
+				tmp_weight_str = rival_info.getJSONObject(i).getString("weight");
+		
+				pre_weight = Float.parseFloat(pre_weight_str);
+				tmp_weight = Float.parseFloat(tmp_weight_str);
+				
+				if(tmp_weight <= pre_weight){
+					float tmp_score = pre_weight-tmp_weight;
+					String tmp_score_str = String.format("%.1f", tmp_score);
+					score_str = "-"+tmp_score_str+"kg";
+				}
+				else{
+					float tmp_score = tmp_weight-pre_weight;
+					String tmp_score_str = String.format("%.1f", tmp_score);
+					score_str = "+"+tmp_score_str+"kg";
+				}
+				otherScore.setText(score_str);
 				
 				String other_character = "@drawable/character_"+rival_info.getJSONObject(i).getString("character");
 				String other_calorie = "@drawable/calorie_"+rival_info.getJSONObject(i).getString("calorie_status");
