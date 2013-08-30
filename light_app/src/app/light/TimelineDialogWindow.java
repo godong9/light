@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -42,7 +43,8 @@ import android.widget.Toast;
 		private int tmp_position = 0;
 		private Float tmp_time = 0f;
 		private Float tmp_power = 1f;
-		
+		private Float tmp_food_calorie = 0f;
+		private Float tmp_food_num = 1f;
 		
 		public TimelineDialogWindow(int type, String my_email, String my_weight) {
 			this.type=type;
@@ -113,6 +115,10 @@ import android.widget.Toast;
 				final ImageButton ok_btn = (ImageButton)getDialog().findViewById(R.id.write_food_ok_btn);
 				AutoCompleteTextView tv_search = (AutoCompleteTextView)getDialog().findViewById(R.id.write_food_search_val);
 				
+				final ImageButton minus_btn = (ImageButton)getDialog().findViewById(R.id.write_food_minus_btn);
+				final ImageButton plus_btn = (ImageButton)getDialog().findViewById(R.id.write_food_plus_btn);	
+				final ImageButton delete_btn = (ImageButton)getDialog().findViewById(R.id.write_food_delete_btn);	
+				
 				SQLiteDatabase db; 
 				final int DB_MODE = Context.MODE_PRIVATE;      
 				final String DB_NAME = "food.db"; // DB 생성시 이름 		
@@ -122,8 +128,7 @@ import android.widget.Toast;
 				
 				db = SQLiteDatabase.openOrCreateDatabase(filePath, null); // 있으면 열고, 없으면 생성                
 			    System.out.println("database test=>"+db); 
-				    
-			   		    
+				    	    
 				String sql = "select * from " + "food_db";
 				Cursor cursor = db.rawQuery(sql, null);
 	
@@ -157,10 +162,27 @@ import android.widget.Toast;
 				    @Override
 				    public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-				    	TextView tv = (TextView)view;
+				    	TextView tv_tmp = (TextView)view;
+				    	TextView tv_select_food = (TextView)getDialog().findViewById(R.id.user_select_food);
+				    	TextView tv_food_calorie = (TextView)getDialog().findViewById(R.id.write_food_calorie);
+				    	AutoCompleteTextView tv_search = (AutoCompleteTextView)getDialog().findViewById(R.id.write_food_search_val);
+				    	
+				    	LinearLayout ll = (LinearLayout)getDialog().findViewById(R.id.write_food_select_layout);
 				    	try{
-				    		String tmp_calorie = food_data.getString(tv.getText().toString());
-				    		System.out.println("칼로리 => "+tmp_calorie);
+				    		String tmp_calorie_str = food_data.getString(tv_tmp.getText().toString());
+				    		//System.out.println("칼로리 => "+tmp_calorie);
+				    		
+				    		float tmp_calorie = Float.valueOf(tmp_calorie_str);
+				    		tmp_food_calorie = tmp_calorie;
+							
+							//float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
+							String calorie_str = String.format("%.0f", tmp_calorie);
+				    		
+				    		tv_select_food.setText(tv_tmp.getText().toString());
+				    		tv_food_calorie.setText("+"+calorie_str+"Kcal");
+				    	    	
+				    		tv_search.setText("");
+				    		ll.setVisibility(View.VISIBLE);  		
 				    	}
 				    	catch(Exception e){
 				    		
@@ -169,8 +191,66 @@ import android.widget.Toast;
 				    }
 				});
 				
+				minus_btn.setOnClickListener(new View.OnClickListener()
+				{
+			    	TextView tv_food_calorie = (TextView)getDialog().findViewById(R.id.write_food_calorie);
+			    	TextView tv_food_num = (TextView)getDialog().findViewById(R.id.write_food_num_val);
+			    	@Override
+					public void onClick(View v)
+					{	
+						String tmp_food_str = (String)tv_food_calorie.getText().toString();
+						//tmp_food_str = tmp_food_str.replaceAll("+", "");
+						tmp_food_str = tmp_food_str.replaceAll("Kcal", "");		
+						
+						Float tmp_num = Float.valueOf(tv_food_num.getText().toString());
+						
+						if(tmp_num > 0.5) {
+							tmp_food_num = tmp_num-0.5f;
+							float tmp_calorie = tmp_food_num * tmp_food_calorie ;
+							tv_food_calorie.setText(String.format("+"+"%.0f", tmp_calorie)+"Kcal");
+							tv_food_num.setText(String.format("%.1f", tmp_food_num));
+						}		
+					}	
+				});
 				
+				plus_btn.setOnClickListener(new View.OnClickListener()
+				{
+					TextView tv_food_calorie = (TextView)getDialog().findViewById(R.id.write_food_calorie);
+			    	TextView tv_food_num = (TextView)getDialog().findViewById(R.id.write_food_num_val);
+					@Override
+					public void onClick(View v)
+					{	
+						String tmp_food_str = (String)tv_food_calorie.getText().toString();
+						//tmp_food_str = tmp_food_str.replaceAll("+", "");
+						tmp_food_str = tmp_food_str.replaceAll("Kcal", "");
+						
+						Float tmp_num = Float.valueOf(tv_food_num.getText().toString());
+						
+						if(tmp_num < 5) {
+							tmp_food_num = tmp_num+0.5f;
+							float tmp_calorie = tmp_food_num * tmp_food_calorie ;
+							tv_food_calorie.setText(String.format("+"+"%.0f", tmp_calorie)+"Kcal");
+							tv_food_num.setText(String.format("%.1f", tmp_food_num));
+						}
+					}	
+				});
 				
+				delete_btn.setOnClickListener(new View.OnClickListener()
+				{
+					TextView tv_food_calorie = (TextView)getDialog().findViewById(R.id.write_food_calorie);
+			    	TextView tv_food_num = (TextView)getDialog().findViewById(R.id.write_food_num_val);
+			    	LinearLayout ll = (LinearLayout)getDialog().findViewById(R.id.write_food_select_layout);
+			    	
+			    	@Override
+					public void onClick(View v)
+					{	
+						tmp_food_num = 1.0f;
+						tmp_food_calorie = 0f;
+						tv_food_num.setText(String.format("%.1f", tmp_food_num));
+						tv_food_calorie.setText(String.format("+"+"%.0f", tmp_food_calorie)+"Kcal");
+						ll.setVisibility(View.GONE);  
+					}	
+				});
 			
 				ok_btn.setOnClickListener(new View.OnClickListener()
 				{
