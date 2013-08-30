@@ -31,6 +31,8 @@ import android.widget.Toast;
 	public class TimelineDialogWindow extends DialogFragment {
 		
 		private static final String PACKAGE_NAME="app.light";
+		private static String[] food_list;
+		private static String[] food_calorie;
 		
 		private Context context;
 		private int type;
@@ -128,26 +130,29 @@ import android.widget.Toast;
 				if (cursor != null) {
 					int count = cursor.getCount(); // 조회된 개수얻기
 					System.out.println("데이터를 조회했어요. 레코드 갯수: " + count + "\n");
-	
+					food_list = new String[count];
 					for (int i = 0; i < count; i++) {
 						cursor.moveToNext();
-	
+							
 						// String name=cursor.getString(0) + "/"
 						// +cursor.getString(1) +"/"+ cursor.getInt(2);
-						String name = cursor.getString(0) + "/"
-								+ cursor.getString(1);
-						// String name= cursor.getString(1);
-						System.out.println("데이터 #" + i + ":" + name + "\n");
+						
+						food_list[i] = cursor.getString(0);
+						food_calorie[i] = cursor.getString(1);
+						
+						//String name = cursor.getString(0) + "/" + cursor.getString(1);
+						//System.out.println("데이터 #" + i + ":" + name + "\n");					
 					}
 				}
 			    
-			    
-			    
-			    
-				//검색 및 자동완성 구현 -> DB에서 데이터 가져오도록 수정
-				String[] food_list = {"김치찌개", "된장찌개", "피자", "치킨"};
-				
 				tv_search.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, food_list));
+			   
+				//검색 및 자동완성 구현 -> DB에서 데이터 가져오도록 수정
+				//String[] food_list = {"김치찌개", "된장찌개", "피자", "치킨"};
+				
+				
+				
+				
 				
 				ok_btn.setOnClickListener(new View.OnClickListener()
 				{
