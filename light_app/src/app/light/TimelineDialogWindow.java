@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -32,7 +33,7 @@ import android.widget.Toast;
 		
 		private static final String PACKAGE_NAME="app.light";
 		private static String[] food_list;
-		private static String[] food_calorie;
+		private static JSONObject food_data;
 		
 		private Context context;
 		private int type;
@@ -121,16 +122,16 @@ import android.widget.Toast;
 				
 				db = SQLiteDatabase.openOrCreateDatabase(filePath, null); // 있으면 열고, 없으면 생성                
 			    System.out.println("database test=>"+db); 
-				
-			    
+				    
 			   		    
 				String sql = "select * from " + "food_db";
 				Cursor cursor = db.rawQuery(sql, null);
 	
 				if (cursor != null) {
 					int count = cursor.getCount(); // 조회된 개수얻기
-					System.out.println("데이터를 조회했어요. 레코드 갯수: " + count + "\n");
+					//System.out.println("데이터를 조회했어요. 레코드 갯수: " + count + "\n");
 					food_list = new String[count];
+					food_data = new JSONObject();
 					for (int i = 0; i < count; i++) {
 						cursor.moveToNext();
 							
@@ -138,22 +139,39 @@ import android.widget.Toast;
 						// +cursor.getString(1) +"/"+ cursor.getInt(2);
 						
 						food_list[i] = cursor.getString(0);
-						food_calorie[i] = cursor.getString(1);
 						
-						//String name = cursor.getString(0) + "/" + cursor.getString(1);
-						//System.out.println("데이터 #" + i + ":" + name + "\n");					
+						//food_calorie[i] = cursor.getString(1);
+						try {
+							food_data.put(cursor.getString(0), cursor.getString(1));
+						}
+						catch(Exception e){
+							System.out.println("JSON put 에러");
+						}			
 					}
 				}
 			    
 				tv_search.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, food_list));
-			   
-				//검색 및 자동완성 구현 -> DB에서 데이터 가져오도록 수정
-				//String[] food_list = {"김치찌개", "된장찌개", "피자", "치킨"};
+				
+				tv_search.setOnItemClickListener(new OnItemClickListener() { 
+
+				    @Override
+				    public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+				    	TextView tv = (TextView)view;
+				    	try{
+				    		String tmp_calorie = food_data.getString(tv.getText().toString());
+				    		System.out.println("칼로리 => "+tmp_calorie);
+				    	}
+				    	catch(Exception e){
+				    		
+				    	}
+				    	
+				    }
+				});
 				
 				
 				
-				
-				
+			
 				ok_btn.setOnClickListener(new View.OnClickListener()
 				{
 					@Override

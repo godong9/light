@@ -46,7 +46,7 @@
 	        <LinearLayout
 		        android:layout_width="fill_parent"
 		        android:layout_height="0dp"
-				android:layout_weight="24"
+				android:layout_weight="25"
 				android:layout_marginLeft="20dp"
 				android:layout_marginRight="20dp"
 				android:background="@drawable/write_underline"
@@ -61,16 +61,57 @@
 				 	 android:hint="음식이름 입력"/>	
 		        
 	        </LinearLayout>
-	        <ListView 
-	          android:id="@+id/food_scroll"
-	          android:layout_width="fill_parent"
-	          android:layout_height="0dp"    
-	          android:layout_weight="76"
-	          android:layout_marginBottom="14dp"
-	          android:transcriptMode="normal"
-	          android:divider="#FFFFFF"
-	       	  android:listSelector="#00000000"
-	       	  android:cacheColorHint="#00000000" />
+	        
+	        <LinearLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+				android:layout_weight="75"
+				android:layout_marginLeft="22dp"
+				android:layout_marginRight="22dp"
+		        android:orientation="vertical">
+		        <ListView 
+		          android:id="@+id/food_scroll"
+		          android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"  
+		          android:minHeight="300dp"  
+		          android:layout_marginBottom="14dp"
+		          android:transcriptMode="normal"
+		          android:divider="#FFFFFF"
+		       	  android:listSelector="#00000000"
+		       	  android:cacheColorHint="#00000000" />
+		        
+		        <LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="42dp"
+			        android:orientation="horizontal">
+			        <EditText
+			          android:id="@+id/user_iuput_food"
+			          android:layout_width="130dp"
+			  		  android:layout_marginRight="2dp"
+			  		  android:layout_marginTop="2dp"
+			          android:layout_height="fill_parent"      
+			          android:hint="직접 입력" />
+			        <EditText
+			          android:id="@+id/user_input_calorie"
+			          android:layout_width="78dp"
+			          android:layout_height="fill_parent"  
+			          android:layout_marginTop="2dp"    
+			          android:hint="0" />
+			        <TextView
+			          android:id="@+id/user_iuput_food"
+			          android:layout_width="38dp"
+			          android:layout_height="fill_parent"
+			          android:layout_marginBottom="2dp"
+			          android:text="Kcal" 
+			          android:textSize="18sp"
+			          android:gravity="center_vertical"
+			          android:textColor="#000000"/>
+		                
+	        	</LinearLayout>
+		        	        
+	        </LinearLayout>
+	        
+	        
 	        
         </LinearLayout>
 	           	          
