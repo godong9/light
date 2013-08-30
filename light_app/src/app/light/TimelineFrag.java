@@ -68,8 +68,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private QuickAction cameraPopup;
 	
 	private static ArrayList<TimeLineObj> my_list = null;
+	private static ListView my_listview;
 	private MyTimelineAdapter my_adapter;
-	private ListView my_listview;
+	
 	private int my_list_count = 0;
 	private int pre_list_add = 0;
 	private boolean first_start = true;
@@ -80,7 +81,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private String my_weight = null;
 	private String tmp_file_name = null;
 	
-	private Calendar last_get_date = Calendar.getInstance();
+	private static Calendar last_get_date = Calendar.getInstance();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -658,7 +659,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 	}
 	
-
 	public void DoFileUpload(String apiUrl, String absolutePath) {
 		HttpFileUpload(apiUrl, "", absolutePath);
 	}
@@ -769,7 +769,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	
 	public void addTimelineData(JSONObject json_param){
 		
-		System.out.println("ADD Timeline Data => "+json_param);
+		//System.out.println("ADD Timeline Data => "+json_param);
 		try {
 			String type = json_param.getString("type");
 	        String nickname = json_param.getString("nickname");

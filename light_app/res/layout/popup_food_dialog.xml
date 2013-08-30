@@ -47,24 +47,19 @@
 		        android:layout_width="fill_parent"
 		        android:layout_height="0dp"
 				android:layout_weight="24"
+				android:layout_marginLeft="20dp"
+				android:layout_marginRight="20dp"
+				android:background="@drawable/write_underline"
 		        android:orientation="horizontal">
-		        <EditText           
+		        <AutoCompleteTextView           
 		             android:id="@+id/write_food_search_val"
-					 android:layout_width="210dp"
-					 android:layout_height="fill_parent"
+					 android:layout_width="fill_parent"
+					 android:layout_height="wrap_content"
 					 android:layout_marginTop="10dp"
 					 android:layout_marginBottom="4dp"
-					 android:layout_marginLeft="25dp"
-				 	 android:layout_marginRight="4dp"/>	
-		        <ImageButton
-		            android:id="@+id/write_food_search_btn"
-			        android:layout_width="32dp"
-					android:layout_height="fill_parent"
-					android:layout_marginTop="14dp"
-					android:layout_marginBottom="12dp"
-					android:layout_marginLeft="2dp"
-					android:layout_marginRight="0dp"
-		            android:background="@drawable/search_btn"/>
+				 	 android:completionThreshold="1"
+				 	 android:hint="음식이름 입력"/>	
+		        
 	        </LinearLayout>
 	        <ListView 
 	          android:id="@+id/food_scroll"

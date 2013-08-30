@@ -8,13 +8,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -23,8 +27,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//커스텀 AlertDialog 구현
+	//커스텀 AlertDialog 구현
 	public class TimelineDialogWindow extends DialogFragment {
+		
+		private static final String PACKAGE_NAME="app.light";
+		
 		private Context context;
 		private int type;
 		private String my_email;
@@ -32,6 +39,7 @@ import android.widget.Toast;
 		private int tmp_position = 0;
 		private Float tmp_time = 0f;
 		private Float tmp_power = 1f;
+		
 		
 		public TimelineDialogWindow(int type, String my_email, String my_weight) {
 			this.type=type;
@@ -47,15 +55,17 @@ import android.widget.Toast;
 			
 			View view; 
 			
-			//타입에 따라 음식 기록 or 운동 기록
+			// 음식 기록 페이지
 			if(type==0){
 				view = mLayoutInflater.inflate(R.layout.popup_food_dialog, null);
 				mBuilder.setView(view);	
 			}
+			// 운동 기록 페이지
 			else if(type==1){
 				view = mLayoutInflater.inflate(R.layout.popup_exercise_dialog, null);
 				mBuilder.setView(view);
 			}
+			// 체중 기록 페이지
 			else if(type==2){
 				view = mLayoutInflater.inflate(R.layout.popup_weight_dialog, null);
 				mBuilder.setView(view);
@@ -84,8 +94,7 @@ import android.widget.Toast;
 			/*
 			 * 버튼 이벤트 처리해주는 부분
 			 */
-			
-			
+				
 			final ImageButton exit_btn = (ImageButton)getDialog().findViewById(R.id.write_exit_btn);
 			exit_btn.setOnClickListener(new View.OnClickListener()
 			{
@@ -97,11 +106,48 @@ import android.widget.Toast;
 				}	
 			});
 			
-			
-			if(type==0){
+			if(type==0){	//음식 기록 페이지
 				final ImageButton ok_btn = (ImageButton)getDialog().findViewById(R.id.write_food_ok_btn);
-				//검색 및 자동완성 구현
+				AutoCompleteTextView tv_search = (AutoCompleteTextView)getDialog().findViewById(R.id.write_food_search_val);
 				
+				SQLiteDatabase db; 
+				final int DB_MODE = Context.MODE_PRIVATE;      
+				final String DB_NAME = "food.db"; // DB 생성시 이름 		
+				
+				String path = Environment.getExternalStorageDirectory().toString();
+				String filePath = path+"/Light_Diet/" + PACKAGE_NAME + "/db/food.db";
+				
+				db = SQLiteDatabase.openOrCreateDatabase(filePath, null); // 있으면 열고, 없으면 생성                
+			    System.out.println("database test=>"+db); 
+				
+			    
+			   		    
+				String sql = "select * from " + "food_db";
+				Cursor cursor = db.rawQuery(sql, null);
+	
+				if (cursor != null) {
+					int count = cursor.getCount(); // 조회된 개수얻기
+					System.out.println("데이터를 조회했어요. 레코드 갯수: " + count + "\n");
+	
+					for (int i = 0; i < count; i++) {
+						cursor.moveToNext();
+	
+						// String name=cursor.getString(0) + "/"
+						// +cursor.getString(1) +"/"+ cursor.getInt(2);
+						String name = cursor.getString(0) + "/"
+								+ cursor.getString(1);
+						// String name= cursor.getString(1);
+						System.out.println("데이터 #" + i + ":" + name + "\n");
+					}
+				}
+			    
+			    
+			    
+			    
+				//검색 및 자동완성 구현 -> DB에서 데이터 가져오도록 수정
+				String[] food_list = {"김치찌개", "된장찌개", "피자", "치킨"};
+				
+				tv_search.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, food_list));
 				
 				ok_btn.setOnClickListener(new View.OnClickListener()
 				{
@@ -113,18 +159,19 @@ import android.widget.Toast;
 					}	
 				});	
 			}
-			else if(type==1){
+			else if(type==1){	//운동 기록 페이지
 				
 		        final ImageButton low_btn = (ImageButton)getDialog().findViewById(R.id.write_exercise_low_btn);
 				final ImageButton middle_btn = (ImageButton)getDialog().findViewById(R.id.write_exercise_middle_btn);
 				final ImageButton high_btn = (ImageButton)getDialog().findViewById(R.id.write_exercise_high_btn);
 				final ImageButton ok_btn = (ImageButton)getDialog().findViewById(R.id.write_exercise_ok_btn);
-	
+				
+				middle_btn.setSelected(true);
+				
 				Spinner es = (Spinner)getDialog().findViewById(R.id.exercise_spinner); 
 				
 				final String[] exercise_calorie = getResources().getStringArray(R.array.exercise_calorie);
-				final TextView tv_calorie = (TextView)getDialog().findViewById(R.id.write_exercise_calorie); 
-				
+				final TextView tv_calorie = (TextView)getDialog().findViewById(R.id.write_exercise_calorie); 	
 				
 				ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( 
 						                  context, R.array.exercise, android.R.layout.simple_spinner_item); 
@@ -170,6 +217,10 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
+						low_btn.setSelected(true);
+						middle_btn.setSelected(false);
+						high_btn.setSelected(false);
+						
 						tmp_power = 0.8f;	
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
 						String calorie_str = String.format("%.1f", tmp_calorie);
@@ -181,6 +232,10 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
+						low_btn.setSelected(false);
+						middle_btn.setSelected(true);
+						high_btn.setSelected(false);
+						
 						tmp_power = 1.0f;	
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
 						String calorie_str = String.format("%.1f", tmp_calorie);
@@ -192,6 +247,10 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
+						low_btn.setSelected(false);
+						middle_btn.setSelected(false);
+						high_btn.setSelected(true);
+						
 						tmp_power = 1.2f;		
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
 						String calorie_str = String.format("%.1f", tmp_calorie);
@@ -208,7 +267,7 @@ import android.widget.Toast;
 					}	
 				});	
 			}
-			else if(type==2){
+			else if(type==2){	//체중 기록 페이지
 				final ImageButton minus_btn = (ImageButton)getDialog().findViewById(R.id.write_weight_minus_btn);
 				final ImageButton plus_btn = (ImageButton)getDialog().findViewById(R.id.write_weight_plus_btn);
 				final TextView tv_date = (TextView)getDialog().findViewById(R.id.write_weight_date);
@@ -260,8 +319,7 @@ import android.widget.Toast;
 					}	
 				});	
 			}
-						
-			
+								
 			/*
 			 * 다이얼로그 내부 버튼 클릭시 이벤트 처리
 			 * 
