@@ -299,7 +299,28 @@ import android.widget.Toast;
 							}
 							TimelineFrag.addMyData(json_my_param);
 							onStop();
-						}		
+						}
+						else{
+							EditText et_food = (EditText)getDialog().findViewById(R.id.user_iuput_food);
+							EditText et_calorie= (EditText)getDialog().findViewById(R.id.user_input_calorie);
+							String user_input_food_str = et_food.getText().toString();
+							String user_input_calorie_str = et_calorie.getText().toString();
+			
+							if(!user_input_calorie_str.equals("")){
+								JSONObject json_my_param = new JSONObject();
+								try{
+									json_my_param.put("type", "4");
+									json_my_param.put("pre_content", "1.0");
+									json_my_param.put("content", user_input_food_str);
+									json_my_param.put("calorie", user_input_calorie_str);
+								}
+								catch(Exception e){
+									System.out.println("JSON put 에러");
+								}
+								TimelineFrag.addMyData(json_my_param);
+								onStop();
+							}
+						}
 					}	
 				});	
 			}
@@ -478,6 +499,8 @@ import android.widget.Toast;
 						tmp_weight_num = tmp_weight_num+0.1f;
 						tmp_weight_content_val = String.format("%.1f", tmp_weight_num);
 						tv_weight.setText(tmp_weight_content_val+"kg");
+						
+						System.out.println("WEIGHT=>"+tmp_weight_content_val);
 					}	
 				});
 				
@@ -488,6 +511,7 @@ import android.widget.Toast;
 					{	
 						JSONObject json_my_param = new JSONObject();
 						try{
+							System.out.println("WEIGHT=>"+tmp_weight_content_val);
 							json_my_param.put("type", "7");
 							json_my_param.put("pre_content", "");
 							json_my_param.put("content", tmp_weight_content_val);
@@ -502,105 +526,6 @@ import android.widget.Toast;
 				});	
 			}
 								
-			/*
-			 * 다이얼로그 내부 버튼 클릭시 이벤트 처리
-			 * 
-			
-			ImageButton dialog_exit_btn;
-	
-			
-			if(type == 0){
-				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
-				
-				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_page_btn);
-				final ImageButton dialog_closet_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_closet_btn);
-				final ImageButton dialog_shop_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_shop_btn);
-				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_history_btn);
-					
-				dialog_page_btn.setSelected(true);
-				
-				dialog_page_btn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{	
-						dialog_page_btn.setSelected(true);
-						dialog_closet_btn.setSelected(false);
-						dialog_shop_btn.setSelected(false);
-						dialog_history_btn.setSelected(false);	
-					}
-				});
-				
-				dialog_closet_btn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{				
-						dialog_page_btn.setSelected(false);
-						dialog_closet_btn.setSelected(true);
-						dialog_shop_btn.setSelected(false);
-						dialog_history_btn.setSelected(false);
-					}	
-				});
-				
-				dialog_shop_btn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{	
-						dialog_page_btn.setSelected(false);
-						dialog_closet_btn.setSelected(false);
-						dialog_shop_btn.setSelected(true);
-						dialog_history_btn.setSelected(false);
-					}
-				});
-				
-				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{	
-						dialog_page_btn.setSelected(false);
-						dialog_closet_btn.setSelected(false);
-						dialog_shop_btn.setSelected(false);
-						dialog_history_btn.setSelected(true);
-					}
-				});
-			
-			}
-			else{
-				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
-				
-				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_page_btn);
-				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_history_btn);
-				
-				dialog_page_btn.setSelected(true);
-				
-				dialog_page_btn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{	
-						dialog_page_btn.setSelected(true);
-						dialog_history_btn.setSelected(false);	
-					}
-				});
-				
-				dialog_history_btn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v)
-					{				
-						dialog_page_btn.setSelected(false);
-						dialog_history_btn.setSelected(true);
-					}	
-				});
-				
-			}
-			
-			//공통 다이얼로그 종료 버튼 이벤트 리스너
-			dialog_exit_btn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v)
-				{	
-					dismiss();
-				}
-			});
-				 */		
 		}
 		
 		@Override

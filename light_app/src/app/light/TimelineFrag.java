@@ -553,7 +553,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
         }
 	}
 	
-	//내가 쓴 채팅 내용 추가
+	
+	//내가 쓴 데이터 추가
 	public static void addMyData(JSONObject json_my_param)
 	{	
 		try {	
@@ -565,7 +566,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	        int type_int = Integer.parseInt(type);
 	       
 			boolean data_status = sendTimelineData(json_my_param);
-		
+			
 			if(data_status){
 			
 				Calendar cal = Calendar.getInstance();
@@ -583,11 +584,19 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					if(dateHour != 12){
 						dateHour = dateHour-12;
 					}
-				}
+				}	
 				
 				String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+				String dateString = String.format("%04d. %02d. %02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
 				
-				my_list.add(new TimeLineObj(type_int, "", pre_content, content, calorie, timeString));	
+				String tmp_list_date;
+	
+				if(type_int==7)	// 타임바일 경우 날짜로 적용
+					tmp_list_date = dateString;
+				else
+					tmp_list_date = timeString;
+						
+				my_list.add(new TimeLineObj(type_int, "", pre_content, content, calorie, tmp_list_date));	
 				my_list_count += 1;     
 				
 				my_adapter.notifyDataSetChanged();		
@@ -646,6 +655,55 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		}
 	}
 	
+	//관리자 데이터 추가
+	public static void addManagerData(JSONObject json_manager_param)
+	{	
+		try {	
+			String type = json_manager_param.getString("type");
+	        String pre_content = json_manager_param.getString("pre_content");
+	        String content = json_manager_param.getString("content");
+	        String calorie = json_manager_param.getString("calorie");
+			
+	        int type_int = Integer.parseInt(type);
+			
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
+		
+			if(dateNoon == 0){
+				dateStatus = "오전";
+			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+		
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+			String dateString = String.format("%04d. %02d. %02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+			
+			String tmp_list_date;
+
+			if(type_int==0)	// 타임바일 경우 날짜로 적용
+				tmp_list_date = dateString;
+			else
+				tmp_list_date = timeString;				
+			
+			my_list.add(new TimeLineObj(type_int, "", pre_content, content, calorie, tmp_list_date));	
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();		
+			my_listview.setSelection(my_list.size());		
+		}
+		catch(Exception e){
+			System.out.println("관리자 대화 추가 에러 발생");
+		}
+	}
+	
 	// 다른사람이 추가한 데이터 추가
 	public void addOtherData(JSONObject json_other_param)
 	{
@@ -674,10 +732,18 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					dateHour = dateHour-12;
 				}
 			}
-			
+				
 			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+			String dateString = String.format("%04d. %02d. %02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
 			
-			my_list.add(new TimeLineObj(type_int+5, nickname, pre_content, content, calorie, timeString));	
+			String tmp_list_date;
+
+			if(type_int==7)	// 타임바일 경우 날짜로 적용
+				tmp_list_date = dateString;
+			else
+				tmp_list_date = timeString;		
+			
+			my_list.add(new TimeLineObj(type_int+5, nickname, pre_content, content, calorie, tmp_list_date));	
 			my_list_count += 1;     
 			
 			my_adapter.notifyDataSetChanged();		
@@ -845,36 +911,34 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		//System.out.println("ADD Timeline Data => "+json_param);
 		try {
 			String type = json_param.getString("type");
-	        String nickname = json_param.getString("nickname");
-	        String pre_content = json_param.getString("pre_content");
-	        String content = json_param.getString("content");
-	        String calorie = json_param.getString("calorie");
-	        String date = json_param.getString("date");
 	        
 	        int type_int = Integer.parseInt(type);
 	        
 	        switch (type_int) {
 				case 0:
-					//
+					addManagerData(json_param);
 				break;
 				case 1:
-					//
+					addManagerData(json_param);
 				break;
 				case 2:
-					//
+					addManagerData(json_param);
 				break;
 				case 3:
-					//
+					addOtherData(json_param);
 				break;
 				case 4:
-					//
+					addOtherData(json_param);
 				break;
 				case 5:
-					//
+					addOtherData(json_param);
 				break;
 				case 6:
-					//
-				break;			
+					addOtherPicture(json_param);
+				break;
+				case 7:
+					addOtherData(json_param);
+				break;
 			}
 	        
 		}
