@@ -647,15 +647,89 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	// 다른사람이 추가한 데이터 추가
-	public void addOtherData(JSONObject json_param)
+	public void addOtherData(JSONObject json_other_param)
 	{
+		try {	
+			String type = json_other_param.getString("type");
+			String nickname = json_other_param.getString("nickname");
+	        String pre_content = json_other_param.getString("pre_content");
+	        String content = json_other_param.getString("content");
+	        String calorie = json_other_param.getString("calorie");
+			
+	        int type_int = Integer.parseInt(type);
 		
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
+		
+			if(dateNoon == 0){
+				dateStatus = "오전";
+			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+			
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+			
+			my_list.add(new TimeLineObj(type_int+5, nickname, pre_content, content, calorie, timeString));	
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();		
+			my_listview.setSelection(my_list.size());
+		}
+		catch(Exception e){
+			System.out.println("내 대화 추가 에러 발생");
+		}
 	}
 	
 	// 다른사람이 올린 사진 추가
-	public void addOtherPicture(JSONObject json_param, Bitmap tmpPicture)
-	{
+	public void addOtherPicture(JSONObject json_other_param)
+	{		
+		try {	
+			//String type = json_other_param.getString("type");
+			String nickname = json_other_param.getString("nickname");
+	        //String pre_content = json_other_param.getString("pre_content");
+	        String content = json_other_param.getString("content");
+	        //String calorie = json_other_param.getString("calorie");
+			
+	        Bitmap img_bm = getTimelineImg(content);
+	        
+	        //int type_int = Integer.parseInt(type);
+	        
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
 		
+			if(dateNoon == 0){
+				dateStatus = "오전";
+			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+			
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+			
+			my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE, nickname, img_bm, timeString));
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();		
+			my_listview.setSelection(my_list.size());
+		}
+		catch(Exception e){
+			System.out.println("내 대화 추가 에러 발생");
+		}
 	}
 	
 	public void DoFileUpload(String apiUrl, String absolutePath) {
