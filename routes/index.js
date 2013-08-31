@@ -5,25 +5,71 @@ var util = require('util')
 var EventEmitter = require('events').EventEmitter;
 var mysql_conn = require('../sql/mysql_server').mysql_conn;
 
-var registrationIds = [];
-
 exports.index = function(req, res){
     res.render('index', { title: 'Express'});
 };
 
 exports.regist = function (req, res) {
+	var evt = new EventEmitter();
+	var dao_u = require('../sql/user');
 	console.log("regId => "+req.body.regId);
-	var reg_val =req.body.regId;
-	registrationIds.push(reg_val);
+	var reg_id =req.body.regId;
+	var email = req.body.email;
+	
+	var params = {
+		email: email,
+		reg_id: reg_id								
+	};
+	
+	//registrationIds.push(reg_id);
+
+	dao_u.dao_regist_reg_id(evt, mysql_conn, params);
+	
+	evt.on('regist_reg_id', function(err, rows){
+		if(err) throw err;
+		console.log("Regist Success!");
+		var result_val = { result:"success", msg:"reg_id 등록 완료!" };
+		res.send(result_val);
+	});
+};
+
+exports.update_reg_id = function (req, res) {
+	var evt = new EventEmitter();
+	var dao_u = require('../sql/user');
+	console.log("regId => "+req.body.regId);
+	var reg_id =req.body.reg_id;
+	var email = req.body.email;
+	
+	var params = {
+		email: email,
+		reg_id: reg_id								
+	};
+
+	dao_u.dao_regist_reg_id(evt, mysql_conn, params);
+	
+	evt.on('regist_reg_id', function(err, rows){
+		if(err) throw err;
+		console.log("Regist Update Success!");
+		var result_val = { result:"success", msg:"reg_id 업데이트 완료!" };
+		res.send(result_val);
+	});
 };
 
 exports.send_push = function(req, res) {
 	var message = new gcm.Message();
 	var evt = new EventEmitter();
 	var dao_t = require('../sql/timeline');
-	
+
+	var registrationIds = [];
+
 	var sender = new gcm.Sender('AIzaSyBHorBmc3UVUlEMte5icgua25nmh9671yY');
 	
+	var user_email = req.session.email;
+
+	var group_params = {
+					group_id: req.session.group_id
+	};
+
 	var params = {
 					email: req.session.email,
 					nickname: req.session.nickname,
@@ -34,11 +80,24 @@ exports.send_push = function(req, res) {
 					calorie: req.body.calorie
 	};
 
-	dao_t.dao_set_timeline(evt, mysql_conn, params);
+	//유저 이메일로 그룹 찾고 그 그룹에 해당하는 reg_id 가져오기
+	//registrationIds.push(reg_id);
+
+	dao_t.dao_get_group_reg_id(evt, mysql_conn, group_params);
+
+	evt.on('get_group_reg_id', function(err, rows){
+		if(err) throw err;
+		
+		for(var i=0; i<rows.length; i++) {
+			registrationIds.push(rows[i]);
+			console.log(rows[i]);
+		}
+		dao_t.dao_set_timeline(evt, mysql_conn, params);
+	});
 
 	evt.on('set_timeline', function(err, rows){
 		if(err) throw err;
-		
+
 		var today = getTimeStamp();
 
 		console.log('Today => ' + today);
@@ -62,9 +121,8 @@ exports.send_push = function(req, res) {
 			res.send(result_val);
 		});
 	});
+
 };
-
-
 
 exports.upload = function(req, res){
 	console.log('->> upload was called!');

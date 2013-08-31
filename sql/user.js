@@ -32,7 +32,8 @@ exports.dao_join = function(evt, mysql_conn, params){
 	var sql = "INSERT INTO `user` ";
 	sql += "SET `email` = '"+params['email']+"', ";
 	sql += "`password` = md5('"+params['password']+"'), ";
-	sql += "`nickname` = '"+params['nickname']+"' ";
+	sql += "`nickname` = '"+params['nickname']+"', ";
+	sql += "`group_id` = '"+params['group_id']+"' ";
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		evt.emit('join', err, rows);
@@ -59,6 +60,22 @@ exports.dao_login = function(evt, mysql_conn, params){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		evt.emit('login', err, rows);
+	});
+	return sql;
+}
+
+// regist_reg_id
+// params['email']
+// params['reg_id']
+exports.dao_regist_reg_id = function(evt, mysql_conn, params){
+
+	console.log("EMAIL=>"+params['email']);
+	var sql = "UPDATE `user` ";
+	sql += "SET `reg_id` = '"+params['reg_id']+"' "; 
+	sql += "WHERE `email` = '"+params['email']+"' ";
+	var query = mysql_conn.query(sql, params, function(err, rows, fields) {
+		console.log("Regist!");
+		evt.emit('regist_reg_id', err, rows);	
 	});
 	return sql;
 }

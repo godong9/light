@@ -73,6 +73,7 @@ app.get('/img', function(req, res){	//이미지 파일 다운로드
 
 // POST 방식
 app.post('/register', routes.regist);
+app.post('/update_reg_id', routes.update_reg_id);
 app.post('/join', user.join);
 app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);

@@ -21,6 +21,7 @@ exports.join = function(req, res){
 	var password = req.body.password;
 	var re_password = req.body.re_password;
 	var nickname = req.body.nickname;
+	var group_id = req.body.group_id;
 
 	req.checkBody("nickname", "닉네임을 입력해주세요!").notEmpty();
 	req.checkBody("email", "email을 입력해주세요!").notEmpty();
@@ -71,7 +72,7 @@ exports.join = function(req, res){
 	});
 
 	evt.on('join', function(err, rows){
-		console.log("join");
+		console.log("JOIN Complete!");
 		register_session(req, email, nickname);
 		result = { result:"success", msg:"회원가입이 완료되었습니다!" };
 		res.send(result);
