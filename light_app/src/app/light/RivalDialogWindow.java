@@ -94,8 +94,7 @@ import android.widget.Toast;
 			TextView myLimitCalorie = (TextView)getDialog().findViewById(R.id.rival_dialog_limit_calorie);
 			TextView myEatCalorie = (TextView)getDialog().findViewById(R.id.rival_dialog_eat_calorie);
 			TextView myExerciseCalorie = (TextView)getDialog().findViewById(R.id.rival_dialog_exercise_calorie);
-			
-			
+				
 			try {
 				myNickName.setText(user_info.getString("nickname"));
 				myChat.setText(user_info.getString("chat_ballon"));

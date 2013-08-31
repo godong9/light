@@ -42,6 +42,8 @@ public class LoginActivity extends CommonActivity {
 	
 	AsyncTask<Void, Void, Void> mRegisterTask;
 	private static final String PACKAGE_NAME="app.light";
+	private String reg_id = "";
+	private boolean is_registered = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +71,20 @@ public class LoginActivity extends CommonActivity {
             if (GCMRegistrar.isRegisteredOnServer(this)) {
                 // Skips registration.         	
                 System.out.println(getString(R.string.already_registered));
+                is_registered = true;
+                reg_id = regId;
             } else {
                 // Try to register again, but not in the UI thread.
                 // It's also necessary to cancel the thread onDestroy(),
                 // hence the use of AsyncTask instead of a raw thread.
-                final Context context = this;
+                
+            	final Context context = this;
                 mRegisterTask = new AsyncTask<Void, Void, Void>() {
-
+                	
                     @Override
                     protected Void doInBackground(Void... params) {
                         boolean registered =
-                                ServerUtilities.register(context, regId);
+                                ServerUtilities.register(context, regId, "");
                         // At this point all attempts to register with the app
                         // server failed, so we need to unregister the device
                         // from GCM - the app will try to register again when
@@ -101,8 +106,6 @@ public class LoginActivity extends CommonActivity {
                 mRegisterTask.execute(null, null, null);
             }
         }
-        
-           
         
 		Intent intent = getIntent();   // 값을 받기 위한 Intent 생성
 
@@ -210,6 +213,11 @@ public class LoginActivity extends CommonActivity {
 					editor.putBoolean("keep_login", keep_login.isChecked());
 					editor.commit();
 					
+					if(is_registered){
+						json_param.put("reg_id", reg_id);
+		                String update_result = ch.postData("http://211.110.61.51:3000/update_reg_id", json_param);  
+					}
+	                	
 					Intent intent = new Intent(LoginActivity.this, BaseFragment.class);
 					startActivity(intent);
 				}

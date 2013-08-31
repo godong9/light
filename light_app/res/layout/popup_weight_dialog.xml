@@ -8,7 +8,7 @@
         android:layout_width="300dp"
         android:layout_height="373dp"
         android:orientation="vertical" 
-        android:background="@drawable/write_dialog_background">
+        android:background="@drawable/write_dialog_weight_background">
  		
 	    <LinearLayout
 	        android:layout_weight="12"	
@@ -42,6 +42,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="0dp"
 			android:layout_weight="74"
+			android:layout_marginTop="22.5dp"
 			android:layout_marginLeft="20dp"
 			android:layout_marginRight="20dp"
 	        android:orientation="vertical">
@@ -51,7 +52,6 @@
 	            android:layout_weight="20"
 				android:layout_width="fill_parent"						
 				android:layout_height="0dp"
-				android:layout_marginTop="8dp"
 				android:layout_marginBottom="8dp"
 				android:layout_marginLeft="2dp"
 				android:layout_marginRight="2dp"
@@ -81,7 +81,7 @@
 					android:layout_marginLeft="2dp"
 					android:layout_marginRight="2dp"
 					android:layout_gravity="center"
-			        android:background="@drawable/write_minus"/>
+			        android:background="@drawable/write_weight_minus"/>
 	            	
 	            <TextView   
 	                android:id="@+id/write_weight_val"
@@ -108,7 +108,7 @@
 					android:layout_marginLeft="2dp"
 					android:layout_marginRight="2dp"
 					android:layout_gravity="center"
-			        android:background="@drawable/write_plus"/>
+			        android:background="@drawable/write_weight_plus"/>
 	
 		        
 	        </LinearLayout>

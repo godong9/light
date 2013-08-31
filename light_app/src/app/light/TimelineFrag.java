@@ -68,9 +68,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private QuickAction cameraPopup;
 	
 	private static ArrayList<TimeLineObj> my_list = null;
-	private MyTimelineAdapter my_adapter;
-	private ListView my_listview;
-	private int my_list_count = 0;
+	private static ListView my_listview;
+	private static MyTimelineAdapter my_adapter;
+	
+	private static int my_list_count = 0;
 	private int pre_list_add = 0;
 	private boolean first_start = true;
 	
@@ -80,7 +81,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private String my_weight = null;
 	private String tmp_file_name = null;
 	
-	private Calendar last_get_date = Calendar.getInstance();
+	private static Calendar last_get_date = Calendar.getInstance();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -209,7 +210,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					try {
 						JSONObject json_my_param = new JSONObject();
 						json_my_param.put("type", "3");
-						json_my_param.put("nickname", "");
 						json_my_param.put("pre_content", "");
 						json_my_param.put("content", chat_val);
 						json_my_param.put("calorie", "");
@@ -468,7 +468,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				
 				String tmp_list_date;
 	
-				if(tmp_type==0)	// 타임바일 경우 날짜로 적용
+				if(tmp_type==0 || tmp_type==7)	// 타임바일 경우 날짜로 적용
 					tmp_list_date = dateString;
 				else
 					tmp_list_date = timeString;
@@ -480,12 +480,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					if(tmp_email.equals(my_email))
 						my_list.add(0, new TimeLineObj(tmp_type, tmp_nickname, img_bm, tmp_list_date));	
 					else
-						my_list.add(0, new TimeLineObj(tmp_type+4, tmp_nickname, img_bm, tmp_list_date));				
+						my_list.add(0, new TimeLineObj(tmp_type+5, tmp_nickname, img_bm, tmp_list_date));				
 				}
 				else if(tmp_email.equals(my_email) || tmp_nickname.equals("LIGHT"))
 					my_list.add(0, new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));						
 				else	//다른 사람 데이터일 때
-					my_list.add(0, new TimeLineObj(tmp_type+4, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
+					my_list.add(0, new TimeLineObj(tmp_type+5, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
 			}
 			pre_list_add = json_timeline_data.length();	//직전에 추가된 리스트 개수
 			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 		
@@ -554,7 +554,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	//내가 쓴 채팅 내용 추가
-	public void addMyData(JSONObject json_my_param)
+	public static void addMyData(JSONObject json_my_param)
 	{	
 		try {	
 			String type = json_my_param.getString("type");
@@ -647,18 +647,91 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	// 다른사람이 추가한 데이터 추가
-	public void addOtherData(JSONObject json_param)
+	public void addOtherData(JSONObject json_other_param)
 	{
+		try {	
+			String type = json_other_param.getString("type");
+			String nickname = json_other_param.getString("nickname");
+	        String pre_content = json_other_param.getString("pre_content");
+	        String content = json_other_param.getString("content");
+	        String calorie = json_other_param.getString("calorie");
+			
+	        int type_int = Integer.parseInt(type);
 		
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
+		
+			if(dateNoon == 0){
+				dateStatus = "오전";
+			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+			
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+			
+			my_list.add(new TimeLineObj(type_int+5, nickname, pre_content, content, calorie, timeString));	
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();		
+			my_listview.setSelection(my_list.size());
+		}
+		catch(Exception e){
+			System.out.println("내 대화 추가 에러 발생");
+		}
 	}
 	
 	// 다른사람이 올린 사진 추가
-	public void addOtherPicture(JSONObject json_param, Bitmap tmpPicture)
-	{
+	public void addOtherPicture(JSONObject json_other_param)
+	{		
+		try {	
+			//String type = json_other_param.getString("type");
+			String nickname = json_other_param.getString("nickname");
+	        //String pre_content = json_other_param.getString("pre_content");
+	        String content = json_other_param.getString("content");
+	        //String calorie = json_other_param.getString("calorie");
+			
+	        Bitmap img_bm = getTimelineImg(content);
+	        
+	        //int type_int = Integer.parseInt(type);
+	        
+			Calendar cal = Calendar.getInstance();
+	
+			String dateStatus;
+			int dateNoon = cal.get(Calendar.AM_PM);
+			int dateHour = cal.get(Calendar.HOUR_OF_DAY);
+			int dateMinute = cal.get(Calendar.MINUTE);
 		
+			if(dateNoon == 0){
+				dateStatus = "오전";
+			}
+			else{
+				dateStatus = "오후";
+				if(dateHour != 12){
+					dateHour = dateHour-12;
+				}
+			}
+			
+			String timeString = dateStatus+" "+dateHour+":"+String.format("%02d",dateMinute);
+			
+			my_list.add(new TimeLineObj(TimeLineObj.VIEW_TYPE_OTHER_PICTURE, nickname, img_bm, timeString));
+			my_list_count += 1;     
+			
+			my_adapter.notifyDataSetChanged();		
+			my_listview.setSelection(my_list.size());
+		}
+		catch(Exception e){
+			System.out.println("내 대화 추가 에러 발생");
+		}
 	}
 	
-
 	public void DoFileUpload(String apiUrl, String absolutePath) {
 		HttpFileUpload(apiUrl, "", absolutePath);
 	}
@@ -742,13 +815,13 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	 * 5 - EXERCISE
 	 * 6 - PICTURE
 	 */
-	public boolean sendTimelineData(JSONObject json_param) {	
+	public static boolean sendTimelineData(JSONObject json_param) {	
 		try {
 			CommonHttp ch = new CommonHttp();	
 			String result_json = ch.postData("http://211.110.61.51:3000/send_push", json_param);		
 			if(result_json.equals("error")) {
 				System.out.println("데이터 전송 실패!");
-				Toast.makeText(context, "데이터 전송 실패!", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(context, "데이터 전송 실패!", Toast.LENGTH_SHORT).show();
 				return false;
 			}	
 			return true;
@@ -769,7 +842,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	
 	public void addTimelineData(JSONObject json_param){
 		
-		System.out.println("ADD Timeline Data => "+json_param);
+		//System.out.println("ADD Timeline Data => "+json_param);
 		try {
 			String type = json_param.getString("type");
 	        String nickname = json_param.getString("nickname");

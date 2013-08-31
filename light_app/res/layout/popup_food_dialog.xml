@@ -46,36 +46,146 @@
 	        <LinearLayout
 		        android:layout_width="fill_parent"
 		        android:layout_height="0dp"
-				android:layout_weight="24"
+				android:layout_weight="25"
+				android:layout_marginLeft="19dp"
+				android:layout_marginRight="21dp"
+				android:background="@drawable/write_underline"
 		        android:orientation="horizontal">
-		        <EditText           
+		        <AutoCompleteTextView           
 		             android:id="@+id/write_food_search_val"
-					 android:layout_width="210dp"
-					 android:layout_height="fill_parent"
+					 android:layout_width="fill_parent"
+					 android:layout_height="wrap_content"
 					 android:layout_marginTop="10dp"
 					 android:layout_marginBottom="4dp"
-					 android:layout_marginLeft="25dp"
-				 	 android:layout_marginRight="4dp"/>	
-		        <ImageButton
-		            android:id="@+id/write_food_search_btn"
-			        android:layout_width="32dp"
-					android:layout_height="fill_parent"
-					android:layout_marginTop="14dp"
-					android:layout_marginBottom="12dp"
-					android:layout_marginLeft="2dp"
-					android:layout_marginRight="0dp"
-		            android:background="@drawable/search_btn"/>
+				 	 android:completionThreshold="1"
+				 	 android:hint="음식이름 입력"/>	
+		        
 	        </LinearLayout>
-	        <ListView 
-	          android:id="@+id/food_scroll"
-	          android:layout_width="fill_parent"
-	          android:layout_height="0dp"    
-	          android:layout_weight="76"
-	          android:layout_marginBottom="14dp"
-	          android:transcriptMode="normal"
-	          android:divider="#FFFFFF"
-	       	  android:listSelector="#00000000"
-	       	  android:cacheColorHint="#00000000" />
+	        
+	        <LinearLayout
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+				android:layout_weight="75"
+				android:layout_marginLeft="19dp"
+				android:layout_marginRight="21dp"
+		        android:orientation="vertical">
+		        
+	            <LinearLayout
+	                android:id="@+id/write_food_select_layout"
+			        android:layout_width="fill_parent"
+			        android:layout_height="48dp"
+			        android:orientation="horizontal"
+			        android:background="@drawable/write_underline"
+			        android:visibility="gone">
+			     
+	                <ImageButton
+				        android:id="@+id/write_food_delete_btn"
+				        android:layout_width="14dp"
+						android:layout_height="fill_parent"
+						android:layout_marginTop="16.5dp"
+						android:layout_marginBottom="16.5dp"
+						android:layout_marginLeft="2dp"
+						android:layout_marginRight="4dp"
+						android:layout_gravity="center"
+				        android:background="@drawable/write_delete"/>
+	                
+			        <TextView
+			          android:id="@+id/user_select_food"
+			          android:layout_width="135dp"
+			          android:layout_height="fill_parent"   
+			          android:layout_marginLeft="2dp"
+					  android:layout_marginRight="2dp" 
+			  		  android:gravity="center_vertical"
+			  		  android:singleLine="true"          
+			          android:text="" 
+			          android:textSize="20sp"
+			          android:textColor="#424242"/>
+			        
+			        <ImageButton
+				        android:id="@+id/write_food_minus_btn"
+				        android:layout_width="25dp"
+						android:layout_height="fill_parent"
+						android:layout_marginTop="12dp"
+						android:layout_marginBottom="12dp"
+						android:layout_marginLeft="2dp"
+						android:layout_marginRight="2dp"
+						android:layout_gravity="center"
+				        android:background="@drawable/write_minus"/>
+		            	
+		            <TextView   
+		                android:id="@+id/write_food_num_val"
+						android:layout_width="30dp"
+						android:layout_height="fill_parent"
+						android:layout_marginTop="8dp"
+						android:layout_marginBottom="8dp"
+						android:layout_marginLeft="1dp"
+						android:layout_marginRight="1dp"
+						android:gravity="center"
+						android:text="1.0"    
+			            android:textSize ="18sp"
+			            android:textColor="#424242" 
+			            android:singleLine="true"/>
+		       		
+		            <ImageButton
+				        android:id="@+id/write_food_plus_btn"
+				        android:layout_width="25dp"
+						android:layout_height="fill_parent"
+						android:layout_marginTop="12dp"
+						android:layout_marginBottom="12dp"
+						android:layout_marginLeft="2dp"
+						android:layout_marginRight="2dp"
+						android:layout_gravity="center"
+				        android:background="@drawable/write_plus"/>
+	            
+	            </LinearLayout>
+			        
+		        <LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="42dp"
+			        android:layout_marginTop="8dp"
+			        android:orientation="horizontal">
+			        <EditText
+			          android:id="@+id/user_iuput_food"
+			          android:layout_width="130dp"
+			  		  android:layout_marginRight="2dp"
+			  		  android:layout_marginTop="2dp"
+			          android:layout_height="fill_parent"      
+			          android:hint="직접 입력" />
+			        <EditText
+			          android:id="@+id/user_input_calorie"
+			          android:layout_width="78dp"
+			          android:layout_height="fill_parent"  
+			          android:layout_marginTop="2dp"    
+			          android:hint="0" />
+			        <TextView
+			          android:layout_width="38dp"
+			          android:layout_height="fill_parent"
+			          android:layout_marginBottom="2dp"
+			          android:text="Kcal" 
+			          android:textSize="18sp"
+			          android:gravity="center_vertical"
+			          android:textColor="#000000"/>
+		                
+	        	</LinearLayout>
+	        	
+		        <TextView          
+	             android:id="@+id/write_food_calorie"
+				 android:layout_width="fill_parent"
+				 android:layout_height="80dp"
+				 android:layout_marginTop="8dp"
+				 android:layout_marginBottom="14dp"
+				 android:layout_marginLeft="24dp"
+			 	 android:layout_marginRight="24dp"
+			 	 android:gravity="center"
+				 android:text="+0kcal"
+				 android:textStyle="bold"
+				 android:textSize ="24sp"
+				 android:textColor="#FF0062" />	
+		        
+		        	        
+	        </LinearLayout>
+	        
+	        
 	        
         </LinearLayout>
 	           	          

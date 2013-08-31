@@ -52,7 +52,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     protected void onRegistered(Context context, String registrationId) {
         Log.i(TAG, "Device registered: regId = " + registrationId);
         System.out.println(getString(R.string.gcm_registered));
-        ServerUtilities.register(context, registrationId);
+        ServerUtilities.register(context, registrationId, "");
     }
 
     @Override
@@ -162,8 +162,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	        notificationIntent.putExtra("nickname", tmp_nickname);
 	        notificationIntent.putExtra("content", tmp_content);
 	        // set intent so it does not start a new activity
-	        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-	                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+	        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 	        PendingIntent intent =
 	                PendingIntent.getActivity(context, 0, notificationIntent, 0);
 	        notification.setLatestEventInfo(context, title, message, intent);
@@ -188,7 +187,6 @@ public class GCMIntentService extends GCMBaseIntentService {
                 break;
             }                         
         }
- 
         return isRunning;
     }
     
