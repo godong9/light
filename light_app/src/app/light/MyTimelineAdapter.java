@@ -64,6 +64,9 @@ public class MyTimelineAdapter extends BaseAdapter {
 				case TimeLineObj.VIEW_TYPE_MY_PICTURE:
 					res = R.layout.timeline_my_picture;
 					break;
+				case TimeLineObj.VIEW_TYPE_MY_WEIGHT:
+					res = R.layout.timeline_my_weight;
+					break;
 					
 				case TimeLineObj.VIEW_TYPE_OTHER_WORD:
 					res = R.layout.timeline_other_word;
@@ -76,6 +79,9 @@ public class MyTimelineAdapter extends BaseAdapter {
 					break;
 				case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
 					res = R.layout.timeline_other_picture;
+					break;
+				case TimeLineObj.VIEW_TYPE_OTHER_WEIGHT:
+					res = R.layout.timeline_other_weight;
 					break;
 					
 				case TimeLineObj.VIEW_TYPE_MANAGER_WORD:
@@ -164,6 +170,14 @@ public class MyTimelineAdapter extends BaseAdapter {
 				ivPicture.setImageBitmap(list.get(position).picture_img);			
 				tvDate.setText(list.get(position).date);
 				break;
+				
+			case TimeLineObj.VIEW_TYPE_MY_WEIGHT:			
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_my_weight_date);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_my_weight_content);
+
+				tvDate.setText(list.get(position).date);
+				tvContent.setText(list.get(position).content);
+				break;	
 							
 			case TimeLineObj.VIEW_TYPE_OTHER_WORD:		
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_word_nickname);
@@ -174,6 +188,7 @@ public class MyTimelineAdapter extends BaseAdapter {
 				tvContent.setText(list.get(position).content);
 				tvDate.setText(list.get(position).date);
 				break;	
+				
 			case TimeLineObj.VIEW_TYPE_OTHER_FOOD:
 				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_write_nickname);
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_write_date);
@@ -214,7 +229,17 @@ public class MyTimelineAdapter extends BaseAdapter {
 				ivPicture.setImageBitmap(list.get(position).picture_img);	
 				tvNickname.setText(list.get(position).nickname);
 				tvDate.setText(list.get(position).date);
-				break;
+				break;		
+				
+			case TimeLineObj.VIEW_TYPE_OTHER_WEIGHT:
+				tvNickname = (TextView) convertView.findViewById(R.id.timeline_other_weight_nickname);
+				tvDate = (TextView) convertView.findViewById(R.id.timeline_other_weight_date);
+				tvContent = (TextView) convertView.findViewById(R.id.timeline_other_weight_content);
+	
+				tvNickname.setText(list.get(position).nickname);
+				tvDate.setText(list.get(position).date);
+				tvContent.setText(list.get(position).content);
+				break;	
 				
 			case TimeLineObj.VIEW_TYPE_MANAGER_WORD:
 				tvContent = (TextView) convertView.findViewById(R.id.timeline_manager_word_content);
@@ -243,7 +268,7 @@ public class MyTimelineAdapter extends BaseAdapter {
 	}
 
 	public int getViewTypeCount() {
-		return 11;
+		return 13;
 	}
 
 }

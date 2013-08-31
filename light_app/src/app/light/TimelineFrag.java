@@ -469,7 +469,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				
 				String tmp_list_date;
 	
-				if(tmp_type==0)	// 타임바일 경우 날짜로 적용
+				if(tmp_type==0 || tmp_type==7)	// 타임바일 경우 날짜로 적용
 					tmp_list_date = dateString;
 				else
 					tmp_list_date = timeString;
@@ -481,12 +481,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					if(tmp_email.equals(my_email))
 						my_list.add(0, new TimeLineObj(tmp_type, tmp_nickname, img_bm, tmp_list_date));	
 					else
-						my_list.add(0, new TimeLineObj(tmp_type+4, tmp_nickname, img_bm, tmp_list_date));				
+						my_list.add(0, new TimeLineObj(tmp_type+5, tmp_nickname, img_bm, tmp_list_date));				
 				}
 				else if(tmp_email.equals(my_email) || tmp_nickname.equals("LIGHT"))
 					my_list.add(0, new TimeLineObj(tmp_type, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));						
 				else	//다른 사람 데이터일 때
-					my_list.add(0, new TimeLineObj(tmp_type+4, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
+					my_list.add(0, new TimeLineObj(tmp_type+5, tmp_nickname, tmp_pre_content, tmp_content, tmp_calorie, tmp_list_date));		
 			}
 			pre_list_add = json_timeline_data.length();	//직전에 추가된 리스트 개수
 			my_list_count += json_timeline_data.length();	//개수만큼 불러와서 추가 		

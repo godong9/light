@@ -19,11 +19,13 @@ public class TimeLineObj {
 	public static final int VIEW_TYPE_MY_WORD = 3;
 	public static final int VIEW_TYPE_MY_FOOD = 4;
 	public static final int VIEW_TYPE_MY_EXERCISE = 5;
-	public static final int VIEW_TYPE_MY_PICTURE = 6;		
-	public static final int VIEW_TYPE_OTHER_WORD = 7;
-	public static final int VIEW_TYPE_OTHER_FOOD = 8;
-	public static final int VIEW_TYPE_OTHER_EXERCISE =9;
-	public static final int VIEW_TYPE_OTHER_PICTURE = 10;	
+	public static final int VIEW_TYPE_MY_PICTURE = 6;
+	public static final int VIEW_TYPE_MY_WEIGHT = 7;
+	public static final int VIEW_TYPE_OTHER_WORD = 8;
+	public static final int VIEW_TYPE_OTHER_FOOD = 9;
+	public static final int VIEW_TYPE_OTHER_EXERCISE = 10;
+	public static final int VIEW_TYPE_OTHER_PICTURE = 11;	
+	public static final int VIEW_TYPE_OTHER_WEIGHT = 12;
 	
 	//public static final int VIEW_TYPE_UPLOAD_MY_PICTURE = 11;
 	
@@ -44,17 +46,23 @@ public class TimeLineObj {
 			this.content = content;
 			this.date = date;	
 		}
+		
 		else if(type == VIEW_TYPE_MY_WORD){
 			this.type = type;
 			this.content = content;
 			this.date = date;		
-		}
+		}	
 		else if(type == VIEW_TYPE_MY_FOOD || type == VIEW_TYPE_MY_EXERCISE){
 			this.type = type;
 			this.pre_content = pre_content;
 			this.content = content;
 			this.calorie = calorie;
 			this.date = date;	
+		}
+		else if(type == VIEW_TYPE_MY_WEIGHT){
+			this.type = type;
+			this.date = date;
+			this.content = content+"kg";		
 		}
 	
 		else if(type == VIEW_TYPE_OTHER_WORD){
@@ -71,16 +79,21 @@ public class TimeLineObj {
 			this.calorie = calorie;
 			this.date = date;	
 		}
+		else if(type == VIEW_TYPE_OTHER_WEIGHT){
+			this.type = type;
+			this.nickname = nickname;
+			this.date = date;
+			this.content = content+"kg";
+		}
 	}
-
+	
 	//MY_PICTURE, OTHER_PICTURE 생성자
 	public TimeLineObj(int type, String nickname, Bitmap img_bm, String date) {
 		this.type = type;
 		this.nickname = nickname;
 		this.picture_img = img_bm;	
 		this.date = date;
-
 	}
-	
+
 }
 
