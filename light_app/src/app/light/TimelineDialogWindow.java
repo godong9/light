@@ -38,13 +38,23 @@ import android.widget.Toast;
 		
 		private Context context;
 		private int type;
-		private String my_email;
-		private String my_weight;
+		private static String my_email;
+		private static String my_weight;
 		private int tmp_position = 0;
 		private Float tmp_time = 0f;
 		private Float tmp_power = 1f;
 		private Float tmp_food_calorie = 0f;
 		private Float tmp_food_num = 1f;
+		
+		private String tmp_food_pre_content_val = "";
+		private String tmp_food_content_val = "";
+		private String tmp_food_calorie_val = "";
+		
+		private String tmp_exercise_pre_content_val = "";
+		private String tmp_exercise_content_val = "";
+		private String tmp_exercise_calorie_val = "";
+		
+		private String tmp_weight_content_val = "";
 		
 		public TimelineDialogWindow(int type, String my_email, String my_weight) {
 			this.type=type;
@@ -169,15 +179,21 @@ import android.widget.Toast;
 				    	
 				    	LinearLayout ll = (LinearLayout)getDialog().findViewById(R.id.write_food_select_layout);
 				    	try{
-				    		String tmp_calorie_str = food_data.getString(tv_tmp.getText().toString());
+				    		String tmp_food_name = tv_tmp.getText().toString();
+				    		String tmp_calorie_str = food_data.getString(tmp_food_name);
 				    		//System.out.println("칼로리 => "+tmp_calorie);
 				    		
 				    		float tmp_calorie = Float.valueOf(tmp_calorie_str);
 				    		tmp_food_calorie = tmp_calorie;
-							
+								
 							//float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
+				    		tmp_calorie = tmp_food_num * tmp_food_calorie ;
 							String calorie_str = String.format("%.0f", tmp_calorie);
 				    		
+							tmp_food_pre_content_val = String.format("%.1f", tmp_food_num);
+							tmp_food_content_val = tmp_food_name;  //음식 이름 변수 저장
+							tmp_food_calorie_val = calorie_str;	//칼로리 변수 저장
+							
 				    		tv_select_food.setText(tv_tmp.getText().toString());
 				    		tv_food_calorie.setText("+"+calorie_str+"Kcal");
 				    	    	
@@ -207,8 +223,13 @@ import android.widget.Toast;
 						if(tmp_num > 0.5) {
 							tmp_food_num = tmp_num-0.5f;
 							float tmp_calorie = tmp_food_num * tmp_food_calorie ;
-							tv_food_calorie.setText(String.format("+"+"%.0f", tmp_calorie)+"Kcal");
-							tv_food_num.setText(String.format("%.1f", tmp_food_num));
+							String calorie_str = String.format("%.0f", tmp_calorie);
+							String num_str = String.format("%.1f", tmp_food_num);
+							tv_food_calorie.setText("+"+calorie_str+"Kcal");
+							tv_food_num.setText(num_str);
+							
+							tmp_food_pre_content_val = num_str;
+							tmp_food_calorie_val = calorie_str;	//칼로리 변수 저장
 						}		
 					}	
 				});
@@ -229,8 +250,13 @@ import android.widget.Toast;
 						if(tmp_num < 5) {
 							tmp_food_num = tmp_num+0.5f;
 							float tmp_calorie = tmp_food_num * tmp_food_calorie ;
-							tv_food_calorie.setText(String.format("+"+"%.0f", tmp_calorie)+"Kcal");
-							tv_food_num.setText(String.format("%.1f", tmp_food_num));
+							String calorie_str = String.format("%.0f", tmp_calorie);
+							String num_str = String.format("%.1f", tmp_food_num);
+							tv_food_calorie.setText("+"+calorie_str+"Kcal");
+							tv_food_num.setText(num_str);
+							
+							tmp_food_pre_content_val = num_str;
+							tmp_food_calorie_val = calorie_str;	//칼로리 변수 저장
 						}
 					}	
 				});
@@ -249,6 +275,9 @@ import android.widget.Toast;
 						tv_food_num.setText(String.format("%.1f", tmp_food_num));
 						tv_food_calorie.setText(String.format("+"+"%.0f", tmp_food_calorie)+"Kcal");
 						ll.setVisibility(View.GONE);  
+						
+						tmp_food_content_val = "";
+						tmp_food_calorie_val = String.format("%.1f", tmp_food_num);	//칼로리 변수 저장
 					}	
 				});
 			
@@ -257,8 +286,20 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
-						//데이터 전송해주는 부분 추가 필요
-						onStop();
+						if(!tmp_food_content_val.equals("")){	//기록 내용이 있을 때
+							JSONObject json_my_param = new JSONObject();
+							try{
+								json_my_param.put("type", "4");
+								json_my_param.put("pre_content", tmp_food_pre_content_val);
+								json_my_param.put("content", tmp_food_content_val);
+								json_my_param.put("calorie", tmp_food_calorie_val);
+							}
+							catch(Exception e){
+								System.out.println("JSON put 에러");
+							}
+							TimelineFrag.addMyData(json_my_param);
+							onStop();
+						}		
 					}	
 				});	
 			}
@@ -283,9 +324,14 @@ import android.widget.Toast;
 				es.setOnItemSelectedListener(new OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> parent, View view,
 							int position, long id) {
+						TextView tv_tmp = (TextView)view;
+						String tmp_exercise_name = tv_tmp.getText().toString();
 						tmp_position = position;
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
-						String calorie_str = String.format("%.1f", tmp_calorie);
+						String calorie_str = String.format("%.0f", tmp_calorie);
+						
+						tmp_exercise_content_val = tmp_exercise_name;
+						tmp_exercise_calorie_val = calorie_str;	
 						tv_calorie.setText("-"+calorie_str+"Kcal");	
 					}
 		
@@ -304,7 +350,10 @@ import android.widget.Toast;
 						tv_val.setText(progress+"분");
 						
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
-						String calorie_str = String.format("%.1f", tmp_calorie);
+						String calorie_str = String.format("%.0f", tmp_calorie);
+						
+						tmp_exercise_pre_content_val = String.format("%d", progress);
+						tmp_exercise_calorie_val = calorie_str;	
 						tv_calorie.setText("-"+calorie_str+"Kcal");			
 					}
 	
@@ -326,7 +375,9 @@ import android.widget.Toast;
 						
 						tmp_power = 0.8f;	
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
-						String calorie_str = String.format("%.1f", tmp_calorie);
+						String calorie_str = String.format("%.0f", tmp_calorie);
+						
+						tmp_exercise_calorie_val = calorie_str;	
 						tv_calorie.setText("-"+calorie_str+"Kcal");	
 					}
 				});
@@ -341,7 +392,9 @@ import android.widget.Toast;
 						
 						tmp_power = 1.0f;	
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
-						String calorie_str = String.format("%.1f", tmp_calorie);
+						String calorie_str = String.format("%.0f", tmp_calorie);
+						
+						tmp_exercise_calorie_val = calorie_str;
 						tv_calorie.setText("-"+calorie_str+"Kcal");	
 					}
 				});
@@ -356,7 +409,9 @@ import android.widget.Toast;
 						
 						tmp_power = 1.2f;		
 						float tmp_calorie = Float.parseFloat(exercise_calorie[tmp_position]) * tmp_time * tmp_power;
-						String calorie_str = String.format("%.1f", tmp_calorie);
+						String calorie_str = String.format("%.0f", tmp_calorie);
+						
+						tmp_exercise_calorie_val = calorie_str;
 						tv_calorie.setText("-"+calorie_str+"Kcal");	
 					}
 				});
@@ -365,7 +420,20 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
-						//데이터 전송해주는 부분 추가 필요
+						if(!tmp_exercise_content_val.equals("")){	//기록 내용이 있을 때
+							JSONObject json_my_param = new JSONObject();
+							try{
+								json_my_param.put("type", "5");
+								json_my_param.put("pre_content", tmp_exercise_pre_content_val+"분");
+								json_my_param.put("content", tmp_exercise_content_val);
+								json_my_param.put("calorie", tmp_exercise_calorie_val);
+							}
+							catch(Exception e){
+								System.out.println("JSON put 에러");
+							}
+							TimelineFrag.addMyData(json_my_param);
+							onStop();
+						}
 						onStop();
 					}	
 				});	
@@ -408,7 +476,8 @@ import android.widget.Toast;
 						tmp_weight_str = tmp_weight_str.replaceAll("kg", "");
 						Float tmp_weight_num = Float.valueOf(tmp_weight_str);
 						tmp_weight_num = tmp_weight_num+0.1f;
-						tv_weight.setText(String.format("%.1f", tmp_weight_num)+"kg");
+						tmp_weight_content_val = String.format("%.1f", tmp_weight_num);
+						tv_weight.setText(tmp_weight_content_val+"kg");
 					}	
 				});
 				
@@ -417,7 +486,17 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
-						//데이터 전송해주는 부분 추가 필요
+						JSONObject json_my_param = new JSONObject();
+						try{
+							json_my_param.put("type", "7");
+							json_my_param.put("pre_content", "");
+							json_my_param.put("content", tmp_weight_content_val);
+							json_my_param.put("calorie", "");
+						}
+						catch(Exception e){
+							System.out.println("JSON put 에러");
+						}
+						TimelineFrag.addMyData(json_my_param);
 						onStop();
 					}	
 				});	

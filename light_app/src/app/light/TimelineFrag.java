@@ -69,9 +69,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	
 	private static ArrayList<TimeLineObj> my_list = null;
 	private static ListView my_listview;
-	private MyTimelineAdapter my_adapter;
+	private static MyTimelineAdapter my_adapter;
 	
-	private int my_list_count = 0;
+	private static int my_list_count = 0;
 	private int pre_list_add = 0;
 	private boolean first_start = true;
 	
@@ -210,7 +210,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 					try {
 						JSONObject json_my_param = new JSONObject();
 						json_my_param.put("type", "3");
-						json_my_param.put("nickname", "");
 						json_my_param.put("pre_content", "");
 						json_my_param.put("content", chat_val);
 						json_my_param.put("calorie", "");
@@ -555,7 +554,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	//내가 쓴 채팅 내용 추가
-	public void addMyData(JSONObject json_my_param)
+	public static void addMyData(JSONObject json_my_param)
 	{	
 		try {	
 			String type = json_my_param.getString("type");
@@ -742,13 +741,13 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	 * 5 - EXERCISE
 	 * 6 - PICTURE
 	 */
-	public boolean sendTimelineData(JSONObject json_param) {	
+	public static boolean sendTimelineData(JSONObject json_param) {	
 		try {
 			CommonHttp ch = new CommonHttp();	
 			String result_json = ch.postData("http://211.110.61.51:3000/send_push", json_param);		
 			if(result_json.equals("error")) {
 				System.out.println("데이터 전송 실패!");
-				Toast.makeText(context, "데이터 전송 실패!", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(context, "데이터 전송 실패!", Toast.LENGTH_SHORT).show();
 				return false;
 			}	
 			return true;
