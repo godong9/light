@@ -65,6 +65,18 @@
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.NoTitleBar" 
             />
+        <activity
+            android:name="ProfileActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            />
+        <activity
+            android:name="MatchingActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar" 
+            />
         
         <!-- GCM -->
 		<receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" 
