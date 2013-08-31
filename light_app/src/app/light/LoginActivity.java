@@ -102,8 +102,6 @@ public class LoginActivity extends CommonActivity {
             }
         }
         
-           
-        
 		Intent intent = getIntent();   // 값을 받기 위한 Intent 생성
 
 		String intent_str = intent.getStringExtra("type");

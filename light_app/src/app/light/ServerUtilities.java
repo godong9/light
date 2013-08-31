@@ -88,8 +88,7 @@ public final class ServerUtilities {
                 backoff *= 2;
             }
         }
-        String message = context.getString(R.string.server_register_error,
-                MAX_ATTEMPTS);
+        String message = context.getString(R.string.server_register_error, MAX_ATTEMPTS);
         System.out.println(message);
         return false;
     }
