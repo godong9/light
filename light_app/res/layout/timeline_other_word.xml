@@ -13,7 +13,7 @@
         android:gravity="center"
         android:textSize = "12sp"
         android:textStyle="bold"
-        android:textColor="#424242" 
+        android:textColor="#FFFFFF" 
   		android:singleLine="true"
         android:paddingLeft="5dp"
   		android:layout_marginTop="3dp"
@@ -25,8 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxWidth="160dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:gravity="center_vertical"
         android:paddingTop="7dp"
         android:paddingLeft="10dp"
@@ -45,7 +45,7 @@
         android:textSize = "8sp"
         android:textColor="#FFFFFF" 
   		android:singleLine="true"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/timeline_other_date"/>
 
 

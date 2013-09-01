@@ -3,48 +3,79 @@
      android:id="@+id/login"
      android:layout_width="fill_parent"
      android:layout_height="fill_parent"
-     android:background="@drawable/login"
-     android:gravity="center"
+     android:background="@drawable/login_background"
+     android:gravity="center_horizontal"
      >
      <TableRow
          android:gravity="center"
-         android:layout_marginTop="80dp">
+         android:layout_marginTop="180dp"
+         android:layout_marginLeft="25dp"
+         android:layout_marginRight="40dp"
+         android:background="@drawable/small_input_background">
          <TextView 
          	 android:gravity="center_vertical"
-             android:text="ID "/>
+             android:text="ID"
+             android:textSize="15sp"
+             android:textColor="#FFFFFF"
+             android:layout_width="24dp"
+             android:layout_marginLeft="18dp"/>
          <EditText           
              android:id="@+id/login_id"
-			 android:layout_width="220dp"/>
+             android:layout_marginTop="7dp"
+             android:layout_marginBottom="5dp"
+             android:layout_marginLeft="16dp"
+			 android:layout_width="221dp"
+			 android:layout_height="40dp"/>
      </TableRow> 
      <TableRow
          android:gravity="center"
-         android:layout_marginTop="10dp">
+         android:layout_width="fill_parent"
+         android:layout_height="70dp"
+         android:layout_marginTop="4dp"
+         android:layout_marginLeft="25dp"
+         android:layout_marginRight="40dp"
+         android:background="@drawable/small_input_background">
+         
          <TextView 
-             android:gravity="center_vertical"
-             android:text="PW "/>
-         <EditText
+         	 android:gravity="center_vertical"
+             android:text="PW"
+             android:textSize="15sp"
+             android:textColor="#FFFFFF"
+             android:layout_width="24dp"
+             android:layout_marginLeft="18dp"/>
+         <EditText           
              android:id="@+id/login_password"
-  			 android:layout_width="220dp"
              android:inputType="textPassword"
-   />
+             android:layout_marginTop="7dp"
+             android:layout_marginBottom="5dp"
+             android:layout_marginLeft="16dp"
+			 android:layout_width="221dp"
+			 android:layout_height="40dp"/>
      </TableRow>
      <TableRow
          android:gravity="center"
-         android:layout_marginTop="10dp">
-         <CheckBox 
+         android:layout_marginTop="2dp">
+         <CheckBox  
+         	 android:layout_gravity="center"
              android:id="@+id/login_keep_login"
              android:text="자동 로그인"
              android:textColor="#000000"
-             android:layout_column="1"/>
+             android:layout_span="2"/>
 
      </TableRow>
      <TableRow
          android:gravity="center"
-         android:layout_marginTop="10dp">
-         <Button
+         android:layout_marginTop="14dp">
+         <ImageButton
              android:gravity="center"
              android:id="@+id/login_btn"
-             android:text="로그인"
+             android:layout_width="140dp"
+             android:layout_height="40dp"
+             android:layout_marginTop="2dp"
+             android:layout_marginBottom="2dp"
+             android:layout_marginLeft="65dp"
+             android:layout_marginRight="65dp"
+             android:background="@drawable/login_btn"
              android:onClick="onLoginBtn"
              android:layout_span="2"
              />
@@ -52,10 +83,16 @@
      <TableRow
          android:gravity="center"
          android:layout_marginTop="5dp">
-         <Button
+         <ImageButton
              android:gravity="center"
              android:id="@+id/join_btn"
-             android:text="회원가입"
+             android:layout_width="140dp"
+             android:layout_height="40dp"
+             android:layout_marginTop="4dp"
+             android:layout_marginBottom="2dp"
+             android:layout_marginLeft="65dp"
+             android:layout_marginRight="65dp"
+             android:background="@drawable/join_btn"
              android:onClick="onJoinBtn"
              android:layout_span="2"
              />

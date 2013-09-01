@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -155,7 +156,7 @@ public class LoginActivity extends CommonActivity {
 			    Handler login_handler = new Handler () {
 			    	@Override
 			    	public void handleMessage(Message msg) {
-			    		Button login_btn = (Button)findViewById(R.id.login_btn);
+			    		ImageButton login_btn = (ImageButton)findViewById(R.id.login_btn);
 			 		    onLoginBtn(login_btn);
 			    	}
 		        };

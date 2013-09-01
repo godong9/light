@@ -3,6 +3,7 @@ package app.light;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,11 @@ public class MyCommunityAdapter extends BaseAdapter {
 		
 		if(tmp_type.equals("공지")){
 			title_type.setBackgroundResource(R.drawable.community_type_notice_background);
+			title_type.setTextColor(Color.parseColor("#FFFFFF"));
 		}
 		else{
 			title_type.setBackgroundResource(R.drawable.community_type_etc_background);
+			title_type.setTextColor(Color.parseColor("#000000"));
 		}
 		
 		TextView title_content = (TextView)convertView.findViewById(R.id.community_title_content);
