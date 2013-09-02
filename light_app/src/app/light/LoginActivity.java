@@ -235,7 +235,9 @@ public class LoginActivity extends CommonActivity {
 	
 	// 회원가입 클릭시 회원가입 화면으로 이동
 	public void onJoinBtn(View v) {
-		Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+		
+		// 테스트용 임시로 레이아웃 교체
+		Intent intent = new Intent(LoginActivity.this, MatchingActivity.class);
 		startActivity(intent);
 	}
 	

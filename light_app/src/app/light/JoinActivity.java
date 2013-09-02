@@ -70,9 +70,7 @@ public class JoinActivity extends CommonActivity {
 				String result_flag = json_data.getString("result");			
 				// 회원가입 성공시
 				if(result_flag.equals("success")){
-					Intent intent = new Intent(JoinActivity.this, BaseFragment.class);
-					startActivity(intent);
-					
+			
 					//푸시서버 GCM 관련 설정
 					checkNotNull(SERVER_URL, "SERVER_URL");
 			        checkNotNull(SENDER_ID, "SENDER_ID");
@@ -125,6 +123,10 @@ public class JoinActivity extends CommonActivity {
 			                };
 			                mRegisterTask.execute(null, null, null);
 			            }
+			            
+			            //프로필 페이지로 이동
+			            Intent intent = new Intent(JoinActivity.this, ProfileActivity.class);
+						startActivity(intent);            
 			        }
 					
 					
