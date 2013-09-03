@@ -150,12 +150,12 @@ public class GCMIntentService extends GCMBaseIntentService {
 	        	message = tmp_nickname + " : " + tmp_content;
 	        }
 	        
-	        //Notification notification = new Notification(icon, message, when);
-	        Notification notification = new Notification.Builder(context)
-	        								.setSmallIcon(icon)
-	        								.setContentTitle(message)
-	        								.setWhen(when)
-	        								.build();
+	        Notification notification = new Notification(icon, message, when);
+	        //Notification notification = new Notification.Builder(context)
+	        //								.setSmallIcon(icon)
+	        //								.setContentTitle(message)
+	        //								.setWhen(when)
+	        //								.build();
 	        
 	        String title = context.getString(R.string.app_name);
 	        Intent notificationIntent = new Intent(context, LoginActivity.class);

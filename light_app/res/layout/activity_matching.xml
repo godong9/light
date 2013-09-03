@@ -1,8 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/matching_background"
+    android:orientation="vertical" >
 	
-   
+    <LinearLayout 
+		android:layout_weight ="22"
+		android:layout_width="fill_parent"
+   		android:layout_height="0dp"
+   		android:layout_marginTop="20dp"
+   		android:orientation="vertical">
+   		<TextView       
+   		    android:layout_weight ="30"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="61dp"
+            android:textSize = "14sp"
+            android:textColor="#FFFFFF" 
+		  	android:singleLine="true"/>
+   		<LinearLayout 
+   		    android:layout_weight ="70"
+			android:layout_width="fill_parent"
+	   		android:layout_height="0dp"
+	   		android:orientation="horizontal"
+	   		android:gravity="center">
+	   		
+   		    <TextView       
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	            android:layout_marginTop="10dp"
+	            android:layout_marginBottom="10dp"
+	            android:layout_marginLeft="30dp"
+	            android:layout_marginRight="30dp"
+	            android:gravity="center"
+	            android:text="이번 매칭에서의 선택 사항들입니다.\n비슷한 조건의 다이어터와 매칭이 되며 경쟁이 끝나고\n새 대결을 시작할 때마다 수정할 수 있습니다."
+	            android:textSize = "14sp"
+	            android:textColor="#000000" />
+   		    
+   		</LinearLayout>
+   		
+   		
+   	</LinearLayout>
+   	
+    <LinearLayout 
+		android:layout_weight ="27"
+		android:layout_width="fill_parent"
+   		android:layout_height="0dp"
+   		android:orientation="vertical">
+   		<TextView       
+   		    android:layout_weight ="30"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="56dp"
+            android:text="감량 목표"    
+            android:textSize = "14sp"
+            android:textColor="#FFFFFF" 
+		  	android:singleLine="true"/>
+   		<LinearLayout 
+   		    android:layout_weight ="70"
+			android:layout_width="fill_parent"
+	   		android:layout_height="0dp"
+	   		android:layout_marginTop="6dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+	   		android:gravity="center"
+	   		android:orientation="horizontal">
+	   		
+   		    <ImageButton
+		        android:id="@+id/matching_minus_btn"
+		        android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="6dp"
+				android:layout_marginBottom="6dp"
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"
+				android:layout_gravity="center"
+				android:onClick="onMatchingMinusBtn"		
+		        android:background="@drawable/matching_minus_btn"/>
+            	
+            <TextView   
+                android:id="@+id/matching_weight"
+				android:layout_width="100dp"
+				android:layout_height="60dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginBottom="8dp"
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"
+				android:gravity="center"
+				android:text="0kg"    
+	            android:textSize ="30sp"
+	            android:textColor="#FF0062" 
+	            android:singleLine="true"/>
+       		
+            <ImageButton
+		        android:id="@+id/matching_plus_btn"
+		        android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"
+				android:layout_gravity="center"
+				android:onClick="onMatchingPlusBtn"		
+		        android:background="@drawable/matching_plus_btn"/>
+	            
+   		</LinearLayout>
+   		
+   		
+   	</LinearLayout>
+   	
+    <LinearLayout 
+		android:layout_weight ="26"
+		android:layout_width="fill_parent"
+   		android:layout_height="0dp"
+   		android:orientation="vertical">
+   		<TextView       
+   		    android:layout_weight ="30"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="60dp"
+            android:text="기간"    
+            android:textSize = "14sp"
+            android:textColor="#FFFFFF" 
+		  	android:singleLine="true"/>
+   		<LinearLayout 
+   		    android:layout_weight ="70"
+			android:layout_width="fill_parent"
+	   		android:layout_height="0dp"
+	   		android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+	   		android:gravity="center"
+	   		android:orientation="horizontal">
+   		    
+   		    <ImageButton  
+		        android:id="@+id/matching_1week_btn" 
+				android:layout_width="62dp"
+				android:layout_height="33dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"	
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"	
+				android:onClick="onMatching1weekBtn"		
+				android:background="@drawable/matching_1week_btn"/> 
+   		    <ImageButton  
+		        android:id="@+id/matching_2week_btn" 
+				android:layout_width="62dp"
+				android:layout_height="33dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"	
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"	
+				android:onClick="onMatching2weekBtn"		
+				android:background="@drawable/matching_2week_btn"/> 
+			<ImageButton  
+		        android:id="@+id/matching_4week_btn" 
+				android:layout_width="62dp"
+				android:layout_height="33dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"	
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"	
+				android:onClick="onMatching4weekBtn"		
+				android:background="@drawable/matching_4week_btn"/> 
+			<ImageButton  
+		        android:id="@+id/matching_6week_btn" 
+				android:layout_width="62dp"
+				android:layout_height="33dp"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp"	
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"		
+				android:onClick="onMatching6weekBtn"	
+				android:background="@drawable/matching_6week_btn"/> 
+   		    
+	   		
+   		</LinearLayout>
+   		
+   		
+   	</LinearLayout>
+    <LinearLayout 
+		android:layout_weight ="26"
+		android:layout_width="fill_parent"
+   		android:layout_height="0dp"
+   		android:gravity="center" 
+   		android:orientation="vertical">	
+	    <ImageButton
+	        android:id="@+id/matching_ok_btn"		            
+			android:layout_width="270dp"
+			android:layout_height="48dp"
+			android:layout_marginTop="20dp"	
+			android:layout_marginBottom="20dp"	
+			android:onClick="onMatchingCompleteBtn"	
+			android:background="@drawable/matching_ok_btn"/> 
+   </LinearLayout>
 </LinearLayout>
