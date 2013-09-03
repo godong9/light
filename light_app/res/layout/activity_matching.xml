@@ -81,10 +81,11 @@
 				android:layout_marginLeft="2dp"
 				android:layout_marginRight="2dp"
 				android:layout_gravity="center"
+				android:onClick="onMatchingMinusBtn"		
 		        android:background="@drawable/matching_minus_btn"/>
             	
             <TextView   
-                android:id="@+id/matching_weight_val"
+                android:id="@+id/matching_weight"
 				android:layout_width="100dp"
 				android:layout_height="60dp"
 				android:layout_marginTop="8dp"
@@ -92,7 +93,7 @@
 				android:layout_marginLeft="2dp"
 				android:layout_marginRight="2dp"
 				android:gravity="center"
-				android:text="99kg"    
+				android:text="0kg"    
 	            android:textSize ="30sp"
 	            android:textColor="#FF0062" 
 	            android:singleLine="true"/>
@@ -106,6 +107,7 @@
 				android:layout_marginLeft="2dp"
 				android:layout_marginRight="2dp"
 				android:layout_gravity="center"
+				android:onClick="onMatchingPlusBtn"		
 		        android:background="@drawable/matching_plus_btn"/>
 	            
    		</LinearLayout>
@@ -147,7 +149,8 @@
 				android:layout_marginTop="5dp"
 				android:layout_marginBottom="5dp"	
 				android:layout_marginLeft="2dp"
-				android:layout_marginRight="2dp"		
+				android:layout_marginRight="2dp"	
+				android:onClick="onMatching1weekBtn"		
 				android:background="@drawable/matching_1week_btn"/> 
    		    <ImageButton  
 		        android:id="@+id/matching_2week_btn" 
@@ -156,7 +159,8 @@
 				android:layout_marginTop="5dp"
 				android:layout_marginBottom="5dp"	
 				android:layout_marginLeft="2dp"
-				android:layout_marginRight="2dp"		
+				android:layout_marginRight="2dp"	
+				android:onClick="onMatching2weekBtn"		
 				android:background="@drawable/matching_2week_btn"/> 
 			<ImageButton  
 		        android:id="@+id/matching_4week_btn" 
@@ -165,7 +169,8 @@
 				android:layout_marginTop="5dp"
 				android:layout_marginBottom="5dp"	
 				android:layout_marginLeft="2dp"
-				android:layout_marginRight="2dp"		
+				android:layout_marginRight="2dp"	
+				android:onClick="onMatching4weekBtn"		
 				android:background="@drawable/matching_4week_btn"/> 
 			<ImageButton  
 		        android:id="@+id/matching_6week_btn" 
@@ -175,6 +180,7 @@
 				android:layout_marginBottom="5dp"	
 				android:layout_marginLeft="2dp"
 				android:layout_marginRight="2dp"		
+				android:onClick="onMatching6weekBtn"	
 				android:background="@drawable/matching_6week_btn"/> 
    		    
 	   		
@@ -194,6 +200,7 @@
 			android:layout_height="48dp"
 			android:layout_marginTop="20dp"	
 			android:layout_marginBottom="20dp"	
+			android:onClick="onMatchingCompleteBtn"	
 			android:background="@drawable/matching_ok_btn"/> 
    </LinearLayout>
 </LinearLayout>
