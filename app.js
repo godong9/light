@@ -79,6 +79,8 @@ app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);
 app.post('/rival_history', rival.rival_history_data);
 app.post('/send_push', routes.send_push);
+app.post('/profile', user.profile);
+app.post('/matching', user.matching);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

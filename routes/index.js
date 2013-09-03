@@ -89,8 +89,10 @@ exports.send_push = function(req, res) {
 		if(err) throw err;
 		
 		for(var i=0; i<rows.length; i++) {
-			registrationIds.push(rows[i]);
-			console.log(rows[i]);
+			var tmp_str = rows[i].reg_id;
+			//tmp_str = tmp_str.replace(/\'/gi, '');
+			console.log(rows[i].reg_id);
+			registrationIds.push(tmp_str);		
 		}
 		dao_t.dao_set_timeline(evt, mysql_conn, params);
 	});
@@ -103,7 +105,7 @@ exports.send_push = function(req, res) {
 		console.log('Today => ' + today);
 
 		message.addDataWithKeyValue('nickname', params['nickname']);
-		message.addDataWithKeyValue('view_type', params['type']);
+		message.addDataWithKeyValue('type', params['type']);
 		message.addDataWithKeyValue('pre_content', params['pre_content']);
 		message.addDataWithKeyValue('content', params['content']);
 		message.addDataWithKeyValue('calorie', params['calorie']);

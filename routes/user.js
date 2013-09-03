@@ -123,3 +123,60 @@ exports.login = function(req, res){
 	});
 };
 
+exports.profile = function(req, res){
+	var evt = new EventEmitter();
+	var dao_u = require('../sql/user');
+	var result = {};
+	
+	var email = req.session.email;
+	var gender = req.body.gender;
+	var height = req.body.height;
+	var weight = req.body.weight;
+	var goal = req.body.goal;
+
+	var params = { 
+		email: email, 
+		gender: gender,
+		height: height,
+		weight: weight,
+		goal: goal 
+	}
+
+	dao_u.dao_profile(evt, mysql_conn, params);
+	evt.on('profile', function(err, rows){
+		if(err)
+			throw err;
+
+		console.log("Profile Update!");
+
+		result = { result:"success", msg:"프로필 업데이트 성공!" };
+		res.send(result);
+	});
+};
+
+exports.matching = function(req, res){
+	var evt = new EventEmitter();
+	var dao_u = require('../sql/user');
+	var result = {};
+	
+	var email = req.session.email;
+	var goal= req.body.goal;
+	var term = req.body.term;
+
+	var params = { 
+		email: email, 
+		goal: goal,
+		term: term
+	}
+
+	dao_u.dao_matching(evt, mysql_conn, params);
+	evt.on('matching', function(err, rows){
+		if(err)
+			throw err;
+
+		console.log("Matching Start!");
+
+		result = { result:"success", msg:"매칭정보 업데이트 성공!" };
+		res.send(result);
+	});
+};

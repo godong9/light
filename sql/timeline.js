@@ -37,6 +37,7 @@ exports.dao_get_weight_data = function(evt, mysql_conn, params){
 
 	var sql = "SELECT ";
 	sql +="`A`.`email`, ";
+	sql +="`A`.`nickname`, ";
 	sql += "`A`.`weight`, ";
 	sql += "`A`.`height` ";
 	sql += "FROM `user` AS `A` ";
