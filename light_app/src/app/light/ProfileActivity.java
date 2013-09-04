@@ -1,23 +1,16 @@
 package app.light;
 
-import static app.light.CommonUtilities.DISPLAY_MESSAGE_ACTION;
-import static app.light.CommonUtilities.SENDER_ID;
-import static app.light.CommonUtilities.SERVER_URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.android.gcm.GCMRegistrar;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class ProfileActivity extends CommonActivity {
@@ -26,7 +19,8 @@ public class ProfileActivity extends CommonActivity {
 	
 	private static int GENDER_WOMAN = 1;
 	private static int GENDER_MAN = 2;
-	
+	ImageButton woman_btn;
+	ImageButton man_btn;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +29,21 @@ public class ProfileActivity extends CommonActivity {
 		setContentView(R.layout.activity_profile);
 		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.basic_title);
+		
+		woman_btn = (ImageButton)findViewById(R.id.profile_woman_btn);
+		man_btn = (ImageButton)findViewById(R.id.profile_man_btn);
 	}
 	
 	public void onProfileWomanBtn(View v){
 		gender = GENDER_WOMAN;
+		woman_btn.setSelected(true);
+		man_btn.setSelected(false);
 	}
 	
 	public void onProfileManBtn(View v){
 		gender = GENDER_MAN;
+		woman_btn.setSelected(false);
+		man_btn.setSelected(true);
 	}
 	
 	
