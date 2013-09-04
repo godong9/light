@@ -90,11 +90,12 @@ exports.dao_profile = function(evt, mysql_conn, params){
 	console.log("profile EMAIL=>"+params['email']);
 	var sql = "UPDATE `user` ";
 	sql += "SET `gender` = '"+params['gender']+"', "; 
-	sql += "SET `height` = '"+params['height']+"', "; 
-	sql += "SET `start_weight` = '"+params['weight']+"', "; 
-	sql += "SET `pre_weight` = '"+params['weight']+"', "; 
-	sql += "SET `goal` = '"+params['goal_weight']+"' ";
+	sql += "`height` = '"+params['height']+"', "; 
+	sql += "`start_weight` = '"+params['weight']+"', "; 
+	sql += "`pre_weight` = '"+params['weight']+"', "; 
+	sql += "`goal_weight` = '"+params['goal']+"' ";
 	sql += "WHERE `email` = '"+params['email']+"' ";
+
 	var query = mysql_conn.query(sql, params, function(err, rows, fields) {
 		evt.emit('profile', err, rows);	
 	});
@@ -109,7 +110,7 @@ exports.dao_matching = function(evt, mysql_conn, params){
 	console.log("matching EMAIL=>"+params['email']);
 	var sql = "UPDATE `user` ";
 	sql += "SET `matching_term` = '"+params['term']+"', "; 
-	sql += "SET `matching_goal` = '"+params['goal']+"' "; 
+	sql += "`matching_goal` = '"+params['goal']+"' "; 
 	sql += "WHERE `email` = '"+params['email']+"' ";
 	var query = mysql_conn.query(sql, params, function(err, rows, fields) {
 		evt.emit('matching', err, rows);	
