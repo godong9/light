@@ -17,6 +17,10 @@ public class MatchingActivity extends CommonActivity {
 	
 	private int term = 0;
 	private int goal = 0;
+	ImageButton week1_btn;
+	ImageButton week2_btn;
+	ImageButton week4_btn;
+	ImageButton week6_btn;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,11 @@ public class MatchingActivity extends CommonActivity {
 		setContentView(R.layout.activity_matching);
 		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.basic_title);
-	
-
+		
+		week1_btn = (ImageButton)findViewById(R.id.matching_1week_btn);
+		week2_btn = (ImageButton)findViewById(R.id.matching_2week_btn);
+		week4_btn = (ImageButton)findViewById(R.id.matching_4week_btn);
+		week6_btn = (ImageButton)findViewById(R.id.matching_6week_btn);	
 	}
 	
 	public void onMatchingMinusBtn(View v){
@@ -52,15 +59,31 @@ public class MatchingActivity extends CommonActivity {
 	}
 	public void onMatching1weekBtn(View v){
 		term = 1;
+		week1_btn.setSelected(true);
+		week2_btn.setSelected(false);
+		week4_btn.setSelected(false);
+		week6_btn.setSelected(false);
 	}
 	public void onMatching2weekBtn(View v){
 		term = 2;
+		week1_btn.setSelected(false);
+		week2_btn.setSelected(true);
+		week4_btn.setSelected(false);
+		week6_btn.setSelected(false);
 	}
 	public void onMatching4weekBtn(View v){
 		term = 4;
+		week1_btn.setSelected(false);
+		week2_btn.setSelected(false);
+		week4_btn.setSelected(true);
+		week6_btn.setSelected(false);
 	}
 	public void onMatching6weekBtn(View v){
 		term = 6;
+		week1_btn.setSelected(false);
+		week2_btn.setSelected(false);
+		week4_btn.setSelected(false);
+		week6_btn.setSelected(true);
 	}
 	
 	public void onMatchingCompleteBtn(View v){
