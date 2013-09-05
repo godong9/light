@@ -96,7 +96,7 @@
    		        android:gravity="center_vertical"
 	            android:text="cm"
 	            android:textSize="16sp"
-	            android:textColor="#000000"/>
+	            android:textColor="#525252"/>
    		    <EditText           
 	             android:id="@+id/profile_weight"
 	             android:layout_marginTop="5dp"
@@ -112,7 +112,7 @@
    		        android:gravity="center_vertical"
 	            android:text="kg"
 	            android:textSize="16sp"
-	            android:textColor="#000000"/>
+	            android:textColor="#525252"/>
    		</LinearLayout>
    		
    		
@@ -159,7 +159,7 @@
    		        android:gravity="center_vertical"
 	            android:text="kg"
 	            android:textSize="16sp"
-	            android:textColor="#000000"/>
+	            android:textColor="#525252"/>
    		    
 	   		
    		</LinearLayout>
