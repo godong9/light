@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -86,7 +87,15 @@ import android.widget.Toast;
 			
 			// 다이얼로그 Home 페이지 내 데이터 적용
 			TextView myNickName = (TextView)getDialog().findViewById(R.id.rival_dialog_nickname);
-			TextView myChat = (TextView)getDialog().findViewById(R.id.rival_dialog_word);
+			
+			EditText myChat = null;
+			TextView otherChat = null;
+			if( type==1 ) {
+				myChat = (EditText)getDialog().findViewById(R.id.rival_dialog_word);
+			}
+			else {
+				otherChat = (TextView)getDialog().findViewById(R.id.rival_dialog_word);
+			}
 			TextView myHeight = (TextView)getDialog().findViewById(R.id.rival_dialog_height);
 			TextView myWeight = (TextView)getDialog().findViewById(R.id.rival_dialog_weight);
 			TextView myGoal = (TextView)getDialog().findViewById(R.id.rival_dialog_goal);
@@ -97,7 +106,13 @@ import android.widget.Toast;
 				
 			try {
 				myNickName.setText(user_info.getString("nickname"));
-				myChat.setText(user_info.getString("chat_ballon"));
+				
+				if( type==1 ) {
+					myChat.setText(user_info.getString("chat_ballon"));
+				}
+				else {
+					otherChat.setText(user_info.getString("chat_ballon"));
+				}	
 				myHeight.setText("키       "+user_info.getString("height")+"cm");
 				myWeight.setText("체중    "+user_info.getString("weight")+"kg");
 				myGoal.setText(user_info.getString("goal_weight")+"kg");
@@ -123,7 +138,7 @@ import android.widget.Toast;
 			 */
 			ImageButton dialog_exit_btn;
 	
-			
+			//내 다이얼로그 선택시
 			if(type == 1){
 				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
 				
