@@ -146,7 +146,8 @@ import android.widget.Toast;
 				final ImageButton dialog_closet_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_closet_btn);
 				final ImageButton dialog_shop_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_shop_btn);
 				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_history_btn);
-							
+				final ImageButton dialog_chat_modify_btn = (ImageButton) getDialog().findViewById(R.id.rival_dialog_word_btn);
+				
 				home_layout = (LinearLayout) getDialog().findViewById(R.id.rival_my_dialog_layout);
 				closet_layout = (LinearLayout) getDialog().findViewById(R.id.rival_closet_layout);
 				shop_layout = (LinearLayout) getDialog().findViewById(R.id.rival_shop_layout);
@@ -228,6 +229,18 @@ import android.widget.Toast;
 						setHistoryList();
 					}
 				});
+				
+				dialog_chat_modify_btn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v)
+					{			
+						final EditText et_my_chat = (EditText)getDialog().findViewById(R.id.rival_dialog_word);
+						String chat_val = et_my_chat.getText().toString();
+						final TextView tv_my_chat = (TextView)getActivity().findViewById(R.id.rival_user1_word);
+						tv_my_chat.setText(chat_val);
+						modifyChat(chat_val);
+					}
+				});
 			
 			}
 			else{
@@ -287,6 +300,31 @@ import android.widget.Toast;
 		@Override
 		public void onStop() {
 			super.onStop();
+		}
+		
+		public void modifyChat(String chat_val) {
+			JSONObject json_param = new JSONObject();
+					
+			try {
+				
+				json_param.put("chat_val", chat_val);
+				
+				CommonHttp ch = new CommonHttp();	
+				String result_json = ch.postData("http://211.110.61.51:3000/chat", json_param);		
+				
+				if(result_json.equals("error")){
+					Toast.makeText(context, "chat 업데이트 실패!", Toast.LENGTH_SHORT).show();
+				}
+				else{			
+					RivalFrag rf = new RivalFrag();
+					rf.my_info.put("chat_ballon", chat_val);
+				}
+				
+			}
+			catch(Exception e){
+				System.out.println("다이얼로그 히스토리 가져오기 에러");
+			}
+			
 		}
 		
 		public void setHistoryList() {

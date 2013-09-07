@@ -72,11 +72,11 @@
 					    	android:layout_weight ="20"     
 					    	android:layout_height="fill_parent"
 							android:layout_width="0dp"	
-							android:layout_marginTop="2dp"
-							android:layout_marginBottom="8dp"
+							android:layout_marginTop="4dp"
+							android:layout_marginBottom="10dp"
 							android:layout_marginLeft="1dp"
-							android:layout_marginRight="1dp"					
-							android:background="#111222"/> 
+							android:layout_marginRight="1dp"			
+							android:background="@drawable/modify_btn"/> 
 				</LinearLayout>
 		        <ImageButton  
 				        android:id="@+id/rival_dialog_character"
