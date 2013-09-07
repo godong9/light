@@ -55,3 +55,23 @@ exports.rival_history_data = function(req, res){
 	});
 };
 
+//라이벌 다이얼로그 말풍선 업데이트
+exports.set_chat_data = function(req, res){
+	var evt = new EventEmitter();
+	var dao_r = require('../sql/rival');
+
+	var email = req.session.email;
+	var chat_val = req.body.chat_val;
+
+	console.log("chat_data(chat_val) => "+chat_val);
+
+	var params = { email: email, chat_val: chat_val };
+
+	dao_r.dao_set_chat_data(evt, mysql_conn, params);
+
+	evt.on('chat_data', function(err, rows){
+		if(err) throw err;
+		result = { result:"success", msg:"chat 데이터 업데이트!" };
+		res.send(result);
+	});
+};

@@ -81,6 +81,7 @@ app.post('/rival_history', rival.rival_history_data);
 app.post('/send_push', routes.send_push);
 app.post('/profile', user.profile);
 app.post('/matching', user.matching);
+app.post('/chat', rival.set_chat_data);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

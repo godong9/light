@@ -68,8 +68,7 @@ exports.dao_login = function(evt, mysql_conn, params){
 // params['email']
 // params['reg_id']
 exports.dao_regist_reg_id = function(evt, mysql_conn, params){
-
-	console.log("EMAIL=>"+params['email']);
+	//console.log("EMAIL=>"+params['email']);
 	var sql = "UPDATE `user` ";
 	sql += "SET `reg_id` = '"+params['reg_id']+"' "; 
 	sql += "WHERE `email` = '"+params['email']+"' ";

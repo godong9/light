@@ -67,3 +67,17 @@ exports.dao_rival_history_data = function(evt, mysql_conn, params){
 	return sql;
 }
 
+// set_chat_data
+// params['email']
+exports.dao_set_chat_data = function(evt, mysql_conn, params){
+	console.log("EMAIL=>"+params['email']);
+	var sql = "UPDATE `user` ";
+	sql += "SET `chat_ballon` = '"+params['chat_val']+"' "; 
+	sql += "WHERE `email` = '"+params['email']+"' ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		evt.emit('chat_data', err, rows);
+	});
+	return sql;
+}
+
