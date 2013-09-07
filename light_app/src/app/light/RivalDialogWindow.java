@@ -316,7 +316,7 @@ import android.widget.Toast;
 					Toast.makeText(context, "chat 업데이트 실패!", Toast.LENGTH_SHORT).show();
 				}
 				else{			
-					RivalFrag rf = new RivalFrag();
+					RivalFrag rf = new RivalFrag(1);
 					rf.my_info.put("chat_ballon", chat_val);
 				}
 				
