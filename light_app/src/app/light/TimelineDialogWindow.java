@@ -485,6 +485,7 @@ import android.widget.Toast;
 						Float tmp_weight_num = Float.valueOf(tmp_weight_str);
 						tmp_weight_num = tmp_weight_num-0.1f;
 						tv_weight.setText(String.format("%.1f", tmp_weight_num)+"kg");
+						tmp_weight_content_val = String.format("%.1f", tmp_weight_num);
 					}	
 				});
 				
@@ -493,14 +494,12 @@ import android.widget.Toast;
 					@Override
 					public void onClick(View v)
 					{	
-						String tmp_weight_str = (String)tv_weight.getText();
-						tmp_weight_str = tmp_weight_str.replaceAll("kg", "");
+						String tmp_weight_str = (String)tv_weight.getText();				
+						tmp_weight_str = tmp_weight_str.replaceAll("kg", "");	
 						Float tmp_weight_num = Float.valueOf(tmp_weight_str);
-						tmp_weight_num = tmp_weight_num+0.1f;
-						tmp_weight_content_val = String.format("%.1f", tmp_weight_num);
-						tv_weight.setText(tmp_weight_content_val+"kg");
-						
-						System.out.println("WEIGHT=>"+tmp_weight_content_val);
+						tmp_weight_num = tmp_weight_num+0.1f;			
+						tv_weight.setText(String.format("%.1f", tmp_weight_num)+"kg");
+						tmp_weight_content_val = String.format("%.1f", tmp_weight_num);		
 					}	
 				});
 				
