@@ -396,7 +396,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	public void setListView() {
-		if(my_list == null){
+		//if(my_list == null){	//my_list 있을 때 DB접속 안하도록
 			my_list = new ArrayList<TimeLineObj>();
 						
 			String end_date_string, start_date_string;
@@ -429,7 +429,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	    		getTimelineData(start_date_string, end_date_string);
 			}
 			
-		}
+	//	}
 		
 		my_adapter = new MyTimelineAdapter(context, my_list);
 		
