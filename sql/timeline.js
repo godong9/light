@@ -108,13 +108,51 @@ exports.dao_set_timeline = function(evt, mysql_conn, params){
 		}); 
 	}
 	else if(params['type'] == '7'){	//체중 기록일 때
-		console.log("weight Update");
-		var pre_sql = "UPDATE `user` ";
-		pre_sql += "SET `weight` = '"+params['content']+"' "; 
+		//체중 기록 업데이트 할 때 비교해서 캐릭터변경
+		var pre_sql = "SELECT ";
+		pre_sql += "`start_weight`, ";
+		pre_sql += "`weight`, ";
+		pre_sql += "`character` ";
+		pre_sql += "FROM `user` "; 
 		pre_sql += "WHERE `email` = '"+params['email']+"' ";
 		var pre_query = mysql_conn.query(pre_sql, params, function(err, rows, fields) {
-			console.log("weight Update");	
-		});
+			var tmp_status = 0;
+			var tmp_val = 0;
+			var ch_rows = rows[0].character;
+			var ch_array = ch_rows.split('_');
+			var ch_0 = ch_array[0];
+			var ch_1 = ch_array[1];
+			var new_ch_1 = 0;
+			var new_ch_array = 0;
+			//console.log("!!!"+ch_0+"!!!"+ch_1);
+
+			if( Number(rows[0].start_weight) >= Number(params['content']) ){
+				tmp_status = 1;
+				new_ch_1 = parseInt(Number(rows[0].start_weight) - Number(params['content']) + 1);	  
+				if(new_ch_1 < 1) {
+					new_ch_1 = 1;
+				}
+				else if(new_ch_1 > 5) {
+					new_ch_1 = 5;
+				}
+			}
+			else {
+				tmp_status = 0;
+				//new_ch_1 = parseInt(Number(params['content']) - Number(rows[0].start_weight));
+				new_ch_1 = 1;
+			}
+			new_ch_array = ch_0+'_'+new_ch_1;
+			//console.log("new: "+new_ch_array);
+			
+			console.log("weight, character Update");
+			var u_sql = "UPDATE `user` ";
+			u_sql += "SET `weight` = '"+params['content']+"', ";
+			u_sql += "`character` = '"+new_ch_array+"' "; 
+			u_sql += "WHERE `email` = '"+params['email']+"' ";
+			var u_query = mysql_conn.query(u_sql, params, function(err, rows, fields) {
+				console.log("weight Update");	
+			});
+		}); 
 	}
 
 	var sql = "INSERT INTO `timeline` ";
