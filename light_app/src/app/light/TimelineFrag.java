@@ -396,6 +396,9 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	}
 	
 	public void setListView() {
+		///////
+		//매칭 안되어 있는 상태에서는 자기 데이터만 가져오도록 수정 필요!
+		///////
 		//if(my_list == null){	//my_list 있을 때 DB접속 안하도록
 			my_list = new ArrayList<TimeLineObj>();
 						

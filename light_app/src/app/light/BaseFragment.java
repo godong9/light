@@ -1,5 +1,8 @@
 package app.light;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -19,7 +22,8 @@ public class BaseFragment extends Activity {
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
 	private static final int ID_LOGOUT   = 3;
-		
+	private static int rf_type = 0;	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -33,7 +37,26 @@ public class BaseFragment extends Activity {
 	    FragmentManager fm = getFragmentManager();
 	    FragmentTransaction tr = fm.beginTransaction();
 	    
-	    RivalFrag rf = new RivalFrag();   
+	    //매칭여부 확인
+	    CommonHttp ch = new CommonHttp();	
+		String result_json = ch.getData("http://211.110.61.51:3000/matching_status");		
+		
+		if(result_json.equals("error")){
+			System.out.println("데이터 수신 실패!");
+		}
+		else{			
+			//System.out.println("성공");		
+			try{
+				JSONObject json_data = new JSONObject(result_json);
+				rf_type = Integer.valueOf(json_data.getString("matching_status"));
+				//System.out.println("RF_TYPE=>"+rf_type);
+			}	
+			catch(Exception e){
+				System.out.println("매칭 상태 에러");
+			}
+		}
+	    
+	    RivalFrag rf = new RivalFrag(rf_type);   
 	    tr.add(R.id.detail_frag, rf);
 	    tr.commit();
 	    
@@ -102,7 +125,7 @@ public class BaseFragment extends Activity {
 				timeline_btn.setSelected(false);
 				community_btn.setSelected(false);	
 				
-				RivalFrag rf = new RivalFrag();	    
+				RivalFrag rf = new RivalFrag(rf_type);	    
 			    tr.replace(R.id.detail_frag, rf);
 			    tr.commit();
 			}	

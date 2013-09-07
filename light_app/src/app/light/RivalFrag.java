@@ -24,79 +24,89 @@ public class RivalFrag extends CommonFragment {
 	private RivalDialogWindow popup_dialog;
 	private String packName = "app.light";
 	private Resources res;
+	private static int rf_type = 0;
 	
 	public static JSONObject group_info = null;
 	public static JSONObject my_info = null;	//내 정보
 	public static JSONArray rival_info = null;
 
+	public RivalFrag(int rf_type){
+		this.rf_type = rf_type;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {
+		View view = null;
+		if(rf_type == 0){
+			view = inflater.inflate(R.layout.frag_waiting, container, false);
+		}
+		else if(rf_type == 1){
+			view = inflater.inflate(R.layout.frag_rival, container, false);	
+			/*
+	         * 버튼 클릭 관련 이벤트 처리하는 부분
+	         * 
+	         */
+	        final ImageButton user1_btn = (ImageButton) view.findViewById(R.id.rival_user1_click);
+			final ImageButton user2_btn = (ImageButton) view.findViewById(R.id.rival_user2_click);
+			final ImageButton user3_btn = (ImageButton) view.findViewById(R.id.rival_user3_click);
+			final ImageButton user4_btn = (ImageButton) view.findViewById(R.id.rival_user4_click);
 		
-		View view = inflater.inflate(R.layout.frag_rival, container, false);
-		context = getActivity();
+			//User1 캐릭터 클릭시
+			user1_btn.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{	
+					popup_dialog = new RivalDialogWindow(1, my_info);	
+					popup_dialog.show(getFragmentManager(), "User1 Popup");	
+				}
+			});
 			
-		/*
-         * 버튼 클릭 관련 이벤트 처리하는 부분
-         * 
-         */
-        final ImageButton user1_btn = (ImageButton) view.findViewById(R.id.rival_user1_click);
-		final ImageButton user2_btn = (ImageButton) view.findViewById(R.id.rival_user2_click);
-		final ImageButton user3_btn = (ImageButton) view.findViewById(R.id.rival_user3_click);
-		final ImageButton user4_btn = (ImageButton) view.findViewById(R.id.rival_user4_click);
-	
-		//User1 캐릭터 클릭시
-		user1_btn.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{	
-				popup_dialog = new RivalDialogWindow(1, my_info);	
-				popup_dialog.show(getFragmentManager(), "User1 Popup");	
-			}
-		});
-		
-		//User2 캐릭터 클릭시
-		user2_btn.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{	
-				try {
-					popup_dialog = new RivalDialogWindow(2, rival_info.getJSONObject(0));	
+			//User2 캐릭터 클릭시
+			user2_btn.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{	
+					try {
+						popup_dialog = new RivalDialogWindow(2, rival_info.getJSONObject(0));	
+					}
+					catch(Exception e){}	
+					popup_dialog.show(getFragmentManager(), "User2 Popup");	
 				}
-				catch(Exception e){}	
-				popup_dialog.show(getFragmentManager(), "User2 Popup");	
-			}
-		});
-		
-		//User3 캐릭터 클릭시
-		user3_btn.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{	
-				try {
-					popup_dialog = new RivalDialogWindow(3, rival_info.getJSONObject(1));	
+			});
+			
+			//User3 캐릭터 클릭시
+			user3_btn.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{	
+					try {
+						popup_dialog = new RivalDialogWindow(3, rival_info.getJSONObject(1));	
+					}
+					catch(Exception e){}	
+					popup_dialog.show(getFragmentManager(), "User3 Popup");	
 				}
-				catch(Exception e){}	
-				popup_dialog.show(getFragmentManager(), "User3 Popup");	
-			}
-		});
-		
-		//User4 캐릭터 클릭시
-		user4_btn.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{	
-				try {
-					popup_dialog = new RivalDialogWindow(4, rival_info.getJSONObject(2));	
+			});
+			
+			//User4 캐릭터 클릭시
+			user4_btn.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{	
+					try {
+						popup_dialog = new RivalDialogWindow(4, rival_info.getJSONObject(2));	
+					}
+					catch(Exception e){}		
+					popup_dialog.show(getFragmentManager(), "User4 Popup");	
 				}
-				catch(Exception e){}		
-				popup_dialog.show(getFragmentManager(), "User4 Popup");	
-			}
-		});
+			});
+		}
+		context = getActivity();
+		
 			
 	
 		return view;
@@ -128,7 +138,7 @@ public class RivalFrag extends CommonFragment {
 					JSONObject json_data = new JSONObject(result_json);
 					JSONArray json_group_info = json_data.getJSONArray("group_info");
 					JSONArray json_user_info = json_data.getJSONArray("user_info");
-				
+					
 					group_info = json_group_info.getJSONObject(0);
 					String my_email = group_info.getString("email");
 					
