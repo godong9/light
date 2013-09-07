@@ -618,6 +618,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			
 			if(data_status){
 			
+				if(type.equals("7")){
+					my_weight = content;
+				}
+				
 				Calendar cal = Calendar.getInstance();
 		
 				String dateStatus;

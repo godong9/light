@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 
 public class MyTimelineAdapter extends BaseAdapter {
 	private ArrayList<TimeLineObj> list;
@@ -103,20 +104,6 @@ public class MyTimelineAdapter extends BaseAdapter {
 		TextView tvDayCount;
 		LinearLayout llWriteType;
 		ImageView ivPicture;
-		/*
-		public int type;
-		public String write_type;
-		public String nickname;
-		public String pre_content;
-		public String content;
-		public String calorie;
-		public String day_count;
-		public int bar_status;
-		public String date;
-		public ImageView manager_img;
-		public ImageView img;
-		public String mission_type;
-		*/
 		
 		switch (list.get(position).type) {
 			case TimeLineObj.VIEW_TYPE_TIMEBAR:
@@ -145,8 +132,11 @@ public class MyTimelineAdapter extends BaseAdapter {
 				llWriteType.setBackgroundResource(R.drawable.timeline_my_food);
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
+				tvPreContent.setTextColor(Color.parseColor("#4980BD"));
 				tvContent.setText(list.get(position).content);
+				tvContent.setTextColor(Color.parseColor("#4980BD"));
 				tvCalorie.setText("+"+list.get(position).calorie+"Kcal"); 
+				tvCalorie.setTextColor(Color.parseColor("#4980BD"));
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
@@ -159,8 +149,11 @@ public class MyTimelineAdapter extends BaseAdapter {
 				llWriteType.setBackgroundResource(R.drawable.timeline_my_exercise);
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
+				tvPreContent.setTextColor(Color.parseColor("#FF0062"));
 				tvContent.setText(list.get(position).content);
+				tvContent.setTextColor(Color.parseColor("#FF0062"));
 				tvCalorie.setText("-"+list.get(position).calorie+"Kcal"); 
+				tvCalorie.setTextColor(Color.parseColor("#FF0062"));
 				break;
 
 			case TimeLineObj.VIEW_TYPE_MY_PICTURE:
@@ -200,9 +193,12 @@ public class MyTimelineAdapter extends BaseAdapter {
 				llWriteType.setBackgroundResource(R.drawable.timeline_other_food);
 				tvNickname.setText(list.get(position).nickname);
 				tvDate.setText(list.get(position).date);
-				tvPreContent.setText(list.get(position).pre_content); 
+				tvPreContent.setText(list.get(position).pre_content);
+				tvPreContent.setTextColor(Color.parseColor("#4980BD"));
 				tvContent.setText(list.get(position).content);
+				tvContent.setTextColor(Color.parseColor("#4980BD"));
 				tvCalorie.setText("+"+list.get(position).calorie+"Kcal"); 
+				tvCalorie.setTextColor(Color.parseColor("#4980BD"));
 				break;
 
 			case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
@@ -217,8 +213,11 @@ public class MyTimelineAdapter extends BaseAdapter {
 				tvNickname.setText(list.get(position).nickname);
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
+				tvPreContent.setTextColor(Color.parseColor("#FF0062"));
 				tvContent.setText(list.get(position).content);
+				tvContent.setTextColor(Color.parseColor("#FF0062"));
 				tvCalorie.setText("-"+list.get(position).calorie+"Kcal"); 
+				tvCalorie.setTextColor(Color.parseColor("#FF0062"));
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_OTHER_PICTURE:
