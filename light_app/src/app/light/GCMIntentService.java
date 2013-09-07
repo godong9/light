@@ -100,7 +100,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         if(running_status) {	//앱이 동작중일 때	
         	String running_activity = getRunningActivity(context);
         	System.out.println("RUNNING => "+running_activity);  
-        	TimelineFrag tmp_tf = new TimelineFrag();
+        	TimelineFrag tmp_tf = new TimelineFrag(1);
         	tmp_tf.addTimelineData(json_obj);
         }
         else {	//앱이 동작중이지 않을 때

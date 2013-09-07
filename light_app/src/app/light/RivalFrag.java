@@ -24,24 +24,24 @@ public class RivalFrag extends CommonFragment {
 	private RivalDialogWindow popup_dialog;
 	private String packName = "app.light";
 	private Resources res;
-	private static int rf_type = 0;
+	private static int matching_status = 0;
 	
 	public static JSONObject group_info = null;
 	public static JSONObject my_info = null;	//내 정보
 	public static JSONArray rival_info = null;
 
-	public RivalFrag(int rf_type){
-		this.rf_type = rf_type;
+	public RivalFrag(int matching_status){
+		this.matching_status = matching_status;
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {
 		View view = null;
-		if(rf_type == 0){
+		if(matching_status == 0){
 			view = inflater.inflate(R.layout.frag_waiting, container, false);
 		}
-		else if(rf_type == 1){
+		else if(matching_status == 1){
 			view = inflater.inflate(R.layout.frag_rival, container, false);	
 			/*
 	         * 버튼 클릭 관련 이벤트 처리하는 부분

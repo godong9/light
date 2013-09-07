@@ -22,7 +22,7 @@ public class BaseFragment extends Activity {
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
 	private static final int ID_LOGOUT   = 3;
-	private static int rf_type = 0;	
+	private static int matching_status = 0;	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class BaseFragment extends Activity {
 			//System.out.println("성공");		
 			try{
 				JSONObject json_data = new JSONObject(result_json);
-				rf_type = Integer.valueOf(json_data.getString("matching_status"));
+				matching_status = Integer.valueOf(json_data.getString("matching_status"));
 				//System.out.println("RF_TYPE=>"+rf_type);
 			}	
 			catch(Exception e){
@@ -56,7 +56,7 @@ public class BaseFragment extends Activity {
 			}
 		}
 	    
-	    RivalFrag rf = new RivalFrag(rf_type);   
+	    RivalFrag rf = new RivalFrag(matching_status);   
 	    tr.add(R.id.detail_frag, rf);
 	    tr.commit();
 	    
@@ -125,7 +125,7 @@ public class BaseFragment extends Activity {
 				timeline_btn.setSelected(false);
 				community_btn.setSelected(false);	
 				
-				RivalFrag rf = new RivalFrag(rf_type);	    
+				RivalFrag rf = new RivalFrag(matching_status);	    
 			    tr.replace(R.id.detail_frag, rf);
 			    tr.commit();
 			}	
@@ -134,7 +134,7 @@ public class BaseFragment extends Activity {
 				timeline_btn.setSelected(true);
 				community_btn.setSelected(false);	
 				
-				TimelineFrag tf = new TimelineFrag();	    
+				TimelineFrag tf = new TimelineFrag(matching_status);	    
 			    tr.replace(R.id.detail_frag, tf);
 			    tr.commit();
 			}

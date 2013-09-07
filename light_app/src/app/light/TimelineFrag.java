@@ -73,6 +73,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private QuickAction writePopup;
 	private QuickAction cameraPopup;
 	
+	private static int matching_status = 0;
 	private static ArrayList<TimeLineObj> my_list = null;
 	private static ListView my_listview;
 	private static MyTimelineAdapter my_adapter;
@@ -110,6 +111,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
     		handler.sendMessage(msg);
 		}
 	};	
+	
+	public TimelineFrag(int matching_status){
+		this.matching_status = matching_status;
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
@@ -477,6 +482,10 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 				String tmp_content = json_timeline_data.getJSONObject(i).getString("content");
 				String tmp_calorie = json_timeline_data.getJSONObject(i).getString("calorie");
 				String tmp_date = json_timeline_data.getJSONObject(i).getString("reg_date");
+				
+				if(matching_status == 0 && !tmp_email.equals(my_email)){
+					continue;
+				}
 				
 				int tmp_type = Integer.parseInt(tmp_type_string);
 				
