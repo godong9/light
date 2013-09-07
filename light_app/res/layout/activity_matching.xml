@@ -38,7 +38,7 @@
 	            android:gravity="center"
 	            android:text="이번 매칭에서의 선택 사항들입니다.\n비슷한 조건의 다이어터와 매칭이 되며 경쟁이 끝나고\n새 대결을 시작할 때마다 수정할 수 있습니다."
 	            android:textSize = "14sp"
-	            android:textColor="#000000" />
+	            android:textColor="#525252" />
    		    
    		</LinearLayout>
    		
