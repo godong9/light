@@ -75,3 +75,23 @@ exports.set_chat_data = function(req, res){
 		res.send(result);
 	});
 };
+
+//매칭 상태 가져옴
+exports.matching_status = function(req, res){
+	var evt = new EventEmitter();
+	var dao_r = require('../sql/rival');
+
+	var email = req.session.email;
+
+	var params = { email: email };
+	var result = {  };
+
+	dao_r.dao_get_matching_status(evt, mysql_conn, params);
+
+	evt.on('matching_status', function(err, rows){
+		if(err) throw err;
+		console.log("status: "+rows[0].matching_status);
+		result = { result:"success", matching_status: rows[0].matching_status };
+		res.send(result);
+	});
+};

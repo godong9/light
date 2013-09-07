@@ -70,6 +70,7 @@ app.get('/img', function(req, res){	//이미지 파일 다운로드
 	var file = __dirname + '/public/upload/' + img_str;
 	res.download(file); // Set disposition and send it.
 });
+app.get('/matching_status', rival.matching_status);
 
 // POST 방식
 app.post('/register', routes.regist);
@@ -82,6 +83,7 @@ app.post('/send_push', routes.send_push);
 app.post('/profile', user.profile);
 app.post('/matching', user.matching);
 app.post('/chat', rival.set_chat_data);
+
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

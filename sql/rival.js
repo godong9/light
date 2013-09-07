@@ -81,3 +81,16 @@ exports.dao_set_chat_data = function(evt, mysql_conn, params){
 	return sql;
 }
 
+// get_matching_status
+// params['email']
+exports.dao_get_matching_status = function(evt, mysql_conn, params){
+	var sql = "SELECT ";
+	sql +="`matching_status` ";
+	sql += "FROM `user` ";
+	sql += "WHERE `email` = '"+params['email']+"' ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		evt.emit('matching_status', err, rows);
+	});
+	return sql;
+}
