@@ -108,7 +108,7 @@ public class MatchingActivity extends CommonActivity {
 				// 회원가입 성공시
 				if(result_flag.equals("success")){			
 		            //매칭대기 페이지로 이동
-		            Intent intent = new Intent(MatchingActivity.this, WaitingActivity.class);
+		            Intent intent = new Intent(MatchingActivity.this, BaseFragment.class);
 					startActivity(intent);              	
 				}
 				else{
