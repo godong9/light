@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 //커스텀 AlertDialog 구현
@@ -130,8 +131,7 @@ import android.widget.Toast;
 			catch(Exception e){
 				System.out.println("다이얼로그 에러 발생");
 			}
-			
-			
+				
 			/*
 			 * 다이얼로그 내부 버튼 클릭시 이벤트 처리
 			 * 
@@ -147,6 +147,7 @@ import android.widget.Toast;
 				final ImageButton dialog_shop_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_shop_btn);
 				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_history_btn);
 				final ImageButton dialog_chat_modify_btn = (ImageButton) getDialog().findViewById(R.id.rival_dialog_word_btn);
+				//final EditText et_my_chat = (EditText) getDialog().findViewById(R.id.rival_dialog_word);
 				
 				home_layout = (LinearLayout) getDialog().findViewById(R.id.rival_my_dialog_layout);
 				closet_layout = (LinearLayout) getDialog().findViewById(R.id.rival_closet_layout);
@@ -233,15 +234,18 @@ import android.widget.Toast;
 				dialog_chat_modify_btn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v)
-					{			
-						final EditText et_my_chat = (EditText)getDialog().findViewById(R.id.rival_dialog_word);
-						String chat_val = et_my_chat.getText().toString();
-						final TextView tv_my_chat = (TextView)getActivity().findViewById(R.id.rival_user1_word);
-						tv_my_chat.setText(chat_val);
-						modifyChat(chat_val);
+					{		
+						modifyChat();
 					}
 				});
-			
+				/*
+				et_my_chat.setOnEditorActionListener(new OnEditorActionListener() {
+					@Override
+					public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+						return false;
+					}
+				});
+				*/
 			}
 			else{
 				
@@ -302,9 +306,15 @@ import android.widget.Toast;
 			super.onStop();
 		}
 		
-		public void modifyChat(String chat_val) {
+		public void modifyChat() {
+			
+			final EditText et_my_chat = (EditText)getDialog().findViewById(R.id.rival_dialog_word);
+			String chat_val = et_my_chat.getText().toString();
+			final TextView tv_my_chat = (TextView)getActivity().findViewById(R.id.rival_user1_word);
+			tv_my_chat.setText(chat_val);
+			
 			JSONObject json_param = new JSONObject();
-					
+				
 			try {
 				
 				json_param.put("chat_val", chat_val);
@@ -378,8 +388,7 @@ import android.widget.Toast;
 			// 리스트뷰에 어댑터 연결
 		    history_listview = (ListView)getDialog().findViewById(R.id.history_scroll);	  
 		    history_listview.setAdapter(history_adapter);
-		 	
-			
+				
 		}
 		
 	}

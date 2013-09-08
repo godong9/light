@@ -28,7 +28,8 @@
              android:layout_marginLeft="4dp"
              android:layout_marginRight="38dp"
 			 android:layout_width="215dp"
-			 android:layout_height="42dp" />
+			 android:layout_height="42dp" 
+			 android:hint="이메일 주소 입력"/>
      </TableRow> 
      <TableRow
          android:gravity="center_vertical"
@@ -52,7 +53,8 @@
              android:layout_marginLeft="4dp"
              android:layout_marginRight="38dp"
 			 android:layout_width="215dp"
-			 android:layout_height="42dp"/>
+			 android:layout_height="42dp"
+			 android:hint="8자리 이상, 숫자+문자"/>
      </TableRow>
      <TableRow
          android:gravity="center_vertical"
@@ -76,7 +78,8 @@
              android:layout_marginLeft="4dp"
              android:layout_marginRight="38dp"
 			 android:layout_width="215dp"
-			 android:layout_height="42dp"/>
+			 android:layout_height="42dp"
+			 android:hint="패스워드 한번 더 입력"/>
      </TableRow>
      <TableRow
          android:gravity="center_vertical"
@@ -99,7 +102,8 @@
              android:layout_marginLeft="4dp"
              android:layout_marginRight="38dp"
 			 android:layout_width="215dp"
-			 android:layout_height="42dp"/>
+			 android:layout_height="42dp"
+			 android:hint="2~5글자"/>
      </TableRow>
       
      <TableRow

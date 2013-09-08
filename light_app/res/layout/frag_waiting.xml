@@ -7,4 +7,23 @@
      android:layout_gravity="center"
      android:background="@drawable/waiting_background"
      >
+    
+    <TextView 
+        android:layout_marginTop="188dp"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:text="다이어트를 함께 할\n 라이벌을 찾고 있습니다."    
+        android:textSize = "16sp"
+        android:textColor="#000000" 
+		android:gravity="center_horizontal"/>
+    
+    <TextView 
+        android:layout_marginTop="14dp"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:text="잠시만 기다려주세요!"    
+        android:textSize = "16sp"
+        android:textColor="#FF0062" 
+		android:gravity="center_horizontal"/>
+    
 </LinearLayout>
