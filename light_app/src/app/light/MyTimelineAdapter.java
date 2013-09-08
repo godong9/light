@@ -132,11 +132,11 @@ public class MyTimelineAdapter extends BaseAdapter {
 				llWriteType.setBackgroundResource(R.drawable.timeline_my_food);
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content); 
-				tvPreContent.setTextColor(Color.parseColor("#4980BD"));
+				tvPreContent.setTextColor(Color.parseColor("#4960FF"));
 				tvContent.setText(list.get(position).content);
-				tvContent.setTextColor(Color.parseColor("#4980BD"));
+				tvContent.setTextColor(Color.parseColor("#4960FF"));
 				tvCalorie.setText("+"+list.get(position).calorie+"Kcal"); 
-				tvCalorie.setTextColor(Color.parseColor("#4980BD"));
+				tvCalorie.setTextColor(Color.parseColor("#4960FF"));
 				break;
 				
 			case TimeLineObj.VIEW_TYPE_MY_EXERCISE:
@@ -194,11 +194,11 @@ public class MyTimelineAdapter extends BaseAdapter {
 				tvNickname.setText(list.get(position).nickname);
 				tvDate.setText(list.get(position).date);
 				tvPreContent.setText(list.get(position).pre_content);
-				tvPreContent.setTextColor(Color.parseColor("#4980BD"));
+				tvPreContent.setTextColor(Color.parseColor("#4960FF"));
 				tvContent.setText(list.get(position).content);
-				tvContent.setTextColor(Color.parseColor("#4980BD"));
+				tvContent.setTextColor(Color.parseColor("#4960FF"));
 				tvCalorie.setText("+"+list.get(position).calorie+"Kcal"); 
-				tvCalorie.setTextColor(Color.parseColor("#4980BD"));
+				tvCalorie.setTextColor(Color.parseColor("#4960FF"));
 				break;
 
 			case TimeLineObj.VIEW_TYPE_OTHER_EXERCISE:
