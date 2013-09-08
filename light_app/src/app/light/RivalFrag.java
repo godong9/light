@@ -226,8 +226,24 @@ public class RivalFrag extends CommonFragment {
 			
 			res = getResources();
 			
+			// 칼로리 상태바 계산
+			float day_calorie_num = Float.valueOf(my_info.getString("day_calorie"));
+			float food_calorie_num = Float.valueOf(my_info.getString("food_calorie"));
+			float exercise_calorie_num = Float.valueOf(my_info.getString("exercise_calorie"));
+				
+			float calorie_per_point = day_calorie_num/10.0f;
+			float tmp_calorie_num = day_calorie_num-(food_calorie_num-exercise_calorie_num);
+			float tmp_calorie_float = tmp_calorie_num / calorie_per_point;
+			int tmp_calorie_int = Math.round(tmp_calorie_float);
+			if(tmp_calorie_int > 10){
+				tmp_calorie_int = 10;
+			}
+			else if(tmp_calorie_int < 0){
+				tmp_calorie_int = 0;
+			}
+			
 			String my_character = "@drawable/character_"+my_info.getString("character");
-			String my_calorie = "@drawable/calorie_"+my_info.getString("calorie_status");
+			String my_calorie = "@drawable/calorie_"+tmp_calorie_int;
 			
 			myCharacter.setBackgroundResource(res.getIdentifier(my_character, "drawable", packName));
 			myCalorie.setBackgroundResource(res.getIdentifier(my_calorie, "drawable", packName));
@@ -275,8 +291,24 @@ public class RivalFrag extends CommonFragment {
 				}
 				otherScore.setText(score_str);
 				
+				// 칼로리 상태바 계산	
+				day_calorie_num = Float.valueOf(rival_info.getJSONObject(i).getString("day_calorie"));
+				food_calorie_num = Float.valueOf(rival_info.getJSONObject(i).getString("food_calorie"));
+				exercise_calorie_num = Float.valueOf(rival_info.getJSONObject(i).getString("exercise_calorie"));
+				
+				calorie_per_point = day_calorie_num/10.0f;
+				tmp_calorie_num = day_calorie_num-(food_calorie_num-exercise_calorie_num);
+				tmp_calorie_float = tmp_calorie_num / calorie_per_point;
+				tmp_calorie_int = Math.round(tmp_calorie_float);
+				if(tmp_calorie_int > 10){
+					tmp_calorie_int = 10;
+				}
+				else if(tmp_calorie_int < 0){
+					tmp_calorie_int = 0;
+				}
+					
 				String other_character = "@drawable/character_"+rival_info.getJSONObject(i).getString("character");
-				String other_calorie = "@drawable/calorie_"+rival_info.getJSONObject(i).getString("calorie_status");
+				String other_calorie = "@drawable/calorie_"+tmp_calorie_int;
 	
 				System.out.println("=>"+other_character);
 				System.out.println("=>"+other_calorie);
