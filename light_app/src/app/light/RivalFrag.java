@@ -1,6 +1,7 @@
 package app.light;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -160,24 +161,36 @@ public class RivalFrag extends CommonFragment {
 				
 		try {
 			//문자열로 날짜 변환 후에 다시 Date 형태로 변환
-			String start_day_str = group_info.getString("start_date");
-			String end_day_str = group_info.getString("end_date");
-		
-			String start_day = start_day_str.substring(0, start_day_str.indexOf("T"));
-			String end_day = end_day_str.substring(0, end_day_str.indexOf("T"));
-					
-			SimpleDateFormat tf = new SimpleDateFormat("yyyy-MM-dd");
-			Date start_day_date = tf.parse(start_day);
-			Date end_day_date = tf.parse(end_day);	
-			Date tmp_day_date = new Date();	//현재 날짜, 시간 가져옴
-				
-			//날짜 차이 계산
-			long start_tmp_diff = tmp_day_date.getTime() - start_day_date.getTime();
-			long tmp_end_diff = end_day_date.getTime() - tmp_day_date.getTime();
-			
-			long start_tmp_diff_days = start_tmp_diff / (24*60*60*1000);
-			long tmp_end_diff_days = tmp_end_diff / (24*60*60*1000);
+			String start_day = group_info.getString("start_date");
+			String end_day = group_info.getString("end_date");
 	
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+			
+			Calendar tmp_date_cal = Calendar.getInstance();
+			Calendar start_date_cal = Calendar.getInstance();
+			Calendar end_date_cal = Calendar.getInstance();
+			
+			start_day = start_day.replaceAll("T"," ");
+			start_day = start_day.replaceAll("Z", "");
+			start_date_cal.setTime(sdf.parse(start_day));
+			start_date_cal.add(start_date_cal.HOUR, 9);
+			
+			end_day = end_day.replaceAll("T"," ");
+			end_day = end_day.replaceAll("Z", "");
+			end_date_cal.setTime(sdf.parse(end_day));
+			end_date_cal.add(end_date_cal.HOUR, 9);
+			
+			System.out.println("start=> "+tmp_date_cal);
+			System.out.println("end=> "+end_date_cal);
+			
+			//날짜 차이 계산
+			long start_tmp_diff = tmp_date_cal.getTimeInMillis() - start_date_cal.getTimeInMillis();
+			long tmp_end_diff = end_date_cal.getTimeInMillis()  - tmp_date_cal.getTimeInMillis();
+			
+			long start_tmp_diff_days = start_tmp_diff / (24*60*60*1000) + 1;
+			long tmp_end_diff_days = tmp_end_diff / (24*60*60*1000) + 1;
+	
+			
 			//그룹 목표, 제목 데이터
 			String group_goal = group_info.getString("goal");
 			String group_title = group_info.getString("title");

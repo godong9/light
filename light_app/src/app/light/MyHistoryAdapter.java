@@ -62,10 +62,10 @@ public class MyHistoryAdapter extends BaseAdapter {
 		}
 		
 		TextView food_calorie = (TextView)convertView.findViewById(R.id.history_food_calorie);
-		food_calorie.setText(list.get(position).food_calorie);
+		food_calorie.setText(list.get(position).food_calorie+"Kcal");
 		
 		TextView exercise_calorie = (TextView)convertView.findViewById(R.id.history_exercise_calorie);
-		exercise_calorie.setText(list.get(position).exercise_calorie);
+		exercise_calorie.setText(list.get(position).exercise_calorie+"Kcal");
 		
 		int result_calorie_num = Integer.parseInt(list.get(position).food_calorie) - Integer.parseInt(list.get(position).exercise_calorie);
 		
