@@ -20,8 +20,9 @@ exports.dao_timeline_data = function(evt, mysql_conn, params){
 	sql += "FROM `timeline` AS `A` ";
 	sql += "INNER JOIN `user` AS `B` ";
 	sql += "ON `A`.`email` = `B`.`email` ";
-	sql += "WHERE `A`.`group_id` = '"+params['group_id']+"' AND ";
-	sql += "`A`.`reg_date` between timestamp('"+start_time+"') and ";
+	sql += "WHERE ( `A`.`group_id` = '"+params['group_id']+"' ";
+	sql += "OR `A`.`group_id` = '0' ) ";
+	sql += "AND `A`.`reg_date` between timestamp('"+start_time+"') and ";
 	sql += "timestamp('"+end_time+"') ";
 	sql += "ORDER BY `A`.`reg_date` DESC";
 	
