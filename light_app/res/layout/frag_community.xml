@@ -16,7 +16,7 @@
 	     
          <EditText           
              android:id="@+id/community_search_val"
-			 android:layout_width="186dp"
+			 android:layout_width="172dp"
 			 android:layout_height="fill_parent"
 			 android:layout_marginTop="6dp"
 			 android:layout_marginBottom="4dp"
@@ -25,12 +25,12 @@
 		 	 android:layout_gravity="center"/>
          <ImageButton  
 	        android:id="@+id/community_search_btn"
-			android:layout_width="25dp"
-			android:layout_height="25dp"
+			android:layout_width="32dp"
+			android:layout_height="32dp"
 			android:layout_marginTop="4dp"
 			android:layout_marginBottom="4dp"
-			android:layout_marginLeft="0dp"
-			android:layout_marginRight="2dp"
+			android:layout_marginLeft="2dp"
+			android:layout_marginRight="8dp"
 			android:layout_gravity="center"
 			android:background="@drawable/search_btn"/> 
 		<ImageButton  
@@ -39,7 +39,7 @@
 			android:layout_height="32dp"
 			android:layout_marginTop="4dp"
 			android:layout_marginBottom="4dp"
-			android:layout_marginLeft="23dp"
+			android:layout_marginLeft="21dp"
 			android:layout_marginRight="10dp"
 			android:layout_gravity="center"
 			android:background="@drawable/community_write_btn"/> 
@@ -49,7 +49,7 @@
 			android:layout_height="32dp"
 			android:layout_marginTop="4dp"
 			android:layout_marginBottom="4dp"
-			android:layout_marginLeft="21dp"
+			android:layout_marginLeft="22dp"
 			android:layout_marginRight="10dp"
 			android:layout_gravity="center"
 			android:background="@drawable/community_sort_btn"/> 

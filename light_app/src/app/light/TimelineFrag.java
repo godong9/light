@@ -546,8 +546,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			System.out.println("에러 발생");
 		}	
 	}
-	
-	
+		
 	// 카메라 촬영시
 	private void doTakePhotoAction()
 	{
