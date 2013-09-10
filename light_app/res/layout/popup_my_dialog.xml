@@ -325,8 +325,8 @@
 				android:layout_marginTop="2dp"   
 		        android:gravity="center"
 		        android:singleLine="true"
-		        android:text="가가가가"
-		        android:textSize="12sp"
+		        android:text="옷장"
+		        android:textSize="14sp"
 		        android:textStyle = "bold"
 		        android:textColor="#424242" />
 		     
@@ -349,11 +349,14 @@
 	          android:layout_width="0dp"
 	          android:layout_height="fill_parent"    
 	          android:layout_weight="40"
-	          android:layout_marginTop="5dp"
+	          android:layout_marginTop="10dp"
 	          android:layout_marginBottom="20dp"
 	          android:layout_marginLeft="10dp"
 	          android:layout_marginRight="0dp"
-	          android:background="#945544"
+	          android:dividerHeight="6dp"
+	          android:divider="#434343"
+       	  	  android:listSelector="#00000000"
+       	  	  android:cacheColorHint="#00000000"
 	          android:transcriptMode="normal">        	          
 	     </ListView>
     </LinearLayout>

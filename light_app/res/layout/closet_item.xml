@@ -6,23 +6,27 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/history_date"
+        android:id="@+id/closet_item_title"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="20"
-        android:layout_marginLeft="5dp"
+        android:layout_weight="15"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="8dp"
         android:gravity="center_vertical"
         android:text="가가가가가가가가"
-        android:textSize="9sp"
-        android:textColor="#ffffff" />
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="#424242" />
 	    
     <ImageButton
-        android:id="@+id/closet_clothes"
+        android:id="@+id/closet_item_clothes"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="80"
-        android:layout_marginTop="2.5dp"
-        android:layout_marginBottom="2.5dp"
+        android:layout_weight="85"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:gravity="center"
         android:background="@drawable/clothes_1" />
 
