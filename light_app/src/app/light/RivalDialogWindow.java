@@ -140,7 +140,7 @@ import android.widget.Toast;
 	
 			//내 다이얼로그 선택시
 			if(type == 1){
-				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
+				//dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_exit);
 				
 				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_page_btn);
 				final ImageButton dialog_closet_btn = (ImageButton) getDialog().findViewById(R.id.rival_my_dialog_closet_btn);
@@ -253,7 +253,7 @@ import android.widget.Toast;
 				history_layout = (LinearLayout) getDialog().findViewById(R.id.rival_history_layout);
 				rival_background_layout = (LinearLayout) getDialog().findViewById(R.id.rival_background_layout);
 				
-				dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
+				//dialog_exit_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_exit);
 				
 				final ImageButton dialog_page_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_page_btn);
 				final ImageButton dialog_history_btn = (ImageButton) getDialog().findViewById(R.id.rival_other_dialog_history_btn);
@@ -289,7 +289,7 @@ import android.widget.Toast;
 				});
 				
 			}
-			
+			/*
 			//공통 다이얼로그 종료 버튼 이벤트 리스너
 			dialog_exit_btn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -298,7 +298,7 @@ import android.widget.Toast;
 					dismiss();
 				}
 			});
-						
+			*/		
 		}
 		
 		@Override

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/closet_item_background"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/history_date"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:text="가가가가가가가가"
+        android:textSize="9sp"
+        android:textColor="#ffffff" />
+	    
+    <ImageButton
+        android:id="@+id/closet_clothes"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="80"
+        android:layout_marginTop="2.5dp"
+        android:layout_marginBottom="2.5dp"
+        android:gravity="center"
+        android:background="@drawable/clothes_1" />
+
+</LinearLayout>

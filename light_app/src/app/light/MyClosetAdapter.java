@@ -17,10 +17,9 @@ public class MyClosetAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private int layout;
 	
-	MyClosetAdapter(Context context, int layout, ArrayList<TimeLineObj> my_list) {
+	MyClosetAdapter(Context context, ArrayList<TimeLineObj> my_list) {
 		this.context = context;
 		this.list = my_list;
-		this.layout = layout;
 
 		this.inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,6 +45,7 @@ public class MyClosetAdapter extends BaseAdapter {
 		// 뷰 얻어오는 부분 -> 여기 수정 필요
 		final int pos = position;
 		if (convertView == null) {
+			layout = R.layout.closet_item;
 			convertView = inflater.inflate(layout, parent, false);
 		}
 		/*

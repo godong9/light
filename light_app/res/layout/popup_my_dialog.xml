@@ -21,7 +21,7 @@
 			android:layout_weight="9"
 			
 	        android:orientation="vertical">
-	        
+	        <!--  
 	        <ImageButton
 	            android:id="@+id/rival_my_dialog_exit"
 	            android:layout_width="20dp"
@@ -30,7 +30,7 @@
 				android:layout_marginTop="9.5dp"
 	        	android:layout_marginRight="6dp"
 	            android:background="@drawable/rival_dialog_exit"/>
-	        
+	        -->
         </LinearLayout>
        
 		<LinearLayout
@@ -309,25 +309,52 @@
         android:layout_height="313dp"
         android:orientation="horizontal"
         android:visibility="gone" >
-        <TextView
-		     android:layout_width="0dp"
-		     android:layout_height="fill_parent"
-		     android:layout_weight="10"
-		     android:paddingTop="60dp"
-		     android:paddingLeft="20dp"
-			 android:textSize = "12sp"
-			 android:textStyle = "bold"
-		     android:textColor="#424242" 
-			 android:singleLine="true">
-	     </TextView>
+		
+		 <LinearLayout
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+			android:layout_weight="60"		
+	        android:orientation="vertical">
+	     	
+		    <TextView
+		        android:id="@+id/closet_title"
+		        android:layout_weight="18"
+		        android:layout_width="50dp"
+				android:layout_height="0dp"     
+				android:layout_marginLeft="22dp"
+				android:layout_marginTop="2dp"   
+		        android:gravity="center"
+		        android:singleLine="true"
+		        android:text="가가가가"
+		        android:textSize="12sp"
+		        android:textStyle = "bold"
+		        android:textColor="#424242" />
+		     
+	        <ImageButton  
+			        android:id="@+id/closet_dialog_character"
+			    	android:layout_weight ="82"     
+					android:layout_width="fill_parent"
+					android:layout_height="0dp"
+					android:gravity="center"
+					android:layout_marginTop="16dp"
+					android:layout_marginBottom="50dp"
+					android:layout_marginLeft="20dp"
+					android:layout_marginRight="20dp"
+					android:background="@drawable/character_1_3"/> 	     
+	     
+         </LinearLayout>  
 	         
 	     <ListView 
 	          android:id="@+id/closet_scroll"
 	          android:layout_width="0dp"
 	          android:layout_height="fill_parent"    
 	          android:layout_weight="40"
-	          android:transcriptMode="normal"
-	          >        	          
+	          android:layout_marginTop="5dp"
+	          android:layout_marginBottom="20dp"
+	          android:layout_marginLeft="10dp"
+	          android:layout_marginRight="0dp"
+	          android:background="#945544"
+	          android:transcriptMode="normal">        	          
 	     </ListView>
     </LinearLayout>
     
