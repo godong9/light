@@ -2,12 +2,14 @@ package app.light;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,11 +78,45 @@ public class MyCommunityAdapter extends BaseAdapter {
 		
 		title_content.setOnClickListener(new TextView.OnClickListener() {
 			public void onClick(View v) {
-				String str = list.get(pos).content;
-				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+				LinearLayout ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
+				LinearLayout ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
+				ll_title.setVisibility(View.GONE);
+				ll_content.setVisibility(View.VISIBLE);
+					
+				TextView title_type = (TextView)((Activity)context).findViewById(R.id.community_content_title_type);
+				
+				String tmp_type = list.get(pos).type;
+				title_type.setText(tmp_type);
+				
+				if(tmp_type.equals("공지")){
+					title_type.setBackgroundResource(R.drawable.community_type_notice_background);
+				}
+				else{
+					title_type.setBackgroundResource(R.drawable.community_type_etc_background);
+				}
+				
+				TextView title_content = (TextView)((Activity)context).findViewById(R.id.community_content_title_content);
+				title_content.setText(list.get(pos).title_content);
+				
+				TextView title_info = (TextView)((Activity)context).findViewById(R.id.community_content_title_info);
+				title_info.setText(list.get(pos).nickname + " / " + list.get(pos).reg_date + " / 조회수: " + list.get(pos).hits);
+				
+				TextView content = (TextView)((Activity)context).findViewById(R.id.community_content_text);
+				content.setText(list.get(pos).content);	
 			}
 		});
-	
+		
+		Button title_btn = (Button)((Activity)context).findViewById(R.id.community_content_title_btn);
+		
+		title_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				LinearLayout ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
+				LinearLayout ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
+				ll_title.setVisibility(View.VISIBLE);
+				ll_content.setVisibility(View.GONE);
+			}
+		});
+		
 		return convertView;
 	}
 
