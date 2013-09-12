@@ -2,15 +2,18 @@ package app.light;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyCommunityAdapter extends BaseAdapter {
 	private ArrayList<CommunityObj> list;
@@ -40,7 +43,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// 뷰 얻어오는 부분 -> 여기 수정 필요
@@ -57,31 +60,63 @@ public class MyCommunityAdapter extends BaseAdapter {
 		
 		if(tmp_type.equals("공지")){
 			title_type.setBackgroundResource(R.drawable.community_type_notice_background);
-			title_type.setTextColor(Color.parseColor("#FFFFFF"));
 		}
 		else{
 			title_type.setBackgroundResource(R.drawable.community_type_etc_background);
-			title_type.setTextColor(Color.parseColor("#000000"));
 		}
 		
 		TextView title_content = (TextView)convertView.findViewById(R.id.community_title_content);
 		title_content.setText(list.get(position).title_content);
 		
 		TextView title_info = (TextView)convertView.findViewById(R.id.community_title_info);
-		title_info.setText(list.get(position).nickname + " / " + list.get(position).reg_date + " / " + list.get(position).hits);
+		title_info.setText(list.get(position).nickname + " / " + list.get(position).reg_date + " / 조회수: " + list.get(position).hits);
 
 		
 		TextView title_comment = (TextView)convertView.findViewById(R.id.community_title_comment);
 		title_comment.setText(list.get(position).comment);
 	
-		/*
+		
 		title_content.setOnClickListener(new TextView.OnClickListener() {
 			public void onClick(View v) {
-				String str = list.get(pos).content;
-				Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+				LinearLayout ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
+				LinearLayout ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
+				ll_title.setVisibility(View.GONE);
+				ll_content.setVisibility(View.VISIBLE);
+					
+				TextView title_type = (TextView)((Activity)context).findViewById(R.id.community_content_title_type);
+				
+				String tmp_type = list.get(pos).type;
+				title_type.setText(tmp_type);
+				
+				if(tmp_type.equals("공지")){
+					title_type.setBackgroundResource(R.drawable.community_type_notice_background);
+				}
+				else{
+					title_type.setBackgroundResource(R.drawable.community_type_etc_background);
+				}
+				
+				TextView title_content = (TextView)((Activity)context).findViewById(R.id.community_content_title_content);
+				title_content.setText(list.get(pos).title_content);
+				
+				TextView title_info = (TextView)((Activity)context).findViewById(R.id.community_content_title_info);
+				title_info.setText(list.get(pos).nickname + " / " + list.get(pos).reg_date + " / 조회수: " + list.get(pos).hits);
+				
+				TextView content = (TextView)((Activity)context).findViewById(R.id.community_content_text);
+				content.setText(list.get(pos).content);	
 			}
 		});
-		*/
+		
+		Button title_btn = (Button)((Activity)context).findViewById(R.id.community_content_title_btn);
+		
+		title_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				LinearLayout ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
+				LinearLayout ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
+				ll_title.setVisibility(View.VISIBLE);
+				ll_content.setVisibility(View.GONE);
+			}
+		});
+		
 		return convertView;
 	}
 

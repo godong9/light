@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="120dp"
+    android:layout_height="110dp"
     android:background="@drawable/closet_item_background"
     android:orientation="vertical" >
 
@@ -25,8 +25,8 @@
         android:layout_weight="85"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:gravity="center"
         android:background="@drawable/clothes_1" />
 
