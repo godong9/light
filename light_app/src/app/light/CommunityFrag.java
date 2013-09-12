@@ -69,8 +69,10 @@ public class CommunityFrag extends CommonFragment implements OnItemClickListener
 			for(int i=0; i<json_community_data.length(); i++){
 				// JSON 데이터 가져와서 리스트에 추가하는 부분		
 				String tmp_type = json_community_data.getJSONObject(i).getString("type");
+				String tmp_post_idx = json_community_data.getJSONObject(i).getString("post_idx");
 				String tmp_nickname = json_community_data.getJSONObject(i).getString("nickname");
 				String tmp_title = json_community_data.getJSONObject(i).getString("title");
+				String tmp_content = json_community_data.getJSONObject(i).getString("content");
 				String tmp_hits = json_community_data.getJSONObject(i).getString("hits");
 				String tmp_num_comment = json_community_data.getJSONObject(i).getString("num_comment");
 				String tmp_date = json_community_data.getJSONObject(i).getString("reg_date");
@@ -89,10 +91,10 @@ public class CommunityFrag extends CommonFragment implements OnItemClickListener
 				
 				//리스트에 값 추가
 				if(tmp_type.equals("공지")){
-					community_list.add(0, new CommunityObj(tmp_type, tmp_title, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
+					community_list.add(0, new CommunityObj(tmp_type, tmp_post_idx, tmp_title, tmp_content, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
 				}
 				else{
-					community_list.add(new CommunityObj(tmp_type, tmp_title, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
+					community_list.add(new CommunityObj(tmp_type, tmp_post_idx, tmp_title, tmp_content, tmp_nickname, dateString, tmp_hits, tmp_num_comment));		
 				}
 		
 			}
