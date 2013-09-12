@@ -4,6 +4,7 @@ exports.dao_community_data = function(evt, mysql_conn, params){
 	
 	var sql = "SELECT ";
 	sql +="`A`.`type`, ";
+	sql +="`A`.`post_idx`, ";
 	sql += "`A`.`title`, ";
 	sql += "`A`.`content`, ";
 	sql += "`A`.`hits`, ";
