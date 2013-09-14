@@ -8,8 +8,11 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +23,9 @@ public class MyCommunityAdapter extends BaseAdapter {
 	private Context context;
 	private LayoutInflater inflater;
 	private int layout;
+	LinearLayout ll_title;
+	LinearLayout ll_content;
+	LinearLayout ll_write;
 	
 	MyCommunityAdapter(Context context, ArrayList<CommunityObj> my_list) {
 		this.context = context;
@@ -78,6 +84,11 @@ public class MyCommunityAdapter extends BaseAdapter {
 		
 		title_content.setOnClickListener(new TextView.OnClickListener() {
 			public void onClick(View v) {
+				v.requestFocus();
+				EditText et = (EditText)((Activity)context).findViewById(R.id.community_search_val);
+				InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(et.getWindowToken(),0); 
+				
 				LinearLayout ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
 				LinearLayout ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
 				ll_title.setVisibility(View.GONE);
@@ -106,14 +117,72 @@ public class MyCommunityAdapter extends BaseAdapter {
 			}
 		});
 		
-		Button title_btn = (Button)((Activity)context).findViewById(R.id.community_content_title_btn);
+		Button content_title_btn = (Button)((Activity)context).findViewById(R.id.community_content_title_btn);
+		Button write_title_btn = (Button)((Activity)context).findViewById(R.id.community_write_title_btn);
+		Button write_complete_btn = (Button)((Activity)context).findViewById(R.id.community_write_complete_btn);
+		Button content_comment_btn = (Button)((Activity)context).findViewById(R.id.community_content_comment_btn);
+		ImageButton search_btn = (ImageButton)((Activity)context).findViewById(R.id.community_search_btn);
+		ImageButton write_btn = (ImageButton)((Activity)context).findViewById(R.id.community_write_btn);
+		ImageButton sort_btn = (ImageButton)((Activity)context).findViewById(R.id.community_sort_btn);
+		ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
+		ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
+		ll_write = (LinearLayout)((Activity)context).findViewById(R.id.community_write_layout);
 		
-		title_btn.setOnClickListener(new TextView.OnClickListener() {
-			public void onClick(View v) {
-				LinearLayout ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
-				LinearLayout ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
+		content_title_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {			
 				ll_title.setVisibility(View.VISIBLE);
 				ll_content.setVisibility(View.GONE);
+				ll_write.setVisibility(View.GONE);
+			}
+		});
+		
+		content_comment_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {			
+				Toast.makeText(context, "준비 중입니다..", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+		write_title_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {			
+				EditText et = (EditText)((Activity)context).findViewById(R.id.community_write_title_text);
+				InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(et.getWindowToken(),0); 
+				
+				ll_title.setVisibility(View.VISIBLE);
+				ll_content.setVisibility(View.GONE);
+				ll_write.setVisibility(View.GONE);
+			}
+		});	
+		
+		write_complete_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				EditText et = (EditText)((Activity)context).findViewById(R.id.community_write_text);
+				InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(et.getWindowToken(),0); 
+				
+				ll_title.setVisibility(View.VISIBLE);
+				ll_content.setVisibility(View.GONE);
+				ll_write.setVisibility(View.GONE);
+			}
+		});
+		
+		write_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				ll_write.setVisibility(View.VISIBLE);
+				ll_content.setVisibility(View.GONE);
+				ll_title.setVisibility(View.GONE);
+			}
+		});
+		
+		search_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				Toast.makeText(context, "준비 중입니다..", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+		sort_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				Toast.makeText(context, "준비 중입니다..", Toast.LENGTH_SHORT).show();
 			}
 		});
 		

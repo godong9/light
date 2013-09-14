@@ -63,28 +63,33 @@ public class ProfileActivity extends CommonActivity {
 			String profile_goal_val = profile_goal_text.getText().toString();
 			json_param.put("goal", profile_goal_val);	
 			
-			//postData 함수로 데이터 전송
-			CommonHttp ch = new CommonHttp();	
-			String result_json = ch.postData("http://211.110.61.51:3000/profile", json_param);		
-							
-			if(result_json.equals("error")){
-				Toast toast = Toast.makeText(this, "프로필 데이터 전송 실패!", Toast.LENGTH_SHORT); 
-				toast.show(); 
+			System.out.println("!!=>"+profile_height_val+"/"+profile_weight_val+"/"+profile_goal_val);
+			
+			if(gender == 0 || profile_height_val.equals("") || profile_weight_val.equals("") || profile_goal_val.equals("")){
+				Toast.makeText(this, "모든 항목을 입력해주세요!", Toast.LENGTH_SHORT).show();
 			}
-			else{		
-				JSONObject json_data = new JSONObject(result_json);
-				String result_flag = json_data.getString("result");			
-				// 회원가입 성공시
-				if(result_flag.equals("success")){
-					
-		            //매칭 페이지로 이동
-		            Intent intent = new Intent(ProfileActivity.this, MatchingActivity.class);
-					startActivity(intent);            
-			  	
+			else {			
+				//postData 함수로 데이터 전송
+				CommonHttp ch = new CommonHttp();	
+				String result_json = ch.postData("http://211.110.61.51:3000/profile", json_param);		
+								
+				if(result_json.equals("error")){
+					Toast.makeText(this, "프로필 데이터 전송 실패!", Toast.LENGTH_SHORT).show();
 				}
-				else{
-					Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
-					toast.show(); 
+				else{		
+					JSONObject json_data = new JSONObject(result_json);
+					String result_flag = json_data.getString("result");			
+					// 회원가입 성공시
+					if(result_flag.equals("success")){
+						
+			            //매칭 페이지로 이동
+			            Intent intent = new Intent(ProfileActivity.this, MatchingActivity.class);
+						startActivity(intent);            
+				  	
+					}
+					else{
+						Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 				
