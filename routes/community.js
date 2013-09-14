@@ -18,3 +18,31 @@ exports.community_data = function(req, res){
 		res.send(result);
 	});
 };
+
+// 커뮤니티에 쓴 글 저장하는 함수
+exports.community_write = function(req, res){
+	
+	var evt = new EventEmitter();
+	var dao_c = require('../sql/community');
+
+	var email = req.session.email; 	
+	var type = req.body.type;
+	var title = req.body.title;
+	var content = req.body.content;
+	var params = { 
+		email: email, 
+		type: type,
+		title: title,
+		content: content
+	}
+
+	var result = { };
+
+	dao_c.dao_community_write(evt, mysql_conn, params);
+
+	evt.on('community_write', function(err, rows){
+		if(err) throw err;
+		result = { result:"success", msg:"글 작성 완료!" };
+		res.send(result);
+	});
+};

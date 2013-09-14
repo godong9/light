@@ -1,5 +1,4 @@
 // community_data
-// 
 exports.dao_community_data = function(evt, mysql_conn, params){
 	
 	var sql = "SELECT ";
@@ -20,4 +19,20 @@ exports.dao_community_data = function(evt, mysql_conn, params){
 		evt.emit('community_data', err, rows);
 	});
 	return sql;
+}
+
+// community_write
+exports.dao_community_write = function(evt, mysql_conn, params){
+
+	var sql = "INSERT INTO `community` ";
+	sql += "SET `email` = '"+params['email']+"', ";
+	sql += "`type` = '"+params['type']+"', ";
+	sql += "`title` = '"+params['title']+"', ";
+	sql += "`content` = '"+params['content']+"' ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		evt.emit('community_write', err, rows);
+	});
+	return sql;
+
 }
