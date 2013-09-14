@@ -70,7 +70,7 @@ public class BaseFragment extends Activity {
         ActionItem setting_help 	= new ActionItem(ID_HELP, "도움말");
         ActionItem setting_logout 	= new ActionItem(ID_LOGOUT, "로그아웃");
   
-        setting_notify.setSticky(true);
+       // setting_notify.setSticky(true);
        
         settingPopup = new QuickAction(this, QuickAction.VERTICAL);
         

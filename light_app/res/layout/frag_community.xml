@@ -1,86 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/timeline_frag"
      android:layout_width="fill_parent"
      android:layout_height="fill_parent"
      android:orientation="vertical">
 	 
      <LinearLayout 
-	     android:layout_width="fill_parent"
-	     android:layout_height="0dp"
-	     android:layout_weight="10"
-	     android:orientation="horizontal"
-	     android:background="@drawable/community_title_background">
-	     
-         <EditText           
-             android:id="@+id/community_search_val"
-			 android:layout_width="172dp"
-			 android:layout_height="fill_parent"
-			 android:layout_marginTop="6dp"
-			 android:layout_marginBottom="4dp"
-			 android:layout_marginLeft="6dp"
-		 	 android:layout_marginRight="6dp"
-		 	 android:layout_gravity="center"/>
-         <ImageButton  
-	        android:id="@+id/community_search_btn"
-			android:layout_width="32dp"
-			android:layout_height="32dp"
-			android:layout_marginTop="4dp"
-			android:layout_marginBottom="4dp"
-			android:layout_marginLeft="4dp"
-			android:layout_marginRight="8dp"
-			android:layout_gravity="center"
-			android:background="@drawable/search_btn"/> 
-		<ImageButton  
-	        android:id="@+id/community_write_btn"
-			android:layout_width="32dp"
-			android:layout_height="32dp"
-			android:layout_marginTop="4dp"
-			android:layout_marginBottom="4dp"
-			android:layout_marginLeft="21dp"
-			android:layout_marginRight="10dp"
-			android:layout_gravity="center"
-			android:background="@drawable/community_write_btn"/> 
-		<ImageButton  
-	        android:id="@+id/community_sort_btn"  
-			android:layout_width="31dp"
-			android:layout_height="32dp"
-			android:layout_marginTop="4dp"
-			android:layout_marginBottom="4dp"
-			android:layout_marginLeft="22dp"
-			android:layout_marginRight="10dp"
-			android:layout_gravity="center"
-			android:background="@drawable/community_sort_btn"/> 
-         
-     </LinearLayout>
-        
-     <LinearLayout 
-         android:id="@+id/community_title_layout"
-         android:layout_weight="90"
          android:layout_width="fill_parent"
-	     android:layout_height="0dp" 
-	     android:visibility="visible">
-	     <ListView 
-	          android:id="@+id/community_scroll"
-	          android:layout_width="fill_parent"
-	          android:layout_height="fill_parent"    
-	          android:transcriptMode="normal"
-	          android:divider="#FFFFFF"
-	       	  android:listSelector="#00000000"
-	       	  android:cacheColorHint="#00000000">        	          
-	     </ListView>
+     	 android:layout_height="fill_parent"
+     	 android:orientation="vertical"
+     	 android:id="@+id/community_title_layout"
+     	 android:visibility="visible">
+    
+	     <LinearLayout 
+		     android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:layout_weight="10"
+		     android:orientation="horizontal"
+		     android:background="@drawable/community_title_background">
+		     
+	         <EditText           
+	             android:id="@+id/community_search_val"
+	             android:inputType="text"    
+				 android:focusable="false"
+	             android:imeOptions="actionSearch"
+				 android:layout_width="172dp"
+				 android:layout_height="fill_parent"
+				 android:layout_marginTop="6dp"
+				 android:layout_marginBottom="4dp"
+				 android:layout_marginLeft="6dp"
+			 	 android:layout_marginRight="6dp"
+			 	 android:layout_gravity="center"/>
+	         <ImageButton  
+		        android:id="@+id/community_search_btn"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
+				android:layout_marginLeft="4dp"
+				android:layout_marginRight="8dp"
+				android:layout_gravity="center"
+				android:background="@drawable/search_btn"/> 
+			<ImageButton  
+		        android:id="@+id/community_write_btn"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
+				android:layout_marginLeft="21dp"
+				android:layout_marginRight="10dp"
+				android:layout_gravity="center"
+				android:background="@drawable/community_write_btn"/> 
+			<ImageButton  
+		        android:id="@+id/community_sort_btn"  
+				android:layout_width="31dp"
+				android:layout_height="32dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
+				android:layout_marginLeft="22dp"
+				android:layout_marginRight="10dp"
+				android:layout_gravity="center"
+				android:background="@drawable/community_sort_btn"/> 
+	         
+	     </LinearLayout>
+	        
+	     <LinearLayout 
+	         
+	         android:layout_weight="90"
+	         android:layout_width="fill_parent"
+		     android:layout_height="0dp">
+		     <ListView 
+		          android:id="@+id/community_scroll"
+		          android:layout_width="fill_parent"
+		          android:layout_height="fill_parent"    
+		          android:transcriptMode="normal"
+		          android:divider="#FFFFFF"
+		       	  android:listSelector="#00000000"
+		       	  android:cacheColorHint="#00000000">        	          
+		     </ListView>
+	     </LinearLayout>
+   
      </LinearLayout>
+     
      
      <LinearLayout 
          android:id="@+id/community_content_layout"
-         android:layout_weight="90"
          android:layout_width="fill_parent"
-	     android:layout_height="0dp"
+     	 android:layout_height="fill_parent"
 	     android:orientation="vertical" 
 	     android:visibility="gone">
 	     
          <LinearLayout 
-	         android:layout_weight="18"
+	         android:layout_weight="16"
 	         android:layout_width="fill_parent"
 		     android:layout_height="0dp"
 		     android:layout_marginTop="1dp"
@@ -170,16 +180,12 @@
 					android:textColor="#D82C76"
 			        android:textSize="13sp"
 					android:background="@drawable/community_content_btn" />
-     
-	   			
-            
-		    </LinearLayout>
-             
-             
+      	        
+		    </LinearLayout>         
 	     </LinearLayout>
 	     
 	     <LinearLayout 
-	         android:layout_weight="82"
+	         android:layout_weight="84"
 	         android:layout_width="fill_parent"
 		     android:layout_height="0dp"
 		     android:gravity="center">
@@ -187,7 +193,7 @@
 	         <ScrollView
 				 android:id="@+id/scrollView"
 				 android:layout_width="336dp" 
-				 android:layout_height="366dp"
+				 android:layout_height="406dp"
 				 android:background="@drawable/community_content_background">     
     			
 		         <TextView
@@ -203,6 +209,120 @@
 			        android:lineSpacingExtra="2dip" 
 			        android:textColor="#000000"/>
 	         </ScrollView>
+	     </LinearLayout>   
+     </LinearLayout>
+     
+     
+     <LinearLayout 
+         android:id="@+id/community_write_layout"
+         android:layout_width="fill_parent"
+     	 android:layout_height="fill_parent"
+	     android:orientation="vertical" 
+	     android:visibility="gone">
+	     
+         <LinearLayout 
+	         android:layout_weight="16"
+	         android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:layout_marginTop="1dp"
+		     android:layout_marginBottom="1dp"
+		     android:orientation="horizontal" 
+		     android:background="@drawable/community_content_title_background">
+		     
+              <LinearLayout
+                 android:layout_weight="78"
+		         android:layout_width="0dp"
+			     android:layout_height="fill_parent"
+			     android:orientation="horizontal" >
+      				
+                 <ImageButton  
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:layout_marginTop="4dp"
+					android:layout_marginBottom="4dp"
+					android:layout_marginLeft="21dp"
+					android:layout_marginRight="10dp"
+					android:layout_gravity="center"
+					android:background="@drawable/community_write_btn"/> 
+			    
+                 <LinearLayout 
+			         android:layout_width="210dp"
+				     android:layout_height="fill_parent"
+				     android:orientation="vertical" >
+	                <Spinner 
+					    android:id="@+id/write_spinner" 
+				        android:layout_width="match_parent" 
+				        android:layout_height="36dp" 
+				        android:drawSelectorOnTop="true"
+				        android:layout_marginTop="7dp"
+				        android:layout_marginBottom="0dp" 
+				     />
+	                 
+					<EditText
+			            android:gravity="top"
+				        android:id="@+id/community_write_title_text"
+				        android:inputType="text"
+	             		android:imeOptions="actionNext"
+				        android:layout_width="210dp" 
+					 	android:layout_height="38dp"
+				        android:textSize="15sp"
+				        android:layout_gravity="center"
+				        android:textColor="#000000" />
+                 </LinearLayout>
+			 </LinearLayout>
+			    
+             <LinearLayout
+                 android:layout_weight="22"
+		         android:layout_width="0dp"
+			     android:layout_height="fill_parent"
+			     android:orientation="vertical"
+			     android:gravity="center" >
+             	
+                 <Button
+                    android:id="@+id/community_write_title_btn"
+					android:layout_width="65dp"
+					android:layout_height="25dp"
+					android:layout_gravity="center"
+					android:text="목록"
+					android:textColor="#D82C76"
+			        android:textSize="13sp"
+					android:background="@drawable/community_content_btn" />
+                 
+                 <Button
+                    android:id="@+id/community_write_complete_btn"
+					android:layout_width="65dp"
+					android:layout_height="25dp"
+					android:layout_gravity="center"
+					android:layout_marginTop="10dp"
+					android:text="글 올리기"
+					android:textColor="#D82C76"
+			        android:textSize="13sp"
+					android:background="@drawable/community_content_btn" />
+      	        
+		    </LinearLayout>   
+	                       
+	     </LinearLayout>
+	     
+	     <LinearLayout 
+	         android:layout_weight="84"
+	         android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:orientation="vertical"
+		     android:gravity="center">
+		         <EditText
+		            android:gravity="top"
+			        android:id="@+id/community_write_text"
+			        android:layout_width="336dp" 
+				 	android:layout_height="406dp"
+			        android:paddingTop="12dp"
+			        android:paddingBottom="12dp"
+			        android:paddingLeft="12dp"
+			        android:paddingRight="12dp"
+			        android:textSize="15sp"
+			        android:lineSpacingExtra="2dip" 
+			        android:textColor="#000000"
+			        android:background="@drawable/community_content_background"/>
+	
 	     </LinearLayout>
          
      </LinearLayout>

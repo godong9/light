@@ -44,4 +44,11 @@
         <item>11.5</item> 
         <item>5.0</item> 
     </string-array>
+    <string-array name="write_type"> 
+        <item>후기</item> 
+        <item>상담</item> 
+        <item>운동</item> 
+        <item>식단</item>
+        <item>잡담</item> 
+    </string-array>
 </resources>

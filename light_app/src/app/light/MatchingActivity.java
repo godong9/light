@@ -89,37 +89,42 @@ public class MatchingActivity extends CommonActivity {
 	public void onMatchingCompleteBtn(View v){
 		JSONObject json_param = new JSONObject();
 		
-		try {		
-			//입력폼으로부터 데이터 가져와서 JSON 오브젝트에 저장
-			json_param.put("goal", goal);
-			json_param.put("term", term);	
-			
-			//postData 함수로 데이터 전송
-			CommonHttp ch = new CommonHttp();	
-			String result_json = ch.postData("http://211.110.61.51:3000/matching", json_param);		
-							
-			if(result_json.equals("error")){
-				Toast toast = Toast.makeText(this, "매칭 데이터 전송 실패!", Toast.LENGTH_SHORT); 
-				toast.show(); 
-			}
-			else{		
-				JSONObject json_data = new JSONObject(result_json);
-				String result_flag = json_data.getString("result");			
-				// 회원가입 성공시
-				if(result_flag.equals("success")){			
-		            //매칭대기 페이지로 이동
-		            Intent intent = new Intent(MatchingActivity.this, BaseFragment.class);
-					startActivity(intent);              	
-				}
-				else{
-					Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
+		if(term == 0 || goal == 0){
+			Toast.makeText(this, "목표와 기간을 선택해주세요!", Toast.LENGTH_SHORT).show();
+		}
+		else{
+			try {		
+				//입력폼으로부터 데이터 가져와서 JSON 오브젝트에 저장
+				json_param.put("goal", goal);
+				json_param.put("term", term);	
+				
+				//postData 함수로 데이터 전송
+				CommonHttp ch = new CommonHttp();	
+				String result_json = ch.postData("http://211.110.61.51:3000/matching", json_param);		
+								
+				if(result_json.equals("error")){
+					Toast toast = Toast.makeText(this, "매칭 데이터 전송 실패!", Toast.LENGTH_SHORT); 
 					toast.show(); 
 				}
+				else{		
+					JSONObject json_data = new JSONObject(result_json);
+					String result_flag = json_data.getString("result");			
+					// 회원가입 성공시
+					if(result_flag.equals("success")){			
+			            //매칭대기 페이지로 이동
+			            Intent intent = new Intent(MatchingActivity.this, BaseFragment.class);
+						startActivity(intent);              	
+					}
+					else{
+						Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
+						toast.show(); 
+					}
+				}
+					
 			}
-				
-		}
-		catch(JSONException e) {
-			Log.e("Error", "putJSON", e);
+			catch(JSONException e) {
+				Log.e("Error", "putJSON", e);
+			}
 		}
 	}
 	
