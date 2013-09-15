@@ -22,6 +22,7 @@ public class BaseFragment extends Activity {
 	private static final int ID_NOTIFY = 1;
 	private static final int ID_HELP   = 2;
 	private static final int ID_LOGOUT   = 3;
+	private static final int ID_EXIT = 4;
 	private static int matching_status = 0;	
 	
 	@Override
@@ -69,6 +70,7 @@ public class BaseFragment extends Activity {
         ActionItem setting_notify 	= new ActionItem(ID_NOTIFY, "알림 설정");
         ActionItem setting_help 	= new ActionItem(ID_HELP, "도움말");
         ActionItem setting_logout 	= new ActionItem(ID_LOGOUT, "로그아웃");
+        ActionItem setting_exit 	= new ActionItem(ID_EXIT, "종료");
   
        // setting_notify.setSticky(true);
        
@@ -78,7 +80,8 @@ public class BaseFragment extends Activity {
         settingPopup.addActionItem(setting_notify);
         settingPopup.addActionItem(setting_help);
         settingPopup.addActionItem(setting_logout);
-            
+        settingPopup.addActionItem(setting_exit);
+        
         //Set listener for action item clicked
         settingPopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
   			@Override
@@ -95,6 +98,11 @@ public class BaseFragment extends Activity {
   					Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
   					intent.putExtra("type", "logout");
   					startActivity(intent);
+  				} else if (actionId == ID_EXIT) {
+   					//Toast.makeText(getApplicationContext(), actionItem.getTitle() + " selected", Toast.LENGTH_SHORT).show();
+  					moveTaskToBack(true);
+  					finish();
+  					android.os.Process.killProcess(android.os.Process.myPid()); 
   				}
   			}
   		});
