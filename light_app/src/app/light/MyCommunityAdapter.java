@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -136,6 +137,28 @@ public class MyCommunityAdapter extends BaseAdapter {
 		ll_write = (LinearLayout)((Activity)context).findViewById(R.id.community_write_layout);
 		
 		final Spinner ws = (Spinner)((Activity)context).findViewById(R.id.write_spinner); 
+		final EditText et_title = (EditText)((Activity)context).findViewById(R.id.community_write_title_text);
+		final EditText et_content = (EditText)((Activity)context).findViewById(R.id.community_write_text);
+	
+		et_title.setOnFocusChangeListener(new OnFocusChangeListener() { 
+			public void onFocusChange(View v, boolean hasFocus) {
+			    if(hasFocus == false) { 
+			    	InputMethodManager imm = (InputMethodManager)context.getSystemService(
+						      Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(et_title.getWindowToken(), 0);
+			    } 
+			} 
+	    });
+		
+		et_content.setOnFocusChangeListener(new OnFocusChangeListener() { 
+			public void onFocusChange(View v, boolean hasFocus) {
+			    if(hasFocus == false) { 
+			    	InputMethodManager imm = (InputMethodManager)context.getSystemService(
+						      Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(et_content.getWindowToken(), 0);
+			    } 
+			} 
+	    });
 		
 		content_title_btn.setOnClickListener(new TextView.OnClickListener() {
 			public void onClick(View v) {			
