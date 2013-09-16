@@ -107,10 +107,10 @@ public class MyTimelineAdapter extends BaseAdapter {
 		
 		switch (list.get(position).type) {
 			case TimeLineObj.VIEW_TYPE_TIMEBAR:
-				tvDayCount = (TextView) convertView.findViewById(R.id.timeline_timebar_day_count);
+				//tvDayCount = (TextView) convertView.findViewById(R.id.timeline_timebar_day_count);
 				tvDate = (TextView) convertView.findViewById(R.id.timeline_timebar_date);				
 				
-				tvDayCount.setText(list.get(position).day_count);
+				//tvDayCount.setText(list.get(position).day_count);
 				tvDate.setText(list.get(position).date);
 				break;	
 				
