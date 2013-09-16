@@ -5,12 +5,12 @@
     android:orientation="horizontal" >
 	<LinearLayout 
 	    android:layout_width="fill_parent"
-    	android:layout_height="20dp"
+    	android:layout_height="24dp"
 	    android:layout_marginTop="24dp"
 	    android:layout_marginBottom="12dp"
 	    android:orientation="horizontal"
 	    android:background="@drawable/timeline_timebar" >
-	    
+	    <!-- 
 		<TextView
 	        android:id="@+id/timeline_timebar_day_count"
 	        android:layout_width="40dp"
@@ -20,14 +20,15 @@
 	       	android:textSize = "11sp"
 	        android:textColor="#424242" 
 	        />
-		
+		 -->
 		<TextView
 	        android:id="@+id/timeline_timebar_date"
 	        android:layout_width="80dp"
-	       	android:layout_height="20dp"
-	    	android:layout_marginLeft="2dp"
+	       	android:layout_height="24dp"
+	    	android:layout_marginLeft="40dp"
 	    	android:gravity="center_vertical"
-	       	android:textSize = "11sp"
+	       	android:textSize = "12sp"
+	       	android:textStyle = "bold"
 	        android:textColor="#424242" 
 	        />          
 	</LinearLayout>	

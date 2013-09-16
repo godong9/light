@@ -33,6 +33,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 	public LinearLayout ll_title;
 	public LinearLayout ll_content;
 	public LinearLayout ll_write;
+	public LinearLayout ll_comment;
 	public String tmp_type = "";
 	
 	MyCommunityAdapter(Context context, ArrayList<CommunityObj> my_list) {
@@ -129,12 +130,14 @@ public class MyCommunityAdapter extends BaseAdapter {
 		Button write_title_btn = (Button)((Activity)context).findViewById(R.id.community_write_title_btn);
 		Button write_complete_btn = (Button)((Activity)context).findViewById(R.id.community_write_complete_btn);
 		Button content_comment_btn = (Button)((Activity)context).findViewById(R.id.community_content_comment_btn);
+		Button community_comment_title_btn = (Button)((Activity)context).findViewById(R.id.community_comment_title_btn);
 		ImageButton search_btn = (ImageButton)((Activity)context).findViewById(R.id.community_search_btn);
 		ImageButton write_btn = (ImageButton)((Activity)context).findViewById(R.id.community_write_btn);
 		ImageButton sort_btn = (ImageButton)((Activity)context).findViewById(R.id.community_sort_btn);
 		ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
 		ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
 		ll_write = (LinearLayout)((Activity)context).findViewById(R.id.community_write_layout);
+		ll_comment = (LinearLayout)((Activity)context).findViewById(R.id.community_comment_layout);
 		
 		final Spinner ws = (Spinner)((Activity)context).findViewById(R.id.write_spinner); 
 		final EditText et_title = (EditText)((Activity)context).findViewById(R.id.community_write_title_text);
@@ -165,12 +168,25 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_title.setVisibility(View.VISIBLE);
 				ll_content.setVisibility(View.GONE);
 				ll_write.setVisibility(View.GONE);
+				ll_comment.setVisibility(View.GONE);
 			}
 		});
 		
 		content_comment_btn.setOnClickListener(new TextView.OnClickListener() {
-			public void onClick(View v) {			
-				Toast.makeText(context, "준비 중입니다..", Toast.LENGTH_SHORT).show();
+			public void onClick(View v) {		
+				ll_comment.setVisibility(View.VISIBLE);
+				ll_title.setVisibility(View.GONE);
+				ll_content.setVisibility(View.GONE);
+				ll_write.setVisibility(View.GONE);	
+			}
+		});
+		
+		community_comment_title_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {				
+				ll_title.setVisibility(View.VISIBLE);
+				ll_content.setVisibility(View.GONE);
+				ll_write.setVisibility(View.GONE);	
+				ll_comment.setVisibility(View.GONE);
 			}
 		});
 		
@@ -183,6 +199,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_title.setVisibility(View.VISIBLE);
 				ll_content.setVisibility(View.GONE);
 				ll_write.setVisibility(View.GONE);
+				ll_comment.setVisibility(View.GONE);
 			}
 		});	
 		
@@ -224,6 +241,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_title.setVisibility(View.VISIBLE);
 				ll_content.setVisibility(View.GONE);
 				ll_write.setVisibility(View.GONE);
+				ll_comment.setVisibility(View.GONE);
 			}
 		});
 		
@@ -232,6 +250,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_write.setVisibility(View.VISIBLE);
 				ll_content.setVisibility(View.GONE);
 				ll_title.setVisibility(View.GONE);
+				ll_comment.setVisibility(View.GONE);
 			}
 		});
 		
