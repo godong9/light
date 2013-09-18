@@ -47,7 +47,7 @@ exports.community_write = function(req, res){
 	});
 };
 
-// 커뮤니티에 쓴 글 저장하는 함수
+// 커뮤니티 댓글 정보 가져오는 함수
 exports.comment_data = function(req, res){
 	
 	var evt = new EventEmitter();
@@ -67,3 +67,52 @@ exports.comment_data = function(req, res){
 		res.send(result);
 	});
 };
+
+// 커뮤니티에 댓글 저장하는 함수
+exports.comment_write = function(req, res){
+	
+	var evt = new EventEmitter();
+	var dao_c = require('../sql/community');
+	
+	var post_idx = req.body.post_idx;
+	var email = req.session.email; 	
+	var content = req.body.content;
+	var params = { 
+		post_idx: post_idx,
+		email: email, 
+		content: content
+	}
+
+	var result = { };
+
+	dao_c.dao_comment_write(evt, mysql_conn, params);
+
+	evt.on('comment_write', function(err, rows){
+		if(err) throw err;
+		result = { result:"success", msg:"댓글 작성 완료!" };
+		res.send(result);
+	});
+};
+
+// 커뮤니티 글 조회 수 업데이트
+exports.community_hits = function(req, res){
+	
+	var evt = new EventEmitter();
+	var dao_c = require('../sql/community');
+	
+	var post_idx = req.body.post_idx;
+	var params = { 
+		post_idx: post_idx
+	}
+
+	var result = { };
+
+	dao_c.dao_community_hits(evt, mysql_conn, params);
+
+	evt.on('community_hits', function(err, rows){
+		if(err) throw err;
+		result = { result:"success", msg:"조회수 업데이트 완료!", hits:rows[0].hits };
+		res.send(result);
+	});
+};
+

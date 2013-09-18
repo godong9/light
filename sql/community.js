@@ -56,3 +56,39 @@ exports.dao_comment_data = function(evt, mysql_conn, params){
 	return sql;
 }
 
+// comment_write
+exports.dao_comment_write = function(evt, mysql_conn, params){
+
+	var sql = "INSERT INTO `community_comment` ";
+	sql += "SET `post_idx` = '"+params['post_idx']+"', ";
+	sql += "`email` = '"+params['email']+"', ";
+	sql += "`content` = '"+params['content']+"' ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		var u_sql = "UPDATE `community` ";
+			u_sql += "SET `num_comment` = `num_comment` + 1 ";
+			u_sql += "WHERE `post_idx` = '"+params['post_idx']+"' ";
+		var u_query = mysql_conn.query(u_sql, params, function(err, rows, fields) {
+			console.log("num_comment Update");	
+		});
+		evt.emit('comment_write', err, rows);
+	});
+	return sql;
+}
+
+// community_hits
+exports.dao_community_hits = function(evt, mysql_conn, params){
+	var u_sql = "UPDATE `community` ";
+		u_sql += "SET `hits` = `hits` + 1 ";
+		u_sql += "WHERE `post_idx` = '"+params['post_idx']+"' ";
+	var u_query = mysql_conn.query(u_sql, params, function(err, rows, fields) {
+		var sql = "SELECT ";
+			sql += "`hits` ";
+			sql += "FROM `community` ";
+			sql += "WHERE `post_idx` = '"+params['post_idx']+"' ";
+		var query = mysql_conn.query(sql, function(err, rows, fields) {
+			evt.emit('community_hits', err, rows);
+		});		
+	});
+	return u_sql;
+}
