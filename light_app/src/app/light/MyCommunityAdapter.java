@@ -198,7 +198,8 @@ public class MyCommunityAdapter extends BaseAdapter {
 				TextView title_info = (TextView)((Activity)context).findViewById(R.id.community_comment_title_info);
 				title_info.setText(list.get(tmp_pos).nickname + " / " + list.get(tmp_pos).reg_date + " / 조회수: " + list.get(tmp_pos).hits);
 	
-				//댓글 데이터 가져와서 리스트에 추가하는 부분 구현
+				CommunityFrag cf = new CommunityFrag();
+				cf.setCommentList(list.get(tmp_pos).post_idx);	
 			}
 		});
 		
@@ -257,7 +258,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 					}
 				}
 				catch(Exception e){
-					
+					System.out.println("에러");
 				}
 				ll_title.setVisibility(View.VISIBLE);
 				ll_content.setVisibility(View.GONE);
