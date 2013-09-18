@@ -84,6 +84,7 @@ app.post('/profile', user.profile);
 app.post('/matching', user.matching);
 app.post('/chat', rival.set_chat_data);
 app.post('/community_write', community.community_write);
+app.post('/community_comment', community.comment_data);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

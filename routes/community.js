@@ -46,3 +46,24 @@ exports.community_write = function(req, res){
 		res.send(result);
 	});
 };
+
+// 커뮤니티에 쓴 글 저장하는 함수
+exports.comment_data = function(req, res){
+	
+	var evt = new EventEmitter();
+	var dao_c = require('../sql/community');
+
+	var post_idx = req.body.post_idx;
+	var params = { 
+		post_idx: post_idx
+	}
+	var result = { comment_data:{} };
+
+	dao_c.dao_comment_data(evt, mysql_conn, params);
+
+	evt.on('comment_data', function(err, rows){
+		if(err) throw err;
+		result.comment_data = rows;
+		res.send(result);
+	});
+};
