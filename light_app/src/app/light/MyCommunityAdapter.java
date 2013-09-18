@@ -123,7 +123,30 @@ public class MyCommunityAdapter extends BaseAdapter {
 				title_info.setText(list.get(pos).nickname + " / " + list.get(pos).reg_date + " / 조회수: " + list.get(pos).hits);
 				
 				TextView content = (TextView)((Activity)context).findViewById(R.id.community_content_text);
-				content.setText(list.get(pos).content);	
+				content.setText(list.get(pos).content);		
+				
+				//조회수 업데이트 구현
+				JSONObject json_param = new JSONObject();
+				
+				try {	
+					json_param.put("post_idx", list.get(pos).post_idx);
+				
+					//postData 함수로 데이터 전송
+					CommonHttp ch = new CommonHttp();	
+					String result_json = ch.postData("http://211.110.61.51:3000/community_hits", json_param);		
+									
+					if(result_json.equals("error")){
+						Toast.makeText(context, "서버 통신 실패!", Toast.LENGTH_SHORT).show();
+					}
+					else{
+						JSONObject json_data = new JSONObject(result_json);
+						String tmp_hits = json_data.getString("hits");
+						list.get(pos).hits = tmp_hits;
+					}
+				}
+				catch(Exception e){
+					System.out.println("에러");
+				}	
 			}
 		});
 		
@@ -135,6 +158,8 @@ public class MyCommunityAdapter extends BaseAdapter {
 		ImageButton search_btn = (ImageButton)((Activity)context).findViewById(R.id.community_search_btn);
 		ImageButton write_btn = (ImageButton)((Activity)context).findViewById(R.id.community_write_btn);
 		ImageButton sort_btn = (ImageButton)((Activity)context).findViewById(R.id.community_sort_btn);
+		Button write_comment_btn = (Button)((Activity)context).findViewById(R.id.community_write_comment_btn);
+		
 		ll_title = (LinearLayout)((Activity)context).findViewById(R.id.community_title_layout);
 		ll_content = (LinearLayout)((Activity)context).findViewById(R.id.community_content_layout);
 		ll_write = (LinearLayout)((Activity)context).findViewById(R.id.community_write_layout);
@@ -170,6 +195,9 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_content.setVisibility(View.GONE);
 				ll_write.setVisibility(View.GONE);
 				ll_comment.setVisibility(View.GONE);
+				
+				CommunityFrag cf = new CommunityFrag();
+				cf.updateCommunityList();	
 			}
 		});
 		
@@ -222,6 +250,9 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_content.setVisibility(View.GONE);
 				ll_write.setVisibility(View.GONE);
 				ll_comment.setVisibility(View.GONE);
+				
+				CommunityFrag cf = new CommunityFrag();
+				cf.updateCommunityList();	
 			}
 		});	
 		
@@ -273,6 +304,40 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_content.setVisibility(View.GONE);
 				ll_title.setVisibility(View.GONE);
 				ll_comment.setVisibility(View.GONE);
+			}
+		});
+		
+		write_comment_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {
+				EditText et = (EditText)((Activity)context).findViewById(R.id.community_write_comment_text);
+				InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(et.getWindowToken(),0); 
+			
+				JSONObject json_param = new JSONObject();
+				
+				try {	
+					json_param.put("post_idx", list.get(tmp_pos).post_idx);
+					final EditText content_text = (EditText)((Activity)context).findViewById(R.id.community_write_comment_text);
+					String content_val = content_text.getText().toString();
+					json_param.put("content", content_val);
+					
+					//postData 함수로 데이터 전송
+					CommonHttp ch = new CommonHttp();	
+					String result_json = ch.postData("http://211.110.61.51:3000/comment_write", json_param);		
+									
+					if(result_json.equals("error")){
+						Toast.makeText(context, "댓글 작성 실패!", Toast.LENGTH_SHORT).show();
+					}
+					else{
+						Toast.makeText(context, "댓글 작성 완료!", Toast.LENGTH_SHORT).show();
+						CommunityFrag cf = new CommunityFrag();
+						cf.setCommentList(list.get(tmp_pos).post_idx);	
+						et.setText("");
+					}
+				}
+				catch(Exception e){
+					System.out.println("에러");
+				}
 			}
 		});
 		
