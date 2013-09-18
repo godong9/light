@@ -162,8 +162,8 @@
              	
                  <Button
                     android:id="@+id/community_content_title_btn"
-					android:layout_width="60dp"
-					android:layout_height="25dp"
+					android:layout_width="62dp"
+					android:layout_height="26dp"
 					android:layout_gravity="center"
 					android:text="목록"
 					android:textColor="#D82C76"
@@ -171,10 +171,10 @@
 					android:background="@drawable/community_content_btn" />
                  <Button
                     android:id="@+id/community_content_comment_btn"
-					android:layout_width="60dp"
-					android:layout_height="25dp"
+					android:layout_width="62dp"
+					android:layout_height="26dp"
 					android:layout_gravity="center"
-					android:layout_marginTop="10dp"
+					android:layout_marginTop="8dp"
 					android:text="댓글"
 					android:textColor="#D82C76"
 			        android:textSize="13sp"
@@ -280,8 +280,8 @@
              	
                  <Button
                     android:id="@+id/community_write_title_btn"
-					android:layout_width="65dp"
-					android:layout_height="25dp"
+					android:layout_width="62dp"
+					android:layout_height="26dp"
 					android:layout_gravity="center"
 					android:text="목록"
 					android:textColor="#D82C76"
@@ -290,10 +290,10 @@
                  
                  <Button
                     android:id="@+id/community_write_complete_btn"
-					android:layout_width="65dp"
-					android:layout_height="25dp"
+					android:layout_width="62dp"
+					android:layout_height="26dp"
 					android:layout_gravity="center"
-					android:layout_marginTop="10dp"
+					android:layout_marginTop="8dp"
 					android:text="글 올리기"
 					android:textColor="#D82C76"
 			        android:textSize="13sp"
@@ -408,9 +408,9 @@
 			     android:gravity="center" >
              	
                  <Button
-                    android:id="@+id/community_comment_title_btn"
-					android:layout_width="60dp"
-					android:layout_height="25dp"
+                    android:id="@+id/community_comment_content_btn"
+					android:layout_width="62dp"
+					android:layout_height="26dp"
 					android:layout_gravity="center"
 					android:text="본문보기"
 					android:textColor="#D82C76"
@@ -421,7 +421,7 @@
 	     </LinearLayout>
 	      	     
 	     <LinearLayout 
-	         android:layout_weight="84"
+	         android:layout_weight="70"
 	         android:layout_width="fill_parent"
 		     android:layout_height="0dp"
 		     android:orientation="vertical"
@@ -436,6 +436,45 @@
 		       	  android:cacheColorHint="#00000000">        	          
 		     	</ListView>
 	
+	     </LinearLayout>
+	     
+	     <LinearLayout 
+	         android:layout_weight="14"
+	         android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:orientation="horizontal"
+		     android:gravity="center"
+		     android:background="@drawable/community_comment_write_background">
+		      
+	         <EditText
+	            android:gravity="center_vertical"
+		        android:id="@+id/community_write_comment_text"
+		        android:inputType="text"
+            	android:imeOptions="actionDone"
+		        android:layout_width="280dp" 
+			 	android:layout_height="62dp"
+			 	android:layout_marginTop="2dp"
+			 	android:layout_marginLeft="4dp"
+			 	android:paddingTop="8dp"
+		        android:paddingBottom="8dp"
+		        android:paddingLeft="8dp"
+		        android:paddingRight="8dp"
+		        android:textSize="15sp"
+		        android:layout_gravity="center"
+		        android:textColor="#000000" />
+	         
+			<Button  
+		        android:id="@+id/community_write_comment_btn"  
+				android:layout_width="54dp"
+				android:layout_height="28dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
+				android:layout_marginLeft="8dp"
+				android:layout_marginRight="8dp"
+				android:layout_gravity="center"
+				android:text="입력"
+				android:textColor="#000000"
+				android:background="@drawable/join_terms_btn"/> 
 	     </LinearLayout>
          
      </LinearLayout>

@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -31,6 +32,10 @@ public class CommunityFrag extends CommonFragment implements OnItemClickListener
 	private static ListView community_listview;
 	private static int community_list_count = 0;
 	private static int notice_count = 0;
+	private static ArrayList<CommentObj> comment_list;
+	private static MyCommentAdapter comment_adapter;
+	private static ListView comment_listview;
+	private static int comment_list_count = 0;
 	private EditText search_text = null;
 	
 	@Override
@@ -168,6 +173,57 @@ public class CommunityFrag extends CommonFragment implements OnItemClickListener
 		catch(Exception e){
 			System.out.println("에러 발생");
 		}	
-	 	
 	}
+	
+	public static void setCommentList(String post_idx){	
+		comment_list = new ArrayList<CommentObj>();
+		comment_list_count = 0;
+		
+		//댓글 데이터 가져와서 리스트에 추가하는 부분 구현
+		JSONObject json_param = new JSONObject();
+		
+		try {	
+			json_param.put("post_idx", post_idx);
+			//postData 함수로 데이터 전송 후 데이터 받아오기
+			CommonHttp ch = new CommonHttp();	
+			String result_json = ch.postData("http://211.110.61.51:3000/community_comment", json_param);		
+			
+			if(result_json.equals("error")){
+				Toast.makeText(context, "댓글 데이터 가져오기 실패!", Toast.LENGTH_SHORT).show();
+			}
+			
+			JSONObject json_data = new JSONObject(result_json);
+			JSONArray json_comment_data = json_data.getJSONArray("comment_data");
+			//JSON 데이터 추가하는 부분 구현
+			for(int i=0; i<json_comment_data.length(); i++){
+				// JSON 데이터 가져와서 리스트에 추가하는 부분		
+				String tmp_nickname = json_comment_data.getJSONObject(i).getString("nickname");
+				String tmp_content = json_comment_data.getJSONObject(i).getString("content");
+				String tmp_date = json_comment_data.getJSONObject(i).getString("reg_date");
+					
+				// 시간 +9 적용(GMT 때문에)
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+				Calendar tmp_date_cal = Calendar.getInstance();
+	
+				tmp_date = tmp_date.replaceAll("T"," ");
+				tmp_date = tmp_date.replaceAll("Z", "");			
+			
+				tmp_date_cal.setTime(sdf.parse(tmp_date));
+				tmp_date_cal.add(tmp_date_cal.HOUR, 9);		
+			
+				String dateString = String.format("%04d.%02d.%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH) + 1, tmp_date_cal.get(Calendar.DAY_OF_MONTH));
+				
+				comment_list.add(new CommentObj(tmp_content, tmp_nickname, dateString));		
+			}
+
+			comment_list_count += json_comment_data.length();	//개수만큼 불러와서 추가 		
+			comment_adapter = new MyCommentAdapter(context, comment_list);
+			comment_listview = (ListView)((Activity)context).findViewById(R.id.comment_scroll);	  
+			comment_listview.setAdapter(comment_adapter);
+		}
+		catch(Exception e){
+			System.out.println("에러");
+		}
+	}
+	
 }
