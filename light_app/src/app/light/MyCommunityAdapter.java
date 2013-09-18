@@ -34,7 +34,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 	public LinearLayout ll_content;
 	public LinearLayout ll_write;
 	public LinearLayout ll_comment;
-	public String tmp_type = "";
+	private int tmp_pos = 0;
 	
 	MyCommunityAdapter(Context context, ArrayList<CommunityObj> my_list) {
 		this.context = context;
@@ -93,6 +93,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 		
 		title_content.setOnClickListener(new TextView.OnClickListener() {
 			public void onClick(View v) {
+				tmp_pos = pos;
 				v.requestFocus();
 				EditText et = (EditText)((Activity)context).findViewById(R.id.community_search_val);
 				InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -130,7 +131,7 @@ public class MyCommunityAdapter extends BaseAdapter {
 		Button write_title_btn = (Button)((Activity)context).findViewById(R.id.community_write_title_btn);
 		Button write_complete_btn = (Button)((Activity)context).findViewById(R.id.community_write_complete_btn);
 		Button content_comment_btn = (Button)((Activity)context).findViewById(R.id.community_content_comment_btn);
-		Button community_comment_title_btn = (Button)((Activity)context).findViewById(R.id.community_comment_title_btn);
+		Button community_comment_content_btn = (Button)((Activity)context).findViewById(R.id.community_comment_content_btn);
 		ImageButton search_btn = (ImageButton)((Activity)context).findViewById(R.id.community_search_btn);
 		ImageButton write_btn = (ImageButton)((Activity)context).findViewById(R.id.community_write_btn);
 		ImageButton sort_btn = (ImageButton)((Activity)context).findViewById(R.id.community_sort_btn);
@@ -178,13 +179,33 @@ public class MyCommunityAdapter extends BaseAdapter {
 				ll_title.setVisibility(View.GONE);
 				ll_content.setVisibility(View.GONE);
 				ll_write.setVisibility(View.GONE);	
+		
+				TextView title_type = (TextView)((Activity)context).findViewById(R.id.community_comment_title_type);
+				
+				String tmp_type = list.get(tmp_pos).type;
+				title_type.setText(tmp_type);
+				
+				if(tmp_type.equals("공지")){
+					title_type.setBackgroundResource(R.drawable.community_type_notice_background);
+				}
+				else{
+					title_type.setBackgroundResource(R.drawable.community_type_etc_background);
+				}
+				
+				TextView title_content = (TextView)((Activity)context).findViewById(R.id.community_comment_title_content);
+				title_content.setText(list.get(tmp_pos).title_content);
+				
+				TextView title_info = (TextView)((Activity)context).findViewById(R.id.community_comment_title_info);
+				title_info.setText(list.get(tmp_pos).nickname + " / " + list.get(tmp_pos).reg_date + " / 조회수: " + list.get(tmp_pos).hits);
+	
+				//댓글 데이터 가져와서 리스트에 추가하는 부분 구현
 			}
 		});
 		
-		community_comment_title_btn.setOnClickListener(new TextView.OnClickListener() {
-			public void onClick(View v) {				
-				ll_title.setVisibility(View.VISIBLE);
-				ll_content.setVisibility(View.GONE);
+		community_comment_content_btn.setOnClickListener(new TextView.OnClickListener() {
+			public void onClick(View v) {	
+				ll_content.setVisibility(View.VISIBLE);
+				ll_title.setVisibility(View.GONE);	
 				ll_write.setVisibility(View.GONE);	
 				ll_comment.setVisibility(View.GONE);
 			}

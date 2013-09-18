@@ -423,7 +423,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			
 			getTimelineData(start_date_string, end_date_string);
 			
-			if (pre_list_add <= 20){
+			if (pre_list_add <= 12){
 	    		end_date_string = String.format("%04d-%02d-%02d", last_get_date.get(Calendar.YEAR), last_get_date.get(Calendar.MONTH) + 1, last_get_date.get(Calendar.DAY_OF_MONTH));		
 	    		
 	    		pre_cal.add(Calendar.DAY_OF_MONTH, -3);
