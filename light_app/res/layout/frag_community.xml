@@ -220,7 +220,7 @@
 	     android:visibility="gone">
 	     
          <LinearLayout 
-	         android:layout_weight="16"
+	         android:layout_weight="10"
 	         android:layout_width="fill_parent"
 		     android:layout_height="0dp"
 		     android:layout_marginTop="1dp"
@@ -234,41 +234,24 @@
 			     android:layout_height="fill_parent"
 			     android:orientation="horizontal" >
       				
-                 <ImageButton  
-					android:layout_width="32dp"
-					android:layout_height="32dp"
+           		<ImageButton  
+					android:layout_width="28dp"
+					android:layout_height="28dp"
 					android:layout_marginTop="4dp"
 					android:layout_marginBottom="4dp"
-					android:layout_marginLeft="21dp"
-					android:layout_marginRight="10dp"
+					android:layout_marginLeft="16dp"
+					android:layout_marginRight="4dp"
 					android:layout_gravity="center"
 					android:background="@drawable/community_write_btn"/> 
-			    
-                 <LinearLayout 
-			         android:layout_width="210dp"
-				     android:layout_height="fill_parent"
-				     android:orientation="vertical" >
-	                <Spinner           
-					    android:id="@+id/write_spinner" 
-				        android:layout_width="match_parent" 
-				        android:layout_height="37dp" 
-				        android:gravity="center_vertical"
-				        android:drawSelectorOnTop="true"
-				        android:layout_marginTop="6dp"
-				        android:layout_marginBottom="0dp" 
-				     />
-	                 
-					<EditText
-			            android:gravity="center_vertical"
-				        android:id="@+id/community_write_title_text"
-				        android:inputType="text"
-	             		android:imeOptions="actionNext"
-				        android:layout_width="210dp" 
-					 	android:layout_height="38dp"
-				        android:textSize="15sp"
-				        android:layout_gravity="center"
-				        android:textColor="#000000" />
-                 </LinearLayout>
+					
+           		<TextView
+			        android:layout_width="60dp"
+			        android:layout_height="fill_parent"
+			        android:layout_marginLeft="4dp" 
+			        android:gravity="center_vertical"
+			        android:textSize="16sp"
+			        android:text="글쓰기"
+			        android:textColor="#D82C76"/>
 			 </LinearLayout>
 			    
              <LinearLayout
@@ -287,13 +270,111 @@
 					android:textColor="#D82C76"
 			        android:textSize="13sp"
 					android:background="@drawable/community_content_btn" />
-                 
+    
+		    </LinearLayout>   
+	                       
+	     </LinearLayout>
+	     
+         <LinearLayout 
+	         android:layout_weight="20"
+	         android:layout_width="fill_parent"
+		     android:layout_height="0dp"
+		     android:layout_marginTop="6dp"
+		     android:layout_marginBottom="1dp"
+		     android:orientation="horizontal">
+		     
+              <LinearLayout
+                 android:layout_weight="78"
+		         android:layout_width="0dp"
+			     android:layout_height="fill_parent"		     
+			     android:gravity="center_vertical"
+			     android:orientation="horizontal" >
+      				
+                 <LinearLayout 
+			         android:layout_width="fill_parent"
+				     android:layout_height="fill_parent"
+				     android:layout_marginLeft="14dp"
+				 	 android:layout_marginRight="5dp"
+				     android:orientation="vertical" >
+				    
+                     <LinearLayout
+                         android:layout_weight="50"
+                         android:layout_width="fill_parent"
+				     	 android:layout_height="0dp"
+				     	 android:layout_marginTop="5dp"
+				     	 android:layout_marginBottom="5dp"
+				     	 android:orientation="horizontal"
+				     	 android:background="@drawable/community_select_background">
+					     <TextView
+					        android:layout_width="50dp"
+					        android:layout_height="38dp"
+					        android:layout_marginLeft="20dp" 
+					        android:layout_marginTop="2dp" 
+					        android:gravity="center_vertical"
+					        android:textSize="14sp"
+					        android:text="카테고리"
+					        android:textColor="#000000"    
+					     />
+                         <Spinner           
+						    android:id="@+id/write_spinner" 
+					        android:layout_width="178dp" 
+					        android:layout_height="38dp" 
+					        android:gravity="center"
+					        android:drawSelectorOnTop="true"
+					        android:layout_marginTop="3dp" 
+					        android:layout_marginLeft="6dp" 
+					        android:layout_marginRight="2dp" 
+					     />
+                         
+                     </LinearLayout>
+	                
+	                 <LinearLayout
+	                     android:layout_weight="50"
+                         android:layout_width="fill_parent"
+				     	 android:layout_height="0dp"
+				     	 android:layout_marginTop="5dp"
+				     	 android:layout_marginBottom="5dp"
+				     	 android:orientation="horizontal"
+				     	 android:background="@drawable/community_select_background">
+                         <TextView
+					        android:layout_width="50dp"
+					        android:layout_height="38dp"
+					        android:layout_marginLeft="20dp" 
+					        android:layout_marginTop="2dp" 
+					        android:gravity="center_vertical"
+					        android:textSize="14sp"
+					        android:text="제목"
+					        android:textColor="#000000"    
+					     />
+						<EditText
+				            android:gravity="center_vertical"
+					        android:id="@+id/community_write_title_text"
+					        android:inputType="text"
+		             		android:imeOptions="actionNext"
+					        android:layout_width="178dp" 
+						 	android:layout_height="38dp"
+						 	android:layout_marginTop="3dp" 
+					        android:layout_marginLeft="6dp" 
+					        android:layout_marginRight="2dp" 
+					        android:textSize="15sp"
+					        android:layout_gravity="center"
+					        android:textColor="#000000" />
+					</LinearLayout>
+                 </LinearLayout>
+			 </LinearLayout>
+			    
+             <LinearLayout
+                 android:layout_weight="22"
+		         android:layout_width="0dp"
+			     android:layout_height="fill_parent"
+			     android:orientation="vertical"
+			     android:gravity="center" >
+             	
                  <Button
                     android:id="@+id/community_write_complete_btn"
 					android:layout_width="62dp"
-					android:layout_height="26dp"
+					android:layout_height="50dp"
 					android:layout_gravity="center"
-					android:layout_marginTop="8dp"
 					android:text="글 올리기"
 					android:textColor="#D82C76"
 			        android:textSize="13sp"
@@ -302,9 +383,10 @@
 		    </LinearLayout>   
 	                       
 	     </LinearLayout>
-	     
+         
+         
 	     <LinearLayout 
-	         android:layout_weight="84"
+	         android:layout_weight="70"
 	         android:layout_width="fill_parent"
 		     android:layout_height="0dp"
 		     android:orientation="vertical"
@@ -312,8 +394,10 @@
 		         <EditText
 		            android:gravity="top"
 			        android:id="@+id/community_write_text"
-			        android:layout_width="336dp" 
-				 	android:layout_height="406dp"
+			        android:layout_width="fill_parent" 
+				 	android:layout_height="342dp"
+				 	android:layout_marginLeft="14dp"
+				 	android:layout_marginRight="14dp"
 			        android:paddingTop="12dp"
 			        android:paddingBottom="12dp"
 			        android:paddingLeft="12dp"
