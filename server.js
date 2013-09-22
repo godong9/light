@@ -15,6 +15,14 @@ var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 0 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 0 Reset!");
+		});
 	});
 });
 
@@ -51,6 +59,14 @@ var d1 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 1}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 1 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 1 Reset!");
+		});
 	});
 });
 
@@ -87,6 +103,14 @@ var d2 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 2}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 2 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 2 Reset!");
+		});
 	});
 });
 
@@ -123,6 +147,14 @@ var d3 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 3}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 3 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 3 Reset!");
+		});
 	});
 });
 
@@ -159,6 +191,14 @@ var d4 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 4}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 4 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 4 Reset!");
+		});
 	});
 });
 
@@ -195,6 +235,14 @@ var d5 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 5}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 5 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 5 Reset!");
+		});
 	});
 });
 
@@ -231,6 +279,14 @@ var d6 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 6}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 6 Insert!");
+
+		var u_sql = "UPDATE `user` ";
+			u_sql += "SET `food_calorie` = '0', "; 
+			u_sql += "`exercise_calorie` = '0' "; 
+
+		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
+			console.log("Day 6 Reset!");
+		});
 	});
 });
 
