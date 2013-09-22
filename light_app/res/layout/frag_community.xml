@@ -373,7 +373,7 @@
                  <Button
                     android:id="@+id/community_write_complete_btn"
 					android:layout_width="62dp"
-					android:layout_height="26dp"
+					android:layout_height="50dp"
 					android:layout_gravity="center"
 					android:text="글 올리기"
 					android:textColor="#D82C76"
