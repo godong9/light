@@ -77,7 +77,8 @@ var c0 = schedule.scheduleJob({hour: 00, minute: 01, dayOfWeek: 0}, function(){
 	//기간 만료됐는지 확인하는 함수
 });
 
-var p0 = schedule.scheduleJob({hour: 20, minute: 22, dayOfWeek: 6}, function(){
+/*
+var p0 = schedule.scheduleJob({hour: 12, minute: 00, dayOfWeek: 0}, function(){
 	//푸시 관련 함수
 	
 	var message = new gcm.Message();
@@ -122,6 +123,7 @@ var p0 = schedule.scheduleJob({hour: 20, minute: 22, dayOfWeek: 6}, function(){
 		});
 	});
 });
+*/
 
 var m0 = schedule.scheduleJob({hour: 09, minute: 00, dayOfWeek: 0}, function(){
 	var email = 'allightdiet@gmail.com';
