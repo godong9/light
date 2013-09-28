@@ -17,12 +17,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 //커스텀 AlertDialog 구현
@@ -47,6 +48,7 @@ import android.widget.Toast;
 		private MyHistoryAdapter history_adapter;
 		private ListView history_listview;
 		private int history_list_count = 0;
+		
 		
 		public RivalDialogWindow(int type, JSONObject user_info) {
 			this.type = type;
@@ -329,6 +331,7 @@ import android.widget.Toast;
 		@Override
 		public void onStop() {
 			super.onStop();
+			
 		}
 		
 		public void modifyChat() {
@@ -362,6 +365,8 @@ import android.widget.Toast;
 			
 		}
 		
+		
+		
 		public void setClosetList() {
 			
 			closet_list = new ArrayList<ClosetObj>();
@@ -392,14 +397,15 @@ import android.widget.Toast;
 				
 			}
 			catch(Exception e){
-				System.out.println("다이얼로그 히스토리 가져오기 에러");
+				System.out.println("다이얼로그 옷장 가져오기 에러");
 			}
-			
+
 			closet_adapter = new MyClosetAdapter(context, closet_list);
-			
+			closet_adapter.setDialog(getDialog());
 			// 리스트뷰에 어댑터 연결
 		    closet_listview = (ListView)getDialog().findViewById(R.id.closet_scroll);	  
 		    closet_listview.setAdapter(closet_adapter);
+
 		}
 		
 		public void setHistoryList() {
