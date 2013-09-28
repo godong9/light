@@ -23,7 +23,7 @@
              android:layout_marginLeft="0dp"/>
          <EditText
              android:id="@+id/join_id"
-         	 android:inputType="text"
+         	 android:inputType="textEmailAddress"
              android:imeOptions="actionNext"
              android:layout_marginTop="7dp"
              android:layout_marginBottom="5dp"
