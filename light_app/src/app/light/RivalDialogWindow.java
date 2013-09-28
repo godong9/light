@@ -365,53 +365,35 @@ import android.widget.Toast;
 		public void setClosetList() {
 			
 			closet_list = new ArrayList<ClosetObj>();
-			
-			/*
+
 			JSONObject json_param = new JSONObject();
 					
 			try {
 				json_param.put("email", user_info.getString("email"));
 				
 				CommonHttp ch = new CommonHttp();	
-				String result_json = ch.postData("http://211.110.61.51:3000/rival_history", json_param);		
+				String result_json = ch.postData("http://211.110.61.51:3000/closet_list", json_param);		
 				
 				if(result_json.equals("error")){
 					Toast.makeText(context, "데이터 수신 실패!", Toast.LENGTH_SHORT).show();
 				}
 				else{			
-					//System.out.println("성공");			
 					JSONObject json_data = new JSONObject(result_json);
-					JSONArray json_history_data = json_data.getJSONArray("history_data");
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-					
+					JSONArray json_history_data = json_data.getJSONArray("closet_list");
+				
 					for(int i=0; i<json_history_data.length(); i++){
 							
-						String status = json_history_data.getJSONObject(i).getString("status");
-						String food_calorie = json_history_data.getJSONObject(i).getString("food_calorie");
-						String exercise_calorie = json_history_data.getJSONObject(i).getString("exercise_calorie");
-						String tmp_date = json_history_data.getJSONObject(i).getString("reg_date");
-				
-						// 시간 +9 적용(GMT 때문에)
-						Calendar tmp_date_cal = Calendar.getInstance();
-						tmp_date = tmp_date.replaceAll("T"," ");
-						tmp_date = tmp_date.replaceAll("Z", "");			
-						tmp_date_cal.setTime(sdf.parse(tmp_date));
-						tmp_date_cal.add(tmp_date_cal.HOUR, 9);
-						
-						String tmp_date_str = String.format(" %04d %02d/%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH), tmp_date_cal.get(Calendar.DAY_OF_MONTH));
+						String title = json_history_data.getJSONObject(i).getString("title");
+						String clothes = json_history_data.getJSONObject(i).getString("clothes");
 										
-						history_list.add(new HistoryObj(tmp_date_str, status, food_calorie, exercise_calorie));
+						closet_list.add(new ClosetObj(title, clothes));
 					}
-
 				}
 				
 			}
 			catch(Exception e){
 				System.out.println("다이얼로그 히스토리 가져오기 에러");
 			}
-			
-			*/
-			closet_list.add(new ClosetObj("베이직룩","1"));
 			
 			closet_adapter = new MyClosetAdapter(context, closet_list);
 			

@@ -63,11 +63,11 @@ public final class R {
         public static final int camera_btn=0x7f020010;
         public static final int camera_off=0x7f020011;
         public static final int camera_on=0x7f020012;
-        public static final int character_1_1=0x7f020013;
-        public static final int character_1_2=0x7f020014;
-        public static final int character_1_3=0x7f020015;
-        public static final int character_1_4=0x7f020016;
-        public static final int character_1_5=0x7f020017;
+        public static final int character_1_1_1=0x7f020013;
+        public static final int character_1_1_2=0x7f020014;
+        public static final int character_1_1_3=0x7f020015;
+        public static final int character_1_1_4=0x7f020016;
+        public static final int character_1_1_5=0x7f020017;
         public static final int chat_ballon=0x7f020018;
         public static final int closet_item_background=0x7f020019;
         public static final int clothes_1=0x7f02001a;
