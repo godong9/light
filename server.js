@@ -1,6 +1,9 @@
 var mysql_conn = require('./sql/mysql_server').mysql_conn;
+var EventEmitter = require('events').EventEmitter;
 var schedule = require('node-schedule');
-
+var util = require('util');
+var fs = require('fs');
+var gcm = require('node-gcm');
 
 // Sunday Job
 var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
@@ -71,7 +74,53 @@ var h0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 });
 
 var c0 = schedule.scheduleJob({hour: 00, minute: 01, dayOfWeek: 0}, function(){
-	//기간 만료됬는지 확인하는 함수
+	//기간 만료됐는지 확인하는 함수
+});
+
+var p0 = schedule.scheduleJob({hour: 20, minute: 22, dayOfWeek: 6}, function(){
+	//푸시 관련 함수
+	
+	var message = new gcm.Message();
+	var evt = new EventEmitter();
+	var dao_r = require('./sql/rival');
+
+	var registrationIds = [];
+
+	var sender = new gcm.Sender('AIzaSyBHorBmc3UVUlEMte5icgua25nmh9671yY');
+	
+	var group_params = {
+		group_id: 1
+	};
+
+	dao_r.dao_get_group_reg(evt, mysql_conn, group_params);
+
+	evt.on('get_group_reg', function(err, rows){
+		if(err) throw err;
+		
+		for(var i=0; i<rows.length; i++) {
+			var tmp_str = rows[i].reg_id;
+			console.log(rows[i].reg_id);
+			registrationIds.push(tmp_str);		
+		}
+		
+		var today = Date.now();
+
+		message.addDataWithKeyValue('nickname', '관리자');
+		message.addDataWithKeyValue('type', '매칭');
+		message.addDataWithKeyValue('pre_content', '매칭관련');
+		message.addDataWithKeyValue('content', '라이벌 매칭이 완료되었습니다!');
+		message.addDataWithKeyValue('calorie', '0');
+		message.addDataWithKeyValue('date', today);		
+		
+		message.collapseKey = 'light';
+		message.delayWhileIdle = false;
+		message.timeToLive = 600;
+		
+		sender.send(message, registrationIds, 4, function (err, result) {
+			console.log(result);	
+			var result_val = { result:"success", msg:"메시지 전송 완료!" };
+		});
+	});
 });
 
 var m0 = schedule.scheduleJob({hour: 09, minute: 00, dayOfWeek: 0}, function(){

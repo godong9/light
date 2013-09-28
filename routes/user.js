@@ -74,6 +74,10 @@ exports.join = function(req, res){
 	evt.on('join', function(err, rows){
 		console.log("JOIN Complete!");
 		register_session(req, email, nickname);
+
+		var params = { email: email }
+		dao_u.dao_set_clothes(evt, mysql_conn, params);
+
 		result = { result:"success", msg:"회원가입이 완료되었습니다!" };
 		res.send(result);
 	});

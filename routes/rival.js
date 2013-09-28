@@ -34,14 +34,31 @@ exports.rival_page_info = function(req, res){
 	});
 };
 
+//라이벌 다이얼로그 옷장 목록 가져오는 함수
+exports.rival_closet_list = function(req, res){
+	var evt = new EventEmitter();
+	var dao_r = require('../sql/rival');
+
+	var email = req.body.email;
+
+	var params = { email: email };
+	var result = { closet_list:{} };
+
+	dao_r.dao_rival_closet_list(evt, mysql_conn, params);
+
+	evt.on('closet_list', function(err, rows){
+		if(err) throw err;
+		result.closet_list = rows;
+		res.send(result);
+	});
+};
+
 //라이벌 다이얼로그 히스토리 데이터 가져오는 함수
 exports.rival_history_data = function(req, res){
 	var evt = new EventEmitter();
 	var dao_r = require('../sql/rival');
 
 	var email = req.body.email;
-
-	console.log("email(routes) => "+email);
 
 	var params = { email: email };
 	var result = { history_data:{} };
@@ -92,6 +109,25 @@ exports.matching_status = function(req, res){
 		if(err) throw err;
 		console.log("status: "+rows[0].matching_status);
 		result = { result:"success", matching_status: rows[0].matching_status };
+		res.send(result);
+	});
+};
+
+//캐릭터 옷 교체
+exports.rival_change_clothes = function(req, res){
+	var evt = new EventEmitter();
+	var dao_r = require('../sql/rival');
+
+	var email = req.session.email;
+	var clothes = req.body.clothes;
+
+	var params = { email: email, clothes: clothes };
+
+	dao_r.dao_set_change_clothes(evt, mysql_conn, params);
+
+	evt.on('change_clothes', function(err, character){
+		if(err) throw err;
+		result = { result:"success", msg:"옷 교체 완료!", character: character };
 		res.send(result);
 	});
 };

@@ -78,6 +78,7 @@ app.post('/update_reg_id', routes.update_reg_id);
 app.post('/join', user.join);
 app.post('/login', user.login);
 app.post('/timeline', timeline.timeline_data);
+app.post('/closet_list', rival.rival_closet_list);
 app.post('/rival_history', rival.rival_history_data);
 app.post('/send_push', routes.send_push);
 app.post('/profile', user.profile);
@@ -87,6 +88,7 @@ app.post('/community_write', community.community_write);
 app.post('/community_comment', community.comment_data);
 app.post('/comment_write', community.comment_write);
 app.post('/community_hits', community.community_hits);
+app.post('/change_clothes', rival.rival_change_clothes);
 
 //파일 업로드 관련
 app.post('/upload', routes.upload);

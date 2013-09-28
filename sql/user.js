@@ -116,3 +116,26 @@ exports.dao_matching = function(evt, mysql_conn, params){
 	});
 	return sql;
 }
+
+// set_clothes
+// params['email']
+exports.dao_set_clothes = function(evt, mysql_conn, params){
+	var sql1 = "INSERT INTO `user_closet` ";
+	sql1 += "SET `email` = '"+params['email']+"', ";
+	sql1 += "`title` = '베이직룩', ";
+	sql1 += "`clothes` = '1' ";
+
+	var query1 = mysql_conn.query(sql1, function(err, rows, fields) {
+		console.log("ADD Clothes 1");
+		var sql2 = "INSERT INTO `user_closet` ";
+			sql2 += "SET `email` = '"+params['email']+"', ";
+			sql2 += "`title` = '캠퍼스룩', ";
+			sql2 += "`clothes` = '2' ";
+
+		var query2 = mysql_conn.query(sql2, function(err, rows, fields) {
+			console.log("ADD Clothes 2");
+		});
+	});
+	return sql1;
+} 
+

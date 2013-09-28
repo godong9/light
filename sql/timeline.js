@@ -121,28 +121,29 @@ exports.dao_set_timeline = function(evt, mysql_conn, params){
 			var tmp_val = 0;
 			var ch_rows = rows[0].character;
 			var ch_array = ch_rows.split('_');
-			var ch_0 = ch_array[0];
-			var ch_1 = ch_array[1];
-			var new_ch_1 = 0;
+			var ch_0 = ch_array[0];	//캐릭터
+			var ch_1 = ch_array[1];	//옷
+			var ch_2 = ch_array[2];	//상태
+			var new_ch_2 = 0;
 			var new_ch_array = 0;
 			//console.log("!!!"+ch_0+"!!!"+ch_1);
 
 			if( Number(rows[0].start_weight) >= Number(params['content']) ){
 				tmp_status = 1;
-				new_ch_1 = parseInt(Number(rows[0].start_weight) - Number(params['content']) + 1);	  
-				if(new_ch_1 < 1) {
-					new_ch_1 = 1;
+				new_ch_2 = parseInt(Number(rows[0].start_weight) - Number(params['content']) + 1);	  
+				if(new_ch_2 < 1) {
+					new_ch_2 = 1;
 				}
-				else if(new_ch_1 > 5) {
-					new_ch_1 = 5;
+				else if(new_ch_2 > 5) {
+					new_ch_2 = 5;
 				}
 			}
 			else {
 				tmp_status = 0;
-				//new_ch_1 = parseInt(Number(params['content']) - Number(rows[0].start_weight));
-				new_ch_1 = 1;
+				//new_ch_2 = parseInt(Number(params['content']) - Number(rows[0].start_weight));
+				new_ch_2 = 1;
 			}
-			new_ch_array = ch_0+'_'+new_ch_1;
+			new_ch_array = ch_0+'_'+ch_1+'_'+new_ch_2;
 			//console.log("new: "+new_ch_array);
 			
 			console.log("weight, character Update");
