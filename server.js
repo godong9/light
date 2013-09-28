@@ -1,6 +1,8 @@
 var mysql_conn = require('./sql/mysql_server').mysql_conn;
 var schedule = require('node-schedule');
 
+
+//Sunday Job
 var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 	var email = 'allightdiet@gmail.com';
 	var group_id = 0;
@@ -15,15 +17,59 @@ var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		console.log("Day 0 Insert!");
+	});
+});
+
+var h0 = schedule.scheduleJob({hour: 10, minute: 47, dayOfWeek: 6}, function(){
+	var sql = "SELECT ";
+		sql += "`email`, "; 
+		sql += "`day_calorie`, "; 
+		sql += "`food_calorie`, "; 
+		sql += "`exercise_calorie` ";
+		sql += "FROM `user` ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		// for 문 안에서 비동기 처리
+		for (var i=1; i<rows.length; i++)
+		{
+			(function (i) {
+				console.log(i);
+				var tmp_email = rows[i].email;
+				var tmp_day = rows[i].day_calorie;
+				var tmp_food = rows[i].food_calorie;
+				var tmp_exercise = rows[i].exercise_calorie;
+				var tmp_status_num = parseInt( Number(tmp_day) - (Number(tmp_food)-Number(tmp_exercise)) );
+				var tmp_status;
+				if(tmp_status_num > 0){
+					tmp_status = "good";
+				}
+				else{
+					tmp_status = "bad";
+				}
+				var i_sql = "INSERT INTO `user_history` ";
+				i_sql += "SET `email` = '"+tmp_email+"', ";
+				i_sql += "`status` = '"+tmp_status+"', ";
+				i_sql += "`food_calorie` = '"+tmp_food+"', ";
+				i_sql += "`exercise_calorie` = '"+tmp_exercise+"' ";
+
+				var i_query = mysql_conn.query(i_sql, function(err, rows, fields) {
+					console.log("tmp_email =>"+tmp_email);
+					console.log("tmp_status=>"+tmp_status);
+					console.log("tmp_food =>"+tmp_food);
+				});
+			}(i));
+		}
 
 		var u_sql = "UPDATE `user` ";
-			u_sql += "SET `food_calorie` = '0', "; 
-			u_sql += "`exercise_calorie` = '0' "; 
-
+		u_sql += "SET `food_calorie` = '0', "; 
+		u_sql += "`exercise_calorie` = '0' "; 
+		
 		var u_query = mysql_conn.query(u_sql, function(err, rows, fields) {
 			console.log("Day 0 Reset!");
 		});
+
 	});
+
 });
 
 var m0 = schedule.scheduleJob({hour: 09, minute: 00, dayOfWeek: 0}, function(){
