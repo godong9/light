@@ -70,7 +70,7 @@
 						android:layout_marginBottom="40dp"
 						android:layout_marginLeft="20dp"
 						android:layout_marginRight="20dp"
-						android:background="@drawable/character_1_1"
+						android:background="@drawable/character_1_1_1"
 						android:tag="1_1"/> 	
 		        
 		    		

@@ -25,7 +25,7 @@ public class RivalFrag extends CommonFragment {
 	private RivalDialogWindow popup_dialog;
 	private String packName = "app.light";
 	private Resources res;
-	private static int matching_status = 0;
+	private int matching_status = 0;
 	
 	public static JSONObject group_info = null;
 	public static JSONObject my_info = null;	//내 정보
@@ -108,8 +108,6 @@ public class RivalFrag extends CommonFragment {
 		}
 		context = getActivity();
 		
-			
-	
 		return view;
 	}
 		
