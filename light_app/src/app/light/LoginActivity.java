@@ -140,12 +140,12 @@ public class LoginActivity extends CommonActivity {
 	    password_edit.setText(password_text);
 	    keep_login_check.setChecked(keep_login_boolean);
 		
-	    System.out.println("intent_str=>"+intent_str);
+	    //System.out.println("intent_str=>"+intent_str);
 	    
 		if(intent_str == null){	//처음 앱 접속시
 			if(!checkDB(this)){
 				dumpDB(this);
-				System.out.println("DUMP DB");
+				//System.out.println("DUMP DB");
 			}
 			
 			startActivity(new Intent(this, SplashActivity.class));
