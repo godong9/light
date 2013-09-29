@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+// 필요한 모듈들 추가
 var express = require('express')
 	, routes = require('./routes')
     , user = require('./routes/user')
@@ -60,7 +61,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// GET 방식
+// GET 방식으로 데이터 받을 때 처리해주는 함수 설정
 app.get('/rival', rival.rival_page_info);
 app.get('/community', community.community_data);
 app.get('/img', function(req, res){	//이미지 파일 다운로드
@@ -72,7 +73,7 @@ app.get('/img', function(req, res){	//이미지 파일 다운로드
 });
 app.get('/matching_status', rival.matching_status);
 
-// POST 방식
+// POST 방식으로 데이터 받을 때 처리해주는 함수 설정
 app.post('/register', routes.regist);
 app.post('/update_reg_id', routes.update_reg_id);
 app.post('/join', user.join);

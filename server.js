@@ -5,7 +5,7 @@ var util = require('util');
 var fs = require('fs');
 var gcm = require('node-gcm');
 
-// Sunday Job
+// 요일별로 특정 시간에 수행되는 작업들
 var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 	var email = 'allightdiet@gmail.com';
 	var group_id = 0;
@@ -23,6 +23,7 @@ var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 	});
 });
 
+// 매일 24시 00분에 기록한 음식, 운동 내용 히스토리로 저장하고 초기화 
 var h0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
@@ -125,6 +126,7 @@ var p0 = schedule.scheduleJob({hour: 12, minute: 00, dayOfWeek: 0}, function(){
 });
 */
 
+//일요일 미션 DB에 추가
 var m0 = schedule.scheduleJob({hour: 09, minute: 00, dayOfWeek: 0}, function(){
 	var email = 'allightdiet@gmail.com';
 	var group_id = 0;
