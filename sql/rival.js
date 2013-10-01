@@ -76,7 +76,7 @@ exports.dao_rival_history_data = function(evt, mysql_conn, params){
 	sql += "`A`.`reg_date` ";
 	sql += "FROM `user_history` AS `A` ";
 	sql += "WHERE `A`.`email` = '"+params['email']+"' ";
-	sql += "ORDER BY `A`.`reg_date` ";
+	sql += "ORDER BY `A`.`reg_date` DESC";
 
 	var query = mysql_conn.query(sql, function(err, rows, fields) {
 		evt.emit('history_data', err, rows);

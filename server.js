@@ -23,8 +23,8 @@ var d0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 	});
 });
 
-// 매일 24시 00분에 기록한 음식, 운동 내용 히스토리로 저장하고 초기화 
-var h0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
+// 매일 23시 59분에 기록한 음식, 운동 내용 히스토리로 저장하고 초기화 
+var h0 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 0}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
@@ -76,6 +76,10 @@ var h0 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 0}, function(){
 
 var c0 = schedule.scheduleJob({hour: 00, minute: 01, dayOfWeek: 0}, function(){
 	//기간 만료됐는지 확인하는 함수
+});
+
+var matching0 = schedule.scheduleJob({hour: 12, minute: 00, dayOfWeek: 0}, function(){
+	
 });
 
 /*
@@ -164,7 +168,7 @@ var d1 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 1}, function(){
 	});
 });
 
-var h1 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 1}, function(){
+var h1 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 1}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
@@ -250,7 +254,7 @@ var d2 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 2}, function(){
 	});
 });
 
-var h2 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 2}, function(){
+var h2 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 2}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
@@ -336,7 +340,7 @@ var d3 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 3}, function(){
 	});
 });
 
-var h3 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 3}, function(){
+var h3 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 3}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
@@ -422,7 +426,7 @@ var d4 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 4}, function(){
 	});
 });
 
-var h4 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 4}, function(){
+var h4 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 4}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
@@ -508,7 +512,7 @@ var d5 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 5}, function(){
 	});
 });
 
-var h5 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 5}, function(){
+var h5 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 5}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
@@ -594,7 +598,7 @@ var d6 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 6}, function(){
 	});
 });
 
-var h6 = schedule.scheduleJob({hour: 00, minute: 00, dayOfWeek: 6}, function(){
+var h6 = schedule.scheduleJob({hour: 23, minute: 59, dayOfWeek: 6}, function(){
 	var sql = "SELECT ";
 		sql += "`email`, "; 
 		sql += "`day_calorie`, "; 
