@@ -442,7 +442,7 @@ import android.widget.Toast;
 						tmp_date_cal.setTime(sdf.parse(tmp_date));
 						tmp_date_cal.add(tmp_date_cal.HOUR, 9);
 						
-						String tmp_date_str = String.format(" %04d %02d/%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH), tmp_date_cal.get(Calendar.DAY_OF_MONTH));
+						String tmp_date_str = String.format(" %04d %02d/%02d", tmp_date_cal.get(Calendar.YEAR), tmp_date_cal.get(Calendar.MONTH)+1, tmp_date_cal.get(Calendar.DAY_OF_MONTH));
 										
 						history_list.add(new HistoryObj(tmp_date_str, status, food_calorie, exercise_calorie));
 					}
