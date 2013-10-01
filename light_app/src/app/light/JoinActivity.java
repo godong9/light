@@ -69,7 +69,7 @@ public class JoinActivity extends CommonActivity {
 				JSONObject json_data = new JSONObject(result_json);
 				String result_flag = json_data.getString("result");			
 				// 회원가입 성공시
-				if(result_flag.equals("success")){
+			//	if(result_flag.equals("success")){
 			
 					//푸시서버 GCM 관련 설정
 					checkNotNull(SERVER_URL, "SERVER_URL");
@@ -130,11 +130,11 @@ public class JoinActivity extends CommonActivity {
 			        }
 					
 					
-				}
-				else{
-					Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
-					toast.show(); 
-				}
+			//	}
+			//	else{
+			//		Toast toast = Toast.makeText(this, json_data.getString("msg"), Toast.LENGTH_SHORT); 
+			//		toast.show(); 
+			//	}
 			}
 				
 		}
