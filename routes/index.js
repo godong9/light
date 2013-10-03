@@ -149,7 +149,7 @@ function renameImg(image){
     var tmp_path = image.path;
 
 	var file_name_array = image.name.split('/');
-    var target_path = './public/upload/' + file_name_array[6];
+    var target_path = '/home/godong/light/public/upload/' + file_name_array[6];
 //  console.log('->> tmp_path: ' + tmp_path );
     console.log('->> target_path: ' + target_path );
             
