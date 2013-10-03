@@ -90,6 +90,7 @@ exports.dao_profile = function(evt, mysql_conn, params){
 	var sql = "UPDATE `user` ";
 	sql += "SET `gender` = '"+params['gender']+"', "; 
 	sql += "`height` = '"+params['height']+"', "; 
+	sql += "`weight` = '"+params['weight']+"', "; 
 	sql += "`start_weight` = '"+params['weight']+"', "; 
 	sql += "`pre_weight` = '"+params['weight']+"', "; 
 	sql += "`goal_weight` = '"+params['goal']+"' ";
