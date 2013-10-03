@@ -68,6 +68,7 @@ public class LoginActivity extends CommonActivity {
             GCMRegistrar.register(this, SENDER_ID);
             System.out.println("GCM Register");
         } else {
+        	/*
             // Device is already registered on GCM, check server.
             if (GCMRegistrar.isRegisteredOnServer(this)) {
                 // Skips registration.         	
@@ -75,6 +76,7 @@ public class LoginActivity extends CommonActivity {
                 is_registered = true;
                 reg_id = regId;
             } else {
+            */
                 // Try to register again, but not in the UI thread.
                 // It's also necessary to cancel the thread onDestroy(),
                 // hence the use of AsyncTask instead of a raw thread.
@@ -105,7 +107,7 @@ public class LoginActivity extends CommonActivity {
 
                 };
                 mRegisterTask.execute(null, null, null);
-            }
+          //  }
         }
         
 		Intent intent = getIntent();   // 값을 받기 위한 Intent 생성
