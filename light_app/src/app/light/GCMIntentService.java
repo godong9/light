@@ -102,7 +102,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         	System.out.println("RUNNING => "+running_activity);  
         	TimelineFrag tmp_tf = new TimelineFrag(1);
         	tmp_tf.addTimelineData(json_obj);
-        	generateNotification(context, json_obj);
+        	//generateNotification(context, json_obj);
         }
         else {	//앱이 동작중이지 않을 때
         	System.out.println("NOT RUNNING");
