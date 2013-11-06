@@ -102,7 +102,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         	System.out.println("RUNNING => "+running_activity);  
         	TimelineFrag tmp_tf = new TimelineFrag(1);
         	tmp_tf.addTimelineData(json_obj);
-        	//generateNotification(context, json_obj);
+        	generateNotification(context, json_obj);
         }
         else {	//앱이 동작중이지 않을 때
         	System.out.println("NOT RUNNING");
@@ -140,11 +140,16 @@ public class GCMIntentService extends GCMBaseIntentService {
 	    	String tmp_nickname = json_param.getString("nickname");
 	    	String tmp_content = json_param.getString("content");
 	    	
+	    	if (tmp_nickname.equals("동순")){
+	        	return;
+	        }
+	    	
 	    	int icon = R.drawable.light_icon;
 	        long when = System.currentTimeMillis();
 	        NotificationManager notificationManager = (NotificationManager)
 	                context.getSystemService(Context.NOTIFICATION_SERVICE);
 	        String message = "";
+	             
 	        if (tmp_type.equals("6")){
 	        	message = tmp_nickname + " : " + "사진";
 	        }
