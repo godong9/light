@@ -33,6 +33,10 @@ import android.net.Uri;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -53,6 +57,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private static final int PICK_FROM_CAMERA = 0;
 	private static final int PICK_FROM_ALBUM = 1;
 	private static final int CROP_FROM_CAMERA = 2;
+	private static final int DO_EXERCISE = 3;
 	
 	private static final int INSERT_COUNT = 5;
 	
@@ -60,6 +65,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private static final int ID_FOOD     = 11;
 	private static final int ID_EXERCISE     = 12;
 	private static final int ID_WEIGHT     = 13;
+	private static final int ID_DO     = 91;
 	private static final int ID_CAMERA     = 14;
 	private static final int ID_ALBUM     = 15;	
 	
@@ -90,7 +96,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	private String tmp_file_name = null;
 	
 	private static Calendar last_get_date = Calendar.getInstance();
-	
+		
 	
 	final Handler handler = new Handler()  {
 
@@ -119,7 +125,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 	@Override
 	public View onCreateView(LayoutInflater inflater, 
 		ViewGroup container, Bundle savedInstanceState) {	
-
+		
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 		.permitDiskReads() 
 		.permitDiskWrites()
@@ -127,12 +133,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		
 		View view = inflater.inflate(R.layout.frag_timeline, container, false);
 		context = getActivity();
-			
+		
 		//기록 버튼 팝업 관련 코드    
 	    ActionItem write_food 	= new ActionItem(ID_FOOD, "음식 기록");
 		ActionItem write_exercise 	= new ActionItem(ID_EXERCISE, "운동 기록");
 		ActionItem write_weight 	= new ActionItem(ID_WEIGHT, "체중 기록");
-      
+		ActionItem write_do	= new ActionItem(ID_DO, "운동 하기");
 		//버튼 눌러도 안사라지게 고정
         //write_food.setSticky(true);
         //write_exercise.setSticky(true);
@@ -143,7 +149,8 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
         writePopup.addActionItem(write_food);
         writePopup.addActionItem(write_exercise);
         writePopup.addActionItem(write_weight);
-
+        writePopup.addActionItem(write_do);
+        
         //Set listener for action item clicked
         writePopup.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {			
   			@Override
@@ -164,6 +171,30 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
   					//Toast.makeText(context, "운동 기록", Toast.LENGTH_SHORT).show();
   					popup_dialog = new TimelineDialogWindow(2, my_email, my_weight);
   					popup_dialog.show(getFragmentManager(), "Weight Popup");	
+  				}
+  				/*
+  				else if (actionId == ID_FITBIT) {
+  					try {
+  						CommonHttp ch = new CommonHttp();	
+  						String result_url = ch.getData("http://211.110.61.51:3000/fitbit");		
+  						if(result_url.equals("error")) {
+  							System.out.println("데이터 수신 실패!");
+  						}	
+  						else{
+  							//Toast.makeText(context, result_url, Toast.LENGTH_SHORT).show();
+  							String result_json = ch.getData(result_url);	
+  							Toast.makeText(context, result_json, Toast.LENGTH_SHORT).show();
+  						}
+  					}
+  					catch(Exception e){
+  						System.out.println("데이터 수신 실패!");
+  					}	
+  				}
+  				*/
+  				else if (actionId == ID_DO) {
+  					//Toast.makeText(context, "운동하기", Toast.LENGTH_SHORT).show();
+  					popup_dialog = new TimelineDialogWindow(3, my_email, my_weight);
+  					popup_dialog.show(getFragmentManager(), "Do Popup");	
   				}
   			}
   		});		
@@ -310,8 +341,6 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 		{
 				return;
 		}
-	
-		//System.out.println("result:"+resultCode);
 
 		switch(requestCode)
 		{
@@ -546,7 +575,12 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			System.out.println("에러 발생");
 		}	
 	}
+	
+	private void doExercise()
+	{
 		
+	}
+	
 	// 카메라 촬영시
 	private void doTakePhotoAction()
 	{
@@ -1019,6 +1053,7 @@ public class TimelineFrag extends CommonFragment implements OnScrollListener, On
 			System.out.println("add 에러");
 		}
 	}
+	
 
 }
 

@@ -10,8 +10,13 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,8 +34,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 	//커스텀 AlertDialog 구현
-	public class TimelineDialogWindow extends DialogFragment {
+	public class TimelineDialogWindow extends DialogFragment implements SensorEventListener{
 		
 		private static final String PACKAGE_NAME="app.light";
 		private static String[] food_list;
@@ -56,6 +62,18 @@ import android.widget.Toast;
 		
 		private String tmp_weight_content_val = "";
 		
+		SensorManager sm;
+		SensorEventListener oriL;
+		Sensor oriSensor;
+		private long lastTime;
+		int count = 0;
+		private float num;
+		private float lastX;
+		private static final int DATA_X = SensorManager.DATA_X;
+		private float x;
+		
+		TextView count_num;
+			
 		public TimelineDialogWindow(int type, String my_email, String my_weight) {
 			this.type=type;
 			this.my_email=my_email;
@@ -67,9 +85,12 @@ import android.widget.Toast;
 			//Theme_Holo_Light_Panel 이용해서 테두리 없게 만들어줌
 			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Panel);
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
-			
+
 			View view; 
-			
+			context = getActivity();
+			sm =  (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+			oriSensor = sm.getDefaultSensor(Sensor.TYPE_ORIENTATION); // ����
+		
 			// 음식 기록 페이지
 			if(type==0){
 				view = mLayoutInflater.inflate(R.layout.popup_food_dialog, null);
@@ -85,11 +106,34 @@ import android.widget.Toast;
 				view = mLayoutInflater.inflate(R.layout.popup_weight_dialog, null);
 				mBuilder.setView(view);
 			}
+			// 운동하기 페이지
+			else if(type==3){
+				view = mLayoutInflater.inflate(R.layout.popup_do_exercise_dialog, null);
+				mBuilder.setView(view);
+			}
 
 			context = getActivity();	
 		
 			return mBuilder.create();
 		}
+		
+		 
+		@Override
+		public void onResume() {
+			// TODO Auto-generated method stub
+			super.onResume();
+			sm.registerListener(this, oriSensor, SensorManager.SENSOR_DELAY_NORMAL); // ����
+		
+		}
+			
+
+		@Override
+		public void onPause() {
+			// TODO Auto-generated method stub
+			super.onPause();
+			sm.unregisterListener(this);
+		}
+
 		
 		@Override 
 		public void onStart() {
@@ -109,7 +153,7 @@ import android.widget.Toast;
 			/*
 			 * 버튼 이벤트 처리해주는 부분
 			 */
-				
+			count_num = (TextView)getDialog().findViewById(R.id.write_count_num);	
 			final ImageButton exit_btn = (ImageButton)getDialog().findViewById(R.id.write_exit_btn);
 			exit_btn.setOnClickListener(new View.OnClickListener()
 			{
@@ -524,6 +568,9 @@ import android.widget.Toast;
 					}	
 				});	
 			}
+			else if(type==3){	//운동하기 페이지
+				System.out.println("33333");
+			}
 								
 		}
 		
@@ -533,5 +580,60 @@ import android.widget.Toast;
 			
 			ImageButton wb = (ImageButton)getActivity().findViewById(R.id.write_btn);
 			wb.setSelected(false);	
+		}
+		
+		
+		
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			// TODO Auto-generated method stub	
+			synchronized (this) {
+				if(type==3){
+					float var0 = event.values[0];
+					float var1 = event.values[1];
+					float var2 = event.values[2];
+					
+					switch (event.sensor.getType()) {
+	
+					case Sensor.TYPE_ORIENTATION:
+						
+						long currentTime = System.currentTimeMillis();
+						long gabOfTime = (currentTime - lastTime);
+						
+						if (gabOfTime > 1000) {
+							lastTime = currentTime;
+							
+							x = event.values[SensorManager.DATA_X];
+							
+							num = lastX - x;
+							String tmpNum = String.valueOf(num);
+							Log.e("Num", tmpNum);
+							if (num > 60){
+								String tmpX = String.valueOf(x);
+								Log.e("X: ", tmpX);
+								String lX = String.valueOf(lastX);
+								Log.e("lX: ", lX);
+								count++;	
+								String tmpCount = String.valueOf(count);
+								Log.e("Count: ", tmpCount);
+									
+								count_num.setText(tmpCount);
+							}
+				
+							lastX = event.values[DATA_X];
+	
+						}
+						
+						break;
+					}
+				}                        
+				                          
+			}
 		}
 	}

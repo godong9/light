@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<string-array name="exercise"> 
+	    <item>Fitbit 기록</item>
         <item>걷기</item> 
         <item>달리기</item> 
         <item>줄넘기</item>  
@@ -23,6 +24,7 @@
         <item>기타 운동(10분에 50kcal)</item> 
     </string-array>
     <string-array name="exercise_calorie"> 
+        <item>1</item> 
         <item>3.1</item> 
         <item>9.0</item> 
         <item>9.6</item>  
