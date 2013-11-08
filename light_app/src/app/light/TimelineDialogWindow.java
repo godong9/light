@@ -67,10 +67,12 @@ import android.widget.Toast;
 		Sensor oriSensor;
 		private long lastTime;
 		int count = 0;
-		private float num;
-		private float lastX;
+		private float numX, numY, numZ;
+		private float lastX, lastY, lastZ;
 		private static final int DATA_X = SensorManager.DATA_X;
-		private float x;
+		private static final int DATA_Y = SensorManager.DATA_Y;
+		private static final int DATA_Z = SensorManager.DATA_Z;
+		private float x, y, z;
 		
 		TextView count_num;
 			
@@ -595,30 +597,35 @@ import android.widget.Toast;
 			// TODO Auto-generated method stub	
 			synchronized (this) {
 				if(type==3){
-					float var0 = event.values[0];
-					float var1 = event.values[1];
-					float var2 = event.values[2];
+					
 					
 					switch (event.sensor.getType()) {
 	
 					case Sensor.TYPE_ORIENTATION:
-						
+						x = event.values[DATA_X];
+						y = event.values[DATA_Y];
+						z = event.values[DATA_Z];
 						long currentTime = System.currentTimeMillis();
 						long gabOfTime = (currentTime - lastTime);
 						
-						if (gabOfTime > 1000) {
+						if (gabOfTime > 800) {
 							lastTime = currentTime;
 							
 							x = event.values[SensorManager.DATA_X];
+							y = event.values[SensorManager.DATA_Y];
+							z = event.values[SensorManager.DATA_Z];
 							
-							num = lastX - x;
-							String tmpNum = String.valueOf(num);
-							Log.e("Num", tmpNum);
-							if (num > 60){
-								String tmpX = String.valueOf(x);
-								Log.e("X: ", tmpX);
-								String lX = String.valueOf(lastX);
-								Log.e("lX: ", lX);
+							numX = Math.abs(x) - Math.abs(lastX);
+							numY = Math.abs(y) - Math.abs(lastY);
+							numZ = Math.abs(z) - Math.abs(lastZ);
+							String tmpX = String.valueOf(numX);
+							String tmpY = String.valueOf(numY);
+							String tmpZ = String.valueOf(numZ);
+							Log.e("NumX", tmpX);
+							Log.e("NumY", tmpY);
+							Log.e("NumZ", tmpZ);
+							if ( numY > 60 ){
+								// numX > 60 || || numY > 60 || numZ > 60
 								count++;	
 								String tmpCount = String.valueOf(count);
 								Log.e("Count: ", tmpCount);
@@ -627,6 +634,8 @@ import android.widget.Toast;
 							}
 				
 							lastX = event.values[DATA_X];
+							lastY = event.values[DATA_Y];
+							lastZ = event.values[DATA_Z];
 	
 						}
 						
