@@ -10,8 +10,13 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,8 +34,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 	//커스텀 AlertDialog 구현
-	public class TimelineDialogWindow extends DialogFragment {
+	public class TimelineDialogWindow extends DialogFragment implements SensorEventListener{
 		
 		private static final String PACKAGE_NAME="app.light";
 		private static String[] food_list;
@@ -56,6 +62,20 @@ import android.widget.Toast;
 		
 		private String tmp_weight_content_val = "";
 		
+		SensorManager sm;
+		SensorEventListener oriL;
+		Sensor oriSensor;
+		private long lastTime;
+		int count = 0;
+		private float numX, numY, numZ;
+		private float lastX, lastY, lastZ;
+		private static final int DATA_X = SensorManager.DATA_X;
+		private static final int DATA_Y = SensorManager.DATA_Y;
+		private static final int DATA_Z = SensorManager.DATA_Z;
+		private float x, y, z;
+		
+		TextView count_num;
+			
 		public TimelineDialogWindow(int type, String my_email, String my_weight) {
 			this.type=type;
 			this.my_email=my_email;
@@ -67,9 +87,12 @@ import android.widget.Toast;
 			//Theme_Holo_Light_Panel 이용해서 테두리 없게 만들어줌
 			AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Panel);
 			LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
-			
+
 			View view; 
-			
+			context = getActivity();
+			sm =  (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+			oriSensor = sm.getDefaultSensor(Sensor.TYPE_ORIENTATION); // ����
+		
 			// 음식 기록 페이지
 			if(type==0){
 				view = mLayoutInflater.inflate(R.layout.popup_food_dialog, null);
@@ -85,11 +108,34 @@ import android.widget.Toast;
 				view = mLayoutInflater.inflate(R.layout.popup_weight_dialog, null);
 				mBuilder.setView(view);
 			}
+			// 운동하기 페이지
+			else if(type==3){
+				view = mLayoutInflater.inflate(R.layout.popup_do_exercise_dialog, null);
+				mBuilder.setView(view);
+			}
 
 			context = getActivity();	
 		
 			return mBuilder.create();
 		}
+		
+		 
+		@Override
+		public void onResume() {
+			// TODO Auto-generated method stub
+			super.onResume();
+			sm.registerListener(this, oriSensor, SensorManager.SENSOR_DELAY_NORMAL); // ����
+		
+		}
+			
+
+		@Override
+		public void onPause() {
+			// TODO Auto-generated method stub
+			super.onPause();
+			sm.unregisterListener(this);
+		}
+
 		
 		@Override 
 		public void onStart() {
@@ -109,7 +155,7 @@ import android.widget.Toast;
 			/*
 			 * 버튼 이벤트 처리해주는 부분
 			 */
-				
+			count_num = (TextView)getDialog().findViewById(R.id.write_count_num);	
 			final ImageButton exit_btn = (ImageButton)getDialog().findViewById(R.id.write_exit_btn);
 			exit_btn.setOnClickListener(new View.OnClickListener()
 			{
@@ -353,7 +399,27 @@ import android.widget.Toast;
 						
 						tmp_exercise_content_val = tmp_exercise_name;
 						tmp_exercise_calorie_val = calorie_str;	
-						tv_calorie.setText("-"+calorie_str+"Kcal");	
+						tv_calorie.setText("-"+calorie_str+"Kcal");
+								
+						if(tmp_exercise_content_val.equals("Fitbit")){
+							try {				
+								CommonHttp ch = new CommonHttp();	
+								String result_json = ch.getData("http://211.110.61.51:3000/get_fitbit");		
+								if(result_json.equals("error")) {
+									System.out.println("데이터 전송 실패!");	
+								}	
+								else {
+									JSONObject json_result = new JSONObject(result_json);
+									tmp_exercise_calorie_val = json_result.getString("activity_cal");
+									//System.out.println("result: "+tmp_exercise_calorie_val);
+									tv_calorie.setText("-"+tmp_exercise_calorie_val+"Kcal");
+								}
+							}
+							catch(Exception e){
+								System.out.println("데이터 전송 실패!");
+							}					
+						}
+						
 					}
 		
 					public void onNothingSelected(AdapterView<?> parent) {
@@ -375,7 +441,7 @@ import android.widget.Toast;
 						
 						tmp_exercise_pre_content_val = String.format("%d", progress);
 						tmp_exercise_calorie_val = calorie_str;	
-						tv_calorie.setText("-"+calorie_str+"Kcal");			
+						tv_calorie.setText("-"+calorie_str+"Kcal");					
 					}
 	
 					public void onStartTrackingTouch(SeekBar seekBar) {
@@ -443,11 +509,19 @@ import android.widget.Toast;
 					{	
 						if(!tmp_exercise_content_val.equals("")){	//기록 내용이 있을 때
 							JSONObject json_my_param = new JSONObject();
-							try{
-								json_my_param.put("type", "5");
-								json_my_param.put("pre_content", tmp_exercise_pre_content_val+"분");
-								json_my_param.put("content", tmp_exercise_content_val);
-								json_my_param.put("calorie", tmp_exercise_calorie_val);
+							try{	
+								if(tmp_exercise_content_val.equals("Fitbit")){
+									json_my_param.put("type", "5");
+									json_my_param.put("pre_content", "Cal");
+									json_my_param.put("content", "칼로리");
+									json_my_param.put("calorie", tmp_exercise_calorie_val);
+								}
+								else{
+									json_my_param.put("type", "5");
+									json_my_param.put("pre_content", tmp_exercise_pre_content_val+"분");
+									json_my_param.put("content", tmp_exercise_content_val);
+									json_my_param.put("calorie", tmp_exercise_calorie_val);
+								}
 							}
 							catch(Exception e){
 								System.out.println("JSON put 에러");
@@ -524,6 +598,46 @@ import android.widget.Toast;
 					}	
 				});	
 			}
+			else if(type==3){	//운동하기 페이지
+				final ImageButton ok_btn = (ImageButton)getDialog().findViewById(R.id.write_do_ok_btn);
+				final LinearLayout do_layout = (LinearLayout)getDialog().findViewById(R.id.do_layout);
+				
+				do_layout.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{			
+						count++;	
+						String tmpCount = String.valueOf(count);
+						Log.e("Count: ", tmpCount);
+							
+						count_num.setText(tmpCount);
+					}	
+				});	
+				
+				ok_btn.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{	
+						
+						JSONObject json_my_param = new JSONObject();
+						try{			
+							json_my_param.put("type", "5");
+							json_my_param.put("pre_content", count+"개");
+							json_my_param.put("content", "운동");
+							json_my_param.put("calorie", count*5);
+						}
+						catch(Exception e){
+							System.out.println("JSON put 에러");
+						}
+						TimelineFrag.addMyData(json_my_param);
+						onStop();
+		
+				
+					}	
+				});	
+			}
 								
 		}
 		
@@ -533,5 +647,67 @@ import android.widget.Toast;
 			
 			ImageButton wb = (ImageButton)getActivity().findViewById(R.id.write_btn);
 			wb.setSelected(false);	
+		}
+		
+		
+		
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			// TODO Auto-generated method stub	
+			synchronized (this) {
+				if(type==3){
+					
+					
+					switch (event.sensor.getType()) {
+	
+					case Sensor.TYPE_ORIENTATION:
+						x = event.values[DATA_X];
+						y = event.values[DATA_Y];
+						z = event.values[DATA_Z];
+						long currentTime = System.currentTimeMillis();
+						long gabOfTime = (currentTime - lastTime);
+						
+						if (gabOfTime > 800) {
+							lastTime = currentTime;
+							
+							x = event.values[SensorManager.DATA_X];
+							y = event.values[SensorManager.DATA_Y];
+							z = event.values[SensorManager.DATA_Z];
+							
+							numX = lastX - x;
+							numY = lastY - y;
+							numZ = z - lastZ;
+							String tmpX = String.valueOf(numX);
+							String tmpY = String.valueOf(numY);
+							String tmpZ = String.valueOf(numZ);
+							Log.e("NumX", tmpX);
+							Log.e("NumY", tmpY);
+							Log.e("NumZ", tmpZ);
+							if ( numY > 80 || numY > 80 ){
+								// numX > 60 || || numY > 60 || numZ > 60
+								count++;	
+								String tmpCount = String.valueOf(count);
+								Log.e("Count: ", tmpCount);
+									
+								count_num.setText(tmpCount);
+							}
+				
+							lastX = event.values[DATA_X];
+							lastY = event.values[DATA_Y];
+							lastZ = event.values[DATA_Z];
+	
+						}
+						
+						break;
+					}
+				}                        
+				                          
+			}
 		}
 	}
