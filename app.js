@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -14,6 +13,12 @@ var express = require('express')
     , path = require('path')
 	, url = require('url')
     , expressValidator = require('express-validator');
+
+var config = require('./config.json');
+var Fitbit = require('fitbit');
+
+var EventEmitter = require('events').EventEmitter;
+var mysql_conn = require('./sql/mysql_server').mysql_conn;
 
 var app = express();
 
@@ -72,6 +77,89 @@ app.get('/img', function(req, res){	//이미지 파일 다운로드
 	res.download(file); // Set disposition and send it.
 });
 app.get('/matching_status', rival.matching_status);
+app.get('/get_fitbit', timeline.get_fitbit);
+app.get('/fitbit', function (req, res) {
+	// Create an API client and start authentication via OAuth
+	var client = new Fitbit(config.fitbit.CONSUMER_KEY, config.fitbit.CONSUMER_SECRET);
+	client.getRequestToken(function (err, token, tokenSecret) {
+		if (err) {
+		  console.log(err);
+		  return;
+		}
+		req.session.oauth = {
+			requestToken: token
+		  , requestTokenSecret: tokenSecret
+		};
+		res.redirect(client.authorizeUrl(token));
+	});
+
+});
+// On return from the authorization
+app.get('/oauth_callback', function (req, res) {
+  var verifier = req.query.oauth_verifier
+    , oauthSettings = req.session.oauth
+    , client = new Fitbit(config.fitbit.CONSUMER_KEY, config.fitbit.CONSUMER_SECRET);
+  // Request an access token
+  client.getAccessToken(
+      oauthSettings.requestToken
+    , oauthSettings.requestTokenSecret
+    , verifier
+    , function (err, token, secret) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        oauthSettings.accessToken = token;
+        oauthSettings.accessTokenSecret = secret;
+
+        res.redirect('/stats');
+      }
+  );
+});
+// Display some stats
+app.get('/stats', function (req, res) {
+  client = new Fitbit(
+      config.fitbit.CONSUMER_KEY
+    , config.fitbit.CONSUMER_SECRET
+    , { // Now set with access tokens
+          accessToken: req.session.oauth.accessToken
+        , accessTokenSecret: req.session.oauth.accessTokenSecret
+        , unitMeasure: 'en_GB'
+      }
+  );
+
+  // Fetch todays activities
+  client.getActivities(function (err, activities) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+	console.log("Activity");
+    // `activities` is a Resource model
+	
+	var evt = new EventEmitter();
+	var dao_f = require('./sql/fitbit');
+
+
+	var params = { "activity_cal": activities.activityCalories(),
+						"out_cal": activities.caloriesOut()
+					}
+
+	dao_f.dao_set_fitbit(evt, mysql_conn, params);
+
+	evt.on('set_fitbit', function(err, rows){
+		if(err) throw err;
+		var result = { "activityCalories": activities.activityCalories(),
+							"caloriesOut": activities.caloriesOut(),
+							"caloriesBMR": activities.caloriesBMR(),
+							"marginalCalories": activities.marginalCalories()
+						}
+		res.send(result);
+	});
+
+  });
+});
+
 
 // POST 방식으로 데이터 받을 때 처리해주는 함수 설정
 app.post('/register', routes.regist);

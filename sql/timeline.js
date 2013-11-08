@@ -170,3 +170,24 @@ exports.dao_set_timeline = function(evt, mysql_conn, params){
 	});
 	return sql;
 }
+
+
+// dao_get_fitbit
+// params['group_id']
+exports.dao_get_fitbit = function(evt, mysql_conn, params){
+	var tmp_time = params['tmp_date']+' 00:00:00';
+
+	var sql = "SELECT ";
+	sql +="`A`.`activity_cal` ";
+	sql += "FROM `fitbit` AS `A` ";
+	sql += "ORDER BY `A`.`reg_date` DESC ";
+	sql += "LIMIT 1 ";
+
+	var query = mysql_conn.query(sql, function(err, rows, fields) {
+		console.log(rows);
+		var activity_cal = rows[0].activity_cal;
+		console.log(activity_cal);
+		evt.emit('get_fitbit', err, rows, activity_cal);
+	});
+	return sql;
+}

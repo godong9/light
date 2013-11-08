@@ -49,3 +49,26 @@ exports.timeline_data = function(req, res){
 		}
 	});
 };
+
+
+exports.get_fitbit  = function(req, res){
+	var evt = new EventEmitter();
+	var dao_t = require('../sql/timeline');
+	var result = {};
+	
+	var email = req.session.email;
+	var group_id = req.session.group_id;
+	var tmp_date = req.body.tmp_date;
+
+	var params = { 
+		email: email,
+		group_id: group_id,
+		tmp_date: tmp_date
+	}
+
+	dao_t.dao_get_fitbit(evt, mysql_conn, params);
+	evt.on('get_fitbit', function(err, rows, activity_cal){
+		result = { result:"success", activity_cal: activity_cal };
+		res.send(result);
+	});
+};
