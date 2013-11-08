@@ -39,6 +39,7 @@
         </LinearLayout>
 	    
 	    <LinearLayout
+	        android:id="@+id/do_layout" 
 	        android:layout_width="fill_parent"
 	        android:layout_height="0dp"
 			android:layout_weight="74"
@@ -88,7 +89,7 @@
         </LinearLayout>
 	           	          
      	<ImageButton
-	        android:id="@+id/write_weight_ok_btn"
+	        android:id="@+id/write_do_ok_btn"
 	        android:layout_weight="14"
 	        android:layout_width="fill_parent"
 			android:layout_height="0dp"

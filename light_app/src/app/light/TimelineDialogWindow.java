@@ -399,7 +399,27 @@ import android.widget.Toast;
 						
 						tmp_exercise_content_val = tmp_exercise_name;
 						tmp_exercise_calorie_val = calorie_str;	
-						tv_calorie.setText("-"+calorie_str+"Kcal");	
+						tv_calorie.setText("-"+calorie_str+"Kcal");
+								
+						if(tmp_exercise_content_val.equals("Fitbit")){
+							try {				
+								CommonHttp ch = new CommonHttp();	
+								String result_json = ch.getData("http://211.110.61.51:3000/get_fitbit");		
+								if(result_json.equals("error")) {
+									System.out.println("데이터 전송 실패!");	
+								}	
+								else {
+									JSONObject json_result = new JSONObject(result_json);
+									tmp_exercise_calorie_val = json_result.getString("activity_cal");
+									//System.out.println("result: "+tmp_exercise_calorie_val);
+									tv_calorie.setText("-"+tmp_exercise_calorie_val+"Kcal");
+								}
+							}
+							catch(Exception e){
+								System.out.println("데이터 전송 실패!");
+							}					
+						}
+						
 					}
 		
 					public void onNothingSelected(AdapterView<?> parent) {
@@ -421,7 +441,7 @@ import android.widget.Toast;
 						
 						tmp_exercise_pre_content_val = String.format("%d", progress);
 						tmp_exercise_calorie_val = calorie_str;	
-						tv_calorie.setText("-"+calorie_str+"Kcal");			
+						tv_calorie.setText("-"+calorie_str+"Kcal");					
 					}
 	
 					public void onStartTrackingTouch(SeekBar seekBar) {
@@ -489,11 +509,19 @@ import android.widget.Toast;
 					{	
 						if(!tmp_exercise_content_val.equals("")){	//기록 내용이 있을 때
 							JSONObject json_my_param = new JSONObject();
-							try{
-								json_my_param.put("type", "5");
-								json_my_param.put("pre_content", tmp_exercise_pre_content_val+"분");
-								json_my_param.put("content", tmp_exercise_content_val);
-								json_my_param.put("calorie", tmp_exercise_calorie_val);
+							try{	
+								if(tmp_exercise_content_val.equals("Fitbit")){
+									json_my_param.put("type", "5");
+									json_my_param.put("pre_content", "Cal");
+									json_my_param.put("content", "칼로리");
+									json_my_param.put("calorie", tmp_exercise_calorie_val);
+								}
+								else{
+									json_my_param.put("type", "5");
+									json_my_param.put("pre_content", tmp_exercise_pre_content_val+"분");
+									json_my_param.put("content", tmp_exercise_content_val);
+									json_my_param.put("calorie", tmp_exercise_calorie_val);
+								}
 							}
 							catch(Exception e){
 								System.out.println("JSON put 에러");
@@ -571,7 +599,44 @@ import android.widget.Toast;
 				});	
 			}
 			else if(type==3){	//운동하기 페이지
-				System.out.println("33333");
+				final ImageButton ok_btn = (ImageButton)getDialog().findViewById(R.id.write_do_ok_btn);
+				final LinearLayout do_layout = (LinearLayout)getDialog().findViewById(R.id.do_layout);
+				
+				do_layout.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{			
+						count++;	
+						String tmpCount = String.valueOf(count);
+						Log.e("Count: ", tmpCount);
+							
+						count_num.setText(tmpCount);
+					}	
+				});	
+				
+				ok_btn.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View v)
+					{	
+						
+						JSONObject json_my_param = new JSONObject();
+						try{			
+							json_my_param.put("type", "5");
+							json_my_param.put("pre_content", count+"개");
+							json_my_param.put("content", "운동");
+							json_my_param.put("calorie", count*5);
+						}
+						catch(Exception e){
+							System.out.println("JSON put 에러");
+						}
+						TimelineFrag.addMyData(json_my_param);
+						onStop();
+		
+				
+					}	
+				});	
 			}
 								
 		}
@@ -615,16 +680,16 @@ import android.widget.Toast;
 							y = event.values[SensorManager.DATA_Y];
 							z = event.values[SensorManager.DATA_Z];
 							
-							numX = Math.abs(x) - Math.abs(lastX);
-							numY = Math.abs(y) - Math.abs(lastY);
-							numZ = Math.abs(z) - Math.abs(lastZ);
+							numX = lastX - x;
+							numY = lastY - y;
+							numZ = z - lastZ;
 							String tmpX = String.valueOf(numX);
 							String tmpY = String.valueOf(numY);
 							String tmpZ = String.valueOf(numZ);
 							Log.e("NumX", tmpX);
 							Log.e("NumY", tmpY);
 							Log.e("NumZ", tmpZ);
-							if ( numY > 60 ){
+							if ( numY > 80 || numY > 80 ){
 								// numX > 60 || || numY > 60 || numZ > 60
 								count++;	
 								String tmpCount = String.valueOf(count);

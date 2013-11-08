@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<string-array name="exercise"> 
-	    <item>Fitbit 기록</item>
+	    <item>Fitbit</item>
         <item>걷기</item> 
         <item>달리기</item> 
         <item>줄넘기</item>  
