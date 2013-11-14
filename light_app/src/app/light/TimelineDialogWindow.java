@@ -626,7 +626,7 @@ import android.widget.Toast;
 							json_my_param.put("type", "5");
 							json_my_param.put("pre_content", count+"개");
 							json_my_param.put("content", "운동");
-							json_my_param.put("calorie", count*5);
+							json_my_param.put("calorie", count*1);
 						}
 						catch(Exception e){
 							System.out.println("JSON put 에러");
@@ -663,48 +663,46 @@ import android.widget.Toast;
 			synchronized (this) {
 				if(type==3){
 					
-					
 					switch (event.sensor.getType()) {
 	
-					case Sensor.TYPE_ORIENTATION:
-						x = event.values[DATA_X];
-						y = event.values[DATA_Y];
-						z = event.values[DATA_Z];
-						long currentTime = System.currentTimeMillis();
-						long gabOfTime = (currentTime - lastTime);
-						
-						if (gabOfTime > 800) {
-							lastTime = currentTime;
+						case Sensor.TYPE_ORIENTATION:
+							x = event.values[DATA_X];
+							y = event.values[DATA_Y];
+							z = event.values[DATA_Z];
+							long currentTime = System.currentTimeMillis();
+							long gabOfTime = (currentTime - lastTime);
 							
-							x = event.values[SensorManager.DATA_X];
-							y = event.values[SensorManager.DATA_Y];
-							z = event.values[SensorManager.DATA_Z];
-							
-							numX = lastX - x;
-							numY = lastY - y;
-							numZ = z - lastZ;
-							String tmpX = String.valueOf(numX);
-							String tmpY = String.valueOf(numY);
-							String tmpZ = String.valueOf(numZ);
-							Log.e("NumX", tmpX);
-							Log.e("NumY", tmpY);
-							Log.e("NumZ", tmpZ);
-							if ( numY > 80 || numY > 80 ){
-								// numX > 60 || || numY > 60 || numZ > 60
-								count++;	
-								String tmpCount = String.valueOf(count);
-								Log.e("Count: ", tmpCount);
-									
-								count_num.setText(tmpCount);
+							if (gabOfTime > 500) {
+								lastTime = currentTime;
+								
+								x = event.values[SensorManager.DATA_X];
+								y = event.values[SensorManager.DATA_Y];
+								z = event.values[SensorManager.DATA_Z];
+								
+								numX = lastX - x;
+								numY = lastY - y;
+								numZ = lastZ - z;
+								String tmpX = String.valueOf(numX);
+								String tmpY = String.valueOf(numY);
+								String tmpZ = String.valueOf(numZ);
+								Log.e("NumX", tmpX);
+								Log.e("NumY", tmpY);
+								Log.e("NumZ", tmpZ);
+								if ( numX > 80 || numY > 80 || numZ > 80 ){
+									// numX > 60 || || numY > 60 || numZ > 60
+									count++;	
+									String tmpCount = String.valueOf(count);
+									Log.e("Count: ", tmpCount);	
+									count_num.setText(tmpCount);
+								}
+					
+								lastX = event.values[DATA_X];
+								lastY = event.values[DATA_Y];
+								lastZ = event.values[DATA_Z];
+		
 							}
-				
-							lastX = event.values[DATA_X];
-							lastY = event.values[DATA_Y];
-							lastZ = event.values[DATA_Z];
-	
-						}
-						
-						break;
+							
+							break;
 					}
 				}                        
 				                          
